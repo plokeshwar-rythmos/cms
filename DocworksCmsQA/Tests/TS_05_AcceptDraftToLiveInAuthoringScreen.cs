@@ -21,7 +21,6 @@ namespace DocWorksQA.Tests
         private static string pwd = ConfigurationHelper.Get<String>("password");
 
         [OneTimeSetUp]
-        [Parallelizable]
         public void AcceptDraftToLiveInAuthoringScreen()
         {
             updateTestRun(testcaseID);
