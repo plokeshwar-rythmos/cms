@@ -15,8 +15,7 @@ using System.Threading.Tasks;
 namespace DocWorksQA.Tests
 {
     [TestFixture]
-    [Parallelizable]
-    class TS_07_GDocEnhancementForVerifyingCodeBlockUploads : BeforeTestAfterTest
+   class TS_07_GDocEnhancementForVerifyingCodeBlockUploads : BeforeTestAfterTest
     {
         static string result;
         private static IWebDriver driver;
