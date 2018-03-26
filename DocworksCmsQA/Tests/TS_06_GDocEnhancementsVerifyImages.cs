@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace DocWorksQA.Tests
 {
-    [TestFixture]
+   // [TestFixture]
     class TS_06_GDocEnhancementsVerifyImages : BeforeTestAfterTest
     {
         private static IWebDriver driver;
@@ -22,7 +22,7 @@ namespace DocWorksQA.Tests
         private static string uid = ConfigurationHelper.Get<String>("UserName");
         private static string pwd = ConfigurationHelper.Get<String>("password");
 
-        [OneTimeSetUp]
+      //  [OneTimeSetUp]
         public void GDocEnhancementsVerifyImages()
         {
             driver = new DriverFactory().Create();
@@ -46,7 +46,7 @@ namespace DocWorksQA.Tests
                 throw;
             }
         }
-        [Test, Description("Verify User is able to Upload an Image in Media Screen")]
+       // [Test, Description("Verify User is able to Upload an Image in Media Screen")]
         public void TC_01_ValidationOfUploadImage()
         {
             try
@@ -82,7 +82,7 @@ namespace DocWorksQA.Tests
             }
         }
 
-        [Test, Description("Verify user is able to do GDoc Enhancement for Uploaded Image")]
+       // [Test, Description("Verify user is able to do GDoc Enhancement for Uploaded Image")]
         public void TC_02_ValidateGdocEnhancementsForUploadOfImage()
         {
             try
@@ -206,7 +206,7 @@ namespace DocWorksQA.Tests
             }
         }
 
-        [Test, Description("Verify User is not able to get the Image When searched by AssetId of Image in CodeBlocks Tab")]
+      //  [Test, Description("Verify User is not able to get the Image When searched by AssetId of Image in CodeBlocks Tab")]
         public void TC_03_ValidateWhenUserSearchesImageAssetIdInCodeBlocks()
         {
             try
@@ -257,7 +257,7 @@ namespace DocWorksQA.Tests
             }
         }
 
-        [Test, Description("Verify User is able to replace an Image")]
+     //   [Test, Description("Verify User is able to replace an Image")]
         public void TC_04_ValidateUserIsAbleToReplaceImage()
         {
             try
@@ -345,7 +345,7 @@ namespace DocWorksQA.Tests
                 throw;
             }
         }
-        [Test, Description("Verify User is Unable to Upload Invalid Images")]
+    //    [Test, Description("Verify User is Unable to Upload Invalid Images")]
         public void TC_05_ValidateUploadOfInvalidImages()
         {
             try

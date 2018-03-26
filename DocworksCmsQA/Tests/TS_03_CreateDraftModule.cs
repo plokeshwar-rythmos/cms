@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace DocWorksQA.Tests
 {
-    [TestFixture]
+   //  //[TestFixture]
     class TS_03_CreateDraftModule : BeforeTestAfterTest
     {
         private static IWebDriver driver;
@@ -22,7 +22,7 @@ namespace DocWorksQA.Tests
         private static string pwd = ConfigurationHelper.Get<String>("password");
 
 
-        [OneTimeSetUp]
+        //[OneTimeSetUp]
         public void CreateDraftModule()
         {
             driver = new DriverFactory().Create();
@@ -47,7 +47,7 @@ namespace DocWorksQA.Tests
             }
         }
 
-        [Test, Description("Verify New Draft Button is enabled or not")]
+         //[Test, Description("Verify New Draft Button is enabled or not")]
         public void TC_01_ValidateNewDraftButtonDialogBoxIsAppearedOrNot()
         {
             
@@ -128,7 +128,7 @@ namespace DocWorksQA.Tests
             }
 
         }
-        [Test, Description("Verify When User Enters Invalid Draft Name Then an error message is apeared")]
+         //[Test, Description("Verify When User Enters Invalid Draft Name Then an error message is apeared")]
         public void TC_02_ValidateErrorMsgForInvalidDraftName()
         {
             try
@@ -159,7 +159,7 @@ namespace DocWorksQA.Tests
             }
 
         }
-        [Test, Description("Verify User is able to create an existing Draft")]
+         //[Test, Description("Verify User is able to create an existing Draft")]
         public void TC_03_ValidationOfCreateExistingDraftWithValidDraftName()
         {
             try
@@ -205,7 +205,7 @@ namespace DocWorksQA.Tests
             }
 
         }
-        [Test, Description("Verify User is able to create a blank draft")]
+         //[Test, Description("Verify User is able to create a blank draft")]
         public void TC_04_ValidationOfCreateBlankDraftWithValidDraftName()
         {
             try

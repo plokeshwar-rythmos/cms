@@ -23,24 +23,7 @@ namespace DocWorksQA.SeleniumHelpers
 
     public class DriverFactory
     {
-        private static readonly FirefoxProfile FirefoxProfile = CreateFirefoxProfile();
-
-        private static FirefoxProfile CreateFirefoxProfile()
-        {
-            var firefoxProfile = new FirefoxProfile();
-            firefoxProfile.SetPreference("general.useragent.override", "UA-STRING");
-            firefoxProfile.SetPreference("extensions.modify_headers.currentVersion", "0.7.1.1-signed");
-            firefoxProfile.SetPreference("modifyheaders.headers.count", 1);
-            firefoxProfile.SetPreference("modifyheaders.headers.action0", "Add");
-            firefoxProfile.SetPreference("modifyheaders.headers.name0", "SampleHeader");
-            firefoxProfile.SetPreference("modifyheaders.headers.value0", "test1234");
-            firefoxProfile.SetPreference("modifyheaders.headers.enabled0", true);
-            firefoxProfile.SetPreference("modifyheaders.config.active", true);
-            firefoxProfile.SetPreference("modifyheaders.config.alwaysOn", true);
-            firefoxProfile.SetPreference("modifyheaders.config.start", true);
-            firefoxProfile.SetPreference("network.automatic-ntlm-auth.trusted-uris", "http://localhost");
-            return firefoxProfile;
-        }
+        
 
         public IWebDriver Create()
         {
@@ -58,24 +41,14 @@ namespace DocWorksQA.SeleniumHelpers
                 switch (driverToUse)
                 {
                     case DriverToUse.InternetExplorer:
-                        driver = new InternetExplorerDriver(AppDomain.CurrentDomain.BaseDirectory, new InternetExplorerOptions(), TimeSpan.FromMinutes(5));
+                        driver = new InternetExplorerDriver();
                         break;
                     case DriverToUse.Firefox:
                         
-                        FirefoxOptions option = new FirefoxOptions();
-                        option.Profile = DriverFactory.FirefoxProfile;
-                        driver = new FirefoxDriver(option);
+                        driver = new FirefoxDriver();
                         break;
                     case DriverToUse.Chrome:
-                        ChromeOptions options = new ChromeOptions();
-                       // options.AddArguments("--incognito");
-                        //options.AddArguments("--enable-notifications");
-                        options.AddUserProfilePreference("profile.managed_default_content_settings.notifications", 1);
-                        
-                       // options.AddAdditionalCapability("excludeSwitches", "disable-default-apps");
-                        //options.AddAdditionalCapability("profile.default_content_setting_values.notifications", "2");
-                       // options.AddArgument("--headless");
-                        driver = new ChromeDriver(options);
+                        driver = new ChromeDriver();
                         break;
                     case DriverToUse.Safari:
                         driver = new SafariDriver();
@@ -92,8 +65,6 @@ namespace DocWorksQA.SeleniumHelpers
             var timeouts = driver.Manage().Timeouts();
 
             
-            // Suppress the onbeforeunload event first. This prevents the application hanging on a dialog box that does not close.
-            ((IJavaScriptExecutor)driver).ExecuteScript("window.onbeforeunload = function(e){};");
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl(url);
 

@@ -20,7 +20,7 @@ namespace DocWorksQA.Tests
         private static string uid = ConfigurationHelper.Get<String>("UserName");
         private static string pwd = ConfigurationHelper.Get<String>("password");
 
-        [OneTimeSetUp]
+       // [OneTimeSetUp]
         public void AcceptDraftToLiveInAuthoringScreen()
         {
             updateTestRun(testcaseID);
@@ -48,7 +48,7 @@ namespace DocWorksQA.Tests
                 throw;
             }
         }
-        [Test, Description("Verify User Is able to View a DropDown on Clicking of AcceptDraftToLive Button When both drafts are different")]
+        //[Test, Description("Verify User Is able to View a DropDown on Clicking of AcceptDraftToLive Button When both drafts are different")]
         public void TC_01_ValidateUserAbleToSeeDropDownOnAccepttodraftliveButtonIfBothTheDraftsAreDifferent()
         {
             try
@@ -141,7 +141,7 @@ namespace DocWorksQA.Tests
             }
         }
 
-        [Test, Description("Verify User Able to Click On the AcceptDraftToLive Button when two Drafts are same")]
+        //[Test, Description("Verify User Able to Click On the AcceptDraftToLive Button when two Drafts are same")]
         public void TC_02_ValidateUserAbleClickOnAcceptToDraftLiveButtonIfBothTheDraftsAreSame()
         {
             try
@@ -187,7 +187,7 @@ namespace DocWorksQA.Tests
             }
         }
 
-        [Test, Description("Verify User Able to Validate Live Draft and Continuous Update Of Live Draft")]
+        //[Test, Description("Verify User Able to Validate Live Draft and Continuous Update Of Live Draft")]
         public void TC_03_ValidateUserAbleToCreateLiveDraftAndCanContinuouslyUpdateIt()
         {
             try
@@ -257,7 +257,7 @@ namespace DocWorksQA.Tests
                 throw;
             }
         }
-        [Test, Description("Verify User Able To View Gdoc Content When selected Live or Coder Draft ")]
+        //[Test, Description("Verify User Able To View Gdoc Content When selected Live or Coder Draft ")]
         public void TC_04_ValidateUserAbleToSeeGdocTabWithaMessageWhenSelectedLiveOrCoderDrafts()
         {
             try
@@ -289,7 +289,7 @@ namespace DocWorksQA.Tests
             }
 
         }
-        [Test, Description("Verify When User selects Existing Live Drafts to Live the AcceptDraftToLive Button is disabled")]
+        //[Test, Description("Verify When User selects Existing Live Drafts to Live the AcceptDraftToLive Button is disabled")]
         public void TC_05_ValidateAcceptDraftToLiveButtonIsDisabledWhenUserSelectsExistingLiveDraftsToLive()
         {
             try
@@ -318,7 +318,7 @@ namespace DocWorksQA.Tests
             }
 
         }
-        [Test, Description("Verify User able to view Updated Content of Live Draft in Coder Draft and vice-versa")]
+        //[Test, Description("Verify User able to view Updated Content of Live Draft in Coder Draft and vice-versa")]
         public void TC_06_ValidateContentInLiveDraftShouldUpdateInCoderDraft()
         {
             try
@@ -400,7 +400,7 @@ namespace DocWorksQA.Tests
             }
 
         }
-        [Test, Description("Verify User is able to select a Draft from Dropdown when two different Drafts are selected for AcceptDraftToLive")]
+        //[Test, Description("Verify User is able to select a Draft from Dropdown when two different Drafts are selected for AcceptDraftToLive")]
         public void TC_07_ValidateUserAbleToSelectaDraftFromDropdownWhenClickedAcceptDraftToLiveButton()
         {
             try
@@ -454,7 +454,7 @@ namespace DocWorksQA.Tests
                 throw;
             }
         }
-        [Test, Description("Verify User is Unable to create a Draft with Same Name of Existing Draft")]
+        //[Test, Description("Verify User is Unable to create a Draft with Same Name of Existing Draft")]
         public void TC_07_ValidateUserIsUnableToCreateDuplicateDrafts()
         {
             try

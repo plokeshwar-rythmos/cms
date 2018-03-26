@@ -14,14 +14,14 @@ using System.Threading.Tasks;
 
 namespace DocWorksQA.Tests
 {
-    [TestFixture]
+     //[TestFixture]
     class TS_02_CreateDistributionModule : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private static string uid = ConfigurationHelper.Get<String>("UserName");
         private static string pwd = ConfigurationHelper.Get<String>("password");
 
-        [OneTimeSetUp]
+       // [OneTimeSetUp]
         public void CreateDistribution()
         {
             driver = new DriverFactory().Create();
@@ -45,7 +45,7 @@ namespace DocWorksQA.Tests
             }
         }
 
-        [Test, Description("Verify User is able to add Distribution for the GitLab Project with all Fields")]
+         //[Test, Description("Verify User is able to add Distribution for the GitLab Project with all Fields")]
         public void TC_01_ValidateCreateDistributionForGitLabProjectWithAllFields()
         {
             try
@@ -136,7 +136,7 @@ namespace DocWorksQA.Tests
 
         }
 
-        [Test, Description("Verify User is able to add Distribution for the GitHub Project with all Fields")]
+         //[Test, Description("Verify User is able to add Distribution for the GitHub Project with all Fields")]
         public void TC_02_ValidateCreateDistributionForGitHubProjectWithAllFields()
         {
             try
@@ -227,7 +227,7 @@ namespace DocWorksQA.Tests
 
         }
 
-        [Test, Description("Verify User is able to add Distribution for the Mercurial Project with all Fields")]
+         //[Test, Description("Verify User is able to add Distribution for the Mercurial Project with all Fields")]
         public void TC_03_ValidateCreateDistributionForMercurialProjectWithAllFields()
         {
             try
@@ -317,7 +317,7 @@ namespace DocWorksQA.Tests
             }
 
         }
-        [Test, Description("Verify User is able to Add Distribution to a Project of Empty TOC With Mandatory Fields")]
+         //[Test, Description("Verify User is able to Add Distribution to a Project of Empty TOC With Mandatory Fields")]
         public void TC_04_ValidateAddDistributionsForProjectOfEmptyTOCAndMandatoryFields()
         {
             try
@@ -388,7 +388,7 @@ namespace DocWorksQA.Tests
 
         }
 
-        [Test, Description("Verify When User sends an Invalid Length to Distribution Name Then it throws an Error Message")]
+         //[Test, Description("Verify When User sends an Invalid Length to Distribution Name Then it throws an Error Message")]
         public void TC_05_ValidateDistributionNamelengthWithLessThan5Characters()
         {
             try

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace DocWorksQA.Tests
 {
-    [TestFixture]
+  //  [TestFixture]
    class TS_07_GDocEnhancementForVerifyingCodeBlockUploads : BeforeTestAfterTest
     {
         static string result;
@@ -22,7 +22,7 @@ namespace DocWorksQA.Tests
         private static string uid = ConfigurationHelper.Get<String>("UserName");
         private static string pwd = ConfigurationHelper.Get<String>("password");
 
-        [OneTimeSetUp]
+      //  [OneTimeSetUp]
         public void GDocEnhancementForVerifyingCodeBlockUploads()
         {
             driver = new DriverFactory().Create();
@@ -46,7 +46,7 @@ namespace DocWorksQA.Tests
                 throw;
             }
         }
-        [Test, Description("Verify User is able to Upload CodeBlocks in Media Screen")]
+     //   [Test, Description("Verify User is able to Upload CodeBlocks in Media Screen")]
         public void TC_01_ValidationOfUploadCodeBlock()
         {
             try
@@ -82,7 +82,7 @@ namespace DocWorksQA.Tests
                 throw;
             }
         }
-        [Test, Description("Verify User is able to make Gdoc Enhancements for Upploaded CodeBlocks")]
+     //   [Test, Description("Verify User is able to make Gdoc Enhancements for Upploaded CodeBlocks")]
         public void TC_02_ValidateGdocEnhancementInUploadOfCodeBlock()
         {
             try
@@ -202,7 +202,7 @@ namespace DocWorksQA.Tests
                 throw;
             }
         }
-        [Test, Description("Verify User is Unable to get the codeBlock when searched with the AssetId of CodeBlock in Images Tab")]
+      //  [Test, Description("Verify User is Unable to get the codeBlock when searched with the AssetId of CodeBlock in Images Tab")]
         public void TC_03_ValidateWhenUserSearchesCodeBlockAssetIdInImages()
         {
             try
@@ -254,7 +254,7 @@ namespace DocWorksQA.Tests
             }
         }
 
-        [Test, Description("Verify User Is able to Replace the code blocks in media screen")]
+      //  [Test, Description("Verify User Is able to Replace the code blocks in media screen")]
         public void TC_04_ValidateUserIsAbleToReplaceCodeBlock()
         {
             try
@@ -340,7 +340,7 @@ namespace DocWorksQA.Tests
                 throw;
             }
         }
-        [Test, Description("Verify User is unable to upload Invalid Code Blocks")]
+       // [Test, Description("Verify User is unable to upload Invalid Code Blocks")]
         public void TC_05_ValidateUploadOfInvalidCodeBlock()
         {
             try
