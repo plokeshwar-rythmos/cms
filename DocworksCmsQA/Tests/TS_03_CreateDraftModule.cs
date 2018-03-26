@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 namespace DocWorksQA.Tests
 {
     [TestFixture]
-    [Parallelizable]
     class TS_03_CreateDraftModule : BeforeTestAfterTest
     {
         private static IWebDriver driver;
