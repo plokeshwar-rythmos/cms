@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 namespace DocWorksQA.Tests
 {
     [TestFixture]
-    [Parallelizable]
     class TS_06_GDocEnhancementsVerifyImages : BeforeTestAfterTest
     {
         private static IWebDriver driver;
