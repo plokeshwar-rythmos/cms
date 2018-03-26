@@ -15,7 +15,6 @@ using DocWorksQA.Pages;
 namespace DocWorksQA.Tests
 {
     [TestFixture]
-    [Parallelizable]
     class TS_01_AddProjectModule: BeforeTestAfterTest
     {
         private static IWebDriver driver;
