@@ -277,7 +277,7 @@ namespace DocWorksQA.Tests
         }
 
 
-       // [Test, Description("Verify Project Title throws an error message When User gives Invalid Length")]
+        [Test, Description("Verify Project Title throws an error message When User gives Invalid Length")]
         public void TC_06_ValidateProjectTitleLengthWithLessThan5Characters()
         {
             try
