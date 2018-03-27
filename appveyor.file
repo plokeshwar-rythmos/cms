@@ -1,0 +1,42 @@
+######## master Branch ########
+-
+  branches:
+    only:      
+      - master            
+  version: '1.0.{build}'
+  image: Visual Studio 2017
+  skip_commits:
+    files:
+      - README.md  
+  init:
+    # Good practice, because Windows line endings are different from Linux ones
+    - cmd: git config --global core.autocrlf true
+  environment:         
+    artifactName_DocWorksQATest: AFT_DocWorksQATest  
+          
+  install:
+    # Install repo specific stuff here
+  # build Configuration, i.e. Debug, Release, etc.
+  configuration: Release    
+  before_build:    
+    # Display minimal restore texts   
+    - ps: nuget restore    
+  build_script:
+   
+    - ps:
+               
+        dotnet test;                                   
+    
+  after_build:
+   # for once the build has completed
+  artifacts:
+    
+    - path: '\DocworksCmsQA\bin\%configuration%\'
+      name: $(artifactName_DocWorksQATest)
+      type: Zip
+    
+  clone_depth: 1
+  on_finish:
+    # any cleanup in here
+  
+  
