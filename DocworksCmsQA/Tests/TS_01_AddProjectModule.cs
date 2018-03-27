@@ -14,7 +14,7 @@ using DocWorksQA.Pages;
 
 namespace DocWorksQA.Tests
 {
-    [TestFixture]
+    [TestFixture, Category("Create Project")]
     class TS_01_AddProjectModule: BeforeTestAfterTest
     {
         private static IWebDriver driver;
