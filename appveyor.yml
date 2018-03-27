@@ -31,8 +31,8 @@
    # for once the build has completed
   artifacts:
     
-    - path: '\DocworksCmsQA\bin\%configuration%\'
-      name: $(artifactName_DocWorksQATest)
+    - path: '\DocworksCmsQA\bin\%configuration%\Reports'
+      name: $(artifactName_DocWorksQATest-'1.0.{build}')
       type: Zip
     
   clone_depth: 1
