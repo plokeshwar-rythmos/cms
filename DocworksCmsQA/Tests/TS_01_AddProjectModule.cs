@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DocWorksQA.Pages;
+using System.Diagnostics;
 
 namespace DocWorksQA.Tests
 {
@@ -18,33 +19,12 @@ namespace DocWorksQA.Tests
     class TS_01_AddProjectModule: BeforeTestAfterTest
     {
         private static IWebDriver driver;
-        private static string uid = ConfigurationHelper.Get<String>("UserName");
-        private static string pwd = ConfigurationHelper.Get<String>("password");
-
+      
         [OneTimeSetUp]
         public void AddPProjectModule() {
             driver = new DriverFactory().Create();
-            try
-            {
-                System.Threading.Thread.Sleep(5000);
-                LoginPage login = new LoginPage(driver);
-                System.Threading.Thread.Sleep(5000);
-                login.EnterUserName(uid);
-                System.Threading.Thread.Sleep(5000);
-                login.EnterPassword(pwd);
-                System.Threading.Thread.Sleep(3000);
-                login.ClickLogin();
-                System.Threading.Thread.Sleep(5000);
-                Console.WriteLine(driver.Title);
-                String actual = driver.Title;
-               // Assert.IsTrue(VerifyEquals("Unity DocWorks - Dashboard", actual, "Page Title is verified successfully", "Page Title is Not correct"));
-
-            }
-            catch (AssertionException)
-            {
-                fail("Assertion failed");
-                throw;
-            }
+            new LoginPage(driver).Login();
+            System.Threading.Thread.Sleep(5000);
         }
 
         [Test, Description("Verifying Add Project Button Is Enabled Or Not")]
@@ -53,19 +33,21 @@ namespace DocWorksQA.Tests
             try
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
+                Debug.WriteLine("Starting Test Case : "+TestName);
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 CreateTest(TestName, description);
                 AddProjectPage addproject = new AddProjectPage(driver);
-                System.Threading.Thread.Sleep(5000);
+
                 Boolean flag = addproject.IsProjectEnable();
+
                 String path = TakeScreenshot(driver);
                 addproject.SuccessScreenshot(path, "Add Project is enabled");
                 Assert.IsTrue(VerifyBoolean(true,flag,"Create Project Button is Enabled","Create Project Button is not Enabled"));
                 System.Threading.Thread.Sleep(15000);
             }
-            catch (AssertionException)
+            catch (Exception e)
             {
-                fail("Assertion failed");
+                fail(e.StackTrace);
                 throw;
             }
         }
@@ -113,10 +95,9 @@ namespace DocWorksQA.Tests
                 addProject.SuccessScreenshot(path1, "ProjectTitle");
                 Assert.IsTrue(VerifyEquals(expected, actual, "GitLab Project Got created Successfully","GitLab Project Not Created Succesfully"));
             }
-            catch (AssertionException)
+            catch (Exception e)
             {
-               // addTestCaseStatus("Fail", testcaseID, "Test Case Failed");
-                fail("Assertion failed");
+                fail(e.StackTrace);
                 throw;
             }
 
@@ -165,10 +146,9 @@ namespace DocWorksQA.Tests
                 addProject.SuccessScreenshot(path1, "ProjectTitle");
                 Assert.IsTrue(VerifyEquals(expected, actual, "GitHub Project Got created Successfully", "GitHub Project Not Created Succesfully"));
             }
-            catch (AssertionException)
+            catch (Exception e)
             {
-               // addTestCaseStatus("Fail", testcaseID, "Test Case Failed");
-                fail("Assertion failed");
+                fail(e.StackTrace);
                 throw;
             }
 
@@ -217,10 +197,9 @@ namespace DocWorksQA.Tests
                 addProject.SuccessScreenshot(path1, "ProjectTitle");
                 Assert.IsTrue(VerifyEquals(expected, actual, "Mercurial Project Got created Successfully", "Mercurial Project Not Created Succesfully"));
             }
-            catch (AssertionException)
+            catch (Exception e)
             {
-               // addTestCaseStatus("Fail", testcaseID, "Test Case Failed");
-                fail("Assertion failed");
+                fail(e.StackTrace);
                 throw;
             }
 
@@ -267,10 +246,9 @@ namespace DocWorksQA.Tests
                 addProject.SuccessScreenshot(path1, "ProjectTitle");
                 Assert.IsTrue(VerifyEquals(expected, actual, "GitLab Project Got created Successfully", "GitLab Project Not Created Succesfully"));
             }
-            catch (AssertionException)
+            catch (Exception e)
             {
-                //addTestCaseStatus("Fail", testcaseID, "Test Case Failed");
-                fail("Assertion failed");
+                fail(e.StackTrace);
                 throw;
             }
 
@@ -301,9 +279,9 @@ namespace DocWorksQA.Tests
                 addProject.ClickClose();
                 System.Threading.Thread.Sleep(5000);
             }
-            catch (AssertionException)
+            catch (Exception e)
             {
-                fail("Assertion failed");
+                fail(e.StackTrace);
                 throw;
             }
 
@@ -332,9 +310,9 @@ namespace DocWorksQA.Tests
                 addProject.ClickClose();
                 System.Threading.Thread.Sleep(5000);
             }
-            catch (AssertionException)
+            catch (Exception e)
             {
-                fail("Assertion failed");
+                fail(e.StackTrace);
                 throw;
             }
         }
@@ -376,9 +354,9 @@ namespace DocWorksQA.Tests
                 Assert.IsTrue(VerifyContainsText(txt, str, "Description Text is validated successfully", "Description Text is not validated successfully"));
                 System.Threading.Thread.Sleep(5000);
             }
-            catch (AssertionException)
+            catch (Exception e)
             {
-                fail("Assertion failed");
+                fail(e.StackTrace);
                 throw;
             }
 

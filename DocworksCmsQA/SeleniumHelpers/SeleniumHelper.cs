@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using OpenQA.Selenium;
@@ -22,8 +23,11 @@ namespace DocWorksQA.SeleniumHelpers
                     _driver = null;
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex) {
+                Debug.WriteLine(ex.Message);
+            }
         }
+
         public static IWebDriver Driver
         {
             get

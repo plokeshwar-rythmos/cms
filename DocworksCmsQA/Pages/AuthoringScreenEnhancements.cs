@@ -14,7 +14,6 @@ namespace DocWorksQA.Pages
 {
     class AuthoringScreenEnhancements : SeleniumHelpers.PageControl
     {
-        private IWebDriver driver;
         public By UNITYMANUAL_CLICK = By.XPath("//span[@class='ui-treenode-label ui-corner-all']");
         public By BACKDROP_CLICK = By.XPath("//div[@class='mat-drawer-backdrop mat-drawer-shown']");
         public By NEWDRAFT_BUTTON = By.XPath("//button/span/i[@class='mdi mdi-plus mdi-18px']");

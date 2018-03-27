@@ -2,16 +2,14 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace DocWorksQA.SeleniumHelpers
 {
     public class PageControl : Utilities.CommonMethods
     {
         IWebDriver driver;
+        private static TraceSource _source = new TraceSource("TestLog");
 
         public PageControl(IWebDriver driver)
         {
@@ -21,7 +19,8 @@ namespace DocWorksQA.SeleniumHelpers
 
         public void Click(By by)
         {
-            Console.WriteLine("Clicking on " + by.ToString());
+          //  Console.WriteLine("Clicking on " + by.ToString());
+            _source.TraceEvent(TraceEventType.Information, 0, "Clicking on " + by.ToString());
             IWebElement element = WaitForElement(by);
             elementHighlight(element);
             element.Click();
@@ -30,7 +29,9 @@ namespace DocWorksQA.SeleniumHelpers
 
         public void EnterValue(By by, string value)
         {
-            Console.WriteLine("Entering value into " + by.ToString());
+            //Console.WriteLine("Entering value into " + by.ToString());
+            _source.TraceEvent(TraceEventType.Information, 0, "Entering value into " + by.ToString());
+
             IWebElement element = WaitForElement(by);
            // elementHighlight(element);
             element.SendKeys(value); 
@@ -38,7 +39,6 @@ namespace DocWorksQA.SeleniumHelpers
 
         public void Clear(By by)
         {
-            Console.WriteLine("Entering value into " + by.ToString());
             IWebElement element = WaitForElement(by);
             elementHighlight(element);
             element.Clear();
@@ -46,9 +46,13 @@ namespace DocWorksQA.SeleniumHelpers
        
         public string GetText(By by)
         {
+            _source.TraceEvent(TraceEventType.Information, 0, "Getting text for " + by.ToString());
+
             IWebElement element = WaitForElement(by);
             elementHighlight(element);
-            return element.Text;
+            String t = element.Text;
+            _source.TraceEvent(TraceEventType.Information, 0, "Text returned " + t);
+            return t;
         }
 
         public String GetAttribute(By by)
@@ -179,11 +183,14 @@ namespace DocWorksQA.SeleniumHelpers
             try
             {
 
+                _source.TraceEvent(TraceEventType.Information, 0, "Selecting by Text " + value);
                 select.SelectByText(value);
 
             }
             catch (Exception e)
             {
+                Debug.WriteLine(e.Message);
+                _source.TraceEvent(TraceEventType.Information, 0, "Selecting by value " + value);
 
                 select.SelectByText(value);
                 //this.test.info("Element Not Found");
@@ -199,16 +206,22 @@ namespace DocWorksQA.SeleniumHelpers
                 {
                     if (driver.FindElement(by).Displayed || driver.FindElement(by).Enabled)
                     {
-                        Console.WriteLine("IDENTIFIED : "+by.ToString());
+                     //   Console.WriteLine("IDENTIFIED : "+by.ToString());
+                        _source.TraceEvent(TraceEventType.Information, 0, "IDENTIFIED: "+by.ToString());
                         return driver.FindElement(by);
                     }
-                    else { Console.WriteLine("NOT IDENTIFIED : " + by.ToString()); }
+                    else {
+                      //  Console.WriteLine("NOT IDENTIFIED : " + by.ToString());
+                        _source.TraceEvent(TraceEventType.Information, 0, "NOT IDENTIFIED: " + by.ToString());
+                    }
 
                 }
                 catch (NoSuchElementException e)
                 {
-                    Console.WriteLine("Waiting for Element : " + by.ToString());
-                    Console.WriteLine(e.StackTrace);
+                   // Console.WriteLine("Waiting for Element : " + by.ToString());
+                    _source.TraceEvent(TraceEventType.Information, 0, "Waiting for Element : " + by.ToString());
+                    Debug.WriteLine(e.Message);
+                    //Console.WriteLine(e.StackTrace);
                     System.Threading.Thread.Sleep(200);
                 }
             }
@@ -217,11 +230,11 @@ namespace DocWorksQA.SeleniumHelpers
 
         public void elementHighlight(IWebElement element)
         {
-           /* IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+          IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
                 
                 js.ExecuteScript( "arguments[0].setAttribute('style', arguments[1]);",
                         element, "color: red; border: 5px solid red;");
-                        */
+                        
 
         }
 

@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using OpenQA.Selenium;
-using AventStack.ExtentReports;
-using System.Threading.Tasks;
 
 namespace DocWorksQA.Pages
 {
@@ -23,9 +18,8 @@ namespace DocWorksQA.Pages
         public By DRAFTNAMEERROR = By.XPath("//mat-error[text()='Please enter at least 5 characters.']");
         public By OPENPROJECT = By.XPath("(//button[@class='mat-raised-button mat-primary']/span)[contains(text(),'Open')]");
         public By LATEST_DRAFT_IN_DROPDOWN = By.XPath("(//mat-option[@class='mat-option ng-star-inserted']//span)[last()]");
-        private static IWebDriver driver;
-        public object DriverWaitUtil { get; private set; }
 
+        
         /**
         * Constructor: CreateDraftPage()
         * Description: This constructor is used to initialize the webdriver
@@ -35,29 +29,7 @@ namespace DocWorksQA.Pages
 
         }
 
-        /**
-        * MethodName: isDistributionPresent()
-        * Description: This method is used to verify if the distribution is present on opening the project
-        */
-        public void isDistributionPresent()
-        {
-            Boolean flag = this.IsEnabled(UNITYMANUAL_CLICK);
-            for (int i = 1; i < 5; i++)
-            {
-                if (flag.Equals("False"))
-                {
-                  driver.Navigate().Refresh();
-               }
-                else
-                {
-                   Click(UNITYMANUAL_CLICK);
-                    info("Distribution is clicked");
-                    break;
-               }
-            }
-            
-            
-        }
+        
 
         /**
         * MethodName: ClickNewDraft()

@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
-using AventStack.ExtentReports;
+using System.Diagnostics;
+
 namespace DocWorksQA.Pages
 {
     public class AddProjectPage : SeleniumHelpers.PageControl
     {
-        private ExtentTest test;
         public By ADDPROJECT_BUTTON = By.XPath("(//button[@class='mat-raised-button mat-primary']/span)[1]");
-
         public  By PROJECT_TITLE_FIELD= By.XPath("//input[@ng-reflect-placeholder='Project Title']");
         public By NOTIFICATION_NAME = By.XPath("//div[@class='mat-list-text']/p[@class='mat-line mb-5']/span");
         public By NOTIFICATION_STATUS = By.XPath("//div[@class='mat-list-text']/p[@class='mat-line mb-5']/small[@class='bg_Success']");
@@ -50,6 +45,7 @@ namespace DocWorksQA.Pages
         {
             Boolean Flag =
             this.IsEnabled(ADDPROJECT_BUTTON);
+            Debug.WriteLine("Is Add Project Button Enabled " + Flag);
 
             return Flag;
         }
@@ -189,7 +185,7 @@ namespace DocWorksQA.Pages
         {
             String text = GetText(NOTIFICATION_NAME);
             System.Threading.Thread.Sleep(7000);
-            Console.WriteLine("%%%%%" + text);
+            //Console.WriteLine("%%%%%" + text);
             return text;
         }
         public String GetCreatedProject()

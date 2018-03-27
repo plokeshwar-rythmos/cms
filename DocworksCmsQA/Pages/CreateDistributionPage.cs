@@ -10,8 +10,7 @@ namespace DocWorksQA.Pages
     class CreateDistributionPage : SeleniumHelpers.PageControl
     {
 
-        private ExtentTest test;
-
+        
         public By ENTER_SEARCH = By.XPath("//input[@type='Search']");
         public By GET_TITLE = By.XPath("//mat-card/mat-card-title/div");
         public By SETTINGS = By.XPath("//mat-card/mat-card-title/div[2]//i[1]");
@@ -131,19 +130,17 @@ namespace DocWorksQA.Pages
         */
         public void ClickBranchWithTOC()
         {
-            Boolean flag = false;
-           
-                WaitForElement(SELECT_BRANCH);
+            WaitForElement(SELECT_BRANCH);
                 this.Click(SELECT_BRANCH);
             info("Cicked on Branch dropdown");
             System.Threading.Thread.Sleep(5000);
                     this.Click(BRANCH_OPTIONS_WITHTOC);
             info("Selected the branch");
         }
+
         public void ClickBranchWithOutTOC()
         {
-            Boolean flag = false;
-
+            
             WaitForElement(SELECT_BRANCH);
             this.Click(SELECT_BRANCH);
             info("Cicked on Branch dropdown");
@@ -153,8 +150,6 @@ namespace DocWorksQA.Pages
         }
         public void ClickBranchForGitHub()
         {
-            Boolean flag = false;
-
             WaitForElement(SELECT_BRANCH);
             this.Click(SELECT_BRANCH);
             info("Cicked on Branch dropdown");

@@ -1,24 +1,24 @@
-﻿using AventStack.ExtentReports;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using DocWorksQA.SeleniumHelpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DocWorksQA.Utilities;
 
 namespace DocWorksQA.Pages
 {
     public class LoginPage : PageControl
     {
 
-      
+        
+
         By USERNAME_FIELD = By.XPath("//input[@ng-reflect-placeholder='User Name']");
         By PASSWORD_FIELD = By.XPath("//input[@ng-reflect-placeholder='Password']");
         By LOGIN_BUTTON = By.XPath("//app-login//button");
         By USERNAME_ERROR = By.XPath("//input[@id='userName']/following-sibling::div//small");
         By PASSWORD_ERROR = By.XPath("//input[@id='passWord']/following-sibling::div//small");
         By CAPTCHA_CHECKBOX = By.XPath("//span[@role='checkbox']//div[@class='recaptcha-checkbox-checkmark']");
+
+        private static string uid = ConfigurationHelper.Get<String>("UserName");
+        private static string pwd = ConfigurationHelper.Get<String>("password");
 
         public LoginPage(IWebDriver driver) : base(driver)
         {
@@ -56,6 +56,12 @@ namespace DocWorksQA.Pages
             String tmp = GetText(USERNAME_ERROR);
          //   info("Getting error message from username field. = "+tmp);
             return tmp;
+        }
+
+        public void Login() {
+            EnterUserName(uid);
+            EnterPassword(pwd);
+            ClickLogin();
         }
 
     }

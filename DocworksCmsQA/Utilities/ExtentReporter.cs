@@ -4,6 +4,7 @@ using AventStack.ExtentReports.Reporter.Configuration;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -73,13 +74,13 @@ namespace DocWorksQA.Utilities
             System.IO.Directory.CreateDirectory(folderPath);
             String file = folderPath + "/" + reportName + getTimeStamp() + ".html";
 
-            Console.WriteLine("Initializing Extent Reporting");
+            //Console.WriteLine("Initializing Extent Reporting");
             ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(file);
             htmlReporter.Configuration().ReportName = reportName;
             htmlReporter.Configuration().DocumentTitle = reportName;
             reporter = new ExtentReports();
             reporter.AttachReporter(htmlReporter);
-            Console.WriteLine("Creating Reporting file " + file);
+            //Console.WriteLine("Creating Reporting file " + file);
         }
 
         /**
@@ -111,8 +112,9 @@ namespace DocWorksQA.Utilities
          */
         public void CreateTest(String testCaseName)
         {
-            
-                Console.WriteLine("Creating test");
+
+            //Console.WriteLine("Creating test");
+            Debug.WriteLine("Creating Test Case for Reporting. "+testCaseName);
                  test = reporter.CreateTest(testCaseName);
           
         }
@@ -124,9 +126,11 @@ namespace DocWorksQA.Utilities
          */
         public void CreateTest(String testCaseName, String description)
         {
-          
-                Console.WriteLine("Creating test Case");
-                test = reporter.CreateTest(testCaseName, description);
+
+            //Console.WriteLine("Creating test Case");
+            Debug.WriteLine("Creating Test Case for Reporting. " + testCaseName);
+
+            test = reporter.CreateTest(testCaseName, description);
             
            
         }
@@ -139,7 +143,7 @@ namespace DocWorksQA.Utilities
         public void CreateParentTest(String testCaseName)
         {
             parent = reporter.CreateTest(testCaseName);
-            Console.WriteLine("Creating Parent Test. : " + parent);
+            //Console.WriteLine("Creating Parent Test. : " + parent);
 
         }
 
@@ -148,7 +152,7 @@ namespace DocWorksQA.Utilities
          */
         public void closeParentTest()
         {
-            Console.WriteLine("Closing Parent Test : " + parent);
+            //Console.WriteLine("Closing Parent Test : " + parent);
             if (parent != null)
                 parent = null;
 
@@ -160,7 +164,8 @@ namespace DocWorksQA.Utilities
          */
         public void pass(String description)
         {
-            Console.WriteLine("PASS : " + description);
+            //Console.WriteLine("PASS : " + description);
+            Debug.WriteLine(removeTags(description));
             test.Pass(description);
         }
 
@@ -170,7 +175,8 @@ namespace DocWorksQA.Utilities
          */
         public void fail(String description)
         {
-            Console.WriteLine("FAIL : " + description);
+            //Console.WriteLine("FAIL : " + description);
+            Debug.WriteLine(removeTags(description));
             test.Fail("<div style=\"color: red;\">" + description + "</div>");
         }
 
@@ -180,7 +186,8 @@ namespace DocWorksQA.Utilities
          */
         public void info(String description)
         {
-            Console.WriteLine("INFO : " + description);
+            //Console.WriteLine("INFO : " + description);
+            Debug.WriteLine(removeTags(description));
             test.Info(description);
         }
 
@@ -189,11 +196,15 @@ namespace DocWorksQA.Utilities
          */
         public void reportFlusher()
         {
-            Console.WriteLine("Flushing the HTML report.");
+            //Console.WriteLine("Flushing the HTML report.");
+
             reporter.Flush();
         }
 
-      
+        public String removeTags(String data) {
+            return data.Replace("<b>", " ").Replace("</b>"," ").Replace("<br>", " ");
+            
+        }
 
     }
 }
