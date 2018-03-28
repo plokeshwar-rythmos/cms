@@ -27,6 +27,9 @@
                
          dotnet test --configuration Release;
          
+     - cmd: 
+          taskkill /im firefox.exe /f
+         
          
     
   after_build:
