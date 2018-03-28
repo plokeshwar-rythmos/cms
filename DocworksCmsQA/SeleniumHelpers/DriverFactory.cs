@@ -40,7 +40,7 @@ namespace DocWorksQA.SeleniumHelpers
                     case DriverToUse.Firefox:
                         _source.TraceEvent(TraceEventType.Information, 0, "Starting Firefox Driver.");
                     FirefoxOptions options = new FirefoxOptions();
-                    options.AddArguments("--headless");
+                   // options.AddArguments("--headless");
                     driver = new FirefoxDriver(options);
                         break;
                     case DriverToUse.Chrome:
