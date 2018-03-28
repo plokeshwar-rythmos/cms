@@ -25,7 +25,7 @@
    
     - ps:
                
-        dotnet test;                                   
+         dotnet test --configuration Release --verbosity detailed;                                  
     
   after_build:
    # for once the build has completed
