@@ -27,7 +27,7 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
 
-        [Test, Description("Verifying Add Project Button Is Enabled Or Not")]
+       // [Test, Description("Verifying Add Project Button Is Enabled Or Not")]
         public void TC_01_ValidateAddProjectButtonsIsEnabled()
         {
             try
