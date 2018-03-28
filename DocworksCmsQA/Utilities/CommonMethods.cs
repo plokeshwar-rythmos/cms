@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace DocWorksQA.Utilities
 {
@@ -229,6 +230,41 @@ public string getInvalidCodeBlockPath()
             return new String(text);
         }
 
+
+        public void KillProcess()
+        {
+            String processName = "";
+
+            String driverToUse = ConfigurationHelper.Get<String>("DriverToUse");
+            if (driverToUse.ToLower().Equals("chrome"))
+            {
+                processName = "chromedriver.exe";
+            }else if (driverToUse.ToLower().Equals("firefox"))
+            {
+                processName = "firefox.exe";
+            }
+            else
+            {
+                processName = "InternetExplorerDriver.exe";
+            }
+
+
+                try
+            {
+                foreach (Process process in Process.GetProcessesByName(processName))
+                {
+                    //kill the process 
+                    Console.WriteLine("Killing process "+process);
+                    process.Kill();
+                }
+            }
+            catch (Exception ex)
+            {
+                //show the exceptions if any here
+                Console.WriteLine(ex.ToString());
+            };
+
+        }
 
 
 

@@ -24,6 +24,7 @@ namespace DocWorksQA.Tests
         [OneTimeTearDown]
         public void GenerateReport()
         {
+            KillProcess();
             reportFlusher();
         }
 

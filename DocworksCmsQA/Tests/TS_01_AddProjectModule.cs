@@ -1,17 +1,11 @@
 ﻿using AventStack.ExtentReports;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using DocWorksQA.SeleniumHelpers;
-using DocWorksQA.TestRailApis;
 using System;
-using DocWorksQA.Utilities;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DocWorksQA.Pages;
 using System.Diagnostics;
+using NLog;
 
 namespace DocWorksQA.Tests
 {
@@ -19,7 +13,9 @@ namespace DocWorksQA.Tests
     class TS_01_AddProjectModule: BeforeTestAfterTest
     {
         private static IWebDriver driver;
-      
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+
         [OneTimeSetUp]
         public void AddPProjectModule() {
             driver = new DriverFactory().Create();
@@ -27,7 +23,7 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
 
-       // [Test, Description("Verifying Add Project Button Is Enabled Or Not")]
+        [Test, Description("Verifying Add Project Button Is Enabled Or Not")]
         public void TC_01_ValidateAddProjectButtonsIsEnabled()
         {
             try
@@ -42,7 +38,7 @@ namespace DocWorksQA.Tests
 
                 String path = TakeScreenshot(driver);
                 addproject.SuccessScreenshot(path, "Add Project is enabled");
-                Assert.IsTrue(VerifyBoolean(true,flag,"Create Project Button is Enabled","Create Project Button is not Enabled"));
+                Assert.IsFalse(VerifyBoolean(true,flag,"Create Project Button is Enabled","Create Project Button is not Enabled"));
                 System.Threading.Thread.Sleep(15000);
             }
             catch (Exception e)
@@ -316,7 +312,7 @@ namespace DocWorksQA.Tests
                 throw;
             }
         }
-       [Test, Description("Verifying User is able to send more than 1000 characters to Description field in Create Project")]
+       //[Test, Description("Verifying User is able to send more than 1000 characters to Description field in Create Project")]
         public void TC_08_ValidateProjectDescriptionLengthWithMoreThan1000Characters()
         {
             try
@@ -363,10 +359,11 @@ namespace DocWorksQA.Tests
         }
 
         [OneTimeTearDown]
-
         public void CloseBrowser()
         {
             driver.Quit();
+        
+
         }
     }
 

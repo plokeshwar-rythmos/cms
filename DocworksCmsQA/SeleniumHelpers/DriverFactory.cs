@@ -7,6 +7,7 @@ using DocWorksQA.Utilities;
 using OpenQA.Selenium.Safari;
 using OpenQA.Selenium.PhantomJS;
 using System.Diagnostics;
+using NLog;
 
 namespace DocWorksQA.SeleniumHelpers
 {
@@ -21,7 +22,9 @@ namespace DocWorksQA.SeleniumHelpers
 
     public class DriverFactory
     {
-        private static TraceSource _source = new TraceSource("TestLog");
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+
 
         public IWebDriver Create()
         {
@@ -34,18 +37,18 @@ namespace DocWorksQA.SeleniumHelpers
                 switch (driverToUse)
                 {
                     case DriverToUse.InternetExplorer:
-                        _source.TraceEvent(TraceEventType.Information, 0, "Starting Internet Explorer Driver.");
+                        Logger.Debug("Starting Internet Explorer Driver.");
                         driver = new InternetExplorerDriver();
                         break;
                     case DriverToUse.Firefox:
-                        _source.TraceEvent(TraceEventType.Information, 0, "Starting Firefox Driver.");
+                    Logger.Debug("Starting Firefox Driver.");
                     FirefoxOptions options = new FirefoxOptions();
-                    options.AddArguments("--headless");
+                    //options.AddArguments("--headless");
                     options.AddArgument("--no-sandbox");
                     driver = new FirefoxDriver(options);
                         break;
                     case DriverToUse.Chrome:
-                        _source.TraceEvent(TraceEventType.Information, 0, "Starting Chrome Driver.");
+                    Logger.Debug("Starting Chrome Driver.");
                         ChromeOptions option = new ChromeOptions();
                     option.AddArgument("--headless");
                     option.AddArguments("window-size=1200,1100");
@@ -56,7 +59,7 @@ namespace DocWorksQA.SeleniumHelpers
                     driver = new ChromeDriver(option);
                         break;
                     case DriverToUse.Safari:
-                        _source.TraceEvent(TraceEventType.Information, 0, "Starting Safari Driver.");
+                    Logger.Debug("Starting Safari Driver.");
                         driver = new SafariDriver();
                         break;
                     case DriverToUse.Phantomjs:
@@ -66,11 +69,9 @@ namespace DocWorksQA.SeleniumHelpers
                         throw new ArgumentOutOfRangeException();
                 
             }
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
+            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60);
 
-            driver.Manage().Window.Maximize();
-            var timeouts = driver.Manage().Timeouts();
-
-            
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl(url);
 

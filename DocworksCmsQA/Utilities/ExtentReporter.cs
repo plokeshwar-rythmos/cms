@@ -2,17 +2,16 @@
 using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports.Reporter.Configuration;
 using MongoDB.Driver;
+using NLog;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DocWorksQA.Utilities
 {
     public class ExtentReporter
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         ExtentHtmlReporter htmlReporter;
         static ExtentReports reporter;
         static ExtentTest parent;
@@ -113,8 +112,7 @@ namespace DocWorksQA.Utilities
         public void CreateTest(String testCaseName)
         {
 
-            //Console.WriteLine("Creating test");
-            Debug.WriteLine("Creating Test Case for Reporting. "+testCaseName);
+            Logger.Debug("Creating Test Case for Reporting. " +testCaseName);
                  test = reporter.CreateTest(testCaseName);
           
         }
@@ -127,8 +125,7 @@ namespace DocWorksQA.Utilities
         public void CreateTest(String testCaseName, String description)
         {
 
-            //Console.WriteLine("Creating test Case");
-            Debug.WriteLine("Creating Test Case for Reporting. " + testCaseName);
+            Logger.Debug("Creating Test Case for Reporting. " + testCaseName);
 
             test = reporter.CreateTest(testCaseName, description);
             
@@ -164,8 +161,7 @@ namespace DocWorksQA.Utilities
          */
         public void pass(String description)
         {
-            //Console.WriteLine("PASS : " + description);
-            Debug.WriteLine(removeTags(description));
+            Logger.Debug(removeTags(description));
             test.Pass(description);
         }
 
@@ -175,9 +171,14 @@ namespace DocWorksQA.Utilities
          */
         public void fail(String description)
         {
-            //Console.WriteLine("FAIL : " + description);
-            Debug.WriteLine(removeTags(description));
+            Logger.Debug(removeTags(description));
             test.Fail("<div style=\"color: red;\">" + description + "</div>");
+        }
+
+        public void fail(Exception ex)
+        {
+            //Console.WriteLine("FAIL : " + description);
+            test.Fail(ex);
         }
 
         /**
@@ -186,8 +187,7 @@ namespace DocWorksQA.Utilities
          */
         public void info(String description)
         {
-            //Console.WriteLine("INFO : " + description);
-            Debug.WriteLine(removeTags(description));
+            Logger.Debug(removeTags(description));
             test.Info(description);
         }
 

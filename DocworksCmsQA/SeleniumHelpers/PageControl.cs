@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NLog;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -9,8 +10,8 @@ namespace DocWorksQA.SeleniumHelpers
     public class PageControl : Utilities.CommonMethods
     {
         IWebDriver driver;
-        private static TraceSource _source = new TraceSource("TestLog");
-
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        
         public PageControl(IWebDriver driver)
         {
             this.driver = driver;
@@ -19,8 +20,7 @@ namespace DocWorksQA.SeleniumHelpers
 
         public void Click(By by)
         {
-          //  Console.WriteLine("Clicking on " + by.ToString());
-            _source.TraceEvent(TraceEventType.Information, 0, "Clicking on " + by.ToString());
+            Logger.Debug("Clicking on " + by.ToString());
             IWebElement element = WaitForElement(by);
             elementHighlight(element);
             element.Click();
@@ -29,12 +29,14 @@ namespace DocWorksQA.SeleniumHelpers
 
         public void EnterValue(By by, string value)
         {
-            //Console.WriteLine("Entering value into " + by.ToString());
-            _source.TraceEvent(TraceEventType.Information, 0, "Entering value into " + by.ToString());
+            Logger.Debug("Entering value into " + by.ToString());
 
-            IWebElement element = WaitForElement(by);
-           // elementHighlight(element);
-            element.SendKeys(value); 
+            // IWebElement element = WaitForElement(by);
+            // elementHighlight(element);
+            // element.SendKeys(value); 
+
+            type(by, value);
+
         }
 
         public void Clear(By by)
@@ -46,12 +48,12 @@ namespace DocWorksQA.SeleniumHelpers
        
         public string GetText(By by)
         {
-            _source.TraceEvent(TraceEventType.Information, 0, "Getting text for " + by.ToString());
+            Logger.Debug("Getting text for " + by.ToString());
 
             IWebElement element = WaitForElement(by);
             elementHighlight(element);
             String t = element.Text;
-            _source.TraceEvent(TraceEventType.Information, 0, "Text returned " + t);
+            Logger.Debug("Text returned " + t);
             return t;
         }
 
@@ -106,7 +108,7 @@ namespace DocWorksQA.SeleniumHelpers
         {
             System.Threading.Thread.Sleep(4000);
             string tmp = driver.Title;
-            Console.WriteLine("The page title is " + tmp);
+            Logger.Debug("The page title is " + tmp);
             return tmp;
         }
 
@@ -183,14 +185,14 @@ namespace DocWorksQA.SeleniumHelpers
             try
             {
 
-                _source.TraceEvent(TraceEventType.Information, 0, "Selecting by Text " + value);
+                Logger.Debug("Selecting by Text " + value);
                 select.SelectByText(value);
 
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
-                _source.TraceEvent(TraceEventType.Information, 0, "Selecting by value " + value);
+                Logger.Debug("Selecting by value " + value);
 
                 select.SelectByText(value);
                 //this.test.info("Element Not Found");
@@ -206,24 +208,30 @@ namespace DocWorksQA.SeleniumHelpers
                 {
                     if (driver.FindElement(by).Displayed || driver.FindElement(by).Enabled)
                     {
-                     //   Console.WriteLine("IDENTIFIED : "+by.ToString());
-                        _source.TraceEvent(TraceEventType.Information, 0, "IDENTIFIED: "+by.ToString());
+                        //   Console.WriteLine("IDENTIFIED : "+by.ToString());
+                        Logger.Debug("IDENTIFIED: " +by.ToString());
                         return driver.FindElement(by);
                     }
                     else {
-                      //  Console.WriteLine("NOT IDENTIFIED : " + by.ToString());
-                        _source.TraceEvent(TraceEventType.Information, 0, "NOT IDENTIFIED: " + by.ToString());
-                    }
+                        //  Console.WriteLine("NOT IDENTIFIED : " + by.ToString());
+                        Logger.Debug("NOT IDENTIFIED: " + by.ToString());
+                     }
 
                 }
                 catch (NoSuchElementException e)
                 {
-                   // Console.WriteLine("Waiting for Element : " + by.ToString());
-                    _source.TraceEvent(TraceEventType.Information, 0, "Waiting for Element : " + by.ToString());
+                    // Console.WriteLine("Waiting for Element : " + by.ToString());
+                    Logger.Debug("Waiting for Element : " + by.ToString());
                     Debug.WriteLine(e.Message);
                     //Console.WriteLine(e.StackTrace);
                     System.Threading.Thread.Sleep(200);
+                }catch(Exception ex)
+                {
+                    fail(ex);
+                    throw (ex);
                 }
+
+
             }
             return el;
         }
