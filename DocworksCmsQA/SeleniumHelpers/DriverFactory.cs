@@ -41,6 +41,7 @@ namespace DocWorksQA.SeleniumHelpers
                         _source.TraceEvent(TraceEventType.Information, 0, "Starting Firefox Driver.");
                     FirefoxOptions options = new FirefoxOptions();
                     options.AddArguments("--headless");
+                    options.AddArgument("--no-sandbox");
                     driver = new FirefoxDriver(options);
                         break;
                     case DriverToUse.Chrome:
