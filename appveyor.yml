@@ -25,7 +25,9 @@
    
     - ps:
                
-         dotnet test --configuration Release --verbosity detailed;                                  
+         dotnet test --configuration Release;
+         cd \DocworksCmsQA\bin\Release\;
+         ls;
     
   after_build:
    # for once the build has completed
