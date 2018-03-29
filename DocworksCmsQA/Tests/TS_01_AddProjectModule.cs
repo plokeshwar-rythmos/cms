@@ -97,7 +97,7 @@ namespace DocWorksQA.Tests
 
         }
 
-        [Test, Description("Verifying User is able to Add Project For GitHub  with all Fields")]
+       // [Test, Description("Verifying User is able to Add Project For GitHub  with all Fields")]
         public void TC_03_ValidateCreateProjectForGitHubWithAllFields()
         {
             try
@@ -310,7 +310,7 @@ namespace DocWorksQA.Tests
                 throw;
             }
         }
-        [Test, Description("Verifying User is able to send more than 1000 characters to Description field in Create Project")]
+        //[Test, Description("Verifying User is able to send more than 1000 characters to Description field in Create Project")]
         public void TC_08_ValidateProjectDescriptionLengthWithMoreThan1000Characters()
         {
             try

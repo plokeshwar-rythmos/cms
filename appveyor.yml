@@ -26,19 +26,11 @@
   build_script:
    
     - ps:
-               
          dotnet test --configuration Release;
-         
-    - cmd: taskkill /im firefox.exe /f
-         
-         
     
   after_build:
    # for once the build has completed
  # - ps: $root = Resolve-Path .\DocworksCmsQA\bin\%configuration%\Reports; [IO.Directory]::GetFiles($root.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
- 
-    - cmd: taskkill /im firefox.exe /f
-         
  
   artifacts:
     
@@ -49,6 +41,6 @@
   clone_depth: 1
   on_finish:
     # any cleanup in here
-    - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+ #   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   
   
