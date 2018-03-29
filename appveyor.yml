@@ -11,7 +11,9 @@
   init:
     # Good practice, because Windows line endings are different from Linux ones
     - cmd: git config --global core.autocrlf true
-  environment:         
+    - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  environment:     
+    appveyor_rdp_password : 'Pravin'
     artifactName_DocWorksQATest: 'DocWorksQATestResult-{build}'
           
   install:
@@ -47,5 +49,6 @@
   clone_depth: 1
   on_finish:
     # any cleanup in here
+    - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   
   

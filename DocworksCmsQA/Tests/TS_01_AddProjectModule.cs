@@ -36,7 +36,7 @@ namespace DocWorksQA.Tests
                 Boolean flag = addproject.IsProjectEnable();
                 String path = TakeScreenshot(driver);
                 addproject.SuccessScreenshot(path, "Add Project is enabled");
-                Assert.IsTrue(VerifyFalse(flag, "Create Project Button is Enabled", "Create Project Button is not Enabled"));
+                Assert.IsTrue(VerifyTrue(flag, "Create Project Button is Enabled", "Create Project Button is not Enabled"));
                 Console.WriteLine("Pravin");
             }
             catch (Exception ex) {
