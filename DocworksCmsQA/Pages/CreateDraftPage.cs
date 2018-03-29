@@ -38,7 +38,7 @@ namespace DocWorksQA.Pages
         public void ClickNewDraft()
         {
             Click(NEWDRAFT_BUTTON);
-            info("Clicked on New Draft Button.");
+            Info("Clicked on New Draft Button.");
         }
 
         /**
@@ -47,7 +47,7 @@ namespace DocWorksQA.Pages
         */
         public void SuccessScreenshot(String path, String message)
         {
-            info("<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
+            Info("<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
 
         }
 
@@ -59,7 +59,7 @@ namespace DocWorksQA.Pages
         {
             EnterValue(DRAFTNAME_EDT, Keys.Tab);
             String text = GetText(by);
-            info("Error for Invalid Draft is: "+text);
+            Info("Error for Invalid Draft is: "+text);
             Click(DRAFTNAME_EDT);
             return text;
         }
@@ -72,7 +72,7 @@ namespace DocWorksQA.Pages
         {
             Click(EXISTINGDRAFTDROPDOWN);
             Click(CODERDRAFT_CLICK);
-            info("Coder Draft Selected.");
+            Info("Coder Draft Selected.");
         }
 
         public void SelectExistingDraft()
@@ -80,7 +80,7 @@ namespace DocWorksQA.Pages
             Click(EXISTINGDRAFTDROPDOWN);
             System.Threading.Thread.Sleep(5000);
             Click(LATEST_DRAFT_IN_DROPDOWN);
-            info("Selected latest Draft");
+            Info("Selected latest Draft");
 
         }
 
@@ -91,7 +91,7 @@ namespace DocWorksQA.Pages
         public void ClikOnBackdrop()
         {
             Click(UNITYMANUAL_CLICK);
-            info("Clicked on Backdrop.");
+            Info("Clicked on Backdrop.");
 
         }
 
@@ -99,10 +99,10 @@ namespace DocWorksQA.Pages
         * MethodName: isDraftPopUpEnabled()
         * Description: This method is used to verify if the draft pop up is enabled after clicking on new draft button
         */
-        public Boolean isDraftPopUpEnabled()
+        public Boolean IsDraftPopUpEnabled()
         {
             Boolean flag = this.IsEnabled(CLOSEDRAFT_BUTTON);
-            info("Draft Dialog Box Is Enabled");
+            Info("Draft Dialog Box Is Enabled");
             return flag;
         }
 
@@ -114,7 +114,7 @@ namespace DocWorksQA.Pages
         {
             String DraftName = "QA";
             EnterValue(DRAFTNAME_EDT, DraftName);
-            info("Entered Draft Name : " + DraftName);
+            Info("Entered Draft Name : " + DraftName);
             return DraftName;
 
         }
@@ -126,7 +126,7 @@ namespace DocWorksQA.Pages
         public void EnterDraftName(String draftName)
         {
             EnterValue(DRAFTNAME_EDT, draftName);
-            info("Entered Draft Name:" + draftName);
+            Info("Entered Draft Name:" + draftName);
 
         }
 
@@ -136,9 +136,9 @@ namespace DocWorksQA.Pages
         */
         public String EnterValidDraftName()
         {
-            String DraftName = "Draft" + "_" + generateRandomNumbers(2);
+            String DraftName = "Draft" + "_" + GenerateRandomNumbers(2);
             EnterValue(DRAFTNAME_EDT, DraftName);
-            info("Draft Name is" + DraftName);
+            Info("Draft Name is" + DraftName);
             return DraftName;
         }
 
@@ -149,7 +149,7 @@ namespace DocWorksQA.Pages
         public void CreateDraft()
         {
             Click(CREATEDRAFT_BUTTON);
-            info("Draft Created Successfully.");
+            Info("Draft Created Successfully.");
         }
 
         /**
@@ -159,7 +159,7 @@ namespace DocWorksQA.Pages
         public void ClickOnBlankDraft()
         {
             Click(BLANKDRAFT_CLICK);
-            info("Selected Blank Draft.");
+            Info("Selected Blank Draft.");
         }
 
         /**
@@ -169,7 +169,7 @@ namespace DocWorksQA.Pages
         public void ClickOnExistingDraft()
         {
             Click(EXISTINGDRAFT_CLICK);
-            info("Selected Existing Draft.");
+            Info("Selected Existing Draft.");
         }
 
         /**
@@ -179,7 +179,7 @@ namespace DocWorksQA.Pages
         public void CLOSEDRAFT()
         {
             Click(CLOSEDRAFT_BUTTON);
-            info("Clicked on Close Draft Button.");
+            Info("Clicked on Close Draft Button.");
         }
 
         /**
@@ -189,7 +189,7 @@ namespace DocWorksQA.Pages
         public void CLICKOPENPROJECT()
         {
             Click(OPENPROJECT);
-            info("Clicked on Open Project Button.");
+            Info("Clicked on Open Project Button.");
         }
 
     }

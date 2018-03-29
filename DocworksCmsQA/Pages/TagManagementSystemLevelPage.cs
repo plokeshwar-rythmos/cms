@@ -49,63 +49,63 @@ namespace DocWorksQA.Pages
         public void ClickSystemTab()
         {
             Click(SYSTEM_LEVEL);
-            info("Clicked on System Screen");
+            Info("Clicked on System Screen");
         }
 
         public void ClickCreateTagGroup()
         {
             Click(CREATE_TAGGROUP_BUTTON);
-            info("Clicked on Create Tag Group Button");
+            Info("Clicked on Create Tag Group Button");
         }
 
         public String EnterTagGroupName()
         {
-            String str = "GROUPTAG" + generateRandomNumbers(3);
+            String str = "GROUPTAG" + GenerateRandomNumbers(3);
             Clear(TAG_GROUP_NAME);
             EnterValue(TAG_GROUP_NAME, str);
-            info("Entered tag Group Name as" + str);
+            Info("Entered tag Group Name as" + str);
             return str;
         }
         public void SuccessScreenshot(String path, String message)
         {
-            info("<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
+            Info("<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
         }
         public void SelectColor()
         {
             Click(COLOR_DROPDOWN);
             System.Threading.Thread.Sleep(5000);
             Click(COLOR_VALUE);
-            info("Selected Tag Color");
+            Info("Selected Tag Color");
         }
 
         public void ClickCheckBoxLimitToOne()
         {
             Click(LIMITTOONE_CHECKBOX);
-            info("Clicked LIMITTOONE Checkbox");
+            Info("Clicked LIMITTOONE Checkbox");
         }
 
         public void ClickChildNodeInheritCheckBox()
         {
             Click(CHILDNODESINHERITS_CHECKBOX);
-          info("Clicked oon Child Node Inherit checkbox");
+          Info("Clicked oon Child Node Inherit checkbox");
         }
 
         public void ClickPublishCheckBox()
         {
             Click(PUBLISH_CHECKBOX);
-            info("Clicked Publish Checkbox");
+            Info("Clicked Publish Checkbox");
         }
 
         public void ClickPublicCheckBox()
         {
             Click(PUBLIC_CHECKBOX);
-            info("Clicked Public Checkbox");
+            Info("Clicked Public Checkbox");
         }
 
         public void ClickCreateTagGroupAfterDone()
         {
             Click(CREATE_TAGGROUP);
-          info("Clicked Create Tag group");
+          Info("Clicked Create Tag group");
         }
 
         public String GetTagGroupName(String str)
@@ -114,7 +114,7 @@ namespace DocWorksQA.Pages
             Console.WriteLine("The group name");
             String str1=  GetTextOfHiddenElement(By.XPath(s));
             Console.WriteLine("The group name is :" + str1.ToString());
-          info("The Tag Group Name Created is " + str1.ToString());
+          Info("The Tag Group Name Created is " + str1.ToString());
             return str1.ToString();
 
         }
@@ -123,7 +123,7 @@ namespace DocWorksQA.Pages
             String s1 = "//mat-list-item//div/span/span" + "[text()='" + str + "']/following::span[3]";
             String str1 = GetTextOfHiddenElement(By.XPath(s1));
             Console.WriteLine("The No of Tags is :" + str1.ToString());
-            info("The No of Tags is " + str1.ToString());
+            Info("The No of Tags is " + str1.ToString());
             return str1.ToString();
         }
         public String GetPublicValue(String str)
@@ -131,7 +131,7 @@ namespace DocWorksQA.Pages
             String s1 = "//mat-list-item//div/span/span" + "[text()='" + str + "']/following::span[1]";
             String str1 = GetTextOfHiddenElement(By.XPath(s1));
             Console.WriteLine("The public value is :" + str1.ToString());
-           info("The public value  is " + str1.ToString());
+           Info("The public value  is " + str1.ToString());
             return str1.ToString();
         }
         public String GetProjctsPointed(String str)
@@ -139,7 +139,7 @@ namespace DocWorksQA.Pages
             String s1 = "//mat-list-item//div/span/span" + "[text()='" + str + "']/following::span[2]";
             String str1 = GetTextOfHiddenElement(By.XPath(s1));
             Console.WriteLine("TheProjects Pointed is :" + str1.ToString());
-            info("The Projects Pointed  is " + str1.ToString());
+            Info("The Projects Pointed  is " + str1.ToString());
             return str1.ToString();
         }
         public String GetLastModified(String str)
@@ -147,21 +147,21 @@ namespace DocWorksQA.Pages
             String s1 = "//mat-list-item//div/span/span" + "[text()='" +str+ "']/following::span[4]";
             String str1 = GetTextOfHiddenElement(By.XPath(s1));
             Console.WriteLine("The Get Last Modified value is :" + str1.ToString());
-            info("The Get Last Modified Value value  is " + str1.ToString());
+            Info("The Get Last Modified Value value  is " + str1.ToString());
             return str1.ToString();
 
         }
         public void ClickTagGroupUpdate()
         {
             Click(UPDATE_TAGGROUP);
-            info("Clicked On Update tag Group ");
+            Info("Clicked On Update tag Group ");
         }
         public String GetTagName()
         {
             Console.WriteLine("The Tag name");
             String str = GetText(GET_TAG_NAME);
             Console.WriteLine("The Tag name is :" + str);
-            info("The Tag Created is " + str);
+            Info("The Tag Created is " + str);
             return str;
         }
         public void ClickGetDetails(String str)
@@ -171,37 +171,37 @@ namespace DocWorksQA.Pages
 
             ClickByJavaScriptExecutor(By.XPath(s1));
             System.Threading.Thread.Sleep(10000);
-            info("Clicked On the Get Details of Tag Group");
+            Info("Clicked On the Get Details of Tag Group");
         }
         public void ClickManageTags()
         {
             ClickByJavaScriptExecutor(MANAGE_TAG_GROUP);
-            info("Clicked on Manage tags");
+            Info("Clicked on Manage tags");
         }
 
         public void ClickEditTags()
         {
             ClickByJavaScriptExecutor(EDIT_TAG_GROUP);
-            info("Clicked on Edit Tag Group");
+            Info("Clicked on Edit Tag Group");
         }
         public void ClickAddTag()
         {
             Click(ADD_TAG);
-            info("Clicked on Add Tag Button");
+            Info("Clicked on Add Tag Button");
         }
 
         public String EnterTagName()
         {
-            String str = "TAG" + generateRandomNumbers(3);
+            String str = "TAG" + GenerateRandomNumbers(3);
             EnterValue(ENTER_TAG_NAME, str);
-            info("Entered Tag Name as" + str);
+            Info("Entered Tag Name as" + str);
             return str;
         }
 
         public void ClickAcceptTagName()
         {
             ClickByJavaScriptExecutor(CHECK_THE_TAGNAME);
-           info("Clicked the Accept Button of Tags");
+           Info("Clicked the Accept Button of Tags");
             System.Threading.Thread.Sleep(8000);
         }
 
@@ -216,17 +216,17 @@ namespace DocWorksQA.Pages
         public void ClickCloseManageTags()
         {
             Click(CLOSE_MANAGE_TAGS);
-            info("Clicked on Close Manage Tags");
+            Info("Clicked on Close Manage Tags");
         }
         public void EnterSearchTagInTagGroup(String TagName)
         {
             EnterValue(SEARCH_TAGGROUP_COLLECTION, TagName);
-          info("Entered Tag Name in Search Bar of Tag Group Collection");
+          Info("Entered Tag Name in Search Bar of Tag Group Collection");
         }
         public void EnterSearchInManageTags(String TagName)
         {
             EnterValue(SEARCH_IN_MANAGETAGS, TagName);
-            info("Entered Tag Name in Search Bar of ManageTags");
+            Info("Entered Tag Name in Search Bar of ManageTags");
 
         }
 

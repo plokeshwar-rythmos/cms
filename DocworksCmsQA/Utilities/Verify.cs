@@ -26,13 +26,13 @@ namespace DocWorksQA.Utilities
 
             if (expected.Equals(actual))
             {
-                pass("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
+                Pass("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
                         + successMessage);
                 return true;
             }
             else
             {
-                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
+                Fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
             return false;
@@ -54,13 +54,13 @@ namespace DocWorksQA.Utilities
 
             if (!expected.Equals(actual))
             {
-                pass("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
+                Pass("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
                         + successMessage);
                 return true;
             }
             else
             {
-                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
+                Fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
             return false;
@@ -80,13 +80,13 @@ namespace DocWorksQA.Utilities
 
             if (actual == null)
             {
-                pass("<b>Expected</b> : null<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
+                Pass("<b>Expected</b> : null<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
                         + successMessage);
                 return true;
             }
             else
             {
-                fail(new AssertException("Expected : Null,   Actual : " + actual + ",  ERROR : " + errorMessage));
+                Fail(new AssertException("Expected : Null,   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
             return false;
@@ -107,13 +107,13 @@ namespace DocWorksQA.Utilities
 
             if (actual != null)
             {
-                pass("<b>Expected</b> : NOT NULL<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
+                Pass("<b>Expected</b> : NOT NULL<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
                         + successMessage);
                 return true;
             }
             else
             {
-                fail(new AssertException("Expected : Not Null,   Actual : " + actual + ",  ERROR : " + errorMessage));
+                Fail(new AssertException("Expected : Not Null,   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
             return false;
@@ -132,13 +132,13 @@ namespace DocWorksQA.Utilities
 
             if (actual)
             {
-                pass("<b>Expected</b> : TRUE<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
+                Pass("<b>Expected</b> : TRUE<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
                         + successMessage);
                 return true;
             }
             else
             {
-                fail(new AssertException("Expected : True , Actual : " + actual + ",  ERROR : " + errorMessage));
+                Fail(new AssertException("Expected : True , Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
             return false;
@@ -160,7 +160,7 @@ namespace DocWorksQA.Utilities
 
             if (!actual)
             {
-                pass("<b>Expected</b> : FALSE<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
+                Pass("<b>Expected</b> : FALSE<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
                         + successMessage);
                 return true;
             }
@@ -184,49 +184,9 @@ namespace DocWorksQA.Utilities
          * @return True if both objects are equal.
          */
 
-        public Boolean verify(Object expected, Object actual, String successMessage, String errorMessage)
-        {
+        
 
-            if (expected.Equals(actual))
-            {
-                pass("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
-                        + successMessage);
-                return true;
-            }
-            else
-            {
-                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
-            }
-
-            return false;
-
-        }
-
-        /**
-         * This method verifies object against object and returns true if equal and reports only error messages.
-         * 
-         * @param expected
-         * @param actual
-         * @param errorMessage
-         * @return True if both objects are equal.
-         
-         */
-        public Boolean verify(Object expected, Object actual, String errorMessage)
-        {
-
-            if (expected.Equals(actual))
-            {
-                pass("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "");
-                return true;
-
-            }
-            else
-            {
-                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
-            }
-            return false;
-        }
-
+      
 
         /**
          * This method verifies Text against Text and reports messages.
@@ -244,13 +204,13 @@ namespace DocWorksQA.Utilities
 
             if (expected.Equals(actual))
             {
-                pass("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
+                Pass("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
                         + successMessage);
                 return true;
             }
             else
             {
-                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
+                Fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
 
             }
             return false;
@@ -269,13 +229,13 @@ namespace DocWorksQA.Utilities
 
             if (expected.Equals(actual))
             {
-                pass("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "");
+                Pass("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "");
                 return true;
 
             }
             else
             {
-                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
+                Fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
             return false;
@@ -298,13 +258,13 @@ namespace DocWorksQA.Utilities
 
             if (expected.Equals(actual, StringComparison.OrdinalIgnoreCase))
             {
-                pass("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
+                Pass("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
                         + successMessage);
                 return true;
             }
             else
             {
-                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
+                Fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
             return false;
@@ -326,13 +286,13 @@ namespace DocWorksQA.Utilities
 
             if (expected.Equals(actual, StringComparison.OrdinalIgnoreCase))
             {
-                pass("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "");
+                Pass("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "");
                 return true;
 
             }
             else
             {
-                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
+                Fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
             return false;
         }
@@ -352,13 +312,13 @@ namespace DocWorksQA.Utilities
 
             if (expected == actual)
             {
-                pass("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> SUCCESS :" + successMessage);
+                Pass("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> SUCCESS :" + successMessage);
                 return true;
             }
             else
             {
                 
-                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
+                Fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
 
             }
             return false;
@@ -379,12 +339,12 @@ namespace DocWorksQA.Utilities
 
             if (expected == actual)
             {
-                pass("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "");
+                Pass("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "");
                 return true;
             }
             else
             {
-                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
+                Fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
             return false;
@@ -408,13 +368,13 @@ namespace DocWorksQA.Utilities
 
             if (actual.Contains(expected))
             {
-                pass("<b>Expected</b> : [" + expected + "] is available in <b>Actual</b> : [" + actual + "]<br> SUCCESS : "
+                Pass("<b>Expected</b> : [" + expected + "] is available in <b>Actual</b> : [" + actual + "]<br> SUCCESS : "
                         + successMessage);
                 return true;
             }
             else
             {
-                fail(new AssertException("Expected : " + expected + " is not available in  Actual : " + actual + ",  ERROR : " + errorMessage));
+                Fail(new AssertException("Expected : " + expected + " is not available in  Actual : " + actual + ",  ERROR : " + errorMessage));
               
 
             }

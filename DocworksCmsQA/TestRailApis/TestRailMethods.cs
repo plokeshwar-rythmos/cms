@@ -52,7 +52,7 @@ namespace DocWorksQA.TestRailApis
             var data = new Dictionary<string, object>
             {
                 { "suite_id", 1},
-                { "name", environment+" : "+Utilities.ExtentReporter.getTimeStamp() },
+                { "name", environment+" : "+Utilities.ExtentReporter.GetTimeStamp() },
                  { "assignedto_id", 1 },
                  { "description", description },
                   { "include_all", false }

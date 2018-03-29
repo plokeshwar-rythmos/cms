@@ -52,51 +52,51 @@ namespace DocWorksQA.Pages
 
         public void SuccessScreenshot(String path,String message)
         {
-            info("<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
+            Info("<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
         }
 
 
         public String GetDescriptionSize()
         {
-            info("Description Size is" + this.GetSize(DESCRIPTION_FIELD));
+            Info("Description Size is" + this.GetSize(DESCRIPTION_FIELD));
             return this.GetSize(DESCRIPTION_FIELD);
         }
 
         public String GetDescriptionLength()
         {
             String str = GetText(SIZE_EXCEED_1000).ToString();
-            info("Description Exceeds 1000 characters***" + str);
+            Info("Description Exceeds 1000 characters***" + str);
             return str;
         }
 
         public String GetDescriptionText()
         {
             String str = GetText(DESCRIPTION_MAT_CARD).ToString();
-            info("The Description Text is"+str);
+            Info("The Description Text is"+str);
             return str;
         }
         public String GetTitleLength()
         {
             String str = GetText(SIZE_EXCEED_100).ToString();
-            info("Title Exceeds 100 characters***" + str);
+            Info("Title Exceeds 100 characters***" + str);
             return str;
         }
         public void ClickDashboard()
         {
             Click(By.XPath("//a[@href='/dashboard']"));
             System.Threading.Thread.Sleep(7000);
-            info("Clicked On DashBoard");
+            Info("Clicked On DashBoard");
         }
 
         public void ClickAddProject() {
             Click(ADDPROJECT_BUTTON);
-            info("Clicked on AddProject Button.");
+            Info("Clicked on AddProject Button.");
         }
 
         public String EnterProjectTitle() {
-           String ProjectTitle = "SELENIUM" + "_" + generateRandomNumbers(2);
+           String ProjectTitle = "SELENIUM" + "_" + GenerateRandomNumbers(2);
             EnterValue(PROJECT_TITLE_FIELD, ProjectTitle);
-            info("Entered Project Title : " + ProjectTitle);
+            Info("Entered Project Title : " + ProjectTitle);
             return ProjectTitle;
         }
 
@@ -104,7 +104,7 @@ namespace DocWorksQA.Pages
         {
             String ProjectTitle = "QA";
             EnterValue(PROJECT_TITLE_FIELD, ProjectTitle);
-            info("Entered Project Title : " + ProjectTitle);
+            Info("Entered Project Title : " + ProjectTitle);
             return ProjectTitle;
         }
         
@@ -112,7 +112,7 @@ namespace DocWorksQA.Pages
         {
             String ProjectTitle = "SELENIUM" + RandomValueOfLengthMorethan100();
             EnterValue(PROJECT_TITLE_FIELD, ProjectTitle);
-            info("Entered Project Title : " + ProjectTitle);
+            Info("Entered Project Title : " + ProjectTitle);
             return ProjectTitle;
         }
 
@@ -122,50 +122,50 @@ namespace DocWorksQA.Pages
             String Description = "(WCM or WCMS)isa CMS designed to support the management of the content of Web pages. Most popular CMSs are also WCMSs. Web content includes text and embedded(WCM or WCMS) is a CMS designed to support the management of the content of Web pages. Most popular CMSs are also WCMSs. Web content includes text and embedded(WCM or WCMS) is a CMS designed to support the management of the content of Web pages. Most popular CMSs are also WCMSs. Web content includes text and embedded(WCM or WCMS) is a CMS designed to support the management of the content of Web pages. Most popular CMSs are also WCMSs. Web content includes text and embedded(WCM or WCMS) is a CMS designed to support the management of the content of Web pages. Most popular CMSs are also WCMSs. Web content includes text and embedded(WCM or WCMS) is a CMS designed to support the management of the content of Web pages. Most popular CMSs are also WCMSs. Web content includes text and embedded(WCM or WCMS) is a CMS designed to support the management of the content of Web pages. Most popular CMSs are also WCMSs. Web content includes text and embedded";
             EnterValue(DESCRIPTION_FIELD, Description);
             System.Threading.Thread.Sleep(10000);
-            info("Entered Project Description : " + Description);
+            Info("Entered Project Description : " + Description);
             return Description;
         }
         public String GetFooterTitle()
         {
             IWebElement element = WaitForElement(FOOTER_TEXT);
             String FooterText = this.GetText(FOOTER_TEXT);
-           info("Footer Title is*************" + FooterText);
+           Info("Footer Title is*************" + FooterText);
             return FooterText;
         }
 
         public void EnterDescription(String description) {
             EnterValue(DESCRIPTION_FIELD, description);
-            info("Entered Description: " + description);
+            Info("Entered Description: " + description);
         }
 
         public void EnterPublishedPath(String path)
         {
             EnterValue(PUBLISHED_PATH, path);
-            info("Enter Published Path:" + path);
+            Info("Enter Published Path:" + path);
         }
 
         public void ClickClose()
         {
             Click(By.XPath("//button//i[@class='mdi mdi-close mdi-24px']"));
-            info("Clicked Close Button");
+            Info("Clicked Close Button");
         }
 
         public void ClickBack()
         {
             Click(BACK_BUTTON);
-            info("Clicked on Back Button.");
+            Info("Clicked on Back Button.");
 
         }
         public void ClickClear()
         {
             Click(CLEAR_BUTTON);
-            info("Clicked on Clear Button.");
+            Info("Clicked on Clear Button.");
 
         }
         public void ClickCreateProject()
         {
             Click(CREATE_PROJECT_BUTTON);
-            info("Clicked on Create project Button.");
+            Info("Clicked on Create project Button.");
 
         }
 
@@ -173,7 +173,7 @@ namespace DocWorksQA.Pages
         {
             System.Threading.Thread.Sleep(7000);
             Click(NOTIFICATION_BELL);
-           info("Clicked Notification Bell");
+           Info("Clicked Notification Bell");
         }
 
         public String GetNotificationStatus()
@@ -205,57 +205,57 @@ namespace DocWorksQA.Pages
             }
             
             String str =this.GetText(GET_CREATEDPROJECT);
-            info("Status of the created Project is :   " + str);
+            Info("Status of the created Project is :   " + str);
             return str;
         }
 
         public void BackToProject()
         {
             this.Click(BACKDROP);
-            info("Clicked On BackDrop");
+            Info("Clicked On BackDrop");
         }
 
         public void ClickContentType()
         {
 
             this.Click(TYPE_OF_CONTENT_DROPDOWN);
-            info("Clicked On the TypeOfContent DropDown");
+            Info("Clicked On the TypeOfContent DropDown");
             this.Click(CONTENT_VALUE);
-            info("selected the content from drop down");
+            Info("selected the content from drop down");
         }
 
         public void ClickSourceControlTypeGitLab()
         {
           
                 this.Click(SOURCE_CONTROL_PROVIDER_DROPDOWN);
-            info("Clicked On the SOURCE_CONTROL_TYPE_DROPDOWN DropDown");
+            Info("Clicked On the SOURCE_CONTROL_TYPE_DROPDOWN DropDown");
             this.Click(SOURCE_CONTROL_VALUE_GITLAB);
-            info("selected the SOURCE_CONTROL_VALUE as GITLAB from drop down");
+            Info("selected the SOURCE_CONTROL_VALUE as GITLAB from drop down");
 
         }
         public void ClickSourceControlTypeGitHub()
         {
 
             this.Click(SOURCE_CONTROL_PROVIDER_DROPDOWN);
-            info("Clicked On the SOURCE_CONTROL_TYPE_DROPDOWN DropDown");
+            Info("Clicked On the SOURCE_CONTROL_TYPE_DROPDOWN DropDown");
             this.Click(SOURCE_CONTROL_VALUE_GITHUB);
-            info("selected the SOURCE_CONTROL_VALUE as GITHUB from drop down");
+            Info("selected the SOURCE_CONTROL_VALUE as GITHUB from drop down");
 
         }
         public void ClickSourceControlTypeOno()
         {
 
             this.Click(SOURCE_CONTROL_PROVIDER_DROPDOWN);
-            info("Clicked On the SOURCE_CONTROL_TYPE_DROPDOWN DropDown");
+            Info("Clicked On the SOURCE_CONTROL_TYPE_DROPDOWN DropDown");
             this.Click(SOURCE_CONTROL_VALUE_ONO);
-            info("selected the SOURCE_CONTROL_VALUE as Ono from drop down");
+            Info("selected the SOURCE_CONTROL_VALUE as Ono from drop down");
 
         }
         public void EnterMercurialRepoPath()
         {
             String path= "https://bitbucket.org/mohittonde/docworks";
             EnterValue(MERCURIAL_REPO_PATH,path);
-            info("Entered Mercurial repo Path as" + path);
+            Info("Entered Mercurial repo Path as" + path);
         }
 
 
@@ -264,9 +264,9 @@ namespace DocWorksQA.Pages
         public void ClickRepository()
         {
                 this.Click(REPOSITORY_DROPDOWN);
-            info("Clicked On the Repository DropDown");
+            Info("Clicked On the Repository DropDown");
             this.Click(REPOSITORY_VALUE);
-            info("selected the Reppository_Value from drop down");
+            Info("selected the Reppository_Value from drop down");
 
 
         }

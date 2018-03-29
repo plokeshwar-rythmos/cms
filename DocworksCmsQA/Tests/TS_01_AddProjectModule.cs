@@ -41,7 +41,7 @@ namespace DocWorksQA.Tests
             }
             catch (Exception ex) {
                 
-                fail(ex);
+                Fail(ex);
                 throw;
             }
         }
@@ -84,14 +84,14 @@ namespace DocWorksQA.Tests
                 System.Threading.Thread.Sleep(3000);
                 distmodule.SearchForProject(expected);
                 System.Threading.Thread.Sleep(3000);
-                String actual = distmodule.getProjectTitle();
+                String actual = distmodule.GetProjectTitle();
                 String path1 = TakeScreenshot(driver);
                 addProject.SuccessScreenshot(path1, "ProjectTitle");
                 Assert.IsTrue(VerifyEquals(expected, actual, "GitLab Project Got created Successfully","GitLab Project Not Created Succesfully"));
             }
             catch (Exception e)
             {
-                fail(e);
+                Fail(e);
                 throw;
             }
 
@@ -135,14 +135,14 @@ namespace DocWorksQA.Tests
                 System.Threading.Thread.Sleep(3000);
                 distmodule.SearchForProject(expected);
                 System.Threading.Thread.Sleep(3000);
-                String actual = distmodule.getProjectTitle();
+                String actual = distmodule.GetProjectTitle();
                 String path1 = TakeScreenshot(driver);
                 addProject.SuccessScreenshot(path1, "ProjectTitle");
                 Assert.IsTrue(VerifyEquals(expected, actual, "GitHub Project Got created Successfully", "GitHub Project Not Created Succesfully"));
             }
             catch (Exception e)
             {
-                fail(e.StackTrace);
+                Fail(e.StackTrace);
                 throw;
             }
 
@@ -186,14 +186,14 @@ namespace DocWorksQA.Tests
                 System.Threading.Thread.Sleep(3000);
                 distmodule.SearchForProject(expected);
                 System.Threading.Thread.Sleep(3000);
-                String actual = distmodule.getProjectTitle();
+                String actual = distmodule.GetProjectTitle();
                 String path1 = TakeScreenshot(driver);
                 addProject.SuccessScreenshot(path1, "ProjectTitle");
                 Assert.IsTrue(VerifyEquals(expected, actual, "Mercurial Project Got created Successfully", "Mercurial Project Not Created Succesfully"));
             }
             catch (Exception e)
             {
-                fail(e.StackTrace);
+                Fail(e.StackTrace);
                 throw;
             }
 
@@ -235,14 +235,14 @@ namespace DocWorksQA.Tests
                 System.Threading.Thread.Sleep(3000);
                 distmodule.SearchForProject(expected);
                 System.Threading.Thread.Sleep(3000);
-                String actual = distmodule.getProjectTitle();
+                String actual = distmodule.GetProjectTitle();
                 String path1 = TakeScreenshot(driver);
                 addProject.SuccessScreenshot(path1, "ProjectTitle");
                 Assert.IsTrue(VerifyEquals(expected, actual, "GitLab Project Got created Successfully", "GitLab Project Not Created Succesfully"));
             }
             catch (Exception e)
             {
-                fail(e.StackTrace);
+                Fail(e.StackTrace);
                 throw;
             }
 
@@ -275,7 +275,7 @@ namespace DocWorksQA.Tests
             }
             catch (Exception e)
             {
-                fail(e.StackTrace);
+                Fail(e.StackTrace);
                 throw;
             }
 
@@ -306,7 +306,7 @@ namespace DocWorksQA.Tests
             }
             catch (Exception e)
             {
-                fail(e.StackTrace);
+                Fail(e.StackTrace);
                 throw;
             }
         }
@@ -350,7 +350,7 @@ namespace DocWorksQA.Tests
             }
             catch (Exception e)
             {
-                fail(e);
+                Fail(e);
                 throw;
             }
 

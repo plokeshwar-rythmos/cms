@@ -37,7 +37,7 @@ namespace DocWorksQA.SeleniumHelpers
             Logger.Debug("Entering value into " + by.ToString());
             try {
 
-                type(by, value);
+                Type(by, value);
 
             } catch (Exception e) {
                 throw e;
@@ -86,7 +86,7 @@ namespace DocWorksQA.SeleniumHelpers
         {
             IWebElement element = WaitForElement(by);
 
-            elementHighlight(element);
+            ElementHighlight(element);
             return element.Size.ToString();
         }
 
@@ -133,7 +133,7 @@ namespace DocWorksQA.SeleniumHelpers
             return tmp;
         }
 
-        public void type(By by, String Value)
+        public void Type(By by, String Value)
         {
             try
             {
@@ -256,7 +256,7 @@ namespace DocWorksQA.SeleniumHelpers
             return el;
         }
 
-        public void elementHighlight(IWebElement element)
+        public void ElementHighlight(IWebElement element)
         {
           IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
                 

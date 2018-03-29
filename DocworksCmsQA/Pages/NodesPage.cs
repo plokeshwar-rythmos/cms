@@ -35,21 +35,21 @@ namespace DocWorksQA.Pages
             System.Threading.Thread.Sleep(7000);
             MoveToelementAndRightClick(UNITYMANUAL_TREE);
             System.Threading.Thread.Sleep(7000);
-            info("Right Click on Unity Manual is performed");
+            Info("Right Click on Unity Manual is performed");
         }
 
         public void ClickOnNewNode()
         {
             MoveToelementAndClick(NEW_NODE_CLICK);
             System.Threading.Thread.Sleep(7000);
-            info("Clicked on New Node");
+            Info("Clicked on New Node");
         }
 
         public String EnterNodeName()
         {
-            String str = "Node" + generateRandomNumbers(3);
+            String str = "Node" + GenerateRandomNumbers(3);
             EnterValue(NODE_NAME, str);
-            info("Entered Node Name with :" + str);
+            Info("Entered Node Name with :" + str);
             System.Threading.Thread.Sleep(7000);
             return str;
         }
@@ -57,16 +57,16 @@ namespace DocWorksQA.Pages
         public String EnterDulicateNodeName(String NodeName)
         {
             EnterValue(NODE_NAME, NodeName);
-            info("Entered Node Name with :" + NodeName);
+            Info("Entered Node Name with :" + NodeName);
             System.Threading.Thread.Sleep(7000);
             return NodeName;
         }
 
         public void EnterDraftName()
         {
-            String str = "Draft" + generateRandomNumbers(3);
+            String str = "Draft" + GenerateRandomNumbers(3);
             EnterValue(DRAFT_NAME, str);
-            info("Entered Draft Name with : " + str);
+            Info("Entered Draft Name with : " + str);
             System.Threading.Thread.Sleep(7000);
 
         }
@@ -75,7 +75,7 @@ namespace DocWorksQA.Pages
         public void ClickNoneRadioButton()
         {
             Click(NONE_RADIO_BUTTON);
-            info("Clicked on None Radio Button");
+            Info("Clicked on None Radio Button");
             System.Threading.Thread.Sleep(7000);
         }
 
@@ -83,14 +83,14 @@ namespace DocWorksQA.Pages
         public void ClickCreateNode()
         {
             Click(CREATE_NODE);
-            info("Clicked Create Node Button");
+            Info("Clicked Create Node Button");
             System.Threading.Thread.Sleep(7000);
         }
         
         public void ClickUnityManualTree()
         {
             Click(UNITYMANUAL_SIDEBAR);
-            info("Clicked Unity Manual Side Bar for extensions");
+            Info("Clicked Unity Manual Side Bar for extensions");
             System.Threading.Thread.Sleep(7000);
 
         }
@@ -99,14 +99,14 @@ namespace DocWorksQA.Pages
         {
             Click(UNITYMANUAL_SIDEBAR);
             Click(LAST_CREATED_NODE_SIDEBAR);
-           info("Clicked Side Bar of Parent Node for extensions");
+           Info("Clicked Side Bar of Parent Node for extensions");
             System.Threading.Thread.Sleep(7000);
         }
         public void ClickDashboard()
         {
             Click(By.XPath("//a[@href='/dashboard']"));
             System.Threading.Thread.Sleep(7000);
-            info("Clicked on Dashboard");
+            Info("Clicked on Dashboard");
         }
 
         public void RightClickOnParentNode()
@@ -114,7 +114,7 @@ namespace DocWorksQA.Pages
             System.Threading.Thread.Sleep(7000);
             MoveToelementAndRightClick(LAST_CREATED_NODE);
             System.Threading.Thread.Sleep(7000);
-            info("Right Click on Parent Node is performed");
+            Info("Right Click on Parent Node is performed");
         }
 
     
@@ -123,7 +123,7 @@ namespace DocWorksQA.Pages
         {
             System.Threading.Thread.Sleep(7000);
            String str = GetText(By.XPath("(//li/div[@class='ui-treenode-content ui-treenode-selectable'])[last()]"));
-            info("The Text of Node Created is" + str);
+            Info("The Text of Node Created is" + str);
             return str;
         }
 
@@ -131,7 +131,7 @@ namespace DocWorksQA.Pages
         {
             String str = "(//li/div[@class='ui-treenode-content ui-treenode-selectable']//span)"+ "[text()='"+NodeName+"']";
             Click(By.XPath(str));
-            info("Clicked On Node" + NodeName);
+            Info("Clicked On Node" + NodeName);
         }
        
 

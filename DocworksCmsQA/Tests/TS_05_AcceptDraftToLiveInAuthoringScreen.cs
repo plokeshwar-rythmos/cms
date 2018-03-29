@@ -44,7 +44,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-                fail("Assertion failed");
+                Fail("Assertion failed");
                 throw;
             }
         }
@@ -136,7 +136,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-                fail("Assertion failed");
+                Fail("Assertion failed");
                 throw;
             }
         }
@@ -182,7 +182,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-                fail("Assertion failed");
+                Fail("Assertion failed");
                 throw;
             }
         }
@@ -253,7 +253,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-                fail("Assertion failed");
+                Fail("Assertion failed");
                 throw;
             }
         }
@@ -284,7 +284,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-                fail("Assertion failed");
+                Fail("Assertion failed");
                 throw;
             }
 
@@ -313,7 +313,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-               fail("Assertion failed");
+               Fail("Assertion failed");
                 throw;
             }
 
@@ -395,7 +395,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-             fail("Assertion failed");
+             Fail("Assertion failed");
                 throw;
             }
 
@@ -450,7 +450,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-                fail("Assertion failed");
+                Fail("Assertion failed");
                 throw;
             }
         }
@@ -492,7 +492,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-                fail("Assertion failed");
+                Fail("Assertion failed");
                 throw;
             }
         }

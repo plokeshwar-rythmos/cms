@@ -21,7 +21,7 @@ namespace DocWorksQA.Utilities
 
        
 
-        public Boolean getReporter() {
+        public Boolean GetReporter() {
             if (reporter == null)
             {
                 return true;
@@ -29,12 +29,12 @@ namespace DocWorksQA.Utilities
             return false;
         }
 
-        public static ExtentHtmlReporter getHtmlReport () {
+        public static ExtentHtmlReporter GetHtmlReport () {
 
-            String path = getCurrentProjectPath() + "/bin/Reports";
-            new CommonMethods().createDirectory(path);
+            String path = GetCurrentProjectPath() + "/bin/Reports";
+            new CommonMethods().CreateDirectory(path);
 
-            ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(path+"/Automation-"+getTimeStamp()+".html");
+            ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(path+"/Automation-"+GetTimeStamp()+".html");
             htmlReporter.Configuration().Theme = Theme.Dark;
             htmlReporter.Configuration().DocumentTitle = "DocWorks Selenium Report";
             htmlReporter.Configuration().ReportName = "DocWorks Selenium Testing Report";
@@ -43,7 +43,7 @@ namespace DocWorksQA.Utilities
 
 
 
-        public static ExtentXReporter getXReporter() {
+        public static ExtentXReporter GetXReporter() {
             
             ExtentXReporter xReporter = new ExtentXReporter(ConfigurationHelper.Get<String>("mongoDbUrl"));
             xReporter.Configuration().ServerURL = (ConfigurationHelper.Get<String>("serverUrl"));
@@ -53,13 +53,13 @@ namespace DocWorksQA.Utilities
         }
 
 
-        public static string getCurrentProjectPath() {
+        public static string GetCurrentProjectPath() {
            String path = System.AppDomain.CurrentDomain.BaseDirectory;
             path = path.Substring(0, path.IndexOf(@"\bin"));
             return path;
         }
 
-        public static string getTimeStamp() {
+        public static string GetTimeStamp() {
             StringBuilder TimeAndDate = new StringBuilder(DateTime.Now.ToString());
             TimeAndDate.Replace("/", "_");
             TimeAndDate.Replace(":", "_");
@@ -73,7 +73,7 @@ namespace DocWorksQA.Utilities
         public static void InitReports(String folderPath, String reportName)
         {
             System.IO.Directory.CreateDirectory(folderPath);
-            String file = folderPath + "/" + reportName + getTimeStamp() + ".html";
+            String file = folderPath + "/" + reportName + GetTimeStamp() + ".html";
 
             //Console.WriteLine("Initializing Extent Reporting");
             ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(file);
@@ -149,7 +149,7 @@ namespace DocWorksQA.Utilities
         /**
          * This method closes the current parent test instance.
          */
-        public void closeParentTest()
+        public void CloseParentTest()
         {
             //Console.WriteLine("Closing Parent Test : " + parent);
             if (parent != null)
@@ -161,9 +161,9 @@ namespace DocWorksQA.Utilities
          * This method adds a pass statement to the current test instance.
          * @param description
          */
-        public void pass(String description)
+        public void Pass(String description)
         {
-            Logger.Debug(removeTags(description));
+            Logger.Debug(RemoveTags(description));
             test.Pass(description);
         }
 
@@ -171,13 +171,13 @@ namespace DocWorksQA.Utilities
          * This method adds a fail statement to the current test instance.
          * @param description
          */
-        public void fail(String description)
+        public void Fail(String description)
         {
-            Logger.Debug(removeTags(description));
+            Logger.Debug(RemoveTags(description));
             test.Fail("<div style=\"color: red;\">" + description + "</div>");
         }
 
-        public void fail(Exception ex)
+        public void Fail(Exception ex)
         {
             string exceptionString = JsonConvert.SerializeObject(ex);
 
@@ -201,23 +201,23 @@ namespace DocWorksQA.Utilities
          * This method adds a info statement to the current test instance.
          * @param description
          */
-        public void info(String description)
+        public void Info(String description)
         {
-            Logger.Debug(removeTags(description));
+            Logger.Debug(RemoveTags(description));
             test.Info(description);
         }
 
         /**
          * This method flushes report to the active extent instance.
          */
-        public void reportFlusher()
+        public void ReportFlusher()
         {
             //Console.WriteLine("Flushing the HTML report.");
            
             reporter.Flush();
         }
 
-        public String removeTags(String data) {
+        public String RemoveTags(String data) {
             return data.Replace("<b>", " ").Replace("</b>"," ").Replace("<br>", " ");
             
         }

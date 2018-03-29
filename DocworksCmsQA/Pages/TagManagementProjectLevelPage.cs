@@ -27,58 +27,58 @@ namespace DocWorksQA.Pages
         public void ClickDashBoard()
         {
             Click(DASHBOARD);
-            info("Clicked Onn DashBoard");
+            Info("Clicked Onn DashBoard");
         }
         public String GetTagNameAtProjectLevel()
         {
             String str = GetText(GET_TAG_NAME_AT_PROJECTLEVEL);
             Console.WriteLine("####" + str);
-            info("The Tag Name at Project Level is" + str);
+            Info("The Tag Name at Project Level is" + str);
             return str;
         }
         public void EnterSearchForProject(String ProjectName)
         {
             Clear(SEARCH_IN_DASHBOARD);
             EnterValue(SEARCH_IN_DASHBOARD, ProjectName);
-            info("ProjectName is" + ProjectName);
+            Info("ProjectName is" + ProjectName);
         }
 
         public void ClickSettings()
         {
             Click(SETTINGS);
-            info("Clicked on Settings");
+            Info("Clicked on Settings");
         }
 
         public void ClickOnManageTagGroups()
         {
             Click(CLICK_MANAGE_TAG_GROUPS);
-            info("Clicked on Manage Tag Groups");
+            Info("Clicked on Manage Tag Groups");
         }
 
         public void SearchTagsAtProjectLevel(String TagName)
         {
             Clear(SEARCH_TAGS_AT_PROJECTLEVEL);
             EnterValue(SEARCH_TAGS_AT_PROJECTLEVEL, TagName);
-            info("Searched Tags At Project Level");
+            Info("Searched Tags At Project Level");
         }
         public void ClickPlusCircle()
         {
             Click(AVAILABLE_TAG_PLUS_CIRCLE);
-            info("Clicked On Plus circle of Available Tag to Move into Assigned Tags");
+            Info("Clicked On Plus circle of Available Tag to Move into Assigned Tags");
         }
        public  void ClickCloseCircle()
         {
             Click(ASSIGNED_TAG_CLOSE_CIRCLE);
-            info("Clicked on Close circle to remove the tag from Assigned Tags");
+            Info("Clicked on Close circle to remove the tag from Assigned Tags");
         }
         public void ClickCloseManageTagGroups()
         {
             Click(CLOSE_MANAGE_TAG_GROUPS);
-            info("Clicked Close Manage Tag Groups");
+            Info("Clicked Close Manage Tag Groups");
         }
         public void SuccessScreenshot(String path, String message)
         {
-            info("<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
+            Info("<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
         }
     }
 }

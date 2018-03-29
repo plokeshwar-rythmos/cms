@@ -40,7 +40,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-                fail("Assertion failed");
+                Fail("Assertion failed");
                 throw;
             }
         }
@@ -105,7 +105,7 @@ namespace DocWorksQA.Tests
                 System.Threading.Thread.Sleep(5000);
                 distmodule.ClickDistribution();
                 System.Threading.Thread.Sleep(18000);
-                String actual = distmodule.getDistributionName();
+                String actual = distmodule.GetDistributionName();
                 String path2 = TakeScreenshot(driver);
                 distmodule.SuccessScreenshot(path2, "Created Distribution:  "+expected1+"");
                 Assert.IsTrue(VerifyEquals(expected1, actual, "Create Distribution for GitLab Project With TOC is successful", "Create Distribution for GitLab Project With TOC is not successful"));
@@ -130,7 +130,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-                fail("Assertion failed");
+                Fail("Assertion failed");
                 throw;
             }
 
@@ -196,7 +196,7 @@ namespace DocWorksQA.Tests
                 System.Threading.Thread.Sleep(5000);
                 distmodule.ClickDistribution();
                 System.Threading.Thread.Sleep(18000);
-                String actual = distmodule.getDistributionName();
+                String actual = distmodule.GetDistributionName();
                 String path2 = TakeScreenshot(driver);
                 distmodule.SuccessScreenshot(path1, "Created Distribution for GITHUB With TOC");
                 Assert.IsTrue(VerifyEquals(expected1, actual, "Create Distribution for GitHub Project  with TOC is successful", "Create Distribution for GitHub Project is not successful"));
@@ -221,7 +221,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-                fail("Assertion failed");
+                Fail("Assertion failed");
                 throw;
             }
 
@@ -287,7 +287,7 @@ namespace DocWorksQA.Tests
                 System.Threading.Thread.Sleep(5000);
                 distmodule.ClickDistribution();
                 System.Threading.Thread.Sleep(18000);
-                String actual = distmodule.getDistributionName();
+                String actual = distmodule.GetDistributionName();
                 String path2 = TakeScreenshot(driver);
                 distmodule.SuccessScreenshot(path1, "Created Distribution");
                 Assert.IsTrue(VerifyEquals(expected1, actual, "Create Distribution for Mercurial Project With TOC path is successful", "Create Distribution for Mercurial Project is not successful"));
@@ -312,7 +312,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-                fail("Assertion failed");
+                Fail("Assertion failed");
                 throw;
             }
 
@@ -373,7 +373,7 @@ namespace DocWorksQA.Tests
                 System.Threading.Thread.Sleep(5000);
                 distmodule.ClickDistribution();
                 System.Threading.Thread.Sleep(18000);
-                String actual = distmodule.getDistributionName();
+                String actual = distmodule.GetDistributionName();
                 String path2 = TakeScreenshot(driver);
                 distmodule.SuccessScreenshot(path1, "Created Distribution");
                 Assert.IsTrue(VerifyEquals(expected1, actual, "Create Distribution for Project WithOut TOC is successful", "Create Distribution for Project Without TOC is not successful"));
@@ -382,7 +382,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-                fail("Assertion failed");
+                Fail("Assertion failed");
                 throw;
             }
 
@@ -441,7 +441,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-                fail("Assertion failed");
+                Fail("Assertion failed");
                 throw;
             }
         }

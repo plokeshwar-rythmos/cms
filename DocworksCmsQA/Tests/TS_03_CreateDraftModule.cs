@@ -42,7 +42,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-               fail("Assertion failed");
+               Fail("Assertion failed");
                 throw;
             }
         }
@@ -114,7 +114,7 @@ namespace DocWorksQA.Tests
                     System.Threading.Thread.Sleep(5000);
                     createDraft.ClickNewDraft();
                     System.Threading.Thread.Sleep(5000);
-                    Boolean flag = createDraft.isDraftPopUpEnabled();
+                    Boolean flag = createDraft.IsDraftPopUpEnabled();
                     System.Threading.Thread.Sleep(5000);
                     String path2 = TakeScreenshot(driver);
                  createDraft.SuccessScreenshot(path2, "Draft Dialog Box Is appeared on screen");
@@ -123,7 +123,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-                fail("Assertion failed");
+                Fail("Assertion failed");
                 throw;
             }
 
@@ -154,7 +154,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-                fail("Assertion failed");
+                Fail("Assertion failed");
                 throw;
             }
 
@@ -200,7 +200,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-                fail("Assertion failed");
+                Fail("Assertion failed");
                 throw;
             }
 
@@ -235,7 +235,7 @@ namespace DocWorksQA.Tests
             }
             catch (AssertionException)
             {
-                fail("Assertion failed");
+                Fail("Assertion failed");
                 throw;
             }
         }

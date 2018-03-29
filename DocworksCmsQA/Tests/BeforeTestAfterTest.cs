@@ -13,7 +13,7 @@ namespace DocWorksQA.Tests
             String path = GetCurrentProjectPath() + "/bin/Release/Reports";
 
 
-            if (getReporter()) { 
+            if (GetReporter()) { 
                 InitReports(path, "CMS-Selenium");
             }
 
@@ -24,9 +24,9 @@ namespace DocWorksQA.Tests
         [OneTimeTearDown]
         public void GenerateReport()
         {
-            
+            Console.WriteLine("Running OneTimeTearDown in BeforeAfter Script");
             KillProcess();
-            reportFlusher();
+            ReportFlusher();
         }
 
     }

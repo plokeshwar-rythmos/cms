@@ -49,16 +49,16 @@ namespace DocWorksQA.Pages
         {
             Clear(ENTER_SEARCH);
             EnterValue(ENTER_SEARCH, projectName);
-            info("ProjectName is" + projectName);
+            Info("ProjectName is" + projectName);
         }
 
         /**
        * MethodName: getProjectTitle()
        * Description: This method is used to get the project Title
        */
-        public String getProjectTitle()
+        public String GetProjectTitle()
         {
-            info("ProjectTitle is" + this.GetText(GET_TITLE));
+            Info("ProjectTitle is" + this.GetText(GET_TITLE));
             return this.GetText(GET_TITLE);
         }
 
@@ -70,7 +70,7 @@ namespace DocWorksQA.Pages
         {
             Click(SETTINGS);
             Click(DISTRIBUTIONS);
-            info("Clicked on Distributions");
+            Info("Clicked on Distributions");
 
         }
 
@@ -80,7 +80,7 @@ namespace DocWorksQA.Pages
         */
         public void SuccessScreenshot(String path, String message)
         {
-         info("<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
+         Info("<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
 
         }
 
@@ -90,9 +90,9 @@ namespace DocWorksQA.Pages
         */
         public String EnterDistirbutionName()
         {
-            String DistName = "SELENIUM_DIST" + "_" + generateRandomNumbers(2);
+            String DistName = "SELENIUM_DIST" + "_" + GenerateRandomNumbers(2);
             EnterValue(DISTRIBUTION_NAME, DistName);
-            info("Distribution Name is" + DistName);
+            Info("Distribution Name is" + DistName);
             return DistName;
         }
 
@@ -104,7 +104,7 @@ namespace DocWorksQA.Pages
         {
             String DistributionTitle = "QA";
             EnterValue(DISTRIBUTION_NAME, DistributionTitle);
-            info("Entered Distribution Title : " + DistributionTitle);
+            Info("Entered Distribution Title : " + DistributionTitle);
             return DistributionTitle;
 
         }
@@ -116,13 +116,13 @@ namespace DocWorksQA.Pages
         public void EnterDescription(String Description)
         {
             EnterValue(DESCRIPTION, Description);
-            info("Distribution Description is" + Description);
+            Info("Distribution Description is" + Description);
         }
 
         public void EnterTocPath()
         {
             EnterValue(TOC_PATH, "Tocfolder");
-            info("Entered TOC Path");
+            Info("Entered TOC Path");
         }
         /**
              * MethodName: ClickBranch()
@@ -132,10 +132,10 @@ namespace DocWorksQA.Pages
         {
             WaitForElement(SELECT_BRANCH);
                 this.Click(SELECT_BRANCH);
-            info("Cicked on Branch dropdown");
+            Info("Cicked on Branch dropdown");
             System.Threading.Thread.Sleep(5000);
                     this.Click(BRANCH_OPTIONS_WITHTOC);
-            info("Selected the branch");
+            Info("Selected the branch");
         }
 
         public void ClickBranchWithOutTOC()
@@ -143,32 +143,32 @@ namespace DocWorksQA.Pages
             
             WaitForElement(SELECT_BRANCH);
             this.Click(SELECT_BRANCH);
-            info("Cicked on Branch dropdown");
+            Info("Cicked on Branch dropdown");
             System.Threading.Thread.Sleep(5000);
             this.Click(BRANCH_OPTIONS_WITHOUT_TOC);
-            info("Selected the branch");
+            Info("Selected the branch");
         }
         public void ClickBranchForGitHub()
         {
             WaitForElement(SELECT_BRANCH);
             this.Click(SELECT_BRANCH);
-            info("Cicked on Branch dropdown");
+            Info("Cicked on Branch dropdown");
             System.Threading.Thread.Sleep(5000);
             this.Click(BRANCH_OPTIONS_GITHUB);
-            info("Selected the branch");
+            Info("Selected the branch");
         }
 
         public void EnterBranchForMercurial()
         {
             String str = "DocworksManual3";
             EnterValue(BRANCH,str);
-            info("Entered Branch value");
+            Info("Entered Branch value");
         }
         public void EnterBranchWithoutTOCForMercurial()
         {
             String str = "DocworkManual2";
             EnterValue(BRANCH, str);
-            info("Entered Branch value");
+            Info("Entered Branch value");
         }
         /**
             * MethodName: ClickCreateDistribution()
@@ -177,7 +177,7 @@ namespace DocWorksQA.Pages
         public void ClickCreateDistribution()
         {
             Click(CREATE_DISTRIBUTION);
-            info("Click on Create distribution");
+            Info("Click on Create distribution");
         }
 
         /**
@@ -187,7 +187,7 @@ namespace DocWorksQA.Pages
         public void ClickClearButton()
         {
             Click(CLEAR_BUTTON);
-            info("Click Clear Button");
+            Info("Click Clear Button");
 
         }
 
@@ -198,7 +198,7 @@ namespace DocWorksQA.Pages
         public void ClickCloseButton()
         {
             Click(CLOSE_BUTTON);
-            info("Click Close Button");
+            Info("Click Close Button");
             
 
         }
@@ -207,9 +207,9 @@ namespace DocWorksQA.Pages
           * MethodName: getDistributionName()
           * Description: This method is used to get the distribution name
        */
-        public String getDistributionName()
+        public String GetDistributionName()
         {
-            info("Available Distribution Name is" + this.GetText(AVAIL_DISTRIBUTION_NAME));
+            Info("Available Distribution Name is" + this.GetText(AVAIL_DISTRIBUTION_NAME));
             return this.GetText(AVAIL_DISTRIBUTION_NAME);
         }
 

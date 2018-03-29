@@ -18,7 +18,7 @@ namespace DocWorksQA.Utilities
 
             String path = GetCurrentProjectPath() + "/bin/Release/Reports/Screenshot";
 
-            createDirectory(path);
+            CreateDirectory(path);
 
             StringBuilder TimeAndDate = new StringBuilder(DateTime.Now.ToString());
             TimeAndDate.Replace("/", "_");
@@ -31,16 +31,10 @@ namespace DocWorksQA.Utilities
         }
 
         
-        public static string GetCurrentProjectPath()
-        {
-            String path = System.AppDomain.CurrentDomain.BaseDirectory;
-            path = path.Substring(0, path.IndexOf(@"\bin"));
-            return path;
-        }
-
+       
        
 
-        public string getImagePath()
+        public string GetImagePath()
         {
             String path = GetCurrentProjectPath();
             String savedpath = path + @"\MediaFiles\Images\";
@@ -74,7 +68,7 @@ namespace DocWorksQA.Utilities
             return Updatedpath;
         }
 
-        public string getInvalidImagePath()
+        public string GetInvalidImagePath()
         {
             String path = GetCurrentProjectPath();
 
@@ -111,7 +105,7 @@ namespace DocWorksQA.Utilities
 
 
 
-        public string getCodeBlockPath()
+        public string GetCodeBlockPath()
         {
             String path = GetCurrentProjectPath();
             String savedpath = path + @"\MediaFiles\CodeBlocks\";
@@ -145,7 +139,7 @@ namespace DocWorksQA.Utilities
             return Updatedpath;
         }
 
-public string getInvalidCodeBlockPath()
+public string GetInvalidCodeBlockPath()
         {
             String path = GetCurrentProjectPath();
             String savedpath = path + @"\MediaFiles\CodeBlocks\";
@@ -178,7 +172,7 @@ public string getInvalidCodeBlockPath()
             Console.WriteLine("Original Path" + Updatedpath);
             return Updatedpath;
         }
-        public void createDirectory(String path)
+        public void CreateDirectory(String path)
         {
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
@@ -217,7 +211,7 @@ public string getInvalidCodeBlockPath()
 
 
 
-        public String generateRandomNumbers(int length)
+        public String GenerateRandomNumbers(int length)
         {
             String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             Random rng = new Random();
