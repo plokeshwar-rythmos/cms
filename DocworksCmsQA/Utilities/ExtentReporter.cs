@@ -1,7 +1,9 @@
 ﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports.Reporter.Configuration;
+using DocworksCmsQA.CustomException;
 using MongoDB.Driver;
+using Newtonsoft.Json;
 using NLog;
 using System;
 using System.Diagnostics;
@@ -177,9 +179,23 @@ namespace DocWorksQA.Utilities
 
         public void fail(Exception ex)
         {
-            //Console.WriteLine("FAIL : " + description);
-            test.Fail(ex);
+            string exceptionString = JsonConvert.SerializeObject(ex);
+
+            if (ex.GetType().ToString().Contains("AssertException")) {
+                Console.WriteLine(ex.GetType());
+                Console.WriteLine(ex.Source);
+                
+                test.Fail(new AssertException(exceptionString));
+            }else {
+                test.Fail(ex.Message+"<br>"+ex.Source);
+                test.Fail(ex);
+            }
         }
+
+                
+               
+            
+        
 
         /**
          * This method adds a info statement to the current test instance.
@@ -197,7 +213,7 @@ namespace DocWorksQA.Utilities
         public void reportFlusher()
         {
             //Console.WriteLine("Flushing the HTML report.");
-
+           
             reporter.Flush();
         }
 
@@ -206,5 +222,17 @@ namespace DocWorksQA.Utilities
             
         }
 
+    }
+
+
+    public class CustomException : Exception
+    {
+        public override string StackTrace { get;  }
+        public CustomException(string message)
+        {
+           // Exception ex = new Exception();
+            
+            this.StackTrace = message;
+        }
     }
 }

@@ -21,48 +21,67 @@ namespace DocWorksQA.SeleniumHelpers
         public void Click(By by)
         {
             Logger.Debug("Clicking on " + by.ToString());
-            IWebElement element = WaitForElement(by);
-            elementHighlight(element);
-            element.Click();
+            try
+            {
+                WaitForElement(by).Click();
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
        
 
         public void EnterValue(By by, string value)
         {
             Logger.Debug("Entering value into " + by.ToString());
+            try {
 
-            // IWebElement element = WaitForElement(by);
-            // elementHighlight(element);
-            // element.SendKeys(value); 
+                type(by, value);
 
-            type(by, value);
+            } catch (Exception e) {
+                throw e;
+                }
+            
 
         }
 
         public void Clear(By by)
         {
-            IWebElement element = WaitForElement(by);
-            elementHighlight(element);
-            element.Clear();
+            try
+            {
+                WaitForElement(by).Clear();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
        
         public string GetText(By by)
         {
             Logger.Debug("Getting text for " + by.ToString());
 
-            IWebElement element = WaitForElement(by);
-            elementHighlight(element);
-            String t = element.Text;
-            Logger.Debug("Text returned " + t);
-            return t;
+            try
+            {
+                return WaitForElement(by).Text;
+            }catch(Exception e)
+            {
+                throw e;
+            }
         }
 
         public String GetAttribute(By by)
         {
-            IWebElement element = WaitForElement(by);
-            elementHighlight(element);
-            return element.GetAttribute("text");
-        }
+            try
+            {
+                return WaitForElement(by).GetAttribute("text");
+            }catch(Exception e)
+            {
+                throw e;
+            }
+       }
+
         public string GetSize(By by)    
         {
             IWebElement element = WaitForElement(by);
@@ -84,24 +103,26 @@ namespace DocWorksQA.SeleniumHelpers
 
         public Boolean IsEnabled(By by)
         {
-            Boolean Flag=false;
-            IWebElement element = WaitForElement(by);
-           if(element.Enabled)
+            try
             {
-                Flag = true;
+                return WaitForElement(by).Enabled;
+            }catch(Exception e)
+            {
+                throw e;
             }
-            return Flag;
+
         }
 
         public Boolean IsDisplayed(By by)
         {
-            Boolean Flag = false;
-            IWebElement element = WaitForElement(by);
-            if (element.Displayed)
+            try
             {
-                Flag = true;
+                return WaitForElement(by).Displayed;
             }
-            return Flag;
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public string GetTitle()
@@ -114,15 +135,15 @@ namespace DocWorksQA.SeleniumHelpers
 
         public void type(By by, String Value)
         {
-            if (by != null)
+            try
             {
                 WaitForElement(by).SendKeys(Value);
             }
-            else
+            catch (Exception e)
             {
-                new Exception(by.ToString() + " : is null").ToString();
-               
+                throw e;
             }
+
         }
 
         public string GetTextOfHiddenElement(By by)
@@ -220,15 +241,14 @@ namespace DocWorksQA.SeleniumHelpers
                 }
                 catch (NoSuchElementException e)
                 {
-                    // Console.WriteLine("Waiting for Element : " + by.ToString());
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine("Waiting for Element : " + by.ToString());
                     Logger.Debug("Waiting for Element : " + by.ToString());
-                    Debug.WriteLine(e.Message);
-                    //Console.WriteLine(e.StackTrace);
+                                      //Console.WriteLine(e.StackTrace);
                     System.Threading.Thread.Sleep(200);
                 }catch(Exception ex)
                 {
-                    fail(ex);
-                    throw (ex);
+                    throw ex;
                 }
 
 

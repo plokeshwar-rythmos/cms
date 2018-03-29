@@ -43,7 +43,7 @@ namespace DocWorksQA.SeleniumHelpers
                     case DriverToUse.Firefox:
                     Logger.Debug("Starting Firefox Driver.");
                     FirefoxOptions options = new FirefoxOptions();
-                    options.AddArguments("--headless");
+                   // options.AddArguments("--headless");
                     options.AddArgument("--no-sandbox");
                     driver = new FirefoxDriver(options);
                         break;

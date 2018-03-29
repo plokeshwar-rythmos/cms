@@ -1,11 +1,11 @@
-﻿using AventStack.ExtentReports;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using DocWorksQA.SeleniumHelpers;
 using System;
 using DocWorksQA.Pages;
-using System.Diagnostics;
 using NLog;
+using DocworksCmsQA.CustomException;
+using Newtonsoft.Json;
 
 namespace DocWorksQA.Tests
 {
@@ -23,27 +23,25 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
 
-        [Test, Description("Verifying Add Project Button Is Enabled Or Not")]
+        //[Test, Description("Verifying Add Project Button Is Enabled Or Not")]
         public void TC_01_ValidateAddProjectButtonsIsEnabled()
         {
             try
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
-                Debug.WriteLine("Starting Test Case : "+TestName);
+                Logger.Debug("Starting Test Case : " + TestName);
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 CreateTest(TestName, description);
                 AddProjectPage addproject = new AddProjectPage(driver);
-
                 Boolean flag = addproject.IsProjectEnable();
-
                 String path = TakeScreenshot(driver);
                 addproject.SuccessScreenshot(path, "Add Project is enabled");
-                Assert.IsFalse(VerifyBoolean(true,flag,"Create Project Button is Enabled","Create Project Button is not Enabled"));
-                System.Threading.Thread.Sleep(15000);
+                Assert.IsTrue(VerifyFalse(flag, "Create Project Button is Enabled", "Create Project Button is not Enabled"));
+                Console.WriteLine("Pravin");
             }
-            catch (Exception e)
-            {
-                fail(e.StackTrace);
+            catch (Exception ex) {
+                
+                fail(ex);
                 throw;
             }
         }
@@ -93,7 +91,7 @@ namespace DocWorksQA.Tests
             }
             catch (Exception e)
             {
-                fail(e.StackTrace);
+                fail(e);
                 throw;
             }
 
@@ -312,7 +310,7 @@ namespace DocWorksQA.Tests
                 throw;
             }
         }
-       //[Test, Description("Verifying User is able to send more than 1000 characters to Description field in Create Project")]
+       [Test, Description("Verifying User is able to send more than 1000 characters to Description field in Create Project")]
         public void TC_08_ValidateProjectDescriptionLengthWithMoreThan1000Characters()
         {
             try
@@ -352,7 +350,7 @@ namespace DocWorksQA.Tests
             }
             catch (Exception e)
             {
-                fail(e.StackTrace);
+                fail(e);
                 throw;
             }
 
@@ -361,6 +359,7 @@ namespace DocWorksQA.Tests
         [OneTimeTearDown]
         public void CloseBrowser()
         {
+            Console.WriteLine("Running OneTimeTearDown Script");
             driver.Quit();
         
 

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DocworksCmsQA.CustomException;
+using System;
 
 namespace DocWorksQA.Utilities
 {
@@ -35,7 +32,7 @@ namespace DocWorksQA.Utilities
             }
             else
             {
-                fail("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> ERROR : " + errorMessage);
+                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
             return false;
@@ -63,7 +60,7 @@ namespace DocWorksQA.Utilities
             }
             else
             {
-                fail("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> ERROR : " + errorMessage);
+                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
             return false;
@@ -89,7 +86,7 @@ namespace DocWorksQA.Utilities
             }
             else
             {
-                fail("<b>Expected</b> : null<br> <b>Actual</b> : " + actual + "<br> ERROR : " + errorMessage);
+                fail(new AssertException("Expected : Null,   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
             return false;
@@ -116,7 +113,7 @@ namespace DocWorksQA.Utilities
             }
             else
             {
-                fail("<b>Expected</b> : NOT NULL<br> <b>Actual</b> : " + actual + "<br> ERROR : " + errorMessage);
+                fail(new AssertException("Expected : Not Null,   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
             return false;
@@ -141,7 +138,7 @@ namespace DocWorksQA.Utilities
             }
             else
             {
-                fail("<b>Expected</b> : TRUE<br> <b>Actual</b> : " + actual + "<br> ERROR : " + errorMessage);
+                fail(new AssertException("Expected : True , Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
             return false;
@@ -169,10 +166,10 @@ namespace DocWorksQA.Utilities
             }
             else
             {
-                fail("<b>Expected</b> : FALSE<br> <b>Actual</b> : " + actual + "<br> ERROR : " + errorMessage);
+                throw new AssertException("Expected : False , Actual : " + actual + ",  ERROR : " + errorMessage);
+                //fail(new Exception("Expected : False , Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
-            return false;
 
         }
 
@@ -198,7 +195,7 @@ namespace DocWorksQA.Utilities
             }
             else
             {
-                fail("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> ERROR : " + errorMessage);
+                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
             return false;
@@ -225,7 +222,7 @@ namespace DocWorksQA.Utilities
             }
             else
             {
-                fail("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> ERROR : " + errorMessage);
+                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
             return false;
         }
@@ -253,7 +250,7 @@ namespace DocWorksQA.Utilities
             }
             else
             {
-                fail("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> ERROR : " + errorMessage);
+                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
 
             }
             return false;
@@ -278,7 +275,7 @@ namespace DocWorksQA.Utilities
             }
             else
             {
-                fail("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> ERROR : " + errorMessage);
+                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
             return false;
@@ -307,7 +304,7 @@ namespace DocWorksQA.Utilities
             }
             else
             {
-                fail("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> ERROR : " + errorMessage);
+                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
             return false;
@@ -335,7 +332,7 @@ namespace DocWorksQA.Utilities
             }
             else
             {
-                fail("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> ERROR : " + errorMessage);
+                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
             return false;
         }
@@ -360,7 +357,8 @@ namespace DocWorksQA.Utilities
             }
             else
             {
-                fail("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> ERROR : " + errorMessage);
+                
+                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
 
             }
             return false;
@@ -386,7 +384,7 @@ namespace DocWorksQA.Utilities
             }
             else
             {
-                fail("<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> ERROR : " + errorMessage);
+                fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
             return false;
@@ -416,39 +414,14 @@ namespace DocWorksQA.Utilities
             }
             else
             {
-                fail("<b>Expected</b> : [" + expected + "] is not available in <b>Actual</b> : [" + actual + "]<br> ERROR : "
-                        + errorMessage);
+                fail(new AssertException("Expected : " + expected + " is not available in  Actual : " + actual + ",  ERROR : " + errorMessage));
+              
 
             }
             return false;
         }
 
-        /**
-         * This method verifies if the expected text contains actual text and reports only error messages.
-         * 
-         * @param expected
-         * @param actual
-         * @param errorMessage
-         * @return True if expected contains actual.
-         */
-        public Boolean VerifyContainsText(String expected, String actual, String errorMessage)
-        {
-
-            if (actual.Contains(expected))
-            {
-                pass("<b>Expected</b> : [" + expected + "] is available in <b>Actual</b> : [" + actual + "]");
-                return true;
-            }
-            else
-            {
-                fail("<b>Expected</b> : [" + expected + "] is not available in <b>Actual</b> : [" + actual + "]<br> ERROR : "
-                        + errorMessage);
-
-            }
-            return false;
-
-        }
-
+        
 
 
     

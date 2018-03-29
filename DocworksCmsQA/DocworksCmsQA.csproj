@@ -99,6 +99,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomException\AssertException.cs" />
     <Compile Include="Pages\AddProjectPage.cs" />
     <Compile Include="Pages\AuthoringScreenEnhancements.cs" />
     <Compile Include="Pages\CreateDistributionPage.cs" />
