@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace DocWorksQA.Tests
 {
-     //[TestFixture]
+    // [TestFixture]
     class TS_02_CreateDistributionModule : BeforeTestAfterTest
     {
         private static IWebDriver driver;
@@ -38,7 +38,7 @@ namespace DocWorksQA.Tests
                 String actual = driver.Title;
            //     Assert.IsTrue(VerifyEquals("Unity DocWorks - Dashboard", actual, "Page Title is verified successfully", "Page Title is Not correct"));
             }
-            catch (AssertionException)
+            catch (AssertionException ex)
             {
                 Fail("Assertion failed");
                 throw;

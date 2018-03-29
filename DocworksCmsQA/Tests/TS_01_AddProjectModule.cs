@@ -46,7 +46,7 @@ namespace DocWorksQA.Tests
             }
         }
 
-        //  [Test, Description("Verifying User is able to Add Project For GitLab  with all Fields")]
+        [Test, Description("Verifying User is able to Add Project For GitLab  with all Fields")]
         public void TC_02_ValidateCreateProjectForGitLabWithAllFields()
         {
             try
@@ -97,7 +97,7 @@ namespace DocWorksQA.Tests
 
         }
 
-       // [Test, Description("Verifying User is able to Add Project For GitHub  with all Fields")]
+        [Test, Description("Verifying User is able to Add Project For GitHub  with all Fields")]
         public void TC_03_ValidateCreateProjectForGitHubWithAllFields()
         {
             try
@@ -148,7 +148,7 @@ namespace DocWorksQA.Tests
 
         }
 
-        // [Test, Description("Verifying User is able to Add Project For Mercurial with all Fields")]
+         [Test, Description("Verifying User is able to Add Project For Mercurial with all Fields")]
         public void TC_04_ValidateCreateProjectForMercurialWithAllFields()
         {
             try
@@ -198,7 +198,7 @@ namespace DocWorksQA.Tests
             }
 
         }
-        //  [Test, Description("Verifying User is able to Add Project For GitLab with Mandatory Fields")]
+          [Test, Description("Verifying User is able to Add Project For GitLab with Mandatory Fields")]
         public void TC_05_ValidateAddingProjectForGitLabWithMandatoryFields()
         {
             try
@@ -249,7 +249,7 @@ namespace DocWorksQA.Tests
         }
 
 
-        // [Test, Description("Verify Project Title throws an error message When User gives Invalid Length")]
+         [Test, Description("Verify Project Title throws an error message When User gives Invalid Length")]
         public void TC_06_ValidateProjectTitleLengthWithLessThan5Characters()
         {
             try
@@ -281,7 +281,7 @@ namespace DocWorksQA.Tests
 
         }
 
-        //  [Test, Description("Verifying Whether User is able to send More Than 100 characters to the Project Title")]
+        [Test, Description("Verifying Whether User is able to send More Than 100 characters to the Project Title")]
         public void TC_07_ValidateProjectTitleLengthWithMoreThan100Characters()
         {
             try
