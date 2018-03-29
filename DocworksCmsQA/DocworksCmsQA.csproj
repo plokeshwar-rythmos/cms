@@ -119,7 +119,6 @@
     <Compile Include="TestRailApis\APIException.cs" />
     <Compile Include="TestRailApis\TestRailMethods.cs" />
     <Compile Include="Tests\BeforeTestAfterTest.cs" />
-    <Compile Include="Tests\SampleTestScenario.cs" />
     <Compile Include="Tests\TS_01_AddProjectModule.cs" />
     <Compile Include="Tests\TS_02_CreateDistributionModule.cs" />
     <Compile Include="Tests\TS_03_CreateDraftModule.cs" />
