@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace DocWorksQA.Tests
 {
     [TestFixture, Category("Create Project")]
-    class TS_01_AddProjectModule: BeforeTestAfterTest
+    class TS_01_AddProjectModule : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -23,7 +23,7 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
 
-        //[Test, Description("Verifying Add Project Button Is Enabled Or Not")]
+        [Test, Description("Verifying Add Project Button Is Enabled Or Not")]
         public void TC_01_ValidateAddProjectButtonsIsEnabled()
         {
             try
@@ -40,13 +40,13 @@ namespace DocWorksQA.Tests
                 Console.WriteLine("Pravin");
             }
             catch (Exception ex) {
-                
+
                 Fail(ex);
                 throw;
             }
         }
 
-      //  [Test, Description("Verifying User is able to Add Project For GitLab  with all Fields")]
+        //  [Test, Description("Verifying User is able to Add Project For GitLab  with all Fields")]
         public void TC_02_ValidateCreateProjectForGitLabWithAllFields()
         {
             try
@@ -87,7 +87,7 @@ namespace DocWorksQA.Tests
                 String actual = distmodule.GetProjectTitle();
                 String path1 = TakeScreenshot(driver);
                 addProject.SuccessScreenshot(path1, "ProjectTitle");
-                Assert.IsTrue(VerifyEquals(expected, actual, "GitLab Project Got created Successfully","GitLab Project Not Created Succesfully"));
+                Assert.IsTrue(VerifyEquals(expected, actual, "GitLab Project Got created Successfully", "GitLab Project Not Created Succesfully"));
             }
             catch (Exception e)
             {
@@ -97,7 +97,7 @@ namespace DocWorksQA.Tests
 
         }
 
-      // [Test, Description("Verifying User is able to Add Project For GitHub  with all Fields")]
+        [Test, Description("Verifying User is able to Add Project For GitHub  with all Fields")]
         public void TC_03_ValidateCreateProjectForGitHubWithAllFields()
         {
             try
@@ -148,7 +148,7 @@ namespace DocWorksQA.Tests
 
         }
 
-      // [Test, Description("Verifying User is able to Add Project For Mercurial with all Fields")]
+        // [Test, Description("Verifying User is able to Add Project For Mercurial with all Fields")]
         public void TC_04_ValidateCreateProjectForMercurialWithAllFields()
         {
             try
@@ -198,7 +198,7 @@ namespace DocWorksQA.Tests
             }
 
         }
-      //  [Test, Description("Verifying User is able to Add Project For GitLab with Mandatory Fields")]
+        //  [Test, Description("Verifying User is able to Add Project For GitLab with Mandatory Fields")]
         public void TC_05_ValidateAddingProjectForGitLabWithMandatoryFields()
         {
             try
@@ -249,7 +249,7 @@ namespace DocWorksQA.Tests
         }
 
 
-       // [Test, Description("Verify Project Title throws an error message When User gives Invalid Length")]
+        // [Test, Description("Verify Project Title throws an error message When User gives Invalid Length")]
         public void TC_06_ValidateProjectTitleLengthWithLessThan5Characters()
         {
             try
@@ -269,7 +269,7 @@ namespace DocWorksQA.Tests
                 String path = TakeScreenshot(driver);
                 addProject.SuccessScreenshot(path, "Validating Length of the Title");
                 System.Threading.Thread.Sleep(3000);
-                Assert.IsTrue(VerifyEquals(expected, actual, "Validation Got Successful","Validation Got Failed"));
+                Assert.IsTrue(VerifyEquals(expected, actual, "Validation Got Successful", "Validation Got Failed"));
                 addProject.ClickClose();
                 System.Threading.Thread.Sleep(5000);
             }
@@ -281,7 +281,7 @@ namespace DocWorksQA.Tests
 
         }
 
-      //  [Test, Description("Verifying Whether User is able to send More Than 100 characters to the Project Title")]
+        //  [Test, Description("Verifying Whether User is able to send More Than 100 characters to the Project Title")]
         public void TC_07_ValidateProjectTitleLengthWithMoreThan100Characters()
         {
             try
@@ -300,7 +300,7 @@ namespace DocWorksQA.Tests
                 addProject.SuccessScreenshot(path, "Length of the Title exceeded its limit");
                 System.Threading.Thread.Sleep(7000);
                 String str = addProject.GetTitleLength();
-                Assert.IsTrue(VerifyEquals("100/100" , str, "Length Of Project Title got exceeded to its limit as " + str + "", "Length Of Project Title Not got exceeded to its limit as " + str + ""));
+                Assert.IsTrue(VerifyEquals("100/100", str, "Length Of Project Title got exceeded to its limit as " + str + "", "Length Of Project Title Not got exceeded to its limit as " + str + ""));
                 addProject.ClickClose();
                 System.Threading.Thread.Sleep(5000);
             }
@@ -310,7 +310,7 @@ namespace DocWorksQA.Tests
                 throw;
             }
         }
-       [Test, Description("Verifying User is able to send more than 1000 characters to Description field in Create Project")]
+        [Test, Description("Verifying User is able to send more than 1000 characters to Description field in Create Project")]
         public void TC_08_ValidateProjectDescriptionLengthWithMoreThan1000Characters()
         {
             try
@@ -361,9 +361,11 @@ namespace DocWorksQA.Tests
         {
             Console.WriteLine("Running OneTimeTearDown Script");
             driver.Quit();
-        
+
 
         }
+
+       
     }
 
 }

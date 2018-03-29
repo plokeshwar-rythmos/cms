@@ -183,11 +183,10 @@ namespace DocWorksQA.Utilities
 
             if (ex.GetType().ToString().Contains("AssertException")) {
                 Console.WriteLine(ex.GetType());
-                Console.WriteLine(ex.Source);
                 
                 test.Fail(new AssertException(exceptionString));
             }else {
-                test.Fail(ex.Message+"<br>"+ex.Source);
+                test.Fail(ex.Message+"<br>"+ex.GetBaseException.ToString());
                 test.Fail(ex);
             }
         }

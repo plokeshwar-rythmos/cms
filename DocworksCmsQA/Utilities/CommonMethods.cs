@@ -13,6 +13,18 @@ namespace DocWorksQA.Utilities
     public class CommonMethods : TestRailMethods
     {
 
+        IWebDriver Driver;
+
+        public void SetDriver(IWebDriver Driver) {
+            this.Driver = Driver;
+        }
+
+        public void CloseDriver() {
+            if(Driver == null){
+                Driver.Quit();
+            }
+        }
+
         public String TakeScreenshot(IWebDriver driver)
         {
 
@@ -232,14 +244,14 @@ public string GetInvalidCodeBlockPath()
             String driverToUse = ConfigurationHelper.Get<String>("DriverToUse");
             if (driverToUse.ToLower().Equals("chrome"))
             {
-                processName = "chromedriver.exe";
+                processName = "chromedriver";
             }else if (driverToUse.ToLower().Equals("firefox"))
             {
-                processName = "firefox.exe";
+                processName = "firefox";
             }
             else
             {
-                processName = "InternetExplorerDriver.exe";
+                processName = "InternetExplorerDriver";
             }
 
 
@@ -260,6 +272,8 @@ public string GetInvalidCodeBlockPath()
 
         }
 
+
+      
 
 
     }

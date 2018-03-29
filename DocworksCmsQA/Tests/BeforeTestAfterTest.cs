@@ -12,11 +12,11 @@ namespace DocWorksQA.Tests
         {
             String path = GetCurrentProjectPath() + "/bin/Release/Reports";
 
-
+            Console.WriteLine(path);
             if (GetReporter()) { 
                 InitReports(path, "CMS-Selenium");
             }
-
+     
 
         }
        
