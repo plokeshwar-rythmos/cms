@@ -186,7 +186,7 @@ namespace DocWorksQA.Utilities
                 
                 test.Fail(new AssertException(exceptionString));
             }else {
-                test.Fail(ex.Message+"<br>"+ex.GetBaseException.ToString());
+                test.Fail(ex.Message+"<br>"+ex.GetType());
                 test.Fail(ex);
             }
         }
