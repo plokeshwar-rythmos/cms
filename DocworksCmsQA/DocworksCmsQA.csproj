@@ -100,6 +100,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomException\AssertException.cs" />
+    <Compile Include="CustomException\ExceptionHandler.cs" />
+    <Compile Include="CustomException\ExtentTestExtension.cs" />
     <Compile Include="Pages\AddProjectPage.cs" />
     <Compile Include="Pages\AuthoringScreenEnhancements.cs" />
     <Compile Include="Pages\CreateDistributionPage.cs" />

@@ -177,18 +177,20 @@ namespace DocWorksQA.Utilities
             test.Fail("<div style=\"color: red;\">" + description + "</div>");
         }
 
+
         public void Fail(Exception ex)
         {
-            string exceptionString = JsonConvert.SerializeObject(ex);
+            test.CustomeFail(ex);
+
+            /*string exceptionString = JsonConvert.SerializeObject(ex);
 
             if (ex.GetType().ToString().Contains("AssertException")) {
                 Console.WriteLine(ex.GetType());
-                
                 test.Fail(new AssertException(exceptionString));
             }else {
-                test.Fail(ex.Message+"<br>"+ex.GetType());
-                test.Fail(ex);
+                test.Fail(new CustomException(exceptionString));
             }
+            */
         }
 
                 

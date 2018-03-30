@@ -43,7 +43,11 @@ namespace DocWorksQA.SeleniumHelpers
                     case DriverToUse.Firefox:
                     Logger.Debug("Starting Firefox Driver.");
                     FirefoxOptions options = new FirefoxOptions();
-                   // options.AddArguments("--headless");
+                    options.SetPreference("browser.tabs.remote.autostart", false);
+                    options.SetPreference("browser.tabs.remote.autostart.1", false);
+                    options.SetPreference("browser.tabs.remote.autostart.2", false);
+                    options.SetPreference("browser.tabs.remote.force-enable", false);
+                    // options.AddArguments("--headless");
                     options.AddArgument("--no-sandbox");
                     driver = new FirefoxDriver(options);
                         break;

@@ -26,7 +26,7 @@ namespace DocWorksQA.Tests
         public void GenerateReport()
         {
             Console.WriteLine("Running OneTimeTearDown in BeforeAfter Script");
-            KillProcess();
+          //  KillProcess();
             ReportFlusher();
         }
 

@@ -6,6 +6,7 @@ using DocWorksQA.Pages;
 using NLog;
 using DocworksCmsQA.CustomException;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace DocWorksQA.Tests
 {
@@ -19,6 +20,7 @@ namespace DocWorksQA.Tests
         [OneTimeSetUp]
         public void AddPProjectModule() {
             driver = new DriverFactory().Create();
+            SetDriver(driver);
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
         }
@@ -46,7 +48,7 @@ namespace DocWorksQA.Tests
             }
         }
 
-        [Test, Description("Verifying User is able to Add Project For GitLab  with all Fields")]
+     //   [Test, Description("Verifying User is able to Add Project For GitLab  with all Fields")]
         public void TC_02_ValidateCreateProjectForGitLabWithAllFields()
         {
             try
@@ -97,7 +99,7 @@ namespace DocWorksQA.Tests
 
         }
 
-        [Test, Description("Verifying User is able to Add Project For GitHub  with all Fields")]
+        //[Test, Description("Verifying User is able to Add Project For GitHub  with all Fields")]
         public void TC_03_ValidateCreateProjectForGitHubWithAllFields()
         {
             try
@@ -148,7 +150,7 @@ namespace DocWorksQA.Tests
 
         }
 
-         [Test, Description("Verifying User is able to Add Project For Mercurial with all Fields")]
+       //  [Test, Description("Verifying User is able to Add Project For Mercurial with all Fields")]
         public void TC_04_ValidateCreateProjectForMercurialWithAllFields()
         {
             try
@@ -193,12 +195,13 @@ namespace DocWorksQA.Tests
             }
             catch (Exception e)
             {
-                Fail(e.StackTrace);
+                Fail(e);
                 throw;
             }
 
         }
-          [Test, Description("Verifying User is able to Add Project For GitLab with Mandatory Fields")]
+
+        //[Test, Description("Verifying User is able to Add Project For GitLab with Mandatory Fields")]
         public void TC_05_ValidateAddingProjectForGitLabWithMandatoryFields()
         {
             try
@@ -242,20 +245,21 @@ namespace DocWorksQA.Tests
             }
             catch (Exception e)
             {
-                Fail(e.StackTrace);
+                Fail(e);
                 throw;
             }
 
         }
 
 
-         [Test, Description("Verify Project Title throws an error message When User gives Invalid Length")]
+       //[Test, Description("Verify Project Title throws an error message When User gives Invalid Length")]
         public void TC_06_ValidateProjectTitleLengthWithLessThan5Characters()
         {
             try
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
+                Trace.TraceInformation("");
                 CreateTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(driver);
                 //addProject.ClickDashboard();
@@ -275,13 +279,13 @@ namespace DocWorksQA.Tests
             }
             catch (Exception e)
             {
-                Fail(e.StackTrace);
+                Fail(e);
                 throw;
             }
 
         }
 
-        [Test, Description("Verifying Whether User is able to send More Than 100 characters to the Project Title")]
+       // [Test, Description("Verifying Whether User is able to send More Than 100 characters to the Project Title")]
         public void TC_07_ValidateProjectTitleLengthWithMoreThan100Characters()
         {
             try
@@ -306,11 +310,11 @@ namespace DocWorksQA.Tests
             }
             catch (Exception e)
             {
-                Fail(e.StackTrace);
+                Fail(e);
                 throw;
             }
         }
-        //[Test, Description("Verifying User is able to send more than 1000 characters to Description field in Create Project")]
+        [Test, Description("Verifying User is able to send more than 1000 characters to Description field in Create Project")]
         public void TC_08_ValidateProjectDescriptionLengthWithMoreThan1000Characters()
         {
             try
@@ -360,7 +364,9 @@ namespace DocWorksQA.Tests
         public void CloseBrowser()
         {
             Console.WriteLine("Running OneTimeTearDown Script");
-            driver.Quit();
+
+            CloseDriver();
+            //driver.Quit();
 
 
         }

@@ -15,6 +15,7 @@ namespace DocworksCmsQA.CustomException
             this.StackTrace = e.Message+"\n"+e.Source+"\n"+e.StackTrace;
         }
 
+
        
 
     }
