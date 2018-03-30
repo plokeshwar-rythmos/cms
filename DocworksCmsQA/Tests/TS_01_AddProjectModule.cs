@@ -355,7 +355,7 @@ namespace DocWorksQA.Tests
             catch (Exception e)
             {
                 Fail(e);
-                throw;
+                
             }
 
         }
