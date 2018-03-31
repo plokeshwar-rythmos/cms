@@ -27,7 +27,7 @@
    
     - ps:
          #dotnet test --configuration Release;
-         nunit3-console C:\projects\cms\DocworksCmsQA\bin\Release\DocworksCmsQA.dll /Logger:trx --result=TestResult.xml;format=AppVeyor
+         nunit3-console C:\projects\cms\DocworksCmsQA\bin\Release\DocworksCmsQA.dll --result=TestResult.xml;format=AppVeyor
     
   after_build:
    # for once the build has completed
