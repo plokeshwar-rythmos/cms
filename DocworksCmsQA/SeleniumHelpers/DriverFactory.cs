@@ -49,7 +49,13 @@ namespace DocWorksQA.SeleniumHelpers
                     options.SetPreference("browser.tabs.remote.force-enable", false);
                     // options.AddArguments("--headless");
                     options.AddArgument("--no-sandbox");
-                    driver = new FirefoxDriver(options);
+                  //  driver = new FirefoxDriver(options);
+                        
+                        var driverService = FirefoxDriverService.CreateDefaultService();
+                    driverService.FirefoxBinaryPath = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
+                    driverService.HideCommandPromptWindow = true;
+                    driverService.SuppressInitialDiagnosticInformation = true;
+                    driver = new FirefoxDriver(driverService, options, TimeSpan.FromSeconds(120));
                         break;
                     case DriverToUse.Chrome:
                     Logger.Debug("Starting Chrome Driver.");
