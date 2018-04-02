@@ -25,10 +25,10 @@
     - ps: nuget restore    
   build_script:
    
-    - ps:
-         dotnet build
+    - ps: dotnet build;
+         
          #dotnet test --configuration Release;
-         nunit3-console.exe .\DocworksCmsQA\bin\Debug\DocworksCmsQA.dll
+    - ps: nunit3-console.exe .\DocworksCmsQA\bin\Debug\DocworksCmsQA.dll;
         # nunit3-console .\DocworksCmsQA\bin\%configuration%\DocworksCmsQA.dll #--result=TestResult.xml;format=AppVeyor
     
   after_build:
