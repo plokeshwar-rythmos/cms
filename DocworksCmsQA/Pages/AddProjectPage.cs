@@ -6,13 +6,17 @@ namespace DocWorksQA.Pages
 {
     public class AddProjectPage : SeleniumHelpers.PageControl
     {
+        public By GET_TITLE = By.XPath("//mat-card/mat-card-title/div");
         public By ADDPROJECT_BUTTON = By.XPath("(//button[@class='mat-raised-button mat-primary']/span)[1]");
         public  By PROJECT_TITLE_FIELD= By.XPath("//input[@ng-reflect-placeholder='Project Title']");
+        public By BELL_NOTIFICATION = By.XPath("//mat-chip[@class='mat-chip notification cursor-pointer mat-warn mat-chip-selected ng-star-inserted']");
+        public By NOTIFICATION_MESSAGE = By.XPath("//div[@class='mat-line operation-status-wrapper']//small");
+        public By NOTIFICATION_PROGRESS = By.XPath("//mat-progress-spinner[@class='mat-progress-spinner mat-primary mat-progress-spinner-indeterminate-animation']");
         public By NOTIFICATION_NAME = By.XPath("//div[@class='mat-list-text']/p[@class='mat-line mb-5']/span");
         public By NOTIFICATION_STATUS = By.XPath("//div[@class='mat-list-text']/p[@class='mat-line mb-5']/small[@class='bg_Success']");
+        public By ENTER_SEARCH = By.XPath("//input[@type='Search']");
         public By TYPE_OF_CONTENT_DROPDOWN = By.XPath("//mat-select[@placeholder='Type of Content']");
         public By SOURCE_CONTROL_PROVIDER_DROPDOWN = By.XPath("//mat-select[@placeholder='Source Control Provider']");
-        public By ENTER_SEARCH = By.XPath("//input[@aria-label='Search']");
         public By REPOSITORY_DROPDOWN = By.XPath("//mat-select[@placeholder='Repository']");
         public By REPOSITORY_VALUE = By.XPath("//mat-option//span[contains(@class,'mat-option-text')][contains(text(),'Docworks')]");
         public  By CONTENT_VALUE = By.XPath("//mat-option//span[contains(@class,'mat-option-text')][contains(text(),'Manual')]");
@@ -35,6 +39,8 @@ namespace DocWorksQA.Pages
         public By DESCRIPTION_MAT_CARD = By.XPath("//mat-card-content/p");
         public object DriverWaitUtil { get; private set; }
 
+
+
         public AddProjectPage(IWebDriver driver) : base(driver)
         {
         }
@@ -50,10 +56,26 @@ namespace DocWorksQA.Pages
             return Flag;
         }
 
+        public void SearchForProject(String projectName)
+        {
+            Clear(ENTER_SEARCH);
+            EnterValue(ENTER_SEARCH, projectName);
+        }
+
         public void SuccessScreenshot(String path,String message)
         {
             Info("<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
         }
+
+        public void SuccessScreenshot(String message)
+        {
+            String path = TakeScreenshot(driver);
+            SuccessScreenshot(path, message);
+        }
+
+
+
+        
 
 
         public String GetDescriptionSize()
@@ -90,6 +112,7 @@ namespace DocWorksQA.Pages
 
         public void ClickAddProject() {
             Click(ADDPROJECT_BUTTON);
+            WaitForElement(PROJECT_TITLE_FIELD);
             Info("Clicked on AddProject Button.");
         }
 
@@ -114,6 +137,12 @@ namespace DocWorksQA.Pages
             EnterValue(PROJECT_TITLE_FIELD, ProjectTitle);
             Info("Entered Project Title : " + ProjectTitle);
             return ProjectTitle;
+        }
+
+        public String GetProjectTitle()
+        {
+            Info("ProjectTitle is" + this.GetText(GET_TITLE));
+            return this.GetText(GET_TITLE);
         }
 
         public String ProjectDescriptionMorethan1000()
@@ -149,8 +178,14 @@ namespace DocWorksQA.Pages
             Info("Enter Published Path:" + path);
         }
 
+        public void EscapePopUp()
+        {
+            WaitForElement(CREATE_PROJECT_BUTTON).SendKeys(Keys.Escape);
+        }
+
         public void ClickClose()
         {
+            
             Click(By.XPath("//button//i[@class='mdi mdi-close mdi-24px']"));
             Info("Clicked Close Button");
         }
@@ -171,6 +206,7 @@ namespace DocWorksQA.Pages
         {
             Click(CREATE_PROJECT_BUTTON);
             Info("Clicked on Create project Button.");
+            WaitForElement(BELL_NOTIFICATION);
 
         }
 
@@ -181,12 +217,32 @@ namespace DocWorksQA.Pages
            Info("Clicked Notification Bell");
         }
 
+        public void WaitForProcessCompletion() {
+            for(int i = 0; i < 50; i++)
+            {
+                String tmp = GetText(NOTIFICATION_MESSAGE);
+                if (tmp.Contains("successful"))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine(tmp);
+                    //Console.WriteLine("Notification is still in progress.");
+                    System.Threading.Thread.Sleep(1000);
+                }
+
+            }
+        }
+
         public String GetNotificationStatus()
         {
-            String text = GetText(NOTIFICATION_STATUS);
-            System.Threading.Thread.Sleep(7000);
-            return text;
+
+            WaitForProcessCompletion();
+            return GetText(NOTIFICATION_MESSAGE);
+            
         }
+
         public String GetNotificationName()
         {
             String text = GetText(NOTIFICATION_NAME);
@@ -268,7 +324,7 @@ namespace DocWorksQA.Pages
 
         public void ClickRepository()
         {
-                this.Click(REPOSITORY_DROPDOWN);
+            this.Click(REPOSITORY_DROPDOWN);
             Info("Clicked On the Repository DropDown");
             this.Click(REPOSITORY_VALUE);
             Info("selected the Reppository_Value from drop down");

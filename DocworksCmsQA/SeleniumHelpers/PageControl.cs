@@ -9,7 +9,7 @@ namespace DocWorksQA.SeleniumHelpers
 {
     public class PageControl : Utilities.CommonMethods
     {
-        IWebDriver driver;
+        protected IWebDriver driver;
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         
         public PageControl(IWebDriver driver)
@@ -18,9 +18,11 @@ namespace DocWorksQA.SeleniumHelpers
             
         }
 
+
+
         public void Click(By by)
         {
-            Logger.Debug("Clicking on " + by.ToString());
+            Console.WriteLine("Clicking on " + by.ToString());
             try
             {
                 WaitForElement(by).Click();
@@ -34,7 +36,7 @@ namespace DocWorksQA.SeleniumHelpers
 
         public void EnterValue(By by, string value)
         {
-            Logger.Debug("Entering value into " + by.ToString());
+            Console.WriteLine("Entering value into " + by.ToString());
             try {
 
                 Type(by, value);
@@ -60,7 +62,7 @@ namespace DocWorksQA.SeleniumHelpers
        
         public string GetText(By by)
         {
-            Logger.Debug("Getting text for " + by.ToString());
+            Console.WriteLine("Getting text for " + by.ToString());
 
             try
             {
@@ -129,7 +131,7 @@ namespace DocWorksQA.SeleniumHelpers
         {
             System.Threading.Thread.Sleep(4000);
             string tmp = driver.Title;
-            Logger.Debug("The page title is " + tmp);
+            Console.WriteLine("The page title is " + tmp);
             return tmp;
         }
 
@@ -164,18 +166,13 @@ namespace DocWorksQA.SeleniumHelpers
 
         public void MoveToelement(By by)
         {
-            //IWebElement scrollArea = driver.FindElement(By.CssSelector("div.slimScrollBar"));
-            //IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            //js.ExecuteScript("arguments[0].scrollTop = arguments[1];", scrollArea, 250);
-           
+            
 
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             const string script =
                "var timeId=setInterval(function(){window.scrollY<document.body.scrollHeight-window.screen.availHeight?window.scrollTo(0,document.body.scrollHeight):(clearInterval(timeId),window.scrollTo(0,0))},500);";
 
-            // Start Scrolling
             js.ExecuteScript(script);
-            //js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight);");
             IWebElement ele = WaitForElement(by);
             Actions act = new Actions(driver);
             act.MoveToElement(ele);
@@ -186,7 +183,7 @@ namespace DocWorksQA.SeleniumHelpers
         {
             IWebElement ele = WaitForElement(by);
             Actions builder = new Actions(driver);
-    builder.MoveToElement(ele).Click().Build().Perform();
+            builder.MoveToElement(ele).Click().Build().Perform();
         }
 
         public void MoveToelementAndRightClick(By by)
@@ -206,14 +203,14 @@ namespace DocWorksQA.SeleniumHelpers
             try
             {
 
-                Logger.Debug("Selecting by Text " + value);
+                Console.WriteLine("Selecting by Text " + value);
                 select.SelectByText(value);
 
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
-                Logger.Debug("Selecting by value " + value);
+                Console.WriteLine("Selecting by value " + value);
 
                 select.SelectByText(value);
                 //this.test.info("Element Not Found");
@@ -229,25 +226,20 @@ namespace DocWorksQA.SeleniumHelpers
                 {
                     if (driver.FindElement(by).Displayed || driver.FindElement(by).Enabled)
                     {
-                        //   Console.WriteLine("IDENTIFIED : "+by.ToString());
-                        Logger.Debug("IDENTIFIED: " +by.ToString());
+                        Console.WriteLine("IDENTIFIED: " +by.ToString());
+
                         return driver.FindElement(by);
                     }
-                    else {
-                        //  Console.WriteLine("NOT IDENTIFIED : " + by.ToString());
-                        Logger.Debug("NOT IDENTIFIED: " + by.ToString());
-                     }
-
                 }
                 catch (NoSuchElementException e)
                 {
                     Console.WriteLine(e.Message);
                     Console.WriteLine("Waiting for Element : " + by.ToString());
-                    Logger.Debug("Waiting for Element : " + by.ToString());
-                                      //Console.WriteLine(e.StackTrace);
-                    System.Threading.Thread.Sleep(200);
+                    Console.WriteLine("Waiting for Element : " + by.ToString());
+                    System.Threading.Thread.Sleep(500);
                 }catch(Exception ex)
                 {
+
                     throw ex;
                 }
 
@@ -255,6 +247,7 @@ namespace DocWorksQA.SeleniumHelpers
             }
             return el;
         }
+
 
         public void ElementHighlight(IWebElement element)
         {

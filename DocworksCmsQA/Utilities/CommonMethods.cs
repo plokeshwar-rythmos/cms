@@ -13,12 +13,16 @@ namespace DocWorksQA.Utilities
     public class CommonMethods : TestRailMethods
     {
 
-        IWebDriver Driver;
+        private IWebDriver Driver;
 
         public void SetDriver(IWebDriver Driver) {
             this.Driver = Driver;
         }
 
+        public IWebDriver GetCurrentDriver() {
+            return this.Driver;
+        }
+        
         public void CloseDriver() {
             String driverToUse = ConfigurationHelper.Get<String>("DriverToUse");
             if (driverToUse.ToLower().Equals("firefox"))
@@ -28,7 +32,7 @@ namespace DocWorksQA.Utilities
                 Driver.Close();
             }
 
-            if (Driver == null){
+            if (Driver != null){
                 Driver.Quit();
             }
         }
@@ -50,9 +54,17 @@ namespace DocWorksQA.Utilities
             
         }
 
-        
-       
-       
+
+        public void ReportExceptionScreenshot(IWebDriver driver, Exception ex) {
+            String path = TakeScreenshot(driver);
+            ExceptionScreenshot(path, ex.Message);
+
+        }
+
+        public void ExceptionScreenshot(String path, String message)
+        {
+            Info("<a style=\"font - size: 20px; color: red;\" href=\"" + path + "\">Exception Occurred : "+message+"<br></a>");
+        }
 
         public string GetImagePath()
         {

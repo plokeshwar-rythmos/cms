@@ -37,17 +37,17 @@ namespace DocWorksQA.SeleniumHelpers
                 switch (driverToUse)
                 {
                     case DriverToUse.InternetExplorer:
-                        Logger.Debug("Starting Internet Explorer Driver.");
+                    Console.WriteLine("Starting Internet Explorer Driver.");
                         driver = new InternetExplorerDriver();
                         break;
                     case DriverToUse.Firefox:
-                    Logger.Debug("Starting Firefox Driver.");
+                    Console.WriteLine("Starting Firefox Driver.");
                     FirefoxOptions options = new FirefoxOptions();
                     options.SetPreference("browser.tabs.remote.autostart", false);
                     options.SetPreference("browser.tabs.remote.autostart.1", false);
                     options.SetPreference("browser.tabs.remote.autostart.2", false);
                     options.SetPreference("browser.tabs.remote.force-enable", false);
-                    // options.AddArguments("--headless");
+                   options.AddArguments("--headless");
                     options.AddArgument("--no-sandbox");
                   //  driver = new FirefoxDriver(options);
                         
@@ -58,7 +58,7 @@ namespace DocWorksQA.SeleniumHelpers
                     driver = new FirefoxDriver(driverService, options, TimeSpan.FromSeconds(120));
                         break;
                     case DriverToUse.Chrome:
-                    Logger.Debug("Starting Chrome Driver.");
+                    Console.WriteLine("Starting Chrome Driver.");
                         ChromeOptions option = new ChromeOptions();
                     option.AddArgument("--headless");
                     option.AddArguments("window-size=1200,1100");
@@ -69,7 +69,7 @@ namespace DocWorksQA.SeleniumHelpers
                     driver = new ChromeDriver(option);
                         break;
                     case DriverToUse.Safari:
-                    Logger.Debug("Starting Safari Driver.");
+                    Console.WriteLine("Starting Safari Driver.");
                         driver = new SafariDriver();
                         break;
                     case DriverToUse.Phantomjs:
@@ -83,6 +83,7 @@ namespace DocWorksQA.SeleniumHelpers
             driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60);
 
             driver.Manage().Window.Maximize();
+            Console.WriteLine("Navigating to URL : "+url);
             driver.Navigate().GoToUrl(url);
 
             return driver;
