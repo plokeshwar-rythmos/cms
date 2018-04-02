@@ -25,7 +25,7 @@
     - ps: nuget restore    
   build_script:
    
-    - ps: dotnet build;
+    - ps: dotnet build .\DocworksCmsQA\DocworksCmsQA.csproj;
          
          #dotnet test --configuration Release;
     - ps: nunit3-console.exe .\DocworksCmsQA\bin\Debug\DocworksCmsQA.dll;
