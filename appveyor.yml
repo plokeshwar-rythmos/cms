@@ -39,10 +39,12 @@
   on_failure:
   - ps: cd .\DocworksCmsQA\bin\Release
   - ps: ls
+  #- ps: 7z a myapp.zip %APPVEYOR_BUILD_FOLDER%\path\to\bin\*.dll
+  
   artifacts:
-        - path: '\DocworksCmsQA\bin\%configuration%\Reports'
-          name: $(artifactName_DocWorksQATest)
-          type: Zip
+    - path: '\DocworksCmsQA\bin\%configuration%\Reports'
+      name: $(artifactName_DocWorksQATest)
+      type: Zip
   
     
   clone_depth: 1
