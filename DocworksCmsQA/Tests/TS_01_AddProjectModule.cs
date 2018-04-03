@@ -33,12 +33,12 @@ namespace DocWorksQA.Tests
                 AddProjectPage addproject = new AddProjectPage(driver);
                 Boolean flag = addproject.IsProjectEnable();
                 addproject.SuccessScreenshot("Add Project is enabled");
-                Assert.IsFalse(VerifyTrue(flag, "Create Project Button is Enabled", "Create Project Button is not Enabled"));
+                Assert.IsTrue(VerifyTrue(flag, "Create Project Button is Enabled", "Create Project Button is not Enabled"));
             }
             catch (Exception ex) {
                 ReportExceptionScreenshot(driver, ex);
                 Fail(ex);
-                //throw;
+                throw;
             }
         }
 
