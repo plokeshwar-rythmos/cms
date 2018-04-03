@@ -26,7 +26,7 @@
   build_script:
    
     #- ps: dotnet build --configuration Release .\DocworksCmsQA\DocworksCmsQA.csproj;
-    - ps: dotnet build /flp:v=diag;logfile=MyLog.log .\DocworksCmsQA\DocworksCmsQA.csproj;
+    - ps: dotnet build /flp:v=diag .\DocworksCmsQA\DocworksCmsQA.csproj;
     #- ps: nunit3-console.exe .\DocworksCmsQA\bin\Release\DocworksCmsQA.dll;
     
   
