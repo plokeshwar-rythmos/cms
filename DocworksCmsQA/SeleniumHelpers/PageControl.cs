@@ -26,6 +26,7 @@ namespace DocWorksQA.SeleniumHelpers
             try
             {
                 WaitForElement(by).Click();
+                System.Threading.Thread.Sleep(5000);
             }
             catch(Exception e)
             {
@@ -173,9 +174,25 @@ namespace DocWorksQA.SeleniumHelpers
                "var timeId=setInterval(function(){window.scrollY<document.body.scrollHeight-window.screen.availHeight?window.scrollTo(0,document.body.scrollHeight):(clearInterval(timeId),window.scrollTo(0,0))},500);";
 
             js.ExecuteScript(script);
+
             IWebElement ele = WaitForElement(by);
             Actions act = new Actions(driver);
             act.MoveToElement(ele);
+            act.Perform();
+        }
+
+        public void MoveToelement(IWebElement element)
+        {
+
+
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            const string script =
+               "var timeId=setInterval(function(){window.scrollY<document.body.scrollHeight-window.screen.availHeight?window.scrollTo(0,document.body.scrollHeight):(clearInterval(timeId),window.scrollTo(0,0))},500);";
+
+            js.ExecuteScript(script);
+
+            Actions act = new Actions(driver);
+            act.MoveToElement(element);
             act.Perform();
         }
 
@@ -227,7 +244,7 @@ namespace DocWorksQA.SeleniumHelpers
                     if (driver.FindElement(by).Displayed || driver.FindElement(by).Enabled)
                     {
                         Console.WriteLine("IDENTIFIED: " +by.ToString());
-
+                      //  MoveToelement(driver.FindElement(by));
                         return driver.FindElement(by);
                     }
                 }

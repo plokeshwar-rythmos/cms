@@ -220,7 +220,8 @@ namespace DocWorksQA.Pages
         public void WaitForProcessCompletion() {
             for(int i = 0; i < 50; i++)
             {
-                String tmp = GetText(NOTIFICATION_MESSAGE);
+                String tmp = WaitForElement(NOTIFICATION_MESSAGE).Text;
+
                 if (tmp.Contains("successful"))
                 {
                     break;
@@ -229,7 +230,7 @@ namespace DocWorksQA.Pages
                 {
                     Console.WriteLine(tmp);
                     //Console.WriteLine("Notification is still in progress.");
-                    System.Threading.Thread.Sleep(1000);
+                    System.Threading.Thread.Sleep(500);
                 }
 
             }

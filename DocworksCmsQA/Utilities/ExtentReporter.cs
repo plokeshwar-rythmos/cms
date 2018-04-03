@@ -114,7 +114,7 @@ namespace DocWorksQA.Utilities
         public void CreateTest(String testCaseName)
         {
 
-            Logger.Debug("Creating Test Case for Reporting. " +testCaseName);
+            Console.WriteLine("Creating Test Case for Reporting. " +testCaseName);
                  test = reporter.CreateTest(testCaseName);
           
         }
@@ -127,7 +127,7 @@ namespace DocWorksQA.Utilities
         public void CreateTest(String testCaseName, String description)
         {
 
-            Logger.Debug("Creating Test Case for Reporting. " + testCaseName);
+            Console.WriteLine("Creating Test Case for Reporting. " + testCaseName);
 
             test = reporter.CreateTest(testCaseName, description);
             
@@ -163,8 +163,9 @@ namespace DocWorksQA.Utilities
          */
         public void Pass(String description)
         {
-            Logger.Debug(RemoveTags(description));
+            Console.WriteLine(RemoveTags(description));
             test.Pass(description);
+            ReportFlusher();
         }
 
         /**
@@ -173,14 +174,16 @@ namespace DocWorksQA.Utilities
          */
         public void Fail(String description)
         {
-            Logger.Debug(RemoveTags(description));
+            Console.WriteLine(RemoveTags(description));
             test.Fail("<div style=\"color: red;\">" + description + "</div>");
+            ReportFlusher();
         }
 
 
         public void Fail(Exception ex)
         {
             test.CustomeFail(ex);
+            ReportFlusher();
 
             /*string exceptionString = JsonConvert.SerializeObject(ex);
 
@@ -204,8 +207,9 @@ namespace DocWorksQA.Utilities
          */
         public void Info(String description)
         {
-            Logger.Debug(RemoveTags(description));
+            Console.WriteLine(RemoveTags(description));
             test.Info(description);
+            ReportFlusher();
         }
 
         /**
