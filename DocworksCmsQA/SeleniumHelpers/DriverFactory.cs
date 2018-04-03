@@ -47,7 +47,7 @@ namespace DocWorksQA.SeleniumHelpers
                     options.SetPreference("browser.tabs.remote.autostart.1", false);
                     options.SetPreference("browser.tabs.remote.autostart.2", false);
                     options.SetPreference("browser.tabs.remote.force-enable", false);
-                  // options.AddArguments("--headless");
+                    options.AddArguments("--headless");
                     options.AddArgument("--no-sandbox");
                   //  driver = new FirefoxDriver(options);
                         
