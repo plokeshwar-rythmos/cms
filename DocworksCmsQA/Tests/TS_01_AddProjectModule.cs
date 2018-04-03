@@ -38,7 +38,7 @@ namespace DocWorksQA.Tests
             catch (Exception ex) {
                 ReportExceptionScreenshot(driver, ex);
                 Fail(ex);
-                throw;
+                //throw;
             }
         }
 
