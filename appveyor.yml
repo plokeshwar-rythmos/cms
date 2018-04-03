@@ -39,9 +39,9 @@
   on_failure:
   - ps: cd .\DocworksCmsQA\bin\Release
   - ps: ls
-  - ps: $root = Resolve-Path .\Reports; [IO.Directory]::GetFiles($root.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
-  #- ps: 7z a myapp.zip %APPVEYOR_BUILD_FOLDER%\DocworksCmsQA\bin\Release\Reports
-  #- ps: Push-AppveyorArtifact myapp.zip
+  #- ps: $root = Resolve-Path .\Reports; [IO.Directory]::GetFiles($root.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  - ps: 7z a myapp.zip $root.Path\Reports
+  - ps: Push-AppveyorArtifact myapp.zip
   
   artifacts:
     - path: '\DocworksCmsQA\bin\%configuration%\Reports'
