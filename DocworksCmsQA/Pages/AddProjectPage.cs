@@ -112,7 +112,7 @@ namespace DocWorksQA.Pages
 
         public void ClickAddProject() {
             Click(ADDPROJECT_BUTTON);
-            WaitForElement(PROJECT_TITLE_FIELD);
+            WaitForElement(CREATE_PROJECT_BUTTON);
             Info("Clicked on AddProject Button.");
         }
 
