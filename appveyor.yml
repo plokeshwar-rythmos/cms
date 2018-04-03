@@ -27,11 +27,10 @@
    
     - ps: dotnet build .\DocworksCmsQA\DocworksCmsQA.csproj;
          
-         #dotnet test --configuration Release;
     #- ps: nunit3-console.exe .\DocworksCmsQA\bin\Release\DocworksCmsQA.dll;
     
   
-  test: off
+  #test: off
   
   after_build:
    # for once the build has completed
