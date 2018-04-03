@@ -39,7 +39,8 @@
   on_failure:
   - ps: cd .\DocworksCmsQA\bin\Release
   - ps: ls
-  #- ps: 7z a myapp.zip %APPVEYOR_BUILD_FOLDER%\path\to\bin\*.dll
+  - ps: 7z a myapp.zip .\DocworksCmsQA\bin\Release\Reports
+  - ps: Push-AppveyorArtifact myapp.zip
   
   artifacts:
     - path: '\DocworksCmsQA\bin\%configuration%\Reports'
