@@ -26,7 +26,7 @@
   build_script:
    
     #- ps: dotnet build --configuration Release .\DocworksCmsQA\DocworksCmsQA.csproj;
-    - ps: dotnet build /flp:v=diag .\DocworksCmsQA\DocworksCmsQA.csproj;
+    - ps: dotnet build .\DocworksCmsQA\DocworksCmsQA.csproj;
     #- ps: nunit3-console.exe .\DocworksCmsQA\bin\Release\DocworksCmsQA.dll;
     
   
@@ -40,7 +40,7 @@
   - ps: cd .\DocworksCmsQA\bin\Release
   - ps: ls
   #- ps: $root = Resolve-Path .\Reports; [IO.Directory]::GetFiles($root.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
-  - ps: 7z a myapp.zip $root.Path\Reports
+  - ps: 7z a myapp.zip \DocworksCmsQA\bin\%configuration%\Reports\*
   - ps: Push-AppveyorArtifact myapp.zip
   
   artifacts:
