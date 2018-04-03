@@ -68,7 +68,7 @@ namespace DocWorksQA.Tests
 
                 VerifyText("creating a project "+expected+ " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
 
-                addProject.BackToProject();
+                addProject.ClickDashboard();
 
                 addProject.SearchForProject(expected);
                 String actual = addProject.GetProjectTitle();
@@ -89,6 +89,7 @@ namespace DocWorksQA.Tests
         {
             try
             {
+
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 Console.WriteLine("Starting Test Case : " + TestName);
 
@@ -114,7 +115,7 @@ namespace DocWorksQA.Tests
 
                 VerifyText("creating a project " + expected + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
 
-                addProject.BackToProject();
+                addProject.ClickDashboard();
 
                 addProject.SearchForProject(expected);
                 String actual = addProject.GetProjectTitle();
@@ -158,7 +159,7 @@ namespace DocWorksQA.Tests
 
                 VerifyText("creating a project " + expected + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
 
-                addProject.BackToProject();
+                addProject.ClickDashboard();
 
                 addProject.SearchForProject(expected);
                 String actual = addProject.GetProjectTitle();
@@ -185,8 +186,6 @@ namespace DocWorksQA.Tests
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 CreateTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(driver);
-                addProject.ClickDashboard();
-                System.Threading.Thread.Sleep(3000);
                 addProject.ClickAddProject();
                 String expected = addProject.EnterProjectTitle();
                 addProject.ClickContentType();
@@ -202,7 +201,7 @@ namespace DocWorksQA.Tests
 
                 VerifyText("creating a project " + expected + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
 
-                addProject.BackToProject();
+                addProject.ClickDashboard();
 
                 addProject.SearchForProject(expected);
                 String actual = addProject.GetProjectTitle();
@@ -241,8 +240,6 @@ namespace DocWorksQA.Tests
 
                 addProject.SuccessScreenshot("Validating Length of the Title");
                 VerifyEquals(expected, actual, "Validation Got Successful", "Validation Got Failed");
-                addProject.ClickClose();
-                System.Threading.Thread.Sleep(5000);
             }
             catch (Exception e)
             {
@@ -274,7 +271,7 @@ namespace DocWorksQA.Tests
 
                 String str = addProject.GetTitleLength();
                 VerifyEquals("100/100", str, "Length Of Project Title got exceeded to its limit as " + str + "", "Length Of Project Title Not got exceeded to its limit as " + str + "");
-                addProject.EscapePopUp();
+                
             }
             catch (Exception e)
             {
@@ -316,7 +313,7 @@ namespace DocWorksQA.Tests
 
                 VerifyText("creating a project " + expected + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
 
-                addProject.BackToProject();
+                addProject.ClickDashboard();
 
                 addProject.SearchForProject(expected);
                 String txt = addProject.GetDescriptionText();

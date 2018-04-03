@@ -105,12 +105,16 @@ namespace DocWorksQA.Pages
         }
         public void ClickDashboard()
         {
-            Click(By.XPath("//a[@href='/dashboard']"));
+            String url = driver.Url;
+            url = url.Substring(0, url.LastIndexOf("/"));
+            driver.Navigate().GoToUrl(url + "/dashboard");
+            //Click(By.XPath("//a[@href='/dashboard']"));
             System.Threading.Thread.Sleep(7000);
             Info("Clicked On DashBoard");
         }
 
         public void ClickAddProject() {
+            ClickDashboard();
             Click(ADDPROJECT_BUTTON);
             WaitForElement(CREATE_PROJECT_BUTTON);
             Info("Clicked on AddProject Button.");
@@ -218,7 +222,7 @@ namespace DocWorksQA.Pages
         }
 
         public void WaitForProcessCompletion() {
-            for(int i = 0; i < 50; i++)
+            for(int i = 0; i < 100; i++)
             {
                 String tmp = WaitForElement(NOTIFICATION_MESSAGE).Text;
 

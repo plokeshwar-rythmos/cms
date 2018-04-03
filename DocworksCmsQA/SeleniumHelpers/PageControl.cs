@@ -181,7 +181,13 @@ namespace DocWorksQA.SeleniumHelpers
             act.Perform();
         }
 
-        public void MoveToelement(IWebElement element)
+        public void PressEscape()
+        {
+            Actions act = new Actions(driver);
+            act.SendKeys(Keys.Escape);
+        }
+
+            public void MoveToelement(IWebElement element)
         {
 
 
