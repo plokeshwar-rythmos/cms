@@ -61,7 +61,7 @@ namespace DocWorksQA.SeleniumHelpers
                     case DriverToUse.Chrome:
                     Console.WriteLine("Starting Chrome Driver.");
                         ChromeOptions option = new ChromeOptions();
-                    option.AddArgument("--headless");
+                    //option.AddArgument("--headless");
                     option.AddArguments("window-size=1200,1100");
                     option.Proxy = null;
                     option.AddArguments("disable-infobars");
