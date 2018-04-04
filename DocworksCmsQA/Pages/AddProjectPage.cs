@@ -60,6 +60,7 @@ namespace DocWorksQA.Pages
         {
             Clear(ENTER_SEARCH);
             EnterValue(ENTER_SEARCH, projectName);
+            
         }
 
         public void SuccessScreenshot(String path,String message)
@@ -222,7 +223,7 @@ namespace DocWorksQA.Pages
         }
 
         public void WaitForProcessCompletion() {
-            for(int i = 0; i < 100; i++)
+            for(int i = 0; i < 200; i++)
             {
                 String tmp = WaitForElement(NOTIFICATION_MESSAGE).Text;
 
@@ -234,7 +235,7 @@ namespace DocWorksQA.Pages
                 {
                     Console.WriteLine(tmp);
                     //Console.WriteLine("Notification is still in progress.");
-                    System.Threading.Thread.Sleep(500);
+                    System.Threading.Thread.Sleep(1000);
                 }
 
             }
