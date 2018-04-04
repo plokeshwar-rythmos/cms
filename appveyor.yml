@@ -2,7 +2,7 @@
 -
   branches:
     only:      
-      - appveyorExceptionHandler            
+      - master            
   version: '1.0.{build}'
   image: Visual Studio 2017
   skip_commits:
