@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using AventStack.ExtentReports;
 
 namespace DocWorksQA.Utilities
 {
-    public class CommonMethods : TestRailMethods
+    public class CommonMethods : Verify
     {
 
         private IWebDriver Driver;
@@ -35,6 +36,8 @@ namespace DocWorksQA.Utilities
             if (Driver != null){
                 Driver.Quit();
             }
+
+            Console.WriteLine(driverToUse+" Driver quited successfully.");
         }
 
         public String TakeScreenshot(IWebDriver driver)
@@ -61,9 +64,21 @@ namespace DocWorksQA.Utilities
 
         }
 
+        public void ReportExceptionScreenshot(ExtentTest test, IWebDriver driver, Exception ex)
+        {
+            String path = TakeScreenshot(driver);
+            ExceptionScreenshot(test, path, ex.Message);
+
+        }
+
         public void ExceptionScreenshot(String path, String message)
         {
             Info("<a style=\"font - size: 20px; color: red;\" href=\"" + path + "\">Exception Occurred : "+message+"<br></a>");
+        }
+
+        public void ExceptionScreenshot(ExtentTest test, String path, String message)
+        {
+            Info(test, "<a style=\"font - size: 20px; color: red;\" href=\"" + path + "\">Exception Occurred : " + message + "<br></a>");
         }
 
         public string GetImagePath()

@@ -13,12 +13,12 @@ namespace DocWorksQA.Utilities
 {
     public class ExtentReporter
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         ExtentHtmlReporter htmlReporter;
         static ExtentReports reporter;
-        static ExtentTest parent;
-       static ExtentTest test;
+        ExtentTest parent;
+       ExtentTest test;
 
+      
        
 
         public Boolean GetReporter() {
@@ -134,6 +134,17 @@ namespace DocWorksQA.Utilities
            
         }
 
+
+        public ExtentTest StartTest(String testCaseName, String description)
+        {
+
+            Console.WriteLine("Creating Test Case for Reporting. " + testCaseName);
+
+            return reporter.CreateTest(testCaseName, description);
+
+
+        }
+
         /**
          * This method creates a new instance of parent test with testcase name.
          * 
@@ -168,6 +179,13 @@ namespace DocWorksQA.Utilities
             ReportFlusher();
         }
 
+        public void Pass(ExtentTest test, String description)
+        {
+            Console.WriteLine(RemoveTags(description));
+            test.Pass(description);
+            ReportFlusher();
+        }
+
         /**
          * This method adds a fail statement to the current test instance.
          * @param description
@@ -179,27 +197,33 @@ namespace DocWorksQA.Utilities
             ReportFlusher();
         }
 
+        public void Fail(ExtentTest test, String description)
+        {
+            Console.WriteLine(RemoveTags(description));
+            test.Fail("<div style=\"color: red;\">" + description + "</div>");
+            ReportFlusher();
+        }
+
+
+
 
         public void Fail(Exception ex)
         {
             test.CustomeFail(ex);
             ReportFlusher();
 
-            /*string exceptionString = JsonConvert.SerializeObject(ex);
-
-            if (ex.GetType().ToString().Contains("AssertException")) {
-                Console.WriteLine(ex.GetType());
-                test.Fail(new AssertException(exceptionString));
-            }else {
-                test.Fail(new CustomException(exceptionString));
-            }
-            */
         }
 
-                
-               
-            
-        
+        public void Fail(ExtentTest test, Exception ex)
+        {
+            test.CustomeFail(ex);
+            ReportFlusher();
+
+        }
+
+
+
+
 
         /**
          * This method adds a info statement to the current test instance.
@@ -212,6 +236,13 @@ namespace DocWorksQA.Utilities
             ReportFlusher();
         }
 
+
+        public void Info(ExtentTest test, String description)
+        {
+            Console.WriteLine(RemoveTags(description));
+            test.Info(description);
+            ReportFlusher();
+        }
         /**
          * This method flushes report to the active extent instance.
          */

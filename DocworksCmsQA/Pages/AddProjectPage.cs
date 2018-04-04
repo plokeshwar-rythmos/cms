@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium;
 using System.Diagnostics;
+using AventStack.ExtentReports;
 
 namespace DocWorksQA.Pages
 {
@@ -39,10 +40,12 @@ namespace DocWorksQA.Pages
         public By DESCRIPTION_MAT_CARD = By.XPath("//mat-card-content/p");
         public object DriverWaitUtil { get; private set; }
 
+        private ExtentTest test;
 
 
-        public AddProjectPage(IWebDriver driver) : base(driver)
+        public AddProjectPage(ExtentTest test, IWebDriver driver) : base(driver)
         {
+            this.test = test;
         }
 
 
@@ -65,7 +68,7 @@ namespace DocWorksQA.Pages
 
         public void SuccessScreenshot(String path,String message)
         {
-            Info("<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
+            Info(test, "<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
         }
 
         public void SuccessScreenshot(String message)
@@ -81,27 +84,27 @@ namespace DocWorksQA.Pages
 
         public String GetDescriptionSize()
         {
-            Info("Description Size is" + this.GetSize(DESCRIPTION_FIELD));
+            Info(test, "Description Size is" + this.GetSize(DESCRIPTION_FIELD));
             return this.GetSize(DESCRIPTION_FIELD);
         }
 
         public String GetDescriptionLength()
         {
             String str = GetText(SIZE_EXCEED_1000).ToString();
-            Info("Description Exceeds 1000 characters***" + str);
+            Info(test, "Description Exceeds 1000 characters***" + str);
             return str;
         }
 
         public String GetDescriptionText()
         {
             String str = GetText(DESCRIPTION_MAT_CARD).ToString();
-            Info("The Description Text is"+str);
+            Info(test, "The Description Text is"+str);
             return str;
         }
         public String GetTitleLength()
         {
             String str = GetText(SIZE_EXCEED_100).ToString();
-            Info("Title Exceeds 100 characters***" + str);
+            Info(test, "Title Exceeds 100 characters***" + str);
             return str;
         }
         public void ClickDashboard()
@@ -111,20 +114,20 @@ namespace DocWorksQA.Pages
             driver.Navigate().GoToUrl(url + "/dashboard");
             //Click(By.XPath("//a[@href='/dashboard']"));
             System.Threading.Thread.Sleep(7000);
-            Info("Clicked On DashBoard");
+            Info(test, "Clicked On DashBoard");
         }
 
         public void ClickAddProject() {
             ClickDashboard();
             Click(ADDPROJECT_BUTTON);
             WaitForElement(CREATE_PROJECT_BUTTON);
-            Info("Clicked on AddProject Button.");
+            Info(test, "Clicked on AddProject Button.");
         }
 
         public String EnterProjectTitle() {
            String ProjectTitle = "SELENIUM" + "_" + GenerateRandomNumbers(2);
             EnterValue(PROJECT_TITLE_FIELD, ProjectTitle);
-            Info("Entered Project Title : " + ProjectTitle);
+            Info(test, "Entered Project Title : " + ProjectTitle);
             return ProjectTitle;
         }
 
@@ -132,7 +135,7 @@ namespace DocWorksQA.Pages
         {
             String ProjectTitle = "QA";
             EnterValue(PROJECT_TITLE_FIELD, ProjectTitle);
-            Info("Entered Project Title : " + ProjectTitle);
+            Info(test, "Entered Project Title : " + ProjectTitle);
             return ProjectTitle;
         }
         
@@ -140,13 +143,13 @@ namespace DocWorksQA.Pages
         {
             String ProjectTitle = "SELENIUM" + RandomValueOfLengthMorethan100();
             EnterValue(PROJECT_TITLE_FIELD, ProjectTitle);
-            Info("Entered Project Title : " + ProjectTitle);
+            Info(test, "Entered Project Title : " + ProjectTitle);
             return ProjectTitle;
         }
 
         public String GetProjectTitle()
         {
-            Info("ProjectTitle is" + this.GetText(GET_TITLE));
+            Info(test, "ProjectTitle is" + this.GetText(GET_TITLE));
             return this.GetText(GET_TITLE);
         }
 
@@ -157,7 +160,7 @@ namespace DocWorksQA.Pages
             {
                 String Description = "(WCM or WCMS)isa CMS designed to support the management of the content of Web pages. Most popular CMSs are also WCMSs. Web content includes text and embedded(WCM or WCMS) is a CMS designed to support the management of the content of Web pages. Most popular CMSs are also WCMSs. Web content includes text and embedded(WCM or WCMS) is a CMS designed to support the management of the content of Web pages. Most popular CMSs are also WCMSs. Web content includes text and embedded(WCM or WCMS) is a CMS designed to support the management of the content of Web pages. Most popular CMSs are also WCMSs. Web content includes text and embedded(WCM or WCMS) is a CMS designed to support the management of the content of Web pages. Most popular CMSs are also WCMSs. Web content includes text and embedded(WCM or WCMS) is a CMS designed to support the management of the content of Web pages. Most popular CMSs are also WCMSs. Web content includes text and embedded(WCM or WCMS) is a CMS designed to support the management of the content of Web pages. Most popular CMSs are also WCMSs. Web content includes text and embedded";
                 EnterDescription(Description);
-                Info("Entered Project Description : " + Description);
+                Info(test, "Entered Project Description : " + Description);
                 return Description;
             }catch(Exception e)
             {
@@ -168,19 +171,19 @@ namespace DocWorksQA.Pages
         {
             IWebElement element = WaitForElement(FOOTER_TEXT);
             String FooterText = this.GetText(FOOTER_TEXT);
-           Info("Footer Title is*************" + FooterText);
+           Info(test, "Footer Title is*************" + FooterText);
             return FooterText;
         }
 
         public void EnterDescription(String description) {
             EnterValue(DESCRIPTION_FIELD, description);
-            Info("Entered Description: " + description);
+            Info(test, "Entered Description: " + description);
         }
 
         public void EnterPublishedPath(String path)
         {
             EnterValue(PUBLISHED_PATH, path);
-            Info("Enter Published Path:" + path);
+            Info(test, "Enter Published Path:" + path);
         }
 
         public void EscapePopUp()
@@ -192,25 +195,25 @@ namespace DocWorksQA.Pages
         {
             
             Click(By.XPath("//button//i[@class='mdi mdi-close mdi-24px']"));
-            Info("Clicked Close Button");
+            Info(test, "Clicked Close Button");
         }
 
         public void ClickBack()
         {
             Click(BACK_BUTTON);
-            Info("Clicked on Back Button.");
+            Info(test, "Clicked on Back Button.");
 
         }
         public void ClickClear()
         {
             Click(CLEAR_BUTTON);
-            Info("Clicked on Clear Button.");
+            Info(test, "Clicked on Clear Button.");
 
         }
         public void ClickCreateProject()
         {
             Click(CREATE_PROJECT_BUTTON);
-            Info("Clicked on Create project Button.");
+            Info(test, "Clicked on Create project Button.");
             WaitForElement(BELL_NOTIFICATION);
 
         }
@@ -219,7 +222,7 @@ namespace DocWorksQA.Pages
         {
             System.Threading.Thread.Sleep(7000);
             Click(NOTIFICATION_BELL);
-           Info("Clicked Notification Bell");
+           Info(test, "Clicked Notification Bell");
         }
 
         public void WaitForProcessCompletion() {
@@ -272,57 +275,57 @@ namespace DocWorksQA.Pages
             }
             
             String str =this.GetText(GET_CREATEDPROJECT);
-            Info("Status of the created Project is :   " + str);
+            Info(test, "Status of the created Project is :   " + str);
             return str;
         }
 
         public void BackToProject()
         {
             this.Click(BACKDROP);
-            Info("Clicked On BackDrop");
+            Info(test, "Clicked On BackDrop");
         }
 
         public void ClickContentType()
         {
 
             this.Click(TYPE_OF_CONTENT_DROPDOWN);
-            Info("Clicked On the TypeOfContent DropDown");
+            Info(test, "Clicked On the TypeOfContent DropDown");
             this.Click(CONTENT_VALUE);
-            Info("selected the content from drop down");
+            Info(test, "selected the content from drop down");
         }
 
         public void ClickSourceControlTypeGitLab()
         {
           
                 this.Click(SOURCE_CONTROL_PROVIDER_DROPDOWN);
-            Info("Clicked On the SOURCE_CONTROL_TYPE_DROPDOWN DropDown");
+            Info(test, "Clicked On the SOURCE_CONTROL_TYPE_DROPDOWN DropDown");
             this.Click(SOURCE_CONTROL_VALUE_GITLAB);
-            Info("selected the SOURCE_CONTROL_VALUE as GITLAB from drop down");
+            Info(test, "selected the SOURCE_CONTROL_VALUE as GITLAB from drop down");
 
         }
         public void ClickSourceControlTypeGitHub()
         {
 
             this.Click(SOURCE_CONTROL_PROVIDER_DROPDOWN);
-            Info("Clicked On the SOURCE_CONTROL_TYPE_DROPDOWN DropDown");
+            Info(test, "Clicked On the SOURCE_CONTROL_TYPE_DROPDOWN DropDown");
             this.Click(SOURCE_CONTROL_VALUE_GITHUB);
-            Info("selected the SOURCE_CONTROL_VALUE as GITHUB from drop down");
+            Info(test, "selected the SOURCE_CONTROL_VALUE as GITHUB from drop down");
 
         }
         public void ClickSourceControlTypeOno()
         {
 
             this.Click(SOURCE_CONTROL_PROVIDER_DROPDOWN);
-            Info("Clicked On the SOURCE_CONTROL_TYPE_DROPDOWN DropDown");
+            Info(test, "Clicked On the SOURCE_CONTROL_TYPE_DROPDOWN DropDown");
             this.Click(SOURCE_CONTROL_VALUE_ONO);
-            Info("selected the SOURCE_CONTROL_VALUE as Ono from drop down");
+            Info(test, "selected the SOURCE_CONTROL_VALUE as Ono from drop down");
 
         }
         public void EnterMercurialRepoPath()
         {
             String path= "https://bitbucket.org/mohittonde/docworks";
             EnterValue(MERCURIAL_REPO_PATH,path);
-            Info("Entered Mercurial repo Path as" + path);
+            Info(test, "Entered Mercurial repo Path as" + path);
         }
 
 
@@ -331,9 +334,9 @@ namespace DocWorksQA.Pages
         public void ClickRepository()
         {
             this.Click(REPOSITORY_DROPDOWN);
-            Info("Clicked On the Repository DropDown");
+            Info(test, "Clicked On the Repository DropDown");
             this.Click(REPOSITORY_VALUE);
-            Info("selected the Reppository_Value from drop down");
+            Info(test, "selected the Reppository_Value from drop down");
 
 
         }

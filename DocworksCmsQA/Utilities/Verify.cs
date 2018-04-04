@@ -1,10 +1,12 @@
-﻿using DocworksCmsQA.CustomException;
+﻿using AventStack.ExtentReports;
+using DocworksCmsQA.CustomException;
 using System;
 
 namespace DocWorksQA.Utilities
 {
     public class Verify : ExtentReporter
     {
+       
         /**
 	 * @author Pravin Lokeshwar
 	 * 
@@ -33,6 +35,24 @@ namespace DocWorksQA.Utilities
             else
             {
                 Fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
+            }
+
+            return false;
+
+        }
+
+        public Boolean VerifyEquals(ExtentTest test, Object expected, Object actual, String successMessage, String errorMessage)
+        {
+
+            if (expected.Equals(actual))
+            {
+                Pass(test, "<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
+                        + successMessage);
+                return true;
+            }
+            else
+            {
+                Fail(test, new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
             }
 
             return false;
@@ -211,6 +231,23 @@ namespace DocWorksQA.Utilities
             else
             {
                 Fail(new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
+
+            }
+            return false;
+        }
+
+        public Boolean VerifyText(ExtentTest test, String expected, String actual, String successMessage, String errorMessage)
+        {
+
+            if (expected.Equals(actual))
+            {
+                Pass(test, "<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
+                        + successMessage);
+                return true;
+            }
+            else
+            {
+                Fail(test, new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
 
             }
             return false;
