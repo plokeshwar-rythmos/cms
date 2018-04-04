@@ -14,220 +14,153 @@ using System.Threading.Tasks;
 
 namespace DocWorksQA.Tests
 {
-    // [TestFixture]
+    [TestFixture, Category("Create Distribution")]
     class TS_02_CreateDistributionModule : BeforeTestAfterTest
     {
         private static IWebDriver driver;
-        private static string uid = ConfigurationHelper.Get<String>("UserName");
-        private static string pwd = ConfigurationHelper.Get<String>("password");
 
-       // [OneTimeSetUp]
-        public void CreateDistribution()
+        [OneTimeSetUp]
+        public void AddPProjectModule()
         {
             driver = new DriverFactory().Create();
-            try
-            {
-                System.Threading.Thread.Sleep(5000);
-                LoginPage login = new LoginPage(driver);
-                login.EnterUserName(uid);
-                login.EnterPassword(pwd);
-                System.Threading.Thread.Sleep(3000);
-                login.ClickLogin();
-                System.Threading.Thread.Sleep(5000);
-                Console.WriteLine(driver.Title);
-                String actual = driver.Title;
-           //     Assert.IsTrue(VerifyEquals("Unity DocWorks - Dashboard", actual, "Page Title is verified successfully", "Page Title is Not correct"));
-            }
-            catch (AssertionException ex)
-            {
-                Fail("Assertion failed");
-                throw;
-            }
+            SetDriver(driver);
+            new LoginPage(driver).Login();
+            System.Threading.Thread.Sleep(5000);
         }
 
-         //[Test, Description("Verify User is able to add Distribution for the GitLab Project with all Fields")]
+        [Test, Description("Verify User is able to add Distribution for the GitLab Project with all Fields")]
         public void TC_01_ValidateCreateDistributionForGitLabProjectWithAllFields()
         {
             try
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
+                Console.WriteLine("Starting Test Case : " + TestName);
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 CreateTest(TestName, description);
-                System.Threading.Thread.Sleep(5000);
                 AddProjectPage addProject = new AddProjectPage(driver);
                 addProject.ClickAddProject();
-                System.Threading.Thread.Sleep(3000);
                 String expected = addProject.EnterProjectTitle();
-                System.Threading.Thread.Sleep(5000);
                 addProject.ClickContentType();
-                System.Threading.Thread.Sleep(5000);
                 addProject.ClickSourceControlTypeGitLab();
-                System.Threading.Thread.Sleep(25000);
-                addProject.ClickRepository();
-                System.Threading.Thread.Sleep(5000);
-                addProject.EnterPublishedPath("Publishing path to create project");
-                System.Threading.Thread.Sleep(5000);
-                addProject.EnterDescription("This is to create Project");
-                System.Threading.Thread.Sleep(5000);
-                addProject.ClickCreateProject();
-                System.Threading.Thread.Sleep(25000);
-                addProject.ClickNotifications();
-                System.Threading.Thread.Sleep(5000);
-                String status = addProject.GetNotificationStatus();
-                String projectDetails = addProject.GetCreatedProject();
-                String path = TakeScreenshot(driver);
-                addProject.SuccessScreenshot(path, "Project Created Successfully");
-                Assert.IsTrue(VerifyText("Success", status, "Project is Created with status:" + status + "", "Project is not created with status: " + status + ""));
-                addProject.BackToProject();
                 System.Threading.Thread.Sleep(15000);
+                addProject.ClickRepository();
+                addProject.EnterPublishedPath("Publishing path to create project");
+                addProject.EnterDescription("This is to create Project");
+                addProject.ClickCreateProject();
+                addProject.ClickNotifications();
+                String status = addProject.GetNotificationStatus();
+                addProject.SuccessScreenshot("Project Created Title");
+                VerifyText("creating a project " + expected + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
+                addProject.ClickDashboard();
+                addProject.SearchForProject(expected);
+                String actual = addProject.GetProjectTitle();
+                addProject.SuccessScreenshot("ProjectTitle");
+                VerifyEquals(expected, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
                 CreateDistributionPage distmodule = new CreateDistributionPage(driver);
-                System.Threading.Thread.Sleep(3000);
-                distmodule.SearchForProject(expected);
-                System.Threading.Thread.Sleep(3000);
                 distmodule.ClickDistribution();
-                System.Threading.Thread.Sleep(8000);
                 String expected1 = distmodule.EnterDistirbutionName();
-                System.Threading.Thread.Sleep(85000);
+                System.Threading.Thread.Sleep(75000);
                 distmodule.ClickBranchWithTOC();
-                System.Threading.Thread.Sleep(5000);
                 distmodule.EnterTocPath();
                 distmodule.EnterDescription("This is to create a distribution");
-                System.Threading.Thread.Sleep(5000);
                 distmodule.ClickCreateDistribution();
-                System.Threading.Thread.Sleep(40000);
                 addProject.ClickNotifications();
-                System.Threading.Thread.Sleep(15000);
                 String status1 = addProject.GetNotificationStatus();
-                String path1 = TakeScreenshot(driver);
-                addProject.SuccessScreenshot(path1, "Distribution got Created successfully With TOC Path");
-                Assert.IsTrue(VerifyText("Success", status1, "Distribution is Created For GitLab TOC with status:" + status1 + "", "Distribution is not created For GitLab TOC with status: " + status1 + ""));
-                addProject.BackToProject();
-                System.Threading.Thread.Sleep(5000);
+                addProject.SuccessScreenshot("Distribution got Created successfully With TOC Path");
+                VerifyText("creating distribution " + expected1 + " is successful", status1, "Distribution is Created For GitLab TOC with status:" + status1 + "", "Distribution is not created For GitLab TOC with status: " + status1 + "");
+                addProject.ClickDashboard();
+                addProject.SearchForProject(expected);
                 distmodule.ClickDistribution();
-                System.Threading.Thread.Sleep(18000);
-                String actual = distmodule.GetDistributionName();
-                String path2 = TakeScreenshot(driver);
-                distmodule.SuccessScreenshot(path2, "Created Distribution:  "+expected1+"");
-                Assert.IsTrue(VerifyEquals(expected1, actual, "Create Distribution for GitLab Project With TOC is successful", "Create Distribution for GitLab Project With TOC is not successful"));
-                System.Threading.Thread.Sleep(8000);
+                String actual1 = distmodule.GetDistributionName();
+                addProject.SuccessScreenshot("Created Distribution:  "+expected1+"");
+                VerifyEquals(expected1, actual1, "Create Distribution for GitLab Project With TOC is successful", "Create Distribution for GitLab Project With TOC is not successful");
                 String expected2 = distmodule.EnterDistirbutionName();
-                System.Threading.Thread.Sleep(85000);
+                System.Threading.Thread.Sleep(75000);
                 distmodule.ClickBranchWithOutTOC();
-                System.Threading.Thread.Sleep(5000);
                 distmodule.EnterDescription("This is to create a distribution");
-                System.Threading.Thread.Sleep(5000);
                 distmodule.ClickCreateDistribution();
-                System.Threading.Thread.Sleep(40000);
                 addProject.ClickNotifications();
-                System.Threading.Thread.Sleep(15000);
                 String status2 = addProject.GetNotificationStatus();
-                String path3 = TakeScreenshot(driver);
-                addProject.SuccessScreenshot(path3, "Distribution: "+expected2+" got Created successfully Without TOC Path");
-                Assert.IsTrue(VerifyText("Success", status2, "Distribution is Created For GitLab Without TOC with status:" + status2 + "", "Distribution is not created For GitLab without TOC with status: " + status2 + ""));
-                addProject.BackToProject();
-                System.Threading.Thread.Sleep(5000);
-
+                addProject.SuccessScreenshot("Distribution: "+expected2+" got Created successfully Without TOC Path");
+                VerifyText("creating distribution " + expected2 + " is successful", status2, "Distribution is Created For GitLab Without TOC with status:" + status2 + "", "Distribution is not created For GitLab without TOC with status: " + status2 + "");
+                addProject.ClickDashboard();
             }
-            catch (AssertionException)
+            catch (Exception ex)
             {
-                Fail("Assertion failed");
+                ReportExceptionScreenshot(driver, ex);
+                Fail(ex);
                 throw;
             }
 
         }
 
-         //[Test, Description("Verify User is able to add Distribution for the GitHub Project with all Fields")]
+         [Test, Description("Verify User is able to add Distribution for the GitHub Project with all Fields")]
         public void TC_02_ValidateCreateDistributionForGitHubProjectWithAllFields()
         {
             try
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
+                Console.WriteLine("Starting Test Case : " + TestName);
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 CreateTest(TestName, description);
-                System.Threading.Thread.Sleep(5000);
                 AddProjectPage addProject = new AddProjectPage(driver);
                 addProject.ClickAddProject();
-                System.Threading.Thread.Sleep(3000);
                 String expected = addProject.EnterProjectTitle();
-                System.Threading.Thread.Sleep(5000);
                 addProject.ClickContentType();
-                System.Threading.Thread.Sleep(15000);
                 addProject.ClickSourceControlTypeGitHub();
                 System.Threading.Thread.Sleep(15000);
                 addProject.ClickRepository();
-                System.Threading.Thread.Sleep(5000);
                 addProject.EnterPublishedPath("Publishing path to create project");
-                System.Threading.Thread.Sleep(5000);
                 addProject.EnterDescription("This is to create Project");
-                System.Threading.Thread.Sleep(5000);
                 addProject.ClickCreateProject();
-                System.Threading.Thread.Sleep(25000);
                 addProject.ClickNotifications();
-                System.Threading.Thread.Sleep(5000);
                 String status = addProject.GetNotificationStatus();
-                String projectDetails = addProject.GetCreatedProject();
-                String path = TakeScreenshot(driver);
-                addProject.SuccessScreenshot(path, "GitHub Project is Created");
-                Assert.IsTrue(VerifyText("Success", status, "GitHub Project is Created with status:" + status + "", "GitHub Project is not created with status: " + status + ""));
-                addProject.BackToProject();
-                System.Threading.Thread.Sleep(15000);
+                addProject.SuccessScreenshot("Project Created Title");
+                VerifyText("creating a project " + expected + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
+                addProject.ClickDashboard();
+                addProject.SearchForProject(expected);
+                String actual = addProject.GetProjectTitle();
+                addProject.SuccessScreenshot("ProjectTitle");
+                VerifyEquals(expected, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
                 CreateDistributionPage distmodule = new CreateDistributionPage(driver);
-                System.Threading.Thread.Sleep(3000);
-                distmodule.SearchForProject(expected);
-                System.Threading.Thread.Sleep(3000);
                 distmodule.ClickDistribution();
-                System.Threading.Thread.Sleep(8000);
                 String expected1 = distmodule.EnterDistirbutionName();
-                System.Threading.Thread.Sleep(85000);
+                System.Threading.Thread.Sleep(75000);
                 distmodule.ClickBranchForGitHub();
-                System.Threading.Thread.Sleep(5000);
                 distmodule.EnterTocPath();
                 distmodule.EnterDescription("This is to create a distribution");
-                System.Threading.Thread.Sleep(5000);
                 distmodule.ClickCreateDistribution();
-                System.Threading.Thread.Sleep(40000);
                 addProject.ClickNotifications();
-                System.Threading.Thread.Sleep(15000);
                 String status1 = addProject.GetNotificationStatus();
-                String path1 = TakeScreenshot(driver);
-                addProject.SuccessScreenshot(path1, "Distribution: "+expected1+"got Created successfully For GITHUB Project with TOC");
-                Assert.IsTrue(VerifyText("Success", status1, "Distribution is Created for github With TOC Path with status:" + status1 + "", "Distribution is not created with status: " + status1 + ""));
-                addProject.BackToProject();
-                System.Threading.Thread.Sleep(5000);
+                addProject.SuccessScreenshot("Distribution got Created successfully With TOC Path");
+                VerifyText("creating distribution " + expected1 + " is successful", status1, "Distribution is Created For GitHub TOC with status:" + status1 + "", "Distribution is not created For GitHub TOC with status: " + status1 + "");
+                addProject.ClickDashboard();
+                addProject.SearchForProject(expected);
                 distmodule.ClickDistribution();
-                System.Threading.Thread.Sleep(18000);
-                String actual = distmodule.GetDistributionName();
-                String path2 = TakeScreenshot(driver);
-                distmodule.SuccessScreenshot(path1, "Created Distribution for GITHUB With TOC");
-                Assert.IsTrue(VerifyEquals(expected1, actual, "Create Distribution for GitHub Project  with TOC is successful", "Create Distribution for GitHub Project is not successful"));
-                System.Threading.Thread.Sleep(8000);
+                String actual1 = distmodule.GetDistributionName();
+                addProject.SuccessScreenshot("Created Distribution:  " + expected1 + "");
+                VerifyEquals(expected1, actual1, "Create Distribution for GitHub Project With TOC is successful", "Create Distribution for GitHub Project With TOC is not successful");
                 String expected2 = distmodule.EnterDistirbutionName();
-                System.Threading.Thread.Sleep(65000);
+                System.Threading.Thread.Sleep(75000);
                 distmodule.ClickBranchWithOutTOC();
-                System.Threading.Thread.Sleep(5000);
                 distmodule.EnterDescription("This is to create a distribution");
-                System.Threading.Thread.Sleep(5000);
                 distmodule.ClickCreateDistribution();
-                System.Threading.Thread.Sleep(40000);
                 addProject.ClickNotifications();
-                System.Threading.Thread.Sleep(15000);
                 String status2 = addProject.GetNotificationStatus();
-                String path3 = TakeScreenshot(driver);
-                addProject.SuccessScreenshot(path3, "Distribution: "+expected2+" got Created successfully Without TOC Path");
-                Assert.IsTrue(VerifyText("Success", status2, "Distribution is Created For GitLab Without TOC with status:" + status2 + "", "Distribution is not created For GitLab without TOC with status: " + status2 + ""));
-                addProject.BackToProject();
-                System.Threading.Thread.Sleep(5000);
-
+                addProject.SuccessScreenshot("Distribution: " + expected2 + " got Created successfully Without TOC Path");
+                VerifyText("creating distribution " + expected2 + " is successful", status2, "Distribution is Created For GitHub Without TOC with status:" + status2 + "", "Distribution is not created For GitHub without TOC with status: " + status2 + "");
+                addProject.ClickDashboard();
             }
-            catch (AssertionException)
+            catch (Exception ex)
             {
-                Fail("Assertion failed");
+                ReportExceptionScreenshot(driver, ex);
+                Fail(ex);
                 throw;
             }
 
         }
 
-         //[Test, Description("Verify User is able to add Distribution for the Mercurial Project with all Fields")]
+         [Test, Description("Verify User is able to add Distribution for the Mercurial Project with all Fields")]
         public void TC_03_ValidateCreateDistributionForMercurialProjectWithAllFields()
         {
             try
@@ -235,209 +168,98 @@ namespace DocWorksQA.Tests
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 CreateTest(TestName, description);
-                System.Threading.Thread.Sleep(5000);
                 AddProjectPage addProject = new AddProjectPage(driver);
                 addProject.ClickAddProject();
-                System.Threading.Thread.Sleep(3000);
                 String expected = addProject.EnterProjectTitle();
-                System.Threading.Thread.Sleep(5000);
                 addProject.ClickContentType();
                 System.Threading.Thread.Sleep(15000);
                 addProject.ClickSourceControlTypeOno();
-                System.Threading.Thread.Sleep(8000);
                 addProject.EnterMercurialRepoPath();
-                System.Threading.Thread.Sleep(5000);
                 addProject.EnterPublishedPath("Publishing path to create project");
-                System.Threading.Thread.Sleep(5000);
                 addProject.EnterDescription("This is to create Project");
-                System.Threading.Thread.Sleep(5000);
                 addProject.ClickCreateProject();
-                System.Threading.Thread.Sleep(25000);
                 addProject.ClickNotifications();
-                System.Threading.Thread.Sleep(5000);
                 String status = addProject.GetNotificationStatus();
-                String projectDetails = addProject.GetCreatedProject();
-                String path = TakeScreenshot(driver);
-                addProject.SuccessScreenshot(path, "Mercurial Project Created Successfully");
-                Assert.IsTrue(VerifyText("Success", status, "Mercurial Project is Created with status:" + status + "", "Mercurial Project is not created with status: " + status + ""));
-                addProject.BackToProject();
-                System.Threading.Thread.Sleep(15000);
+                addProject.SuccessScreenshot("Project Created Title");
+                VerifyText("creating a project " + expected + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
+                addProject.ClickDashboard();
+                addProject.SearchForProject(expected);
+                String actual = addProject.GetProjectTitle();
+                addProject.SuccessScreenshot("ProjectTitle");
+                VerifyEquals(expected, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
                 CreateDistributionPage distmodule = new CreateDistributionPage(driver);
-                System.Threading.Thread.Sleep(3000);
-                distmodule.SearchForProject(expected);
-                System.Threading.Thread.Sleep(3000);
                 distmodule.ClickDistribution();
-                System.Threading.Thread.Sleep(8000);
                 String expected1 = distmodule.EnterDistirbutionName();
-                System.Threading.Thread.Sleep(7000);
                 distmodule.EnterBranchForMercurial();
-                System.Threading.Thread.Sleep(5000);
                 distmodule.EnterTocPath();
                 distmodule.EnterDescription("This is to create a distribution");
-                System.Threading.Thread.Sleep(5000);
                 distmodule.ClickCreateDistribution();
-                System.Threading.Thread.Sleep(40000);
                 addProject.ClickNotifications();
-                System.Threading.Thread.Sleep(15000);
                 String status1 = addProject.GetNotificationStatus();
-                String path1 = TakeScreenshot(driver);
-                addProject.SuccessScreenshot(path1, "Distribution: "+expected1+" got Created successfully With TOC");
-                Assert.IsTrue(VerifyText("Success", status1, "Distribution is Created For mercurial With TOC with status:" + status1 + "", "Distribution is not created with status: " + status1 + ""));
-                addProject.BackToProject();
-                System.Threading.Thread.Sleep(5000);
+                addProject.SuccessScreenshot("Distribution got Created successfully With TOC Path");
+                VerifyText("creating distribution " + expected1 + " is successful", status1, "Distribution is Created For Mercurial With TOC with status:" + status1 + "", "Distribution is not created For Mercurial With TOC as status: " + status1 + "");
+                addProject.ClickDashboard();
+                addProject.SearchForProject(expected);
                 distmodule.ClickDistribution();
-                System.Threading.Thread.Sleep(18000);
-                String actual = distmodule.GetDistributionName();
-                String path2 = TakeScreenshot(driver);
-                distmodule.SuccessScreenshot(path1, "Created Distribution");
-                Assert.IsTrue(VerifyEquals(expected1, actual, "Create Distribution for Mercurial Project With TOC path is successful", "Create Distribution for Mercurial Project is not successful"));
-                System.Threading.Thread.Sleep(8000);
+                String actual1 = distmodule.GetDistributionName();
+                addProject.SuccessScreenshot("Created Distribution: "+actual1+"");
+                VerifyEquals(expected1, actual, "Create Distribution for Mercurial Project With TOC path is successful", "Create Distribution for Mercurial Project is not successful");
                 String expected2= distmodule.EnterDistirbutionName();
-                System.Threading.Thread.Sleep(7000);
                 distmodule.EnterBranchWithoutTOCForMercurial();
-                System.Threading.Thread.Sleep(5000);
                 distmodule.EnterDescription("This is to create a distribution");
-                System.Threading.Thread.Sleep(5000);
                 distmodule.ClickCreateDistribution();
-                System.Threading.Thread.Sleep(40000);
                 addProject.ClickNotifications();
-                System.Threading.Thread.Sleep(15000);
                 String status2 = addProject.GetNotificationStatus();
-                String path3 = TakeScreenshot(driver);
-                addProject.SuccessScreenshot(path3, "Distribution: "+expected2+" got Created successfully Without TOC");
-                Assert.IsTrue(VerifyText("Success", status2, "Distribution is Created For mercurial Without TOC with status:" + status2 + "", "Distribution is not created with status: " + status2 + ""));
-                addProject.BackToProject();
-                System.Threading.Thread.Sleep(3000);
-
+                addProject.SuccessScreenshot("Distribution: "+expected2+" got Created successfully Without TOC");
+                VerifyText("creating distribution " + expected1 + " is successful", status2, "Distribution is Created For mercurial Without TOC with status:" + status2 + "", "Distribution is not created with status: " + status2 + "");
+                addProject.ClickDashboard();
             }
-            catch (AssertionException)
+
+            catch (Exception ex)
             {
-                Fail("Assertion failed");
+                ReportExceptionScreenshot(driver, ex);
+                Fail(ex);
                 throw;
             }
 
         }
-         //[Test, Description("Verify User is able to Add Distribution to a Project of Empty TOC With Mandatory Fields")]
-        public void TC_04_ValidateAddDistributionsForProjectOfEmptyTOCAndMandatoryFields()
+        
+        [Test, Description("Verify When User sends an Invalid Length to Distribution Name Then it throws an Error Message")]
+        public void TC_04_ValidateDistributionNamelengthWithLessThan5Characters()
         {
             try
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-                CreateTest(TestName, description);
+                 CreateTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(driver);
                 addProject.ClickAddProject();
-                System.Threading.Thread.Sleep(3000);
                 String expected = addProject.EnterProjectTitle();
-                System.Threading.Thread.Sleep(5000);
                 addProject.ClickContentType();
-                System.Threading.Thread.Sleep(15000);
                 addProject.ClickSourceControlTypeGitLab();
-                System.Threading.Thread.Sleep(5000);
+                System.Threading.Thread.Sleep(15000);
                 addProject.ClickRepository();
-                System.Threading.Thread.Sleep(5000);
                 addProject.EnterPublishedPath("Publishing path to create project");
-                System.Threading.Thread.Sleep(5000);
                 addProject.EnterDescription("This is to create Project");
-                System.Threading.Thread.Sleep(5000);
                 addProject.ClickCreateProject();
-                System.Threading.Thread.Sleep(25000);
                 addProject.ClickNotifications();
-                System.Threading.Thread.Sleep(5000);
                 String status = addProject.GetNotificationStatus();
-                String projectDetails = addProject.GetCreatedProject();
-                String path = TakeScreenshot(driver);
-                addProject.SuccessScreenshot(path, "Project Created Successfully");
-                Assert.IsTrue(VerifyText("Success", status, "Project is Created with status:" + status + "", "Project is not created with status: " + status + ""));
-                addProject.BackToProject();
-                System.Threading.Thread.Sleep(15000);
+                addProject.SuccessScreenshot("Project Created Title");
+                VerifyText("creating a project " + expected + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
+                addProject.ClickDashboard();
+                addProject.SearchForProject(expected);
+                String actual = addProject.GetProjectTitle();
+                addProject.SuccessScreenshot("ProjectTitle");
+                VerifyEquals(expected, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
                 CreateDistributionPage distmodule = new CreateDistributionPage(driver);
-                System.Threading.Thread.Sleep(3000);
-                distmodule.SearchForProject(expected);
-                System.Threading.Thread.Sleep(5000);
-                distmodule.ClickDistribution();
-                System.Threading.Thread.Sleep(8000);
-                String expected1 = distmodule.EnterDistirbutionName();
-                System.Threading.Thread.Sleep(57000);
-                distmodule.ClickBranchWithOutTOC();
-                System.Threading.Thread.Sleep(5000);
-                distmodule.ClickCreateDistribution();
-                System.Threading.Thread.Sleep(35000);
-                addProject.ClickNotifications();
-                System.Threading.Thread.Sleep(15000);
-                String status1 = addProject.GetNotificationStatus();
-                String path1 = TakeScreenshot(driver);
-                addProject.SuccessScreenshot(path1, "Distribution got Created successfully");
-                Assert.IsTrue(VerifyText("Success", status1, "Distribution is Created with status:" + status1 + "", "Distribution is not created with status: " + status1 + ""));
-                addProject.BackToProject();
-                System.Threading.Thread.Sleep(5000);
-                distmodule.ClickDistribution();
-                System.Threading.Thread.Sleep(18000);
-                String actual = distmodule.GetDistributionName();
-                String path2 = TakeScreenshot(driver);
-                distmodule.SuccessScreenshot(path1, "Created Distribution");
-                Assert.IsTrue(VerifyEquals(expected1, actual, "Create Distribution for Project WithOut TOC is successful", "Create Distribution for Project Without TOC is not successful"));
-                distmodule.ClickCloseButton();
-                System.Threading.Thread.Sleep(5000);
-            }
-            catch (AssertionException)
-            {
-                Fail("Assertion failed");
-                throw;
-            }
-
-        }
-
-         //[Test, Description("Verify When User sends an Invalid Length to Distribution Name Then it throws an Error Message")]
-        public void TC_05_ValidateDistributionNamelengthWithLessThan5Characters()
-        {
-            try
-            {
-                String TestName = (TestContext.CurrentContext.Test.Name.ToString());
-                String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-               CreateTest(TestName, description);
-                AddProjectPage addProject = new AddProjectPage(driver);
-                addProject.ClickAddProject();
-                System.Threading.Thread.Sleep(3000);
-                String expected = addProject.EnterProjectTitle();
-                System.Threading.Thread.Sleep(5000);
-                addProject.ClickContentType();
-                System.Threading.Thread.Sleep(15000);
-                addProject.ClickSourceControlTypeGitLab();
-                System.Threading.Thread.Sleep(5000);
-                addProject.ClickRepository();
-                System.Threading.Thread.Sleep(5000);
-                addProject.EnterPublishedPath("Publishing path to create project");
-                System.Threading.Thread.Sleep(5000);
-                addProject.EnterDescription("This is to create Project");
-                System.Threading.Thread.Sleep(5000);
-                addProject.ClickCreateProject();
-                System.Threading.Thread.Sleep(25000);
-                addProject.ClickNotifications();
-                System.Threading.Thread.Sleep(5000);
-                String status = addProject.GetNotificationStatus();
-                String projectDetails = addProject.GetCreatedProject();
-                String path = TakeScreenshot(driver);
-                addProject.SuccessScreenshot(path, "Project Created Successfully");
-                Assert.IsTrue(VerifyText("Success", status, "Project is Created with status:" + status + "", "Project is not created with status: " + status + ""));
-                addProject.BackToProject();
-                System.Threading.Thread.Sleep(15000);
-                CreateDistributionPage distmodule = new CreateDistributionPage(driver);
-                System.Threading.Thread.Sleep(3000);
-                distmodule.SearchForProject(expected);
-                System.Threading.Thread.Sleep(5000);
                 distmodule.ClickDistribution();
                 String expected1 = "Please enter at least 5 characters.";
                 distmodule.EnterInvalidnNameLength();
-                System.Threading.Thread.Sleep(7000);
                 distmodule.EnterDescription("Description");
-                String actual = distmodule.GetText(distmodule.INVALID_TITLE_LENGTH);
-                String path1 = TakeScreenshot(driver);
-                distmodule.SuccessScreenshot(path1, "Validating Distribution Name Length");
-                System.Threading.Thread.Sleep(7000);
-                Assert.IsTrue(VerifyEquals(expected1, actual, "Validation of Length Constraints for Distribution Name Field is successful", "Validation of Length Constraints for Distribution Name Field is Not successful"));
-                distmodule.ClickCloseButton();
-                System.Threading.Thread.Sleep(5000);
+                String actual1 = distmodule.GetText(distmodule.INVALID_TITLE_LENGTH);
+                addProject.SuccessScreenshot("Validating Distribution Name Length");
+                Assert.IsTrue(VerifyEquals(expected1, actual1, "Validation of Length Constraints for Distribution Name Field is successful", "Validation of Length Constraints for Distribution Name Field is Not successful"));
+                addProject.ClickDashboard();
             }
             catch (AssertionException)
             {
@@ -446,12 +268,10 @@ namespace DocWorksQA.Tests
             }
         }
 
-       
         [OneTimeTearDown]
 
         public void CloseBrowser()
         {
-
             driver.Quit();
         }
 
