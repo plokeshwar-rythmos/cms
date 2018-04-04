@@ -453,7 +453,7 @@ namespace DocWorksQA.Pages
 
         public void ViewDraft()
         {
-            MoveToelement(HISTORY_VALID_DRAFT1);
+            MoveToElement(HISTORY_VALID_DRAFT1);
             System.Threading.Thread.Sleep(7000);
             MoveToelementAndClick(By.XPath("(//div[@class='draft-extend-icons']/i[@title='View Draft'])"));
             System.Threading.Thread.Sleep(7000);
@@ -463,7 +463,7 @@ namespace DocWorksQA.Pages
         public void ViewDraft1()
         {
             System.Threading.Thread.Sleep(7000);
-            MoveToelement(HISTORT_VALID_DRAFT2);
+            MoveToElement(HISTORT_VALID_DRAFT2);
             System.Threading.Thread.Sleep(7000);
             MoveToelementAndClick(By.XPath("(//div[@class='draft-extend-icons']/i[@title='View Draft'])"));
             System.Threading.Thread.Sleep(7000);
@@ -473,7 +473,7 @@ namespace DocWorksQA.Pages
         public String CreateDraftFromSnapshot()
         {
             System.Threading.Thread.Sleep(7000);
-            MoveToelement(HISTORT_VALID_DRAFT2);
+            MoveToElement(HISTORT_VALID_DRAFT2);
             System.Threading.Thread.Sleep(7000);
             MoveToelementAndClick(By.XPath("(//div[@class='draft-extend-icons']/i[@title='Create Draft'])"));
             System.Threading.Thread.Sleep(7000);

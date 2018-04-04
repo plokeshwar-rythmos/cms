@@ -1,5 +1,4 @@
-﻿using NLog;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -10,7 +9,6 @@ namespace DocWorksQA.SeleniumHelpers
     public class PageControl : Utilities.CommonMethods
     {
         protected IWebDriver driver;
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         
         public PageControl(IWebDriver driver)
         {
@@ -95,14 +93,9 @@ namespace DocWorksQA.SeleniumHelpers
 
         public String GetSizeOfElements(By by)
         {
-
-
             String str= driver.FindElements(by).Count.ToString();
-
             return str;
-
-
-        }
+         }
 
         public Boolean IsEnabled(By by)
         {
@@ -165,7 +158,7 @@ namespace DocWorksQA.SeleniumHelpers
             executor.ExecuteScript("arguments[0].click();", ele);
         }
 
-        public void MoveToelement(By by)
+        public void MoveToElement(By by)
         {
             
 
@@ -181,15 +174,10 @@ namespace DocWorksQA.SeleniumHelpers
             act.Perform();
         }
 
-        public void PressEscape()
-        {
-            Actions act = new Actions(driver);
-            act.SendKeys(Keys.Escape);
-        }
+        
 
-            public void MoveToelement(IWebElement element)
+        public void MoveToElement(IWebElement element)
         {
-
 
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             const string script =
@@ -221,10 +209,11 @@ namespace DocWorksQA.SeleniumHelpers
 
         public void SelectDropdown(By by, String value)
         {
-            SelectElement select = new SelectElement(WaitForElement(by));
+            SelectElement select = null;
 
             try
             {
+                select = new SelectElement(WaitForElement(by));
 
                 Console.WriteLine("Selecting by Text " + value);
                 select.SelectByText(value);
@@ -236,31 +225,36 @@ namespace DocWorksQA.SeleniumHelpers
                 Console.WriteLine("Selecting by value " + value);
 
                 select.SelectByText(value);
-                //this.test.info("Element Not Found");
             }
         }
 
         public IWebElement WaitForElement(By by)
         {
             IWebElement el = null;
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i <=30; i++)
             {
                 try
                 {
                     if (driver.FindElement(by).Displayed || driver.FindElement(by).Enabled)
                     {
                         Console.WriteLine("IDENTIFIED: " +by.ToString());
-                      //  MoveToelement(driver.FindElement(by));
                         return driver.FindElement(by);
                     }
                 }
                 catch (NoSuchElementException e)
                 {
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine("Waiting for Element : " + by.ToString());
-                    Console.WriteLine("Waiting for Element : " + by.ToString());
-                    System.Threading.Thread.Sleep(500);
-                }catch(Exception ex)
+                    if (i == 30)
+                    {
+                        throw e;
+                    }
+                    else { 
+
+                        Console.WriteLine(e.Message+" Retrying after 1 second.");
+                    System.Threading.Thread.Sleep(2000);
+                    }
+
+                }
+                catch(Exception ex)
                 {
 
                     throw ex;

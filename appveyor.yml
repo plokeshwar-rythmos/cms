@@ -2,7 +2,7 @@
 -
   branches:
     only:      
-      - master            
+      - appveyorExceptionHandler            
   version: '1.0.{build}'
   image: Visual Studio 2017
   skip_commits:
@@ -17,8 +17,7 @@
     artifactName_DocWorksQATest: 'DocWorksQATestResult-{build}'
           
   install:
-    # Install repo specific stuff here
-  # build Configuration, i.e. Debug, Release, etc.
+    # build Configuration, i.e. Debug, Release, etc.
   configuration: Release    
   before_build:    
     # Display minimal restore texts   
@@ -26,22 +25,25 @@
   build_script:
    
     - ps: dotnet build .\DocworksCmsQA\DocworksCmsQA.csproj;
-         
-    #- ps: nunit3-console.exe .\DocworksCmsQA\bin\Release\DocworksCmsQA.dll;
-    
-  
-  #test: off
+   #- ps: nunit3-console.exe .\DocworksCmsQA\bin\Release\DocworksCmsQA.dll;
+   
+   #test: off
   
   after_build:
-   # for once the build has completed
- # - ps: $root = Resolve-Path .\DocworksCmsQA\bin\%configuration%\Reports; [IO.Directory]::GetFiles($root.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  
+  on_failure:
+  - ps: cd .\DocworksCmsQA\bin\Release\Reports
+  - ps: ls
+  #- ps: $root = Resolve-Path .\Reports; [IO.Directory]::GetFiles($root.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  - ps: 7z a myapp.zip *
+  - ps: Push-AppveyorArtifact myapp.zip
+  
   artifacts:
-        - path: '\DocworksCmsQA\bin\%configuration%\Reports'
-          name: $(artifactName_DocWorksQATest)
-          type: Zip
+    - path: '\DocworksCmsQA\bin\%configuration%\Reports'
+      name: $(artifactName_DocWorksQATest)
+      type: Zip
   
     
   clone_depth: 1
   on_finish:
-    # any cleanup in here
     # - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
