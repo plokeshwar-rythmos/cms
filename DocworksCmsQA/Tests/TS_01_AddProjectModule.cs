@@ -8,6 +8,7 @@ using System.Diagnostics;
 namespace DocWorksQA.Tests
 {
     [TestFixture, Category("Create Project")]
+    [Parallelizable]
     class TS_01_AddProjectModule : BeforeTestAfterTest
     {
         private IWebDriver driver;

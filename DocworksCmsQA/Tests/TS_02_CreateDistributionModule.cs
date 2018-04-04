@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 namespace DocWorksQA.Tests
 {
     [TestFixture, Category("Create Distribution")]
+    [Parallelizable]
     class TS_02_CreateDistributionModule : BeforeTestAfterTest
     {
         private static IWebDriver driver;
@@ -261,9 +262,10 @@ namespace DocWorksQA.Tests
                 Assert.IsTrue(VerifyEquals(expected1, actual1, "Validation of Length Constraints for Distribution Name Field is successful", "Validation of Length Constraints for Distribution Name Field is Not successful"));
                 addProject.ClickDashboard();
             }
-            catch (AssertionException)
+            catch (Exception ex)
             {
-                Fail("Assertion failed");
+                ReportExceptionScreenshot(driver, ex);
+                Fail(ex);
                 throw;
             }
         }
@@ -272,7 +274,9 @@ namespace DocWorksQA.Tests
 
         public void CloseBrowser()
         {
-            driver.Quit();
+            Console.WriteLine("Quiting Browser");
+
+            CloseDriver();
         }
 
     }
