@@ -42,7 +42,7 @@ namespace DocWorksQA.Tests
             }
         }
 
-        [Test, Description("Verifying User is able to Add Project For GitLab  with all Fields")]
+       [Test, Description("Verifying User is able to Add Project For GitLab  with all Fields")]
         public void TC_02_ValidateCreateProjectForGitLabWithAllFields()
         {
             try
@@ -84,7 +84,7 @@ namespace DocWorksQA.Tests
 
         }
 
-        [Test, Description("Verifying User is able to Add Project For GitHub  with all Fields")]
+       [Test, Description("Verifying User is able to Add Project For GitHub  with all Fields")]
         public void TC_03_ValidateCreateProjectForGitHubWithAllFields()
         {
             try
@@ -131,7 +131,7 @@ namespace DocWorksQA.Tests
 
         }
 
-       [Test, Description("Verifying User is able to Add Project For Mercurial with all Fields")]
+      [Test, Description("Verifying User is able to Add Project For Mercurial with all Fields")]
         public void TC_04_ValidateCreateProjectForMercurialWithAllFields()
         {
             try
@@ -175,7 +175,7 @@ namespace DocWorksQA.Tests
 
         }
 
-        [Test, Description("Verifying User is able to Add Project For GitLab with Mandatory Fields")]
+      [Test, Description("Verifying User is able to Add Project For GitLab with Mandatory Fields")]
         public void TC_05_ValidateAddingProjectForGitLabWithMandatoryFields()
         {
             try
@@ -218,7 +218,7 @@ namespace DocWorksQA.Tests
         }
 
 
-       [Test, Description("Verify Project Title throws an error message When User gives Invalid Length")]
+      [Test, Description("Verify Project Title throws an error message When User gives Invalid Length")]
         public void TC_06_ValidateProjectTitleLengthWithLessThan5Characters()
         {
             try
@@ -250,7 +250,7 @@ namespace DocWorksQA.Tests
 
         }
 
-       [Test, Description("Verifying Whether User is able to send More Than 100 characters to the Project Title")]
+        [Test, Description("Verifying Whether User is able to send More Than 100 characters to the Project Title")]
         public void TC_07_ValidateProjectTitleLengthWithMoreThan100Characters()
         {
             try
@@ -281,54 +281,6 @@ namespace DocWorksQA.Tests
             }
         }
       
-
-
-            [Test, Description("Verifying User is able to send more than 1000 characters to Description field in Create Project")]
-            public void TC_08_ValidateProjectDescriptionLengthWithMoreThan1000Characters()
-            {
-                try
-                {
-                    String TestName = (TestContext.CurrentContext.Test.Name.ToString());
-                Trace.TraceInformation("Starting Test Case : " + TestName);
-
-                String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-                    CreateTest(TestName, description);
-                    AddProjectPage addProject = new AddProjectPage(driver);
-                    addProject.ClickAddProject();
-                    System.Threading.Thread.Sleep(3000);
-                    String expected = addProject.EnterProjectTitle();
-                    addProject.ClickContentType();
-                    addProject.ClickSourceControlTypeOno();
-                    System.Threading.Thread.Sleep(8000);
-                    addProject.EnterMercurialRepoPath();
-                    addProject.EnterPublishedPath("Publishing path to create project");
-                    String str = RandomValueOfLengthMorethan1000();
-                    addProject.EnterDescription(str);
-                    addProject.ClickCreateProject();
-                    addProject.ClickNotifications();
-
-
-                String status = addProject.GetNotificationStatus();
-                addProject.SuccessScreenshot("Description Length");
-
-                VerifyText("creating a project " + expected + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
-
-                addProject.ClickDashboard();
-
-                addProject.SearchForProject(expected);
-                String txt = addProject.GetDescriptionText();
-                VerifyContainsText(txt, str, "Description Text is validated successfully", "Description Text is not validated successfully");
-            }
-                catch (Exception e)
-                {
-                ReportExceptionScreenshot(driver, e);
-                Fail(e);
-                throw;
-                }
-
-            }
-        
-
         [OneTimeTearDown]
         public void CloseBrowser()
         {
