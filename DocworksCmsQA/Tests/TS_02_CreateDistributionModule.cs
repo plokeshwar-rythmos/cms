@@ -67,7 +67,7 @@ namespace DocWorksQA.Tests
                 addProject.ClickNotifications();
                 String status1 = addProject.GetNotificationStatus();
                 addProject.SuccessScreenshot("Distribution got Created successfully With TOC Path");
-                VerifyText("creating distribution " + expected1 + " is successful", status1, "Distribution is Created For GitLab TOC with status:" + status1 + "", "Distribution is not created For GitLab TOC with status: " + status1 + "");
+                VerifyText("creating distribution " + expected1 +" in " + expected + " is successful", status1, "Distribution is Created For GitLab TOC with status:" + status1 + "", "Distribution is not created For GitLab TOC with status: " + status1 + "");
                 addProject.ClickDashboard();
                 addProject.SearchForProject(expected);
                 distmodule.ClickDistribution();
@@ -82,7 +82,7 @@ namespace DocWorksQA.Tests
                 addProject.ClickNotifications();
                 String status2 = addProject.GetNotificationStatus();
                 addProject.SuccessScreenshot("Distribution: "+expected2+" got Created successfully Without TOC Path");
-                VerifyText("creating distribution " + expected2 + " is successful", status2, "Distribution is Created For GitLab Without TOC with status:" + status2 + "", "Distribution is not created For GitLab without TOC with status: " + status2 + "");
+                VerifyText("creating distribution " + expected2 + " in " + expected + " is successful", status2, "Distribution is Created For GitLab Without TOC with status:" + status2 + "", "Distribution is not created For GitLab without TOC with status: " + status2 + "");
                 addProject.ClickDashboard();
             }
             catch (Exception ex)
@@ -133,7 +133,7 @@ namespace DocWorksQA.Tests
                 addProject.ClickNotifications();
                 String status1 = addProject.GetNotificationStatus();
                 addProject.SuccessScreenshot("Distribution got Created successfully With TOC Path");
-                VerifyText("creating distribution " + expected1 + " is successful", status1, "Distribution is Created For GitHub TOC with status:" + status1 + "", "Distribution is not created For GitHub TOC with status: " + status1 + "");
+                VerifyText("creating distribution " + expected1 + " in " + expected + " is successful", status1, "Distribution is Created For GitHub TOC with status:" + status1 + "", "Distribution is not created For GitHub TOC with status: " + status1 + "");
                 addProject.ClickDashboard();
                 addProject.SearchForProject(expected);
                 distmodule.ClickDistribution();
@@ -148,7 +148,7 @@ namespace DocWorksQA.Tests
                 addProject.ClickNotifications();
                 String status2 = addProject.GetNotificationStatus();
                 addProject.SuccessScreenshot("Distribution: " + expected2 + " got Created successfully Without TOC Path");
-                VerifyText("creating distribution " + expected2 + " is successful", status2, "Distribution is Created For GitHub Without TOC with status:" + status2 + "", "Distribution is not created For GitHub without TOC with status: " + status2 + "");
+                VerifyText("creating distribution " + expected2 + " in " + expected + " is successful", status2, "Distribution is Created For GitHub Without TOC with status:" + status2 + "", "Distribution is not created For GitHub without TOC with status: " + status2 + "");
                 addProject.ClickDashboard();
             }
             catch (Exception ex)
@@ -197,7 +197,7 @@ namespace DocWorksQA.Tests
                 addProject.ClickNotifications();
                 String status1 = addProject.GetNotificationStatus();
                 addProject.SuccessScreenshot("Distribution got Created successfully With TOC Path");
-                VerifyText("creating distribution " + expected1 + " is successful", status1, "Distribution is Created For Mercurial With TOC with status:" + status1 + "", "Distribution is not created For Mercurial With TOC as status: " + status1 + "");
+                VerifyText("creating distribution " + expected1 + " in " + expected + " is successful", status1, "Distribution is Created For Mercurial With TOC with status:" + status1 + "", "Distribution is not created For Mercurial With TOC as status: " + status1 + "");
                 addProject.ClickDashboard();
                 addProject.SearchForProject(expected);
                 distmodule.ClickDistribution();
@@ -211,7 +211,7 @@ namespace DocWorksQA.Tests
                 addProject.ClickNotifications();
                 String status2 = addProject.GetNotificationStatus();
                 addProject.SuccessScreenshot("Distribution: "+expected2+" got Created successfully Without TOC");
-                VerifyText("creating distribution " + expected1 + " is successful", status2, "Distribution is Created For mercurial Without TOC with status:" + status2 + "", "Distribution is not created with status: " + status2 + "");
+                VerifyText("creating distribution " + expected2 + " in " + expected + " is successful", status2, "Distribution is Created For mercurial Without TOC with status:" + status2 + "", "Distribution is not created with status: " + status2 + "");
                 addProject.ClickDashboard();
             }
 
