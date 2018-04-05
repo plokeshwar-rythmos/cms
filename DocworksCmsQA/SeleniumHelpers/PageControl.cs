@@ -94,20 +94,26 @@ namespace DocWorksQA.SeleniumHelpers
 
             try
             {
-                return WaitForElement(by).Text;
+                String text = WaitForElement(by).Text;
+                Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "Returned text is " + text);
+                return text;
             }
             catch (StaleElementReferenceException se)
             {
                 Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "ERROR : " + se.Message);
                 Console.WriteLine("Retrying Get Text Operation");
-                return WaitForElement(by).Text;
+                String text = WaitForElement(by).Text;
+                Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "Returned text is " + text);
+                return text;
 
             }
             catch (WebDriverException wbe)
             {
                 Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "ERROR : " + wbe.Message);
                 Console.WriteLine("Retrying Get Text Operation");
-                return WaitForElement(by).Text;
+                String text = WaitForElement(by).Text;
+                Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "Returned text is " + text);
+                return text;
             }
             catch (Exception e)
             {

@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using System.Diagnostics;
 using AventStack.ExtentReports;
+using DocWorksQA.Utilities;
 
 namespace DocWorksQA.Pages
 {
@@ -20,7 +21,7 @@ namespace DocWorksQA.Pages
         public By SOURCE_CONTROL_PROVIDER_DROPDOWN = By.XPath("//mat-select[@placeholder='Source Control Provider']");
         public By REPOSITORY_DROPDOWN = By.XPath("//mat-select[@placeholder='Repository']");
         public By REPOSITORY_VALUE = By.XPath("//mat-option//span[contains(@class,'mat-option-text')][contains(text(),'Docworks')]");
-        public  By CONTENT_VALUE = By.XPath("//mat-option//span[contains(@class,'mat-option-text')][contains(text(),'Manual')]");
+        public By CONTENT_VALUE = By.XPath("//mat-option//span[contains(@class,'mat-option-text')][contains(text(),'Manual')]");
         public By SOURCE_CONTROL_VALUE_GITLAB = By.XPath("//mat-option//span[contains(@class,'mat-option-text')][contains(text(),'GitLab')]");
         public By SOURCE_CONTROL_VALUE_GITHUB = By.XPath("//mat-option//span[contains(@class,'mat-option-text')][contains(text(),'GitHub')]");
         public By SOURCE_CONTROL_VALUE_ONO = By.XPath("//mat-option//span[contains(@class,'mat-option-text')][contains(text(),'Ono')]");
@@ -91,20 +92,20 @@ namespace DocWorksQA.Pages
         public String GetDescriptionLength()
         {
             String str = GetText(SIZE_EXCEED_1000).ToString();
-            Info(test, "Description Exceeds 1000 characters***" + str);
+            Info(test, "Description Exceeds 1000 characters*** " + str);
             return str;
         }
 
         public String GetDescriptionText()
         {
             String str = GetText(DESCRIPTION_MAT_CARD).ToString();
-            Info(test, "The Description Text is"+str);
+            Info(test, "The Description Text is "+str);
             return str;
         }
         public String GetTitleLength()
         {
             String str = GetText(SIZE_EXCEED_100).ToString();
-            Info(test, "Title Exceeds 100 characters***" + str);
+            Info(test, "Title Exceeds 100 characters*** " + str);
             return str;
         }
         public void ClickDashboard()
@@ -114,7 +115,7 @@ namespace DocWorksQA.Pages
             driver.Navigate().GoToUrl(url + "/dashboard");
             //Click(By.XPath("//a[@href='/dashboard']"));
             System.Threading.Thread.Sleep(7000);
-            Info(test, "Clicked On DashBoard");
+            //Info(test, "Clicked On DashBoard");
         }
 
         public void ClickAddProject() {
@@ -149,7 +150,7 @@ namespace DocWorksQA.Pages
 
         public String GetProjectTitle()
         {
-            Info(test, "ProjectTitle is" + this.GetText(GET_TITLE));
+            Info(test, "ProjectTitle is " + this.GetText(GET_TITLE));
             return this.GetText(GET_TITLE);
         }
 
@@ -171,19 +172,19 @@ namespace DocWorksQA.Pages
         {
             IWebElement element = WaitForElement(FOOTER_TEXT);
             String FooterText = this.GetText(FOOTER_TEXT);
-           Info(test, "Footer Title is*************" + FooterText);
+           Info(test, "Footer Title is************* " + FooterText);
             return FooterText;
         }
 
         public void EnterDescription(String description) {
             EnterValue(DESCRIPTION_FIELD, description);
-            Info(test, "Entered Description: " + description);
+            Info(test, "Entered Description : " + description);
         }
 
         public void EnterPublishedPath(String path)
         {
             EnterValue(PUBLISHED_PATH, path);
-            Info(test, "Enter Published Path:" + path);
+            Info(test, "Entered Published Path : " + path);
         }
 
         public void EscapePopUp()
@@ -195,7 +196,7 @@ namespace DocWorksQA.Pages
         {
             
             Click(By.XPath("//button//i[@class='mdi mdi-close mdi-24px']"));
-            Info(test, "Clicked Close Button");
+            Info(test, "Clicked on Close Button");
         }
 
         public void ClickBack()
@@ -222,7 +223,7 @@ namespace DocWorksQA.Pages
         {
             System.Threading.Thread.Sleep(7000);
             Click(NOTIFICATION_BELL);
-           Info(test, "Clicked Notification Bell");
+           Info(test, "Clicked on Notification Bell.");
         }
 
         public void WaitForProcessCompletion() {
@@ -286,13 +287,51 @@ namespace DocWorksQA.Pages
             Info(test, "Clicked On BackDrop");
         }
 
+        public void SelectContentType(String value)
+        {
+            this.Click(TYPE_OF_CONTENT_DROPDOWN);
+            By OPTION = By.XPath("//mat-option//span[contains(@class,'mat-option-text')][contains(text(),'"+value+"')]");
+            this.Click(OPTION);
+            Info(test, "Selected ContentType as " + value);
+        }
+
+        public void SelectSourceControlProviderType(String value)
+        {
+            if (!GetText(SOURCE_CONTROL_PROVIDER_DROPDOWN).Equals(value))
+            {
+                this.Click(SOURCE_CONTROL_PROVIDER_DROPDOWN);
+                By OPTION = By.XPath("//mat-option//span[contains(@class,'mat-option-text')][contains(text(),'" + value + "')]");
+                this.Click(OPTION);
+                Info(test, "Selected Source Control Provider Type as " + value);
+            }
+            else
+            {
+                Info(test, value + " Source Control Provider Type already Selected.");
+            }
+        }
+
+        public void SelectRepository(String value)
+        {
+            if (!GetText(REPOSITORY_DROPDOWN).Equals(value))
+            {
+                this.Click(REPOSITORY_DROPDOWN);
+                By OPTION = By.XPath("//mat-option//span[contains(@class,'mat-option-text')][contains(text(),'" + value + "')]");
+                this.Click(OPTION);
+                Info(test, "Selected Repository as " + value);
+            }
+            else
+            {
+                Info(test, value+" Repository already Selected.");
+            }
+        }
+
         public void ClickContentType()
         {
 
             this.Click(TYPE_OF_CONTENT_DROPDOWN);
-            Info(test, "Clicked On the TypeOfContent DropDown");
+            Info(test, "Clicked On the TypeOfContent DropDown.");
             this.Click(CONTENT_VALUE);
-            Info(test, "selected the content from drop down");
+            Info(test, "Selected the content from drop down "+CONTENT_VALUE);
         }
 
         public void ClickSourceControlTypeGitLab()
@@ -304,6 +343,7 @@ namespace DocWorksQA.Pages
             Info(test, "selected the SOURCE_CONTROL_VALUE as GITLAB from drop down");
 
         }
+
         public void ClickSourceControlTypeGitHub()
         {
 
@@ -324,7 +364,7 @@ namespace DocWorksQA.Pages
         }
         public void EnterMercurialRepoPath()
         {
-            String path= "https://bitbucket.org/mohittonde/docworks";
+            var path = ConfigurationHelper.Get<String>("MercurialRepo");
             EnterValue(MERCURIAL_REPO_PATH,path);
             Info(test, "Entered Mercurial repo Path as" + path);
         }

@@ -40,9 +40,11 @@ namespace DocWorksQA.Tests
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.ClickAddProject();
                 String expected = addProject.EnterProjectTitle();
-                addProject.ClickContentType();
-                addProject.ClickSourceControlTypeOno();
-                System.Threading.Thread.Sleep(8000);
+
+                addProject.SelectContentType("Manual");
+                addProject.SelectSourceControlProviderType("GitHub");
+
+               // System.Threading.Thread.Sleep(8000);
                 addProject.EnterMercurialRepoPath();
                 addProject.EnterPublishedPath("Publishing path to create project");
                 addProject.EnterDescription("This is to create Project");

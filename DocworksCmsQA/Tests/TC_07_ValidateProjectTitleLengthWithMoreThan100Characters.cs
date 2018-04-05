@@ -38,12 +38,10 @@ namespace DocWorksQA.Tests
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
-                addProject.ClickDashboard();
-                System.Threading.Thread.Sleep(3000);
                 addProject.ClickAddProject();
                 addProject.ProjectLengthMoreThan100();
-                addProject.ClickContentType();
-
+                addProject.SelectContentType("Manual");
+ 
                 addProject.SuccessScreenshot("Length of the Title exceeded its limit");
 
                 String str = addProject.GetTitleLength();

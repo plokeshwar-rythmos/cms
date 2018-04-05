@@ -32,13 +32,14 @@ namespace DocWorksQA.Pages
         public By INVALID_TITLE_LENGTH = By.XPath("//mat-error[@class='mat-error ng-star-inserted']");
         public By TOC_PATH = By.XPath("//input[@placeholder='TOC Path']");
 
+        private ExtentTest test;
         /**
         * Constructor: CreateDistributionPage()
         * Description: This constructor is used to initialize the webdriver
         */
-        public CreateDistributionPage(IWebDriver driver) : base(driver)
+        public CreateDistributionPage(ExtentTest test, IWebDriver driver) : base(driver)
         {
-           
+            this.test = test;
         }
 
         /**
@@ -49,7 +50,7 @@ namespace DocWorksQA.Pages
         {
             Clear(ENTER_SEARCH);
             EnterValue(ENTER_SEARCH, projectName);
-            Info("ProjectName is" + projectName);
+            Info(test, "ProjectName is" + projectName);
         }
 
         /**
@@ -58,7 +59,7 @@ namespace DocWorksQA.Pages
        */
         public String GetProjectTitle()
         {
-            Info("ProjectTitle is" + this.GetText(GET_TITLE));
+            Info(test, "ProjectTitle is" + this.GetText(GET_TITLE));
             return this.GetText(GET_TITLE);
         }
 
@@ -70,7 +71,7 @@ namespace DocWorksQA.Pages
         {
             Click(SETTINGS);
             Click(DISTRIBUTIONS);
-            Info("Clicked on Distributions");
+            Info(test, "Clicked on Distributions");
 
         }
 
@@ -80,7 +81,7 @@ namespace DocWorksQA.Pages
         */
         public void SuccessScreenshot(String path, String message)
         {
-         Info("<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
+         Info(test, "<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
 
         }
 
@@ -92,7 +93,7 @@ namespace DocWorksQA.Pages
         {
             String DistName = "SELENIUM_DIST" + "_" + GenerateRandomNumbers(2);
             EnterValue(DISTRIBUTION_NAME, DistName);
-            Info("Distribution Name is" + DistName);
+            Info(test, "Distribution Name is" + DistName);
             return DistName;
         }
 
@@ -104,7 +105,7 @@ namespace DocWorksQA.Pages
         {
             String DistributionTitle = "QA";
             EnterValue(DISTRIBUTION_NAME, DistributionTitle);
-            Info("Entered Distribution Title : " + DistributionTitle);
+            Info(test, "Entered Distribution Title : " + DistributionTitle);
             return DistributionTitle;
 
         }
@@ -116,13 +117,13 @@ namespace DocWorksQA.Pages
         public void EnterDescription(String Description)
         {
             EnterValue(DESCRIPTION, Description);
-            Info("Distribution Description is" + Description);
+            Info(test, "Distribution Description is" + Description);
         }
 
         public void EnterTocPath()
         {
             EnterValue(TOC_PATH, "Tocfolder");
-            Info("Entered TOC Path");
+            Info(test, "Entered TOC Path");
         }
         /**
              * MethodName: ClickBranch()
@@ -132,10 +133,10 @@ namespace DocWorksQA.Pages
         {
             WaitForElement(SELECT_BRANCH);
                 this.Click(SELECT_BRANCH);
-            Info("Cicked on Branch dropdown");
+            Info(test, "Cicked on Branch dropdown");
             System.Threading.Thread.Sleep(5000);
                     this.Click(BRANCH_OPTIONS_WITHTOC);
-            Info("Selected the branch");
+            Info(test, "Selected the branch");
         }
 
         public void ClickBranchWithOutTOC()
@@ -143,32 +144,32 @@ namespace DocWorksQA.Pages
             
             WaitForElement(SELECT_BRANCH);
             this.Click(SELECT_BRANCH);
-            Info("Cicked on Branch dropdown");
+            Info(test, "Cicked on Branch dropdown");
             System.Threading.Thread.Sleep(5000);
             this.Click(BRANCH_OPTIONS_WITHOUT_TOC);
-            Info("Selected the branch");
+            Info(test, "Selected the branch");
         }
         public void ClickBranchForGitHub()
         {
             WaitForElement(SELECT_BRANCH);
             this.Click(SELECT_BRANCH);
-            Info("Cicked on Branch dropdown");
+            Info(test, "Cicked on Branch dropdown");
             System.Threading.Thread.Sleep(5000);
             this.Click(BRANCH_OPTIONS_GITHUB);
-            Info("Selected the branch");
+            Info(test, "Selected the branch");
         }
 
         public void EnterBranchForMercurial()
         {
             String str = "DocworksManual3";
             EnterValue(BRANCH,str);
-            Info("Entered Branch value");
+            Info(test, "Entered Branch value");
         }
         public void EnterBranchWithoutTOCForMercurial()
         {
             String str = "DocworkManual2";
             EnterValue(BRANCH, str);
-            Info("Entered Branch value");
+            Info(test, "Entered Branch value");
         }
         /**
             * MethodName: ClickCreateDistribution()
@@ -177,7 +178,7 @@ namespace DocWorksQA.Pages
         public void ClickCreateDistribution()
         {
             Click(CREATE_DISTRIBUTION);
-            Info("Click on Create distribution");
+            Info(test, "Click on Create distribution");
         }
 
         /**
@@ -187,7 +188,7 @@ namespace DocWorksQA.Pages
         public void ClickClearButton()
         {
             Click(CLEAR_BUTTON);
-            Info("Click Clear Button");
+            Info(test, "Click Clear Button");
 
         }
 
@@ -198,7 +199,7 @@ namespace DocWorksQA.Pages
         public void ClickCloseButton()
         {
             Click(CLOSE_BUTTON);
-            Info("Click Close Button");
+            Info(test, "Click Close Button");
             
 
         }
@@ -209,7 +210,7 @@ namespace DocWorksQA.Pages
        */
         public String GetDistributionName()
         {
-            Info("Available Distribution Name is" + this.GetText(AVAIL_DISTRIBUTION_NAME));
+            Info(test, "Available Distribution Name is" + this.GetText(AVAIL_DISTRIBUTION_NAME));
             return this.GetText(AVAIL_DISTRIBUTION_NAME);
         }
 

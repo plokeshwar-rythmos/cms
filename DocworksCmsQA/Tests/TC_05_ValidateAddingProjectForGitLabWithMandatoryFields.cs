@@ -40,10 +40,12 @@ namespace DocWorksQA.Tests
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.ClickAddProject();
                 String expected = addProject.EnterProjectTitle();
-                addProject.ClickContentType();
-                addProject.ClickSourceControlTypeGitLab();
-                System.Threading.Thread.Sleep(13000);
-                addProject.ClickRepository();
+
+                addProject.SelectContentType("Manual");
+                addProject.SelectSourceControlProviderType("GitLab");
+              //  System.Threading.Thread.Sleep(15000);
+                addProject.SelectRepository("Docworks");
+
                 addProject.EnterPublishedPath("Publishing path to create project");
                 addProject.ClickCreateProject();
                 addProject.ClickNotifications();

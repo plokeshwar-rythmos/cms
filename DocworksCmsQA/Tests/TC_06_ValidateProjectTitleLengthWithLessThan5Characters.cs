@@ -40,11 +40,10 @@ namespace DocWorksQA.Tests
                 Trace.TraceInformation("");
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
-                System.Threading.Thread.Sleep(3000);
                 addProject.ClickAddProject();
                 addProject.ProjectTitleInvalidLength();
                 String expected = "Please enter at least 5 characters";
-                addProject.ClickContentType();
+                addProject.SelectContentType("Manual");
                 String actual = addProject.GetText(addProject.INVALID_TITLE_LENGTH);
 
                 addProject.SuccessScreenshot("Validating Length of the Title");
