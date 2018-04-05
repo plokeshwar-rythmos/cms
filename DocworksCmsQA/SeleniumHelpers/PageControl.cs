@@ -17,7 +17,7 @@ namespace DocWorksQA.SeleniumHelpers
         }
 
 
-
+        
         public void Click(By by)
         {
             Console.WriteLine("Clicking on " + by.ToString());
@@ -25,6 +25,11 @@ namespace DocWorksQA.SeleniumHelpers
             {
                 WaitForElement(by).Click();
                 System.Threading.Thread.Sleep(5000);
+            }catch(WebDriverException wbe)
+            {
+                Console.WriteLine("ERROR : "+wbe.Message);
+                Console.WriteLine("Retrying Click Operation");
+                WaitForElement(by).Click();
             }
             catch(Exception e)
             {
@@ -40,7 +45,8 @@ namespace DocWorksQA.SeleniumHelpers
 
                 Type(by, value);
 
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 throw e;
                 }
             
@@ -51,6 +57,12 @@ namespace DocWorksQA.SeleniumHelpers
         {
             try
             {
+                WaitForElement(by).Clear();
+            }
+            catch (WebDriverException wbe)
+            {
+                Console.WriteLine("ERROR : " + wbe.Message);
+                Console.WriteLine("Retrying Clear Operation");
                 WaitForElement(by).Clear();
             }
             catch (Exception e)
@@ -66,7 +78,14 @@ namespace DocWorksQA.SeleniumHelpers
             try
             {
                 return WaitForElement(by).Text;
-            }catch(Exception e)
+            }
+            catch (WebDriverException wbe)
+            {
+                Console.WriteLine("ERROR : " + wbe.Message);
+                Console.WriteLine("Retrying Get Text Operation");
+                return WaitForElement(by).Text;
+            }
+            catch (Exception e)
             {
                 throw e;
             }
@@ -77,7 +96,14 @@ namespace DocWorksQA.SeleniumHelpers
             try
             {
                 return WaitForElement(by).GetAttribute("text");
-            }catch(Exception e)
+            }
+            catch (WebDriverException wbe)
+            {
+                Console.WriteLine("ERROR : " + wbe.Message);
+                Console.WriteLine("Retrying Get Attribute Operation");
+                return WaitForElement(by).GetAttribute("text");
+            }
+            catch (Exception e)
             {
                 throw e;
             }
@@ -133,6 +159,12 @@ namespace DocWorksQA.SeleniumHelpers
         {
             try
             {
+                WaitForElement(by).SendKeys(Value);
+            }
+            catch (WebDriverException wbe)
+            {
+                Console.WriteLine("ERROR : " + wbe.Message);
+                Console.WriteLine("Retrying Type Operation");
                 WaitForElement(by).SendKeys(Value);
             }
             catch (Exception e)
@@ -254,7 +286,13 @@ namespace DocWorksQA.SeleniumHelpers
                     }
 
                 }
-                catch(Exception ex)
+                catch (WebDriverException wbe)
+                {
+                    Console.WriteLine(wbe.Message + " Retrying after 1 second.");
+                    System.Threading.Thread.Sleep(2000);
+
+                }
+                catch (Exception ex)
                 {
 
                     throw ex;
