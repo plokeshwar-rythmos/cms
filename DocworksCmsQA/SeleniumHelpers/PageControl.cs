@@ -20,7 +20,7 @@ namespace DocWorksQA.SeleniumHelpers
 
         public void Click(By by)
         {
-            Console.WriteLine("Clicking on " + by.ToString());
+            Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "Clicking on " + by.ToString());
             try
             {
                 WaitForElement(by).Click();
@@ -28,14 +28,14 @@ namespace DocWorksQA.SeleniumHelpers
             }
             catch (StaleElementReferenceException se)
             {
-                Console.WriteLine("ERROR : " + se.Message);
+                Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "ERROR : " + se.Message);
                 Console.WriteLine("Retrying Click Operation");
                 WaitForElement(by).Click();
 
             }
             catch (WebDriverException wbe)
             {
-                Console.WriteLine("ERROR : " + wbe.Message);
+                Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "ERROR : " + wbe.Message);
                 Console.WriteLine("Retrying Click Operation");
                 WaitForElement(by).Click();
             }
@@ -48,7 +48,7 @@ namespace DocWorksQA.SeleniumHelpers
 
         public void EnterValue(By by, string value)
         {
-            Console.WriteLine("Entering value into " + by.ToString());
+            Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "Entering value into " + by.ToString());
             try
             {
 
@@ -71,14 +71,14 @@ namespace DocWorksQA.SeleniumHelpers
             }
             catch (StaleElementReferenceException se)
             {
-                Console.WriteLine("ERROR : " + se.Message);
+                Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "ERROR : " + se.Message);
                 Console.WriteLine("Retrying Clear Operation");
                 WaitForElement(by).Clear();
 
             }
             catch (WebDriverException wbe)
             {
-                Console.WriteLine("ERROR : " + wbe.Message);
+                Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "ERROR : " + wbe.Message);
                 Console.WriteLine("Retrying Clear Operation");
                 WaitForElement(by).Clear();
             }
@@ -90,7 +90,7 @@ namespace DocWorksQA.SeleniumHelpers
 
         public string GetText(By by)
         {
-            Console.WriteLine("Getting text for " + by.ToString());
+            Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "Getting text for " + by.ToString());
 
             try
             {
@@ -98,14 +98,14 @@ namespace DocWorksQA.SeleniumHelpers
             }
             catch (StaleElementReferenceException se)
             {
-                Console.WriteLine("ERROR : " + se.Message);
+                Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "ERROR : " + se.Message);
                 Console.WriteLine("Retrying Get Text Operation");
                 return WaitForElement(by).Text;
 
             }
             catch (WebDriverException wbe)
             {
-                Console.WriteLine("ERROR : " + wbe.Message);
+                Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "ERROR : " + wbe.Message);
                 Console.WriteLine("Retrying Get Text Operation");
                 return WaitForElement(by).Text;
             }
@@ -123,14 +123,14 @@ namespace DocWorksQA.SeleniumHelpers
             }
             catch (StaleElementReferenceException se)
             {
-                Console.WriteLine("ERROR : " + se.Message);
+                Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "ERROR : " + se.Message);
                 Console.WriteLine("Retrying Get Attribute Operation");
                 return WaitForElement(by).GetAttribute("text");
 
             }
             catch (WebDriverException wbe)
             {
-                Console.WriteLine("ERROR : " + wbe.Message);
+                Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "ERROR : " + wbe.Message);
                 Console.WriteLine("Retrying Get Attribute Operation");
                 return WaitForElement(by).GetAttribute("text");
             }
@@ -195,14 +195,14 @@ namespace DocWorksQA.SeleniumHelpers
             }
             catch (StaleElementReferenceException se)
             {
-                Console.WriteLine("ERROR : " + se.Message);
+                Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "ERROR : " + se.Message);
                 Console.WriteLine("Retrying Type Operation");
                 WaitForElement(by).SendKeys(Value);
 
             }
             catch (WebDriverException wbe)
             {
-                Console.WriteLine("ERROR : " + wbe.Message);
+                Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "ERROR : " + wbe.Message);
                 Console.WriteLine("Retrying Type Operation");
                 WaitForElement(by).SendKeys(Value);
             }
@@ -308,7 +308,7 @@ namespace DocWorksQA.SeleniumHelpers
                 {
                     if (driver.FindElement(by).Displayed || driver.FindElement(by).Enabled)
                     {
-                        Console.WriteLine("IDENTIFIED: " + by.ToString());
+                        Console.WriteLine("DRIVER ID : "+driver.GetHashCode()+", IDENTIFIED: " + by.ToString());
                         return driver.FindElement(by);
                     }
                 }
@@ -321,21 +321,14 @@ namespace DocWorksQA.SeleniumHelpers
                     else
                     {
 
-                        Console.WriteLine(e.Message + " Retrying after 1 second.");
+                        Console.WriteLine("DRIVER ID : " + driver +", "+ e.Message + " Retrying after 1 second.");
                         System.Threading.Thread.Sleep(2000);
                     }
 
                 }
                 catch (StaleElementReferenceException se)
                 {
-                    Console.WriteLine(se.Message + " Retrying after 1 second.");
-                    System.Threading.Thread.Sleep(2000);
-
-                }
-
-                catch (WebDriverException wbe)
-                {
-                    Console.WriteLine(wbe.Message + " Retrying after 1 second.");
+                    Console.WriteLine("DRIVER ID : " + driver + ", " + se.Message + " Retrying after 1 second.");
                     System.Threading.Thread.Sleep(2000);
 
                 }
