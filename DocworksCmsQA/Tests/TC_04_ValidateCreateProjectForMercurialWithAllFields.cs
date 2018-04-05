@@ -42,9 +42,8 @@ namespace DocWorksQA.Tests
                 String expected = addProject.EnterProjectTitle();
 
                 addProject.SelectContentType("Manual");
-                addProject.SelectSourceControlProviderType("GitHub");
+                addProject.SelectSourceControlProviderType("Ono");
 
-               // System.Threading.Thread.Sleep(8000);
                 addProject.EnterMercurialRepoPath();
                 addProject.EnterPublishedPath("Publishing path to create project");
                 addProject.EnterDescription("This is to create Project");
