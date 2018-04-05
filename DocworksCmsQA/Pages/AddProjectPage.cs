@@ -232,7 +232,8 @@ namespace DocWorksQA.Pages
 
                 if (tmp.Contains("successful"))
                 {
-                    break;
+                   Console.WriteLine(i+" : "+tmp);
+                   break;
                 }
                 else
                 {
