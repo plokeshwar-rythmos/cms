@@ -9,15 +9,15 @@ namespace DocWorksQA.SeleniumHelpers
     public class PageControl : Utilities.CommonMethods
     {
         protected IWebDriver driver;
-        
+
         public PageControl(IWebDriver driver)
         {
             this.driver = driver;
-            
+
         }
 
 
-        
+
         public void Click(By by)
         {
             Console.WriteLine("Clicking on " + by.ToString());
@@ -25,31 +25,41 @@ namespace DocWorksQA.SeleniumHelpers
             {
                 WaitForElement(by).Click();
                 System.Threading.Thread.Sleep(5000);
-            }catch(WebDriverException wbe)
+            }
+            catch (StaleElementReferenceException se)
             {
-                Console.WriteLine("ERROR : "+wbe.Message);
+                Console.WriteLine("ERROR : " + se.Message);
+                Console.WriteLine("Retrying Click Operation");
+                WaitForElement(by).Click();
+
+            }
+            catch (WebDriverException wbe)
+            {
+                Console.WriteLine("ERROR : " + wbe.Message);
                 Console.WriteLine("Retrying Click Operation");
                 WaitForElement(by).Click();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw e;
             }
         }
-       
+
 
         public void EnterValue(By by, string value)
         {
             Console.WriteLine("Entering value into " + by.ToString());
-            try {
+            try
+            {
 
                 Type(by, value);
 
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 throw e;
-                }
-            
+            }
+
 
         }
 
@@ -58,6 +68,13 @@ namespace DocWorksQA.SeleniumHelpers
             try
             {
                 WaitForElement(by).Clear();
+            }
+            catch (StaleElementReferenceException se)
+            {
+                Console.WriteLine("ERROR : " + se.Message);
+                Console.WriteLine("Retrying Clear Operation");
+                WaitForElement(by).Clear();
+
             }
             catch (WebDriverException wbe)
             {
@@ -70,7 +87,7 @@ namespace DocWorksQA.SeleniumHelpers
                 throw e;
             }
         }
-       
+
         public string GetText(By by)
         {
             Console.WriteLine("Getting text for " + by.ToString());
@@ -78,6 +95,13 @@ namespace DocWorksQA.SeleniumHelpers
             try
             {
                 return WaitForElement(by).Text;
+            }
+            catch (StaleElementReferenceException se)
+            {
+                Console.WriteLine("ERROR : " + se.Message);
+                Console.WriteLine("Retrying Get Text Operation");
+                return WaitForElement(by).Text;
+
             }
             catch (WebDriverException wbe)
             {
@@ -97,6 +121,13 @@ namespace DocWorksQA.SeleniumHelpers
             {
                 return WaitForElement(by).GetAttribute("text");
             }
+            catch (StaleElementReferenceException se)
+            {
+                Console.WriteLine("ERROR : " + se.Message);
+                Console.WriteLine("Retrying Get Attribute Operation");
+                return WaitForElement(by).GetAttribute("text");
+
+            }
             catch (WebDriverException wbe)
             {
                 Console.WriteLine("ERROR : " + wbe.Message);
@@ -107,9 +138,9 @@ namespace DocWorksQA.SeleniumHelpers
             {
                 throw e;
             }
-       }
+        }
 
-        public string GetSize(By by)    
+        public string GetSize(By by)
         {
             IWebElement element = WaitForElement(by);
 
@@ -119,16 +150,17 @@ namespace DocWorksQA.SeleniumHelpers
 
         public String GetSizeOfElements(By by)
         {
-            String str= driver.FindElements(by).Count.ToString();
+            String str = driver.FindElements(by).Count.ToString();
             return str;
-         }
+        }
 
         public Boolean IsEnabled(By by)
         {
             try
             {
                 return WaitForElement(by).Enabled;
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 throw e;
             }
@@ -161,6 +193,13 @@ namespace DocWorksQA.SeleniumHelpers
             {
                 WaitForElement(by).SendKeys(Value);
             }
+            catch (StaleElementReferenceException se)
+            {
+                Console.WriteLine("ERROR : " + se.Message);
+                Console.WriteLine("Retrying Type Operation");
+                WaitForElement(by).SendKeys(Value);
+
+            }
             catch (WebDriverException wbe)
             {
                 Console.WriteLine("ERROR : " + wbe.Message);
@@ -179,7 +218,7 @@ namespace DocWorksQA.SeleniumHelpers
             IWebElement element = WaitForElement(by);
             String script = "return arguments[0].innerHTML";
             String n = (String)((IJavaScriptExecutor)driver).ExecuteScript(script, element);
-            
+
             return n;
         }
 
@@ -192,7 +231,7 @@ namespace DocWorksQA.SeleniumHelpers
 
         public void MoveToElement(By by)
         {
-            
+
 
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             const string script =
@@ -206,7 +245,7 @@ namespace DocWorksQA.SeleniumHelpers
             act.Perform();
         }
 
-        
+
 
         public void MoveToElement(IWebElement element)
         {
@@ -233,11 +272,11 @@ namespace DocWorksQA.SeleniumHelpers
         {
             IWebElement ele = WaitForElement(by);
             Actions builder = new Actions(driver);
-           builder.MoveToElement(ele).ContextClick().Build().Perform();
+            builder.MoveToElement(ele).ContextClick().Build().Perform();
 
 
         }
-        
+
 
         public void SelectDropdown(By by, String value)
         {
@@ -263,13 +302,13 @@ namespace DocWorksQA.SeleniumHelpers
         public IWebElement WaitForElement(By by)
         {
             IWebElement el = null;
-            for (int i = 0; i <=30; i++)
+            for (int i = 0; i <= 30; i++)
             {
                 try
                 {
                     if (driver.FindElement(by).Displayed || driver.FindElement(by).Enabled)
                     {
-                        Console.WriteLine("IDENTIFIED: " +by.ToString());
+                        Console.WriteLine("IDENTIFIED: " + by.ToString());
                         return driver.FindElement(by);
                     }
                 }
@@ -279,13 +318,21 @@ namespace DocWorksQA.SeleniumHelpers
                     {
                         throw e;
                     }
-                    else { 
+                    else
+                    {
 
-                        Console.WriteLine(e.Message+" Retrying after 1 second.");
-                    System.Threading.Thread.Sleep(2000);
+                        Console.WriteLine(e.Message + " Retrying after 1 second.");
+                        System.Threading.Thread.Sleep(2000);
                     }
 
                 }
+                catch (StaleElementReferenceException se)
+                {
+                    Console.WriteLine(se.Message + " Retrying after 1 second.");
+                    System.Threading.Thread.Sleep(2000);
+
+                }
+
                 catch (WebDriverException wbe)
                 {
                     Console.WriteLine(wbe.Message + " Retrying after 1 second.");
@@ -306,11 +353,11 @@ namespace DocWorksQA.SeleniumHelpers
 
         public void ElementHighlight(IWebElement element)
         {
-          IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-                
-                js.ExecuteScript( "arguments[0].setAttribute('style', arguments[1]);",
-                        element, "color: red; border: 5px solid red;");
-                        
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+
+            js.ExecuteScript("arguments[0].setAttribute('style', arguments[1]);",
+                    element, "color: red; border: 5px solid red;");
+
 
         }
 
