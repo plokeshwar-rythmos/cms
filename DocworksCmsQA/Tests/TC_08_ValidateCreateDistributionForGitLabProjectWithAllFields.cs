@@ -34,7 +34,6 @@ namespace DocWorksQA.Tests
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
-                addProject.ClickDashboard();
                 addProject.ClickAddProject();
                 String expected = addProject.EnterProjectTitle();
                 addProject.SelectContentType("Manual");
