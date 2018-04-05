@@ -80,7 +80,7 @@ namespace DocWorksQA.SeleniumHelpers
                         throw new ArgumentOutOfRangeException();
                 
             }
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(120);
             driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60);
 
             driver.Manage().Window.Maximize();

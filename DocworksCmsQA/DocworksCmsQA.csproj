@@ -121,6 +121,7 @@
     <Compile Include="TestRailApis\APIException.cs" />
     <Compile Include="TestRailApis\TestRailMethods.cs" />
     <Compile Include="Tests\BeforeTestAfterTest.cs" />
+    <Compile Include="Tests\TC_09_ValidateCreateDistributionForGitLabProjectWithAllFields.cs" />
     <Compile Include="Tests\TC_08_ValidateCreateDistributionForGitLabProjectWithAllFields.cs" />
     <Compile Include="Tests\TC_02_ValidateCreateProjectForGitLabWithAllFields.cs" />
     <Compile Include="Tests\TC_03_ValidateCreateProjectForGitHubWithAllFields.cs" />
