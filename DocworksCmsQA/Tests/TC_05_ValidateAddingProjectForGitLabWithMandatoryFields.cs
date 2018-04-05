@@ -27,7 +27,7 @@ namespace DocWorksQA.Tests
 
 
 
-        //[Test, Description("Verifying User is able to Add Project For GitLab with Mandatory Fields")]
+        [Test, Description("Verifying User is able to Add Project For GitLab with Mandatory Fields")]
         public void TC05_ValidateAddingProjectForGitLabWithMandatoryFields()
         {
             try
