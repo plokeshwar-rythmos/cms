@@ -49,18 +49,18 @@ namespace DocWorksQA.Tests
                 String status = addProject.GetNotificationStatus();
                 addProject.SuccessScreenshot("Project Created Title");
 
-                VerifyText("creating a project "+expected+ " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
+                VerifyText(test, "creating a project "+expected+ " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
 
                 addProject.ClickDashboard();
 
                 addProject.SearchForProject(expected);
                 String actual = addProject.GetProjectTitle();
                 addProject.SuccessScreenshot("ProjectTitle");
-                VerifyEquals(expected, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
+                VerifyEquals(test, expected, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
             }
             catch (Exception e)
             {
-                ReportExceptionScreenshot(driver, e);
+                ReportExceptionScreenshot(test, driver, e);
                 Fail(test, e);
                 throw;
             }
