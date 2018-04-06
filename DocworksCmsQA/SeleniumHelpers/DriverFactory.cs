@@ -66,7 +66,7 @@ namespace DocWorksQA.SeleniumHelpers
                     option.AddArguments("window-size=1200,1100");
                     option.Proxy = null;
                     option.AddArguments("disable-infobars");
-                    option.AddArgument("no-sandbox");
+                    option.AddArgument("--no-sandbox");
                     option.AddArguments("--incognito");
                     driver = new ChromeDriver(ChromeDriverService.CreateDefaultService(), option, TimeSpan.FromSeconds(timeout));
                         break;

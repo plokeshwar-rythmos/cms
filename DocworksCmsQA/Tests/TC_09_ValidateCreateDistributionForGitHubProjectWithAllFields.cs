@@ -93,7 +93,7 @@ namespace DocWorksQA.Tests
         {
             Console.WriteLine("Quiting Browser");
 
-            CloseDriver();
+            CloseDriver(driver);
         }
 
     }

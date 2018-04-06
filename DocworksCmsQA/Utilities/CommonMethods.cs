@@ -14,31 +14,31 @@ namespace DocWorksQA.Utilities
     public class CommonMethods : Verify
     {
 
-        private IWebDriver Driver;
-
-        public void SetDriver(IWebDriver Driver) {
-            this.Driver = Driver;
-        }
-
-        public IWebDriver GetCurrentDriver() {
-            return this.Driver;
-        }
         
-        public void CloseDriver() {
+        public void CloseDriver(IWebDriver Driver) {
             String driverToUse = ConfigurationHelper.Get<String>("DriverToUse");
-            
-            if (driverToUse.ToLower().Equals("firefox"))
+            int hash = 0;
+            try {
+                hash = Driver.GetHashCode();
+                if (driverToUse.ToLower().Equals("firefox"))
+                {
+                    Driver.Navigate().GoToUrl("about:config");
+                    Driver.Close();
+                }
+
+                if (Driver != null){
+                    Driver.Navigate().GoToUrl("about:blank");
+                    Driver.Quit();
+                    Console.WriteLine(driverToUse + " "+Driver.GetHashCode()+" Driver quited successfully.");
+                }
+            }catch(Exception ex)
             {
-                Driver.Navigate().GoToUrl("about:config");
-                Driver.Close();
+                Console.WriteLine("There was error in Quitting the driver. "+hash);
+                Console.WriteLine(ex.Message);
             }
 
-            if (Driver != null){
-                Driver.Navigate().GoToUrl("about:blank");
-                Driver.Quit();
-            }
 
-            Console.WriteLine(driverToUse+" Driver quited successfully.");
+
         }
 
         public String TakeScreenshot(IWebDriver driver)
