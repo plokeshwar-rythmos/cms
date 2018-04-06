@@ -19,7 +19,6 @@ namespace DocWorksQA.Tests
         public void AddPProjectModule()
         {
             driver = new DriverFactory().Create();
-            SetDriver(driver);
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
         }
@@ -38,7 +37,6 @@ namespace DocWorksQA.Tests
                 String expected = addProject.EnterProjectTitle();
                 addProject.SelectContentType("Manual");
                 addProject.SelectSourceControlProviderType("GitLab");
-               // System.Threading.Thread.Sleep(15000);
                 addProject.SelectRepository("Docworks");
                 addProject.EnterPublishedPath("Publishing path to create project");
                 addProject.EnterDescription("This is to create Project");

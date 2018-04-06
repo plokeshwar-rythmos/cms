@@ -19,7 +19,6 @@ namespace DocWorksQA.Tests
         public void AddPProjectModule()
         {
             driver = new DriverFactory().Create();
-            SetDriver(driver);
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
         }
@@ -85,6 +84,7 @@ namespace DocWorksQA.Tests
                 Fail(test, ex);
                 throw;
             }
+            
 
         }
 

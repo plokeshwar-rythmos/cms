@@ -32,9 +32,10 @@ namespace DocWorksQA.SeleniumHelpers
             var driverToUse = ConfigurationHelper.Get<DriverToUse>("DriverToUse");
             var browserStackIndicator = ConfigurationHelper.Get<bool>("UseBrowserStack");
             var url = ConfigurationHelper.Get<String>("TargetUrl");
+            int timeout = ConfigurationHelper.Get<int>("ImplicitlyWait");
 
-          
-                switch (driverToUse)
+
+            switch (driverToUse)
                 {
                     case DriverToUse.InternetExplorer:
                     Console.WriteLine("Starting Internet Explorer Driver.");
@@ -56,7 +57,7 @@ namespace DocWorksQA.SeleniumHelpers
                     driverService.FirefoxBinaryPath = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
                     driverService.HideCommandPromptWindow = true;
                     driverService.SuppressInitialDiagnosticInformation = true;
-                    driver = new FirefoxDriver(driverService, options, TimeSpan.FromSeconds(120));
+                    driver = new FirefoxDriver(driverService, options, TimeSpan.FromSeconds(timeout));
                         break;
                     case DriverToUse.Chrome:
                     Console.WriteLine("Starting Chrome Driver.");
@@ -67,7 +68,7 @@ namespace DocWorksQA.SeleniumHelpers
                     option.AddArguments("disable-infobars");
                     option.AddArgument("no-sandbox");
                     option.AddArguments("--incognito");
-                    driver = new ChromeDriver(option);
+                    driver = new ChromeDriver(ChromeDriverService.CreateDefaultService(), option, TimeSpan.FromSeconds(timeout));
                         break;
                     case DriverToUse.Safari:
                     Console.WriteLine("Starting Safari Driver.");

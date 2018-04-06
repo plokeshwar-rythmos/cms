@@ -68,7 +68,7 @@ namespace DocWorksQA.Utilities
         public void ReportExceptionScreenshot(ExtentTest test, IWebDriver driver, Exception ex)
         {
             String path = TakeScreenshot(driver);
-            ExceptionScreenshot(test, path, ex.Message);
+            ExceptionScreenshot(test, path, ex.GetType().ToString());
 
         }
 
