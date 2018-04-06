@@ -19,7 +19,6 @@ namespace DocWorksQA.Tests
         public void AddPProjectModule()
         {
             driver = new DriverFactory().Create();
-            SetDriver(driver);
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
         }
@@ -57,13 +56,12 @@ namespace DocWorksQA.Tests
                 distmodule.EnterDescription("Description");
                 String actual1 = distmodule.GetText(distmodule.INVALID_TITLE_LENGTH);
                 addProject.SuccessScreenshot("Validating Distribution Name Length");
-                Assert.IsTrue(VerifyEquals(expected1, actual1, "Validation of Length Constraints for Distribution Name Field is successful", "Validation of Length Constraints for Distribution Name Field is Not successful"));
-                addProject.ClickDashboard();
+                VerifyEquals(test, expected1, actual1, "Validation of Length Constraints for Distribution Name Field is successful", "Validation of Length Constraints for Distribution Name Field is Not successful");
             }
             catch (Exception ex)
             {
-                ReportExceptionScreenshot(driver, ex);
-                Fail(ex);
+                ReportExceptionScreenshot(test, driver, ex);
+                Fail(test, ex);
                 throw;
             }
         }
