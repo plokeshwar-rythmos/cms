@@ -66,5 +66,13 @@ namespace DocWorksQA.Tests
             }
         }
 
+        [OneTimeTearDown]
+        public void CloseBrowser()
+        {
+            Console.WriteLine("Quiting Browser");
+
+            CloseDriver(driver);
+        }
+
     }
 }
