@@ -19,6 +19,7 @@ namespace DocWorksQA.Tests
         public void AddPProjectModule()
         {
             driver = new DriverFactory().Create();
+            SetDriver(driver);
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
         }
@@ -35,11 +36,9 @@ namespace DocWorksQA.Tests
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.ClickAddProject();
                 String expected = addProject.EnterProjectTitle();
-
                 addProject.SelectContentType("Manual");
                 addProject.SelectSourceControlProviderType("GitHub");
                 addProject.SelectRepository("Docworks");
-                
                 addProject.EnterPublishedPath("Publishing path to create project");
                 addProject.EnterDescription("This is to create Project");
                 addProject.ClickCreateProject();
@@ -55,10 +54,10 @@ namespace DocWorksQA.Tests
                 CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
                 distmodule.ClickDistribution();
                 String expected1 = distmodule.EnterDistirbutionName();
-                System.Threading.Thread.Sleep(75000);
-                distmodule.ClickBranchForGitHub();
+                System.Threading.Thread.Sleep(55000);
+                distmodule.SelectBrach("DocWorksManual3");
                 distmodule.EnterTocPath();
-                distmodule.EnterDescription("This is to create a distribution");
+                distmodule.EnterDescription("This is to create a distribution With TOC");
                 distmodule.ClickCreateDistribution();
                 addProject.ClickNotifications();
                 String status1 = addProject.GetNotificationStatus();
@@ -71,9 +70,9 @@ namespace DocWorksQA.Tests
                 addProject.SuccessScreenshot("Created Distribution:  " + expected1 + "");
                 VerifyEquals(test, expected1, actual1, "Create Distribution for GitHub Project With TOC is successful", "Create Distribution for GitHub Project With TOC is not successful");
                 String expected2 = distmodule.EnterDistirbutionName();
-                System.Threading.Thread.Sleep(75000);
-                distmodule.ClickBranchWithOutTOC();
-                distmodule.EnterDescription("This is to create a distribution");
+                System.Threading.Thread.Sleep(55000);
+                distmodule.SelectBrach("DocworksManual2");
+                distmodule.EnterDescription("This is to create a distribution Without TOC");
                 distmodule.ClickCreateDistribution();
                 addProject.ClickNotifications();
                 String status2 = addProject.GetNotificationStatus();

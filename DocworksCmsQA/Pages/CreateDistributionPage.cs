@@ -139,6 +139,23 @@ namespace DocWorksQA.Pages
             Info(test, "Selected the branch");
         }
 
+        public void SelectBrach(String value)
+        {
+            if (!GetText(SELECT_BRANCH).Equals(value))
+            {
+                this.Click(SELECT_BRANCH);
+                By OPTION = By.XPath("(//mat-option//span[contains(@class,'mat-option-text')])[text()='" + value + "']");
+                this.Click(OPTION);
+                Info(test, "Selected Branch as " + value);
+            }
+            else
+            {
+                Info(test, value + " Branch is already Selected.");
+            }
+        }
+
+
+
         public void ClickBranchWithOutTOC()
         {
             
@@ -149,6 +166,8 @@ namespace DocWorksQA.Pages
             this.Click(BRANCH_OPTIONS_WITHOUT_TOC);
             Info(test, "Selected the branch");
         }
+
+      
         public void ClickBranchForGitHub()
         {
             WaitForElement(SELECT_BRANCH);
@@ -159,15 +178,14 @@ namespace DocWorksQA.Pages
             Info(test, "Selected the branch");
         }
 
-        public void EnterBranchForMercurial()
+        public void EnterBranchForMercurial( String str)
         {
-            String str = "DocworksManual3";
             EnterValue(BRANCH,str);
             Info(test, "Entered Branch value");
         }
-        public void EnterBranchWithoutTOCForMercurial()
+        public void EnterBranchWithoutTOCForMercurial(String str)
         {
-            String str = "DocworkManual2";
+         
             EnterValue(BRANCH, str);
             Info(test, "Entered Branch value");
         }

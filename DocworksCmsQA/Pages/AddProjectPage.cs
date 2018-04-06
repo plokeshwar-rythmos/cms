@@ -64,6 +64,7 @@ namespace DocWorksQA.Pages
         {
             Clear(ENTER_SEARCH);
             EnterValue(ENTER_SEARCH, projectName);
+            Info(test, "Entered the Project Name in search bar");
             
         }
 

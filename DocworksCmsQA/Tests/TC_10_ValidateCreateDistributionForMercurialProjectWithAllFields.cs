@@ -9,7 +9,7 @@ namespace DocWorksQA.Tests
 {
     [TestFixture, Category("Create Distribution")]
     [Parallelizable]
-    class TC_08_ValidateCreateDistributionForGitLabProjectWithAllFields : BeforeTestAfterTest
+    class TC_10_ValidateCreateDistributionForMercurialProjectWithAllFields : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
@@ -24,8 +24,8 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
 
-        [Test, Description("Verify User is able to add Distribution for the GitLab Project with all Fields")]
-        public void TC08_ValidateCreateDistributionForGitLabProjectWithAllFields()
+        [Test, Description("Verify User is able to add Distribution for the GitHub Project with all Fields")]
+        public void TC10_ValidateCreateDistributionForMercurialProjectWithAllFields()
         {
             try
             {
@@ -37,9 +37,8 @@ namespace DocWorksQA.Tests
                 addProject.ClickAddProject();
                 String expected = addProject.EnterProjectTitle();
                 addProject.SelectContentType("Manual");
-                addProject.SelectSourceControlProviderType("GitLab");
-               // System.Threading.Thread.Sleep(15000);
-                addProject.SelectRepository("Docworks");
+                addProject.SelectSourceControlProviderType("Ono");
+                addProject.EnterMercurialRepoPath();
                 addProject.EnterPublishedPath("Publishing path to create project");
                 addProject.EnterDescription("This is to create Project");
                 addProject.ClickCreateProject();
@@ -56,29 +55,29 @@ namespace DocWorksQA.Tests
                 distmodule.ClickDistribution();
                 String expected1 = distmodule.EnterDistirbutionName();
                 System.Threading.Thread.Sleep(55000);
-                distmodule.SelectBrach("DocworksManual3");
+                distmodule.EnterBranchForMercurial("DocworksManual3");
                 distmodule.EnterTocPath();
-                distmodule.EnterDescription("This is to create a distribution With TOC Path");
+                distmodule.EnterDescription("This is to create a distribution With TOC");
                 distmodule.ClickCreateDistribution();
                 addProject.ClickNotifications();
                 String status1 = addProject.GetNotificationStatus();
                 addProject.SuccessScreenshot("Distribution got Created successfully With TOC Path");
-                VerifyText(test, "creating distribution " + expected1 + " in " + expected + " is successful", status1, "Distribution is Created For GitLab TOC with status:" + status1 + "", "Distribution is not created For GitLab TOC with status: " + status1 + "");
+                VerifyText(test, "creating distribution " + expected1 + " in " + expected + " is successful", status1, "Distribution is Created For Mercurial TOC with status:" + status1 + "", "Distribution is not created For Mercurial TOC with status: " + status1 + "");
                 addProject.ClickDashboard();
                 addProject.SearchForProject(expected);
                 distmodule.ClickDistribution();
                 String actual1 = distmodule.GetDistributionName();
                 addProject.SuccessScreenshot("Created Distribution:  " + expected1 + "");
-                VerifyEquals(test, expected1, actual1, "Create Distribution for GitLab Project With TOC is successful", "Create Distribution for GitLab Project With TOC is not successful");
+                VerifyEquals(test, expected1, actual1, "Create Distribution for Mercurial Project With TOC is successful", "Create Distribution for Mercurial Project With TOC is not successful");
                 String expected2 = distmodule.EnterDistirbutionName();
                 System.Threading.Thread.Sleep(55000);
-                distmodule.SelectBrach("DocworksManual2");
-                distmodule.EnterDescription("This is to create a distribution Without TOC Path");
+                distmodule.EnterBranchWithoutTOCForMercurial("DocworkManual2");
+                distmodule.EnterDescription("This is to create a distribution Without TOC");
                 distmodule.ClickCreateDistribution();
                 addProject.ClickNotifications();
                 String status2 = addProject.GetNotificationStatus();
                 addProject.SuccessScreenshot("Distribution: " + expected2 + " got Created successfully Without TOC Path");
-                VerifyText(test, "creating distribution " + expected2 + " in " + expected + " is successful", status2, "Distribution is Created For GitLab Without TOC with status:" + status2 + "", "Distribution is not created For GitLab without TOC with status: " + status2 + "");
+                VerifyText(test, "creating distribution " + expected2 + " in " + expected + " is successful", status2, "Distribution is Created For Mercurial Without TOC with status:" + status2 + "", "Distribution is not created For Mercurial without TOC with status: " + status2 + "");
             }
             catch (Exception ex)
             {
@@ -88,12 +87,15 @@ namespace DocWorksQA.Tests
             }
 
         }
+
         [OneTimeTearDown]
         public void CloseBrowser()
         {
             Console.WriteLine("Quiting Browser");
+
             CloseDriver();
         }
 
     }
 }
+
