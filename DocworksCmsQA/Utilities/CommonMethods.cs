@@ -26,14 +26,15 @@ namespace DocWorksQA.Utilities
         
         public void CloseDriver() {
             String driverToUse = ConfigurationHelper.Get<String>("DriverToUse");
+            
             if (driverToUse.ToLower().Equals("firefox"))
             {
                 Driver.Navigate().GoToUrl("about:config");
-                Driver.Navigate().GoToUrl("about:blank");
                 Driver.Close();
             }
 
             if (Driver != null){
+                Driver.Navigate().GoToUrl("about:blank");
                 Driver.Quit();
             }
 
