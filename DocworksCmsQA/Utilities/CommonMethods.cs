@@ -23,7 +23,7 @@ namespace DocWorksQA.Utilities
                 if (driverToUse.ToLower().Equals("firefox"))
                 {
                     Driver.Navigate().GoToUrl("about:config");
-                    Driver.Close();
+                    //Driver.Close();
                 }
 
                 if (Driver != null){
