@@ -23,7 +23,7 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
 
-        [Test, Description("Verify User is able to add Distribution for the GitHub Project with all Fields")]
+      //  [Test, Description("Verify User is able to add Distribution for the GitHub Project with all Fields")]
         public void TC09_ValidateCreateDistributionForGitHubProjectWithAllFields()
         {
             try
