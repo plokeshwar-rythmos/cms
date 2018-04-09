@@ -228,7 +228,7 @@ namespace DocWorksQA.Pages
         }
 
         public void WaitForProcessCompletion() {
-            for(int i = 0; i < 200; i++)
+            for(int i = 0; i < 300; i++)
             {
                 
                 String tmp = driver.FindElement(NOTIFICATION_MESSAGE).Text; //WaitForElement(NOTIFICATION_MESSAGE).Text;

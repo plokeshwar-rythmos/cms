@@ -53,7 +53,7 @@ namespace DocWorksQA.Tests
                 CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
                 distmodule.ClickDistribution();
                 String expected1 = distmodule.EnterDistirbutionName();
-                System.Threading.Thread.Sleep(55000);
+                System.Threading.Thread.Sleep(75000);
                 distmodule.SelectBrach("DocworksManual3");
                 distmodule.EnterTocPath();
                 distmodule.EnterDescription("This is to create a distribution With TOC Path");
@@ -69,7 +69,7 @@ namespace DocWorksQA.Tests
                 addProject.SuccessScreenshot("Created Distribution:  " + expected1 + "");
                 VerifyEquals(test, expected1, actual1, "Create Distribution for GitLab Project With TOC is successful", "Create Distribution for GitLab Project With TOC is not successful");
                 String expected2 = distmodule.EnterDistirbutionName();
-                System.Threading.Thread.Sleep(55000);
+                System.Threading.Thread.Sleep(75000);
                 distmodule.SelectBrach("DocworksManual2");
                 distmodule.EnterDescription("This is to create a distribution Without TOC Path");
                 distmodule.ClickCreateDistribution();

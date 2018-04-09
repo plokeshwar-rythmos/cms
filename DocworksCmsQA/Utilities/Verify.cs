@@ -362,6 +362,24 @@ namespace DocWorksQA.Utilities
 
         }
 
+        public Boolean VerifyBoolean(ExtentTest test,Boolean expected, Boolean actual, String successMessage, String errorMessage)
+        {
+
+            if (expected == actual)
+            {
+                Pass(test,"<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> SUCCESS :" + successMessage);
+                return true;
+            }
+            else
+            {
+
+                Fail(test,new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage));
+
+            }
+            return false;
+
+        }
+
         /**
          * This method verifies boolean against boolean and reports error messages.
          * 

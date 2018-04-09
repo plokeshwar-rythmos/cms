@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using OpenQA.Selenium;
+using AventStack.ExtentReports;
 
 namespace DocWorksQA.Pages
 {
@@ -19,14 +24,14 @@ namespace DocWorksQA.Pages
         public By OPENPROJECT = By.XPath("(//button[@class='mat-raised-button mat-primary']/span)[contains(text(),'Open')]");
         public By LATEST_DRAFT_IN_DROPDOWN = By.XPath("(//mat-option[@class='mat-option ng-star-inserted']//span)[last()]");
 
-        
+        private ExtentTest test;
         /**
         * Constructor: CreateDraftPage()
         * Description: This constructor is used to initialize the webdriver
         */
-        public CreateDraftPage(IWebDriver driver) : base(driver)
+        public CreateDraftPage(ExtentTest test,IWebDriver driver) : base(driver)
         {
-
+            this.test = test;
         }
 
         
@@ -38,7 +43,7 @@ namespace DocWorksQA.Pages
         public void ClickNewDraft()
         {
             Click(NEWDRAFT_BUTTON);
-            Info("Clicked on New Draft Button.");
+            Info(test,"Clicked on New Draft Button.");
         }
 
         /**
@@ -59,7 +64,7 @@ namespace DocWorksQA.Pages
         {
             EnterValue(DRAFTNAME_EDT, Keys.Tab);
             String text = GetText(by);
-            Info("Error for Invalid Draft is: "+text);
+            Info(test,"Error for Invalid Draft is: "+text+" ");
             Click(DRAFTNAME_EDT);
             return text;
         }
@@ -72,7 +77,7 @@ namespace DocWorksQA.Pages
         {
             Click(EXISTINGDRAFTDROPDOWN);
             Click(CODERDRAFT_CLICK);
-            Info("Coder Draft Selected.");
+            Info(test,"Coder Draft Selected.");
         }
 
         public void SelectExistingDraft()
@@ -80,7 +85,7 @@ namespace DocWorksQA.Pages
             Click(EXISTINGDRAFTDROPDOWN);
             System.Threading.Thread.Sleep(5000);
             Click(LATEST_DRAFT_IN_DROPDOWN);
-            Info("Selected latest Draft");
+            Info(test,"Selected latest Draft");
 
         }
 
@@ -88,10 +93,11 @@ namespace DocWorksQA.Pages
         * MethodName: ClikOnBackdrop()
         * Description: This method is used to click on Backdrop
         */
-        public void ClikOnBackdrop()
+        public void ClickOnUnityManualNode()
         {
             Click(UNITYMANUAL_CLICK);
-            Info("Clicked on Backdrop.");
+            System.Threading.Thread.Sleep(5000);
+            Info(test,"Clicked on Unity Manual Node");
 
         }
 
@@ -102,7 +108,7 @@ namespace DocWorksQA.Pages
         public Boolean IsDraftPopUpEnabled()
         {
             Boolean flag = this.IsEnabled(CLOSEDRAFT_BUTTON);
-            Info("Draft Dialog Box Is Enabled");
+            Info(test,"Draft Dialog Box Is Enabled");
             return flag;
         }
 
@@ -114,7 +120,7 @@ namespace DocWorksQA.Pages
         {
             String DraftName = "QA";
             EnterValue(DRAFTNAME_EDT, DraftName);
-            Info("Entered Draft Name : " + DraftName);
+            Info(test,"Entered Draft Name : " + DraftName + " ");
             return DraftName;
 
         }
@@ -126,7 +132,7 @@ namespace DocWorksQA.Pages
         public void EnterDraftName(String draftName)
         {
             EnterValue(DRAFTNAME_EDT, draftName);
-            Info("Entered Draft Name:" + draftName);
+            Info(test,"Entered Draft Name:" + draftName + " ");
 
         }
 
@@ -138,7 +144,7 @@ namespace DocWorksQA.Pages
         {
             String DraftName = "Draft" + "_" + GenerateRandomNumbers(2);
             EnterValue(DRAFTNAME_EDT, DraftName);
-            Info("Draft Name is" + DraftName);
+            Info(test,"Draft Name is" + DraftName + " ");
             return DraftName;
         }
 
@@ -149,7 +155,7 @@ namespace DocWorksQA.Pages
         public void CreateDraft()
         {
             Click(CREATEDRAFT_BUTTON);
-            Info("Draft Created Successfully.");
+            Info(test,"Draft Created Successfully.");
         }
 
         /**
@@ -159,7 +165,7 @@ namespace DocWorksQA.Pages
         public void ClickOnBlankDraft()
         {
             Click(BLANKDRAFT_CLICK);
-            Info("Selected Blank Draft.");
+            Info(test,"Selected Blank Draft.");
         }
 
         /**
@@ -169,7 +175,7 @@ namespace DocWorksQA.Pages
         public void ClickOnExistingDraft()
         {
             Click(EXISTINGDRAFT_CLICK);
-            Info("Selected Existing Draft.");
+            Info(test,"Selected Existing Draft.");
         }
 
         /**
@@ -179,7 +185,7 @@ namespace DocWorksQA.Pages
         public void CLOSEDRAFT()
         {
             Click(CLOSEDRAFT_BUTTON);
-            Info("Clicked on Close Draft Button.");
+            Info(test,"Clicked on Close Draft Button.");
         }
 
         /**
@@ -189,7 +195,8 @@ namespace DocWorksQA.Pages
         public void CLICKOPENPROJECT()
         {
             Click(OPENPROJECT);
-            Info("Clicked on Open Project Button.");
+            System.Threading.Thread.Sleep(25000);
+            Info(test,"Clicked on Open Project Button");
         }
 
     }

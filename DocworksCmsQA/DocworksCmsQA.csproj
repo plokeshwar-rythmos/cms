@@ -132,6 +132,8 @@
     <Compile Include="Tests\TC_07_ValidateProjectTitleLengthWithMoreThan100Characters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\TC_11_ValidateDistributionNameLengthWithLessThan5Characters.cs" />
+    <Compile Include="Tests\TC_12_ValidateNewDraftDialogBoxAndErrorMsgForInvalidDrafts.cs" />
+    <Compile Include="Tests\TC_13_ValidationOfCreateDraftsOfExistingAndBlankWithValidDraftNames .cs" />
     <Compile Include="Utilities\CommonMethods.cs" />
     <Compile Include="Utilities\ConfigurationHelper.cs" />
     <Compile Include="Utilities\ExtentReporter.cs" />
