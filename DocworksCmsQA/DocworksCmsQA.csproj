@@ -135,6 +135,7 @@
     <Compile Include="Tests\TC_12_ValidateNewDraftDialogBoxAndErrorMsgForInvalidDrafts.cs" />
     <Compile Include="Tests\TC_13_ValidationOfCreateDraftsOfExistingAndBlankWithValidDraftNames .cs" />
     <Compile Include="Tests\TC_14_ValidateScreenEnhancementsWhenUserEditsExistingDraftContent.cs" />
+    <Compile Include="Tests\TC_15_ValidateScreenEnhancementsWhenUserEditsBlankDraftContent.cs" />
     <Compile Include="Utilities\CommonMethods.cs" />
     <Compile Include="Utilities\ConfigurationHelper.cs" />
     <Compile Include="Utilities\ExtentReporter.cs" />

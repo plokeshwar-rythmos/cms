@@ -9,7 +9,7 @@ namespace DocWorksQA.Tests
 {
     [TestFixture, Category("Authoring Screen Enhancements")]
     [Parallelizable]
-    class TC_14_ValidateScreenEnhancementsWhenUserEditsExistingDraftContent : BeforeTestAfterTest
+    class TC_15_ValidateScreenEnhancementsWhenUserEditsBlankDraftContent : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
@@ -22,14 +22,14 @@ namespace DocWorksQA.Tests
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
         }
-        [Test, Description("Verify User is able to edit the existing draft content in Left side GDOC")]
-        public void TC_01_ValidateScreenEnhancementsWhenUserEditsExistingContentInLeftGdoc()
+        [Test, Description("Verify User is able to edit the Blank draft content in Left side GDOC")]
+        public void TC_01_ValidateScreenEnhancementsWhenUserEditsBlankContentInLeftGdoc()
         {
             try
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-               test= StartTest(TestName, description);
+                test = StartTest(TestName, description);
                 System.Threading.Thread.Sleep(5000);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 //addProject.ClickAddProject();
@@ -68,14 +68,14 @@ namespace DocWorksQA.Tests
                 createDraft.ClickOnUnityManualNode();
                 createDraft.ClickNewDraft();
                 String draftName = createDraft.EnterValidDraftName();
-                createDraft.SelectCoderDraft();
+                createDraft.ClickOnBlankDraft();
                 createDraft.CreateDraft();
                 addProject.ClickNotifications();
                 String status2 = addProject.GetNotificationStatus();
-                addProject.SuccessScreenshot("Draft got Created Successfully");
+                addProject.SuccessScreenshot("Blank Draft got Created Successfully");
                 VerifyText(test, "creating a draft " + draftName + " in UnityManual is successful", status2, "Draft: " + draftName + " is Created with status:" + status2 + "", "Draft is not created with status: " + status2 + "");
                 addProject.BackToProject();
-                AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test,driver);
+                AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test, driver);
                 auth.LeftDraftDropDown(draftName);
                 IWebElement framel = auth.EnterIntoLeftFrame();
                 driver.SwitchTo().Frame(framel);
@@ -95,8 +95,8 @@ namespace DocWorksQA.Tests
                 throw;
             }
         }
-        [Test, Description("Verify User is Able to view changes made of Existing Draft in Left GDOC are reflected in Right Side Tabs")]
-        public void TC_02_ValidationWhenEditedExistingDraftInLeftGDocGetsReflectedInRightSideTabs()
+        [Test, Description("Verify User is Able to view changes made of Blank Draft in Left GDOC are reflected in Right Side Tabs")]
+        public void TC_02_ValidationWhenEditedBlankDraftInLeftGDocGetsReflectedInRightSideTabs()
         {
             try
             {
@@ -105,7 +105,7 @@ namespace DocWorksQA.Tests
                 CreateTest(TestName, description);
                 String expected = "SELENIUM_TEST_123";
                 AddProjectPage addProject = new AddProjectPage(test, driver);
-                AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test,driver);
+                AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test, driver);
                 addProject.SuccessScreenshot("Verifying Edited Draft Contains String: " + expected + " in GDOC Right");
                 auth.HtmlRightTab();
                 addProject.SuccessScreenshot("Verifying Edited Draft Contains String: " + expected + " in HTML Right");
@@ -122,26 +122,26 @@ namespace DocWorksQA.Tests
                 throw;
             }
         }
-        [Test, Description("Verify User is able to edit the existing draft content in Right side GDOC")]
-        public void TC_03_ValidationOfScreenEnhancementsUserEditsExistingContentInRightGdoc()
+        [Test, Description("Verify User is able to edit the Blank draft content in Right side GDOC")]
+        public void TC_03_ValidationOfScreenEnhancementsUserEditsBlankContentInRightGdoc()
         {
             try
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 CreateTest(TestName, description);
-                CreateDraftPage createDraft = new CreateDraftPage(test,driver);
+                CreateDraftPage createDraft = new CreateDraftPage(test, driver);
                 createDraft.ClickNewDraft();
                 String draftName = createDraft.EnterValidDraftName();
-                createDraft.SelectCoderDraft();
+                createDraft.ClickOnBlankDraft();
                 createDraft.CreateDraft();
-                AddProjectPage addProject = new AddProjectPage(test,driver);
+                AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.ClickNotifications();
                 String status2 = addProject.GetNotificationStatus();
-                addProject.SuccessScreenshot("Draft got Created Successfully");
+                addProject.SuccessScreenshot("Blank Draft got Created Successfully");
                 VerifyText(test, "creating a draft " + draftName + " in UnityManual is successful", status2, "Draft: " + draftName + " is Created with status:" + status2 + "", "Draft is not created with status: " + status2 + "");
                 addProject.BackToProject();
-                AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test,driver);
+                AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test, driver);
                 auth.RightDraftDropDown(draftName);
                 IWebElement framel = auth.EnterIntoRightFrame();
                 driver.SwitchTo().Frame(framel);
@@ -162,7 +162,7 @@ namespace DocWorksQA.Tests
                 throw;
             }
         }
-       [Test, Description("Verify User is Able to view changes made of Existing Draft in Right GDOC are reflected in Left Side Tabs")]
+        [Test, Description("Verify User is Able to view changes made of Blank Draft in Right GDOC are reflected in Left Side Tabs")]
         public void TC_04_ValidationWhenUserEditedRightGDocGetsReflectedInLeftSideTabs()
         {
             try
@@ -172,7 +172,7 @@ namespace DocWorksQA.Tests
                 CreateTest(TestName, description);
                 String expected = "SELENIUM_TEST_123";
                 AddProjectPage addProject = new AddProjectPage(test, driver);
-                AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test,driver);
+                AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test, driver);
                 addProject.SuccessScreenshot("Verifying Edited Draft Contains String: " + expected + " in GDOC Left");
                 auth.HtmlLeftTab();
                 addProject.SuccessScreenshot("Verifying Edited Draft Contains String: " + expected + " in HTML Left");
