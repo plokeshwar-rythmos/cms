@@ -139,7 +139,7 @@ namespace DocWorksQA.Pages
             Info(test, "Selected the branch");
         }
 
-        public void SelectBrach(String value)
+        public void SelectBranch(String value)
         {
             if (!GetText(SELECT_BRANCH).Equals(value))
             {
@@ -196,7 +196,7 @@ namespace DocWorksQA.Pages
         public void ClickCreateDistribution()
         {
             Click(CREATE_DISTRIBUTION);
-            Info(test, "Click on Create distribution");
+            Info(test, "Clicked on Create distribution");
         }
 
         /**

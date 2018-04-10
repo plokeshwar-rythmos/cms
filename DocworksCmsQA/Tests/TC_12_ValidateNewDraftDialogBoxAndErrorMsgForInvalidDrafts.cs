@@ -25,7 +25,7 @@ namespace DocWorksQA.Tests
 
         [Test, Description("Verify New Draft Button is enabled or not")]
 
-        public void TC_01_ValidateNewDraftDialogBoxIsAppearedOrNot()
+        public void TC_12A_ValidateNewDraftDialogBoxIsAppearedOrNot()
         {
 
             try
@@ -33,38 +33,12 @@ namespace DocWorksQA.Tests
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
+
+                String projectName = CreateDistribution("GitLab", test, driver);
+
                 AddProjectPage addProject = new AddProjectPage(test, driver);
-                addProject.ClickAddProject();
-                String expected = addProject.EnterProjectTitle();
-                addProject.SelectContentType("Manual");
-                addProject.SelectSourceControlProviderType("GitLab");
-                addProject.SelectRepository("Docworks");
-                addProject.EnterPublishedPath("Publishing path to create project");
-                addProject.EnterDescription("This is to create Project");
-                addProject.ClickCreateProject();
-                addProject.ClickNotifications();
-                String status = addProject.GetNotificationStatus();
-                addProject.SuccessScreenshot("Project Created Title");
-                VerifyText(test, "creating a project " + expected + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
-                addProject.ClickDashboard();
-                addProject.SearchForProject(expected);
-                String actual = addProject.GetProjectTitle();
-                addProject.SuccessScreenshot("ProjectTitle");
-                VerifyEquals(test, expected, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
-                CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
-                distmodule.ClickDistribution();
-                String expected1 = distmodule.EnterDistirbutionName();
-                System.Threading.Thread.Sleep(75000);
-                distmodule.SelectBrach("DocworksManual3");
-                distmodule.EnterTocPath();
-                distmodule.EnterDescription("This is to create a distribution With TOC Path");
-                distmodule.ClickCreateDistribution();
-                addProject.ClickNotifications();
-                String status1 = addProject.GetNotificationStatus();
-                addProject.SuccessScreenshot("Distribution got Created successfully With TOC Path");
-                VerifyText(test, "creating distribution " + expected1 + " in " + expected + " is successful", status1, "Distribution is Created For GitLab TOC with status:" + status1 + "", "Distribution is not created For GitLab TOC with status: " + status1 + "");
-                addProject.ClickDashboard();
-                addProject.SearchForProject(expected);
+                
+                addProject.SearchForProject(projectName);
                 CreateDraftPage createDraft = new CreateDraftPage(test,driver);
                 createDraft.CLICKOPENPROJECT();
                 createDraft.ClickOnUnityManualNode();
@@ -81,8 +55,9 @@ namespace DocWorksQA.Tests
                 throw;
             }
         }
+
         [Test, Description("Verify When User Enters Invalid Draft Name Then an error message is apeared")]
-        public void TC_02_ValidateErrorMesgForInvalidDraftName()
+        public void TC_12B_ValidateErrorMesgForInvalidDraftName()
         {
             try
             {

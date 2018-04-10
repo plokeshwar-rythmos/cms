@@ -140,6 +140,8 @@
     <Compile Include="Utilities\ConfigurationHelper.cs" />
     <Compile Include="Utilities\ExtentReporter.cs" />
     <Compile Include="Utilities\Guard.cs" />
+    <Compile Include="Utilities\Properties.cs" />
+    <Compile Include="Utilities\Sample.cs" />
     <Compile Include="Utilities\Verify.cs" />
   </ItemGroup>
   <ItemGroup>

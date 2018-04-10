@@ -54,7 +54,7 @@ namespace DocWorksQA.Tests
                 distmodule.ClickDistribution();
                 String expected1 = distmodule.EnterDistirbutionName();
                 System.Threading.Thread.Sleep(75000);
-                distmodule.SelectBrach("DocWorksManual3");
+                distmodule.SelectBranch("DocWorksManual3");
                 distmodule.EnterTocPath();
                 distmodule.EnterDescription("This is to create a distribution With TOC");
                 distmodule.ClickCreateDistribution();
@@ -70,7 +70,7 @@ namespace DocWorksQA.Tests
                 VerifyEquals(test, expected1, actual1, "Create Distribution for GitHub Project With TOC is successful", "Create Distribution for GitHub Project With TOC is not successful");
                 String expected2 = distmodule.EnterDistirbutionName();
                 System.Threading.Thread.Sleep(75000);
-                distmodule.SelectBrach("DocworksManual2");
+                distmodule.SelectBranch("DocworksManual2");
                 distmodule.EnterDescription("This is to create a distribution Without TOC");
                 distmodule.ClickCreateDistribution();
                 addProject.ClickNotifications();

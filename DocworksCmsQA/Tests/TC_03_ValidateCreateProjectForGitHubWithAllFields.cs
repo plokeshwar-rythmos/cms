@@ -62,6 +62,7 @@ namespace DocWorksQA.Tests
                 String actual = addProject.GetProjectTitle();
                 addProject.SuccessScreenshot("ProjectTitle");
                 VerifyEquals(test, expected, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
+
             }
             catch (Exception e)
             {

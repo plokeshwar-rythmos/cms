@@ -109,6 +109,7 @@ namespace DocWorksQA.Pages
             Info(test, "Title Exceeds 100 characters*** " + str);
             return str;
         }
+
         public void ClickDashboard()
         {
             String url = driver.Url;

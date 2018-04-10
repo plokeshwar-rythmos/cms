@@ -5,6 +5,7 @@ using System;
 using DocWorksQA.Pages;
 using System.Diagnostics;
 using AventStack.ExtentReports;
+using System.Collections.Generic;
 
 namespace DocWorksQA.Tests
 {
@@ -61,6 +62,13 @@ namespace DocWorksQA.Tests
                 String actual = addProject.GetProjectTitle();
                 addProject.SuccessScreenshot("ProjectTitle");
                 VerifyEquals(test, expected, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
+
+                var map = new Dictionary<string, string>();
+
+                map.Add("projectName", expected);
+                map.Add("projectStatus", "Success");
+                CreateFile(GetCurrentProjectPath() + "//bin/onoProject.properties", map);
+
             }
             catch (Exception e)
             {

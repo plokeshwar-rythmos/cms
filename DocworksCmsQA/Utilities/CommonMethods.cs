@@ -8,13 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using AventStack.ExtentReports;
+using DocWorksQA.Pages;
+using DocworksCmsQA.Utilities;
 
 namespace DocWorksQA.Utilities
 {
     public class CommonMethods : Verify
     {
 
-        
+
         public void CloseDriver(IWebDriver Driver) {
             String driverToUse = ConfigurationHelper.Get<String>("DriverToUse");
             int hash = 0;
@@ -26,14 +28,14 @@ namespace DocWorksQA.Utilities
                     //Driver.Close();
                 }
 
-                if (Driver != null){
+                if (Driver != null) {
                     Driver.Navigate().GoToUrl("about:blank");
                     Driver.Quit();
-                    Console.WriteLine(driverToUse + " "+Driver.GetHashCode()+" Driver quited successfully.");
+                    Console.WriteLine(driverToUse + " " + Driver.GetHashCode() + " Driver quited successfully.");
                 }
-            }catch(Exception ex)
+            } catch (Exception ex)
             {
-                Console.WriteLine("There was error in Quitting the driver. "+hash);
+                Console.WriteLine("There was error in Quitting the driver. " + hash);
                 Console.WriteLine(ex.Message);
             }
 
@@ -55,7 +57,7 @@ namespace DocWorksQA.Utilities
             Screenshot screenshot = ssdriver.GetScreenshot();
             screenshot.SaveAsFile(path + "/screenshot-" + TimeAndDate + ".jpeg", ScreenshotImageFormat.Jpeg);
             return "./Screenshot/screenshot-" + TimeAndDate + ".jpeg";
-            
+
         }
 
 
@@ -74,7 +76,7 @@ namespace DocWorksQA.Utilities
 
         public void ExceptionScreenshot(String path, String message)
         {
-            Info("<a style=\"font - size: 20px; color: red;\" href=\"" + path + "\">Exception Occurred : "+message+"<br></a>");
+            Info("<a style=\"font - size: 20px; color: red;\" href=\"" + path + "\">Exception Occurred : " + message + "<br></a>");
         }
 
         public void ExceptionScreenshot(ExtentTest test, String path, String message)
@@ -187,7 +189,7 @@ namespace DocWorksQA.Utilities
             return Updatedpath;
         }
 
-public string GetInvalidCodeBlockPath()
+        public string GetInvalidCodeBlockPath()
         {
             String path = GetCurrentProjectPath();
             String savedpath = path + @"\MediaFiles\CodeBlocks\";
@@ -220,11 +222,39 @@ public string GetInvalidCodeBlockPath()
             Console.WriteLine("Original Path" + Updatedpath);
             return Updatedpath;
         }
+
         public void CreateDirectory(String path)
         {
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
         }
+
+        public void CreateFile(String fileName, Dictionary<string, string> data)
+        {
+            FileInfo f = new FileInfo(fileName);
+            StreamWriter w = f.CreateText();
+            foreach (var pair in data)
+            {
+                string key = pair.Key;
+                string value = pair.Value;
+                w.WriteLine(key + "=" + value);
+                w.Write(w.NewLine);
+            }
+
+            w.Close();
+        }
+
+        public void ReadFile(String fileName) {
+
+            IDictionary<string, string> properties;
+
+            using (TextReader reader = new StreamReader(fileName))
+            {
+                // properties = PropertiesLoader.Load(reader);
+            }
+        }
+
+
 
 
         public String RandomValueOfLengthMorethan100()
@@ -267,7 +297,7 @@ public string GetInvalidCodeBlockPath()
             for (int i = 0; i < length; i++)
             {
                 text[i] = characters.ElementAt(rng.Next(characters.Length));
-                    
+
             }
             return new String(text);
         }
@@ -281,7 +311,7 @@ public string GetInvalidCodeBlockPath()
             if (driverToUse.ToLower().Equals("chrome"))
             {
                 processName = "chromedriver";
-            }else if (driverToUse.ToLower().Equals("firefox"))
+            } else if (driverToUse.ToLower().Equals("firefox"))
             {
                 processName = "firefox";
             }
@@ -291,12 +321,12 @@ public string GetInvalidCodeBlockPath()
             }
 
 
-                try
+            try
             {
                 foreach (Process process in Process.GetProcessesByName(processName))
                 {
                     //kill the process 
-                    Console.WriteLine("Killing process "+process);
+                    Console.WriteLine("Killing process " + process);
                     process.Kill();
                 }
             }
@@ -308,9 +338,265 @@ public string GetInvalidCodeBlockPath()
 
         }
 
+        public void UpdateGitLabProjectProperties(String distributionStatus) {
 
-      
+            Properties prop = new Properties(GetCurrentProjectPath() + "//bin/gitLabProject");
+            prop.set("distributionStatus", distributionStatus);
+            prop.Save();
+
+        }
+
+        public void UpdateMercurialProjectProperties(String distributionStatus)
+        {
+
+            Properties prop = new Properties(GetCurrentProjectPath() + "//bin/onoProject");
+            prop.set("distributionStatus", distributionStatus);
+            prop.Save();
+
+        }
+
+        public bool FileExists(String filePath) {
+
+            return System.IO.File.Exists(filePath);
+        }
+
+        public String CreateDistribution(String projectType, ExtentTest test, IWebDriver driver)
+        {
+            String projectName = "";
+
+            if (projectType.Equals("GitLab"))
+            {
+                if (FileExists(GetCurrentProjectPath() + "//bin/gitLabProject.properties"))
+                {
+                    Properties prop = new Properties(GetCurrentProjectPath() + "//bin/gitLabProject");
+                    if (prop.get("distributionStatus").ToLower().Equals("success"))
+                    {
+                        Console.WriteLine("Using existing GitLab project.");
+                        projectName = prop.get("projectName");
+                    }
+                    else if(prop.get("projectStatus").ToLower().Equals("success"))
+                    {
+                        CreateDistribution(test, driver, prop.get("projectName"));
+                        UpdateGitLabProjectProperties("Success");
+                    }
+                    else
+                    {
+                        projectName = CreateGitLabProject(test, driver);
+                        CreateDistribution(test, driver, projectName);
+                        UpdateGitLabProjectProperties("Success");
+                    }
+                }
+            }else if (projectType.Equals("Mercurial"))
+            {
+                if (FileExists(GetCurrentProjectPath() + "//bin/onoProject.properties"))
+                {
+                    Properties prop = new Properties(GetCurrentProjectPath() + "//bin/onoProject");
+                    if (prop.get("distributionStatus").ToLower().Equals("success"))
+                    {
+                        Console.WriteLine("Using existing Mercurial project.");
+                        projectName = prop.get("projectName");
+                    }
+                    else if (prop.get("projectStatus").ToLower().Equals("success"))
+                    {
+                        CreateMercurialDistribution(test, driver, prop.get("projectName"));
+                        UpdateMercurialProjectProperties("Success");
+                    }
+                    else
+                    {
+                        projectName = CreateMercurialProject(test, driver);
+                        CreateMercurialDistribution(test, driver, projectName);
+                        UpdateMercurialProjectProperties("Success");
+                    }
+                }
+
+            }
+
+            return projectName;
 
 
+        }
+
+
+
+        public String CreateDistribution(ExtentTest test, IWebDriver driver, String projectName) {
+            AddProjectPage project = new AddProjectPage(test, driver);
+
+            project.SearchForProject(projectName);
+            CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
+            distmodule.ClickDistribution();
+
+            String expected2 = distmodule.EnterDistirbutionName();
+            System.Threading.Thread.Sleep(75000);
+            distmodule.SelectBranch("DocworksManual2");
+            distmodule.EnterDescription("This distribution is created for GitLabWithout TOC Path");
+            distmodule.ClickCreateDistribution();
+            project.ClickNotifications();
+            String status2 = project.GetNotificationStatus();
+            SuccessScreenshot(driver, "Distribution: " + expected2 + " got Created successfully Without TOC Path", test);
+            VerifyText(test, "creating distribution " + expected2 + " in " + projectName + " is successful", status2, "Distribution is Created For GitLab Without TOC with status:" + status2 + "", "Distribution is not created For GitLab without TOC with status: " + status2 + "");
+
+            return projectName;
+
+        }
+
+        public void CreateMercurialDistribution(ExtentTest test, IWebDriver driver, String projectName)
+        {
+            AddProjectPage project = new AddProjectPage(test, driver);
+
+            project.SearchForProject(projectName);
+            CreateDistributionPage distribution = new CreateDistributionPage(test, driver);
+            distribution.ClickDistribution();
+            String expected1 = distribution.EnterDistirbutionName();
+            System.Threading.Thread.Sleep(5000);
+            distribution.EnterBranchForMercurial("DocworksManual3");
+            distribution.EnterTocPath();
+            distribution.EnterDescription("This distribution is created for Mercurial Project");
+            distribution.ClickCreateDistribution();
+            project.ClickNotifications();
+            String status1 = project.GetNotificationStatus();
+            project.SuccessScreenshot("Distribution got Created successfully With TOC Path");
+            VerifyText(test, "creating distribution " + expected1 + " in " + projectName + " is successful", status1, "Distribution is Created For Mercurial TOC with status:" + status1 + "", "Distribution is not created For Mercurial TOC with status: " + status1 + "");
+        }
+
+        public String CreateGitLabProject(ExtentTest test, IWebDriver driver)
+        {
+            if (FileExists(GetCurrentProjectPath() + "//bin/gitLabProject.properties"))
+            {
+                Properties prop = new Properties(GetCurrentProjectPath() + "//bin/gitLabProject");
+                if (prop.get("projectStatus").ToLower().Equals("success"))
+                {
+                    Console.WriteLine("Using existing GitLab project.");
+                    return prop.get("projectName");
+                }
+ 
+            }
+
+            AddProjectPage addProject = new AddProjectPage(test, driver);
+            addProject.ClickAddProject();
+            String projectName = addProject.EnterProjectTitle();
+            addProject.SelectContentType("Manual");
+            addProject.SelectSourceControlProviderType("GitLab");
+            addProject.SelectRepository("unitydemo2/DocwokrsQA");
+            addProject.EnterPublishedPath("Publishing path to create project");
+            addProject.EnterDescription("This is to create Project");
+            addProject.ClickCreateProject();
+            addProject.ClickNotifications();
+
+            String status = GetNotificationStatus(driver);
+            addProject.SuccessScreenshot("Project Created Title");
+
+            VerifyText(test, "creating a project " + projectName + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
+
+            addProject.ClickDashboard();
+
+            addProject.SearchForProject(projectName);
+            String actual = addProject.GetProjectTitle();
+            addProject.SuccessScreenshot("ProjectTitle");
+            VerifyEquals(test, projectName, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
+
+            var map = new Dictionary<string, string>();
+
+            map.Add("projectName", projectName);
+            map.Add("projectStatus", "Success");
+            CreateFile(GetCurrentProjectPath() + "//bin/gitLabProject.properties", map);
+
+            return projectName;
+            
+        }
+
+
+        public String CreateMercurialProject(ExtentTest test, IWebDriver driver) {
+
+            if (System.IO.File.Exists(GetCurrentProjectPath() + "//bin/onoProject.properties"))
+            {
+                Properties prop = new Properties(GetCurrentProjectPath() + "//bin/onoProject");
+                if (prop.get("projectStatus").ToLower().Equals("success"))
+                {
+                    Console.WriteLine("Using existing Mercurial project.");
+                    return prop.get("projectName");
+                }
+
+            }
+            AddProjectPage addProject = new AddProjectPage(test, driver);
+            addProject.ClickAddProject();
+            String projectName = addProject.EnterProjectTitle();
+
+            addProject.SelectContentType("Manual");
+            addProject.SelectSourceControlProviderType("Ono");
+
+            addProject.EnterMercurialRepoPath();
+            addProject.EnterPublishedPath("Publishing path to create project");
+            addProject.EnterDescription("This is to create Project");
+            addProject.ClickCreateProject();
+
+            addProject.ClickNotifications();
+
+            String status = addProject.GetNotificationStatus();
+            addProject.SuccessScreenshot("Project Created Title");
+
+            VerifyText(test, "creating a project " + projectName + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
+
+            addProject.ClickDashboard();
+
+            addProject.SearchForProject(projectName);
+            String actual = addProject.GetProjectTitle();
+            addProject.SuccessScreenshot("ProjectTitle");
+            VerifyEquals(test, projectName, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
+
+            var map = new Dictionary<string, string>();
+
+            map.Add("projectName", projectName);
+            map.Add("projectStatus", "Success");
+            CreateFile(GetCurrentProjectPath() + "//bin/onoProject.properties", map);
+            return projectName;
+        }
+
+        public void WaitForProcessCompletion(IWebDriver driver)
+        {
+            By NOTIFICATION_MESSAGE = By.XPath("//div[@class='mat-line operation-status-wrapper']//small");
+            for (int i = 0; i < 300; i++)
+            {
+
+                String tmp = driver.FindElement(NOTIFICATION_MESSAGE).Text;
+
+                if (tmp.Contains("successful"))
+                {
+                    Console.WriteLine(i + " : " + tmp);
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine(tmp);
+                    //Console.WriteLine("Notification is still in progress.");
+                    System.Threading.Thread.Sleep(1000);
+                }
+
+            }
+        }
+
+        public String GetNotificationStatus(IWebDriver driver)
+        {
+            By NOTIFICATION_MESSAGE = By.XPath("//div[@class='mat-line operation-status-wrapper']//small");
+            WaitForProcessCompletion(driver);
+            return driver.FindElement(NOTIFICATION_MESSAGE).Text;
+
+        }
+
+        public void ClickNotification(IWebDriver driver)
+        {
+            By NOTIFICATION_BELL = By.XPath("//i[@class='mdi mdi-bell mdi-24px']");
+            driver.FindElement(NOTIFICATION_BELL).Click();
+        }
+
+        public void SuccessScreenshot(IWebDriver driver, String message, ExtentTest test)
+        {
+            String path = TakeScreenshot(driver);
+            SuccessScreenshot(path, message, test);
+        }
+
+        public void SuccessScreenshot(String path, String message, ExtentTest test)
+        {
+            Info(test, "<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
+        }
     }
 }
