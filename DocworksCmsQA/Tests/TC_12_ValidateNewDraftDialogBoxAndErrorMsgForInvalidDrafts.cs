@@ -64,7 +64,7 @@ namespace DocWorksQA.Tests
                 addProject.SuccessScreenshot("Distribution got Created successfully With TOC Path");
                 VerifyText(test, "creating distribution " + expected1 + " in " + expected + " is successful", status1, "Distribution is Created For GitLab TOC with status:" + status1 + "", "Distribution is not created For GitLab TOC with status: " + status1 + "");
                 addProject.ClickDashboard();
-                addProject.SearchForProject("SELENIUM_QI");
+                addProject.SearchForProject(expected);
                 CreateDraftPage createDraft = new CreateDraftPage(test,driver);
                 createDraft.CLICKOPENPROJECT();
                 createDraft.ClickOnUnityManualNode();

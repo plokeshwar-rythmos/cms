@@ -62,28 +62,29 @@ namespace DocWorksQA.Pages
         public By HISTORT_VALID_DRAFT2 = By.XPath("(//mat-list[@class='mat-list valid-draft ng-star-inserted']//div[@class='mat-list-item-content'])[1]");
         public By ViewDraft_DraftName = By.XPath("//input[@ng-reflect-placeholder='Draft Name']");
 
+        private ExtentTest test;
 
-
-        public AuthoringScreenEnhancements(IWebDriver driver) : base(driver)
+        public AuthoringScreenEnhancements(ExtentTest test,IWebDriver driver) : base(driver)
         {
+            this.test = test;
         }
 
         public void OpenProject()
         {
             Click(OPENPROJECT);
-            Info("Clicked on open Project");
+            Info(test,"Clicked on open Project");
         }
 
         public void ClickNode()
         {
             Click(UNITYMANUAL_CLICK);
-            Info("Clicked on Unity Manual Node");
+            Info(test,"Clicked on Unity Manual Node");
         }
 
         public void ClickBackDrop()
         {
             Click(BACKDROP_CLICK);
-             Info("Clicked Backdrop");
+             Info(test,"Clicked Backdrop");
         }
 
         public void LeftDraftDropDown(String str)
@@ -92,7 +93,7 @@ namespace DocWorksQA.Pages
             Click(LEFT_DRAFTDROPDOWN);
             String s = "(//mat-option/span)" + "[text()='" + str + "']";
             Click(By.XPath(s));
-            Info("selected Draft:  "+str+"  in left Drop Down");
+            Info(test,"selected Draft:  "+str+"  in left Drop Down");
         }
 
         public void LeftLiveDraft()
@@ -100,7 +101,7 @@ namespace DocWorksQA.Pages
             System.Threading.Thread.Sleep(7000);
             Click(LEFT_DRAFTDROPDOWN);
             Click(By.XPath("(//mat-option/span)[text()='Live Draft']"));
-            Info("selected a Live draft in Left Drop Down");
+            Info(test,"selected a Live draft in Left Drop Down");
 
         }
 
@@ -109,7 +110,7 @@ namespace DocWorksQA.Pages
         {
             Click(LEFT_DRAFTDROPDOWN);
             Click(By.XPath("(//mat-option/span)[text()='Coder Draft']"));
-            Info("selected a Coder draft in Left Drop Down");
+            Info(test,"selected a Coder draft in Left Drop Down");
         }
         public IWebElement EnterIntoLeftFrame()
         {
@@ -122,7 +123,7 @@ namespace DocWorksQA.Pages
         {
             Click(EDT_GDOC_HDR);
             System.Threading.Thread.Sleep(7000);
-            Info("Click on left Gdoc");
+            Info(test,"Click on left Gdoc");
             
 
         }
@@ -133,21 +134,21 @@ namespace DocWorksQA.Pages
             Click(RIGHT_DRAFTDROPDOWN);
             String s = "(//mat-option/span)" + "[text()='" + str + "']";
             Click(By.XPath(s));
-            Info("selected Draft:  " + str + "  in Right Drop Down");
+            Info(test,"selected Draft:  " + str + "  in Right Drop Down");
         }
 
         public void RightLiveDraft()
         {
             Click(RIGHT_DRAFTDROPDOWN);
             Click(By.XPath("(//mat-option/span)[text()='Live Draft']"));
-            Info("selected a Live draft in Right Drop Down");
+            Info(test,"selected a Live draft in Right Drop Down");
 
         }
         public Boolean IsAcceptDraftToLiveButtonEnabled()
         {
             Boolean Flag = this.IsEnabled(By.XPath("//button[@ng-reflect-disabled='true'] /span/i[@class='mdi mdi-checkbox-marked-circle-outline mdi-18px']"));
 
-           Info("AddProject Button id Enabled");
+           Info(test,"AddProject Button id Enabled");
 
 
             return Flag;
@@ -156,13 +157,13 @@ namespace DocWorksQA.Pages
         {
             Click(RIGHT_DRAFTDROPDOWN);
             Click(By.XPath("(//mat-option/span)[text()='Coder Draft']"));
-            Info("selected a Coder draft in Right Drop Down");
+            Info(test,"selected a Coder draft in Right Drop Down");
 
         }
         public String GetTextInRightDropDown()
         {
            String str= GetText(RIGHT_DRAFTDROPDOWN);
-           Info("Right Drop Down Value is " + str);
+           Info(test,"Right Drop Down Value is " + str);
             return str;
         }
         public IWebElement EnterIntoRightFrame()
@@ -181,20 +182,20 @@ namespace DocWorksQA.Pages
         {
             Click(RIGHT_HTML_TAB);
             System.Threading.Thread.Sleep(20000);
-            Info("Clicked On Right HTML Tab");
+            Info(test,"Clicked On Right HTML Tab");
 
         }
         public void GdocLeftTab()
         {
             Click(LEFT_GDOC_TAB);
-            Info("Clicked On Left GDOC Tab");
+            Info(test,"Clicked On Left GDOC Tab");
         }
 
         public void HtmlLeftTab()
         {
             Click(LEFT_HTML_TAB);
             System.Threading.Thread.Sleep(20000);
-            Info("Clicked On Left HTML Tab");
+            Info(test,"Clicked On Left HTML Tab");
 
         }
 
@@ -202,51 +203,51 @@ namespace DocWorksQA.Pages
         {
             Click(LEFT_HISTORY_TAB);
             System.Threading.Thread.Sleep(20000);
-            Info("Clicked On Left History Tab");
+            Info(test,"Clicked On Left History Tab");
 
         }
         public void HistoryRightTab()
         {
             Click(RIGHT_HISTORY_TAB);
             System.Threading.Thread.Sleep(20000);
-            Info("Clicked On Right History Tab");
+            Info(test,"Clicked On Right History Tab");
         }
         public void GdocRightTab()
         {
             Click(RIGHT_GDOC_TAB);
             System.Threading.Thread.Sleep(20000);
-            Info("Clicked on Right GDOC Tab");
+            Info(test,"Clicked on Right GDOC Tab");
         }
         public void MDRightTab()
         {
             Click(RIGHT_MD_TAB);
             System.Threading.Thread.Sleep(20000);
-            Info("Clicked on Right MD Tab");
+            Info(test,"Clicked on Right MD Tab");
         }
         public void MDLeftTab()
         {
             Click(LEFT_MD_TAB);
             System.Threading.Thread.Sleep(20000);
-            Info("Clicked On Left MD Tab");
+            Info(test,"Clicked On Left MD Tab");
         }
         public void PreviewRightTab()
         {
             Click(RIGHT_PREVIEW_TAB);
             System.Threading.Thread.Sleep(20000);
-            Info("Clicked On Right Preview Tab");
+            Info(test,"Clicked On Right Preview Tab");
         }
         public void PreviewLeftTab()
         {
             Click(LEFT_PREVIEW_TAB);
             System.Threading.Thread.Sleep(20000);
-            Info("Clicked on Left Preview Tab");
+            Info(test,"Clicked on Left Preview Tab");
         }
 
         public void  ClickGdocRight()
         {
             Click(EDT_GDOC_HDR);
             System.Threading.Thread.Sleep(7000);
-            Info("Clicked On GDOC Right");
+            Info(test,"Clicked On GDOC Right");
             
         }
 
@@ -254,25 +255,25 @@ namespace DocWorksQA.Pages
         {
             Click(INSERT);
             System.Threading.Thread.Sleep(7000);
-            Info("Clicked On Insert Menu");
+            Info(test,"Clicked On Insert Menu");
             Click(SELECT_INSERT_IMAGE);
             System.Threading.Thread.Sleep(7000);
-            Info("Selected Insert Image");
+            Info(test,"Selected Insert Image");
             Click(CLICK_UPLOADED_BY_ME);
             System.Threading.Thread.Sleep(7000);
-            Info("Clicked on Uploaded By Me Tab");
+            Info(test,"Clicked on Uploaded By Me Tab");
         }
         public void ClickInsertCodeBlock()
         {
             Click(INSERT);
             System.Threading.Thread.Sleep(7000);
-            Info("Clicked on Insert Menu");
+            Info(test,"Clicked on Insert Menu");
             Click(SELECT_INSERT_CODEBLOCK);
             System.Threading.Thread.Sleep(7000);
-            Info("Selected Insert CodeBlock");
+            Info(test,"Selected Insert CodeBlock");
             Click(CLICK_UPLOADED_BY_ME);
             System.Threading.Thread.Sleep(7000);
-            Info("Clicked on Uploaded By Me Tab");
+            Info(test,"Clicked on Uploaded By Me Tab");
         }
 
         public void SearchAssetID()
@@ -281,7 +282,7 @@ namespace DocWorksQA.Pages
             EnterValue(SEARCH_ASSETID, Keys.Control + "v");
             System.Threading.Thread.Sleep(7000);
             Click(By.XPath("//button/span/i[@class='mdi mdi-magnify mdi-24px']"));
-           Info("Clicked the search button");
+           Info(test,"Clicked the search button");
         }
 
         public void ReplaceTheImage(String Name)
@@ -296,7 +297,7 @@ namespace DocWorksQA.Pages
             System.Threading.Thread.Sleep(7000);
             Click(By.XPath("//mat-dialog-actions/div/button/span[text()='REPLACE']"));
             System.Threading.Thread.Sleep(27000);
-            Info("Replaced the Image");
+            Info(test,"Replaced the Image");
         }
 
         public void ReplaceCodeBlocks()
@@ -309,7 +310,7 @@ namespace DocWorksQA.Pages
             System.Threading.Thread.Sleep(7000);
             Click(By.XPath("//mat-dialog-actions/div/button/span[text()='REPLACE']"));
             System.Threading.Thread.Sleep(27000);
-            Info("Replaced the codeBlocks");
+            Info(test,"Replaced the codeBlocks");
 
         }
         public void SelectImageFromUpload(String Name)
@@ -317,57 +318,57 @@ namespace DocWorksQA.Pages
             Info("Selecting image: "+Name+" from the Upload");
             System.Threading.Thread.Sleep(7000);
             Click(By.XPath("//button/span/i[@class='mdi mdi-content-copy']"));
-            Info("copying the clipboard content of Image");
+            Info(test,"copying the clipboard content of Image");
             System.Threading.Thread.Sleep(8000);
             Click(By.XPath("//button/span/i[@class='mdi mdi-close mdi-24px']"));
             System.Threading.Thread.Sleep(7000);
-            Info("copied the Asset Id and Closed the dialog box");
+            Info(test,"copied the Asset Id and Closed the dialog box");
         }
 
         public void SelectCodeBlockFromUpload(String Name)
         {
           
-           Info("Selecting CodeBlock: "+Name+" from Upload");
+           Info(test,"Selecting CodeBlock: "+Name+" from Upload");
             System.Threading.Thread.Sleep(7000);
             Click(By.XPath("//button/span/i[@class='mdi mdi-content-copy']"));
-            Info("copying the clipboard content");
+            Info(test,"copying the clipboard content");
             System.Threading.Thread.Sleep(7000);
             Click(By.XPath("//button/span/i[@class='mdi mdi-close mdi-24px']"));
             System.Threading.Thread.Sleep(7000);
-            Info("copied the Asset Id and Closed the dialog box");
+            Info(test,"copied the Asset Id and Closed the dialog box");
         }
         public void CloseUploadPage()
         {
             Click(By.XPath("//button/span/i[@class='mdi mdi-close mdi-24px']"));
             System.Threading.Thread.Sleep(7000);
-            Info("Closed the Uppload Image Dialog box");
+            Info(test,"Closed the Uppload Image Dialog box");
         }
 
         public void EnterAssetID()
         {
             EnterValue(SEARCH_ASSETID, Keys.Control + "V");
-            Info("ENtered the Asset ID in Search Bar");
+            Info(test,"ENtered the Asset ID in Search Bar");
         }
         public void EnterAssetName(String Name)
         {
             EnterValue(SEARCH_ASSETID, Name);
-            Info("ENtered Asset Name: " + Name);
+            Info(test,"ENtered Asset Name: " + Name);
             Click(SEARCH_ASSET_BAR);
-            Info("Clicked On Search Bar");
+            Info(test,"Clicked On Search Bar");
             System.Threading.Thread.Sleep(5000);
         }
         public void ClickMedia()
         {
             Click(By.XPath("//a[@href='/media']"));
             System.Threading.Thread.Sleep(7000);
-            Info("Clicked on Media Tab");
+            Info(test,"Clicked on Media Tab");
 
         }
         public void ClickCodeBlocksTab()
         {
             Click(CLICK_CODEBLOCK_TAB);
             System.Threading.Thread.Sleep(5000);
-            Info("Clicked on CodeBlock Tab");
+            Info(test,"Clicked on CodeBlock Tab");
         }
 
         public void UploadCodeBlock()
@@ -379,7 +380,7 @@ namespace DocWorksQA.Pages
                 Console.WriteLine("********" + CodeBlock_Path);
                 EnterValue(UPLOAD_BUTTON, CodeBlock_Path);
                 System.Threading.Thread.Sleep(17000);
-                Info("Uploaded CodeBlock");
+                Info(test,"Uploaded CodeBlock");
             }
             catch (Exception e)
             {
@@ -438,7 +439,7 @@ namespace DocWorksQA.Pages
                 Console.WriteLine("********" + Image_Path);
                 EnterValue(UPLOAD_BUTTON, Image_Path);
                 System.Threading.Thread.Sleep(7000);
-                Info("Uploaded Image");
+                Info(test,"Uploaded Image");
                 
             }
             catch(Exception e)
@@ -457,7 +458,7 @@ namespace DocWorksQA.Pages
             System.Threading.Thread.Sleep(7000);
             MoveToelementAndClick(By.XPath("(//div[@class='draft-extend-icons']/i[@title='View Draft'])"));
             System.Threading.Thread.Sleep(7000);
-            Info("Clicked on View Draft");
+            Info(test,"Clicked on View Draft");
         }
 
         public void ViewDraft1()
@@ -467,7 +468,7 @@ namespace DocWorksQA.Pages
             System.Threading.Thread.Sleep(7000);
             MoveToelementAndClick(By.XPath("(//div[@class='draft-extend-icons']/i[@title='View Draft'])"));
             System.Threading.Thread.Sleep(7000);
-            Info("Clicked on Uppdated View Draft");
+            Info(test,"Clicked on Uppdated View Draft");
         }
 
         public String CreateDraftFromSnapshot()
@@ -482,19 +483,19 @@ namespace DocWorksQA.Pages
             System.Threading.Thread.Sleep(7000);
             Click(By.XPath("(//button[@class='mat-raised-button mat-primary']/span)[contains(text(),'Create Draft')]"));
             System.Threading.Thread.Sleep(7000);
-            Info("Created Draft from SnapShot");
+            Info(test,"Created Draft from SnapShot");
             return str;
         }
         public String GetViewDraft()
         {
         String str =  GetText(By.XPath("//mat-dialog-content//div[@class='view-draft-wrapper']/div"));
-            Info("Getting Text From View Draft");
+            Info(test,"Getting Text From View Draft");
             return str;
         }
         public void CloseViewDraft()
         {
             Click(By.XPath("//button//i[@class='mdi mdi-close mdi-24px']"));
-            Info("Closing View Draft");
+            Info(test,"Closing View Draft");
         }
         public void UploadInvalidImages()
         {
@@ -540,23 +541,23 @@ namespace DocWorksQA.Pages
         {
             Click(By.XPath("//a[@href='/dashboard']"));
             System.Threading.Thread.Sleep(7000);
-            Info("Clicked on Dashboard");
+            Info(test,"Clicked on Dashboard");
         }
         public void ClickAcceptDraftToLive()
         {
             Click(CLICK_ACCEPTDRAFTTOLIVE);
-            Info("Clicked on Accept Draft to Live button");
+            Info(test,"Clicked on Accept Draft to Live button");
         }
 
         public void SelectDraftFromAcceptDraftToLiveDropDown()
         {
             Click(SELECT_DRAFT_FROM_CLICK_ACCEPTDRAFTTOLIVE);
-            Info("Clicked on First Option in DropDown");
+            Info(test,"Clicked on First Option in DropDown");
         }
         public String GetDropDownValues()
         {
             String str = GetText(ACCEPTDRAFTTOLIVE_DROPDOWN);
-            Info("When Clicked on Accept Draft to Live button the drop down consists of  "+ str);
+            Info(test,"When Clicked on Accept Draft to Live button the drop down consists of  "+ str);
             Click(By.XPath("//div[@class='cdk-overlay-backdrop cdk-overlay-transparent-backdrop cdk-overlay-backdrop-showing']"));
             return str;
         }
