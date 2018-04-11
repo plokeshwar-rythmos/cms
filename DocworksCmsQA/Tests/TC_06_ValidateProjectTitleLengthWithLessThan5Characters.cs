@@ -34,7 +34,6 @@ namespace DocWorksQA.Tests
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 Console.WriteLine("Starting Test Case : " + TestName);
-
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 Trace.TraceInformation("");
                 test = StartTest(TestName, description);
@@ -44,7 +43,6 @@ namespace DocWorksQA.Tests
                 String expected = "Please enter at least 5 characters";
                 addProject.SelectContentType("Manual");
                 String actual = addProject.GetText(addProject.INVALID_TITLE_LENGTH);
-
                 addProject.SuccessScreenshot("Validating Length of the Title");
                 VerifyEquals(test, expected, actual, "Validation Got Successful", "Validation Got Failed");
             }

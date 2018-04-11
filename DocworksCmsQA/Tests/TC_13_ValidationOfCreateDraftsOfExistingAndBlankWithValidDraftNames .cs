@@ -23,33 +23,17 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
         [Test, Description("Verify User is able to create a Blank Draft")]
-        public void TC_01_ValidationOfBlankDraftWithValidDraftName()
+        public void TC13A_ValidationOfBlankDraftWithValidDraftName()
         {
             try
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
-
-                String projectName = CreateGitLabProject(test, driver);
+                String projectName = CreateDistribution("GitLab", test, driver);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
-                addProject.ClickAddProject();
-
-                CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
-                distmodule.ClickDistribution();
-                String expected1 = distmodule.EnterDistirbutionName();
-                System.Threading.Thread.Sleep(75000);
-                distmodule.SelectBranch("DocworksManual3");
-                distmodule.EnterTocPath();
-                distmodule.EnterDescription("This is to create a distribution With TOC Path");
-                distmodule.ClickCreateDistribution();
-                addProject.ClickNotifications();
-                String status1 = addProject.GetNotificationStatus();
-                addProject.SuccessScreenshot("Distribution got Created successfully With TOC Path");
-                VerifyText(test, "creating distribution " + expected1 + " in " + projectName + " is successful", status1, "Distribution is Created For GitLab TOC with status:" + status1 + "", "Distribution is not created For GitLab TOC with status: " + status1 + "");
-                addProject.ClickDashboard();
                 addProject.SearchForProject(projectName);
-                CreateDraftPage createDraft = new CreateDraftPage(test,driver);
+                CreateDraftPage createDraft = new CreateDraftPage(test, driver);
                 createDraft.ClickOpenProject();
                 createDraft.ClickOnUnityManualNode();
                 createDraft.ClickNewDraft();
@@ -80,7 +64,7 @@ namespace DocWorksQA.Tests
         }
 
         [Test, Description("Verify User is able to create a Existing draft")]
-        public void TC_02_ValidationOfExistingDraftWithValidDraftName()
+        public void TC13B_ValidationOfExistingDraftWithValidDraftName()
         {
             try
             {

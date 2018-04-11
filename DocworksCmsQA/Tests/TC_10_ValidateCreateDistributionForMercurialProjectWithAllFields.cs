@@ -23,8 +23,8 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
 
-        [Test, Description("Verify User is able to add Distribution for the GitHub Project with all Fields")]
-        public void TC10_ValidateCreateDistributionForMercurialProjectWithAllFields()
+        [Test, Description("Verify User is able to add Distribution for the GitHub Project with out TOC")]
+        public void TC10A_ValidateCreateDistributionForMercurialProjectWithoutTOC()
         {
             try
             {
@@ -32,10 +32,8 @@ namespace DocWorksQA.Tests
                 Console.WriteLine("Starting Test Case : " + TestName);
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
-
                 String projectName = CreateMercurialProject(test, driver);
                 AddProjectPage project = new AddProjectPage(test, driver);
-
                 CreateDistributionPage distribution = new CreateDistributionPage(test, driver);
                 distribution.ClickDistribution();
                 String expected1 = distribution.EnterDistirbutionName();
@@ -54,6 +52,32 @@ namespace DocWorksQA.Tests
                 String actual1 = distribution.GetDistributionName();
                 project.SuccessScreenshot("Created Distribution:  " + expected1 + "");
                 VerifyEquals(test, expected1, actual1, "Create Distribution for Mercurial Project With TOC is successful", "Create Distribution for Mercurial Project With TOC is not successful");
+                UpdateMercurialProjectProperties("Success");
+            }
+            catch (Exception ex)
+            {
+                ReportExceptionScreenshot(test, driver, ex);
+                Fail(test, ex);
+                UpdateMercurialProjectProperties("Failure");
+                throw;
+            }
+
+        }
+
+        [Test, Description("Verify User is able to add Distribution for the Mercurial Project without TOC")]
+        public void TC10B_ValidateCreateDistributionForMercurialProjectWithOutTOC()
+        {
+            try
+            {
+                String TestName = (TestContext.CurrentContext.Test.Name.ToString());
+                Console.WriteLine("Starting Test Case : " + TestName);
+                String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
+                test = StartTest(TestName, description);
+                String projectName = CreateGitLabProject(test, driver);
+                AddProjectPage project = new AddProjectPage(test, driver);
+                project.SearchForProject(projectName);
+                CreateDistributionPage distribution = new CreateDistributionPage(test, driver);
+                distribution.ClickDistribution();
                 String expected2 = distribution.EnterDistirbutionName();
                 System.Threading.Thread.Sleep(5000);
                 distribution.EnterBranchWithoutTOCForMercurial("DocworkManual2");

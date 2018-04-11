@@ -345,6 +345,15 @@ namespace DocWorksQA.Utilities
 
         }
 
+        public void UpdateGitHubProjectProperties(String distributionStatus)
+        {
+
+            Properties prop = new Properties(GetCurrentProjectPath() + "//bin/gitHubProject");
+            prop.set("distributionStatus", distributionStatus);
+            prop.Save();
+
+        }
+
         public void UpdateMercurialProjectProperties(String distributionStatus)
         {
 
@@ -475,32 +484,64 @@ namespace DocWorksQA.Utilities
             String projectName = addProject.EnterProjectTitle();
             addProject.SelectContentType("Manual");
             addProject.SelectSourceControlProviderType("GitLab");
-            addProject.SelectRepository("unitydemo2/DocwokrsQA");
+            addProject.SelectRepository("Docworks");
             addProject.EnterPublishedPath("Publishing path to create project");
             addProject.EnterDescription("This is to create Project");
             addProject.ClickCreateProject();
             addProject.ClickNotifications();
-
             String status = GetNotificationStatus(driver);
             addProject.SuccessScreenshot("Project Created Title");
-
             VerifyText(test, "creating a project " + projectName + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
-
             addProject.ClickDashboard();
-
             addProject.SearchForProject(projectName);
             String actual = addProject.GetProjectTitle();
             addProject.SuccessScreenshot("ProjectTitle");
             VerifyEquals(test, projectName, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
-
             var map = new Dictionary<string, string>();
-
             map.Add("projectName", projectName);
             map.Add("projectStatus", "Success");
             CreateFile(GetCurrentProjectPath() + "//bin/gitLabProject.properties", map);
-
             return projectName;
             
+        }
+
+        public String CreateGitHubProject(ExtentTest test, IWebDriver driver)
+        {
+            if (FileExists(GetCurrentProjectPath() + "//bin/gitHubProject.properties"))
+            {
+                Properties prop = new Properties(GetCurrentProjectPath() + "//bin/gitHubProject");
+                if (prop.get("projectStatus").ToLower().Equals("success"))
+                {
+                    Console.WriteLine("Using existing GitHub project.");
+                    return prop.get("projectName");
+                }
+
+            }
+
+            AddProjectPage addProject = new AddProjectPage(test, driver);
+            addProject.ClickAddProject();
+            String projectName = addProject.EnterProjectTitle();
+            addProject.SelectContentType("Manual");
+            addProject.SelectSourceControlProviderType("GitHub");
+            addProject.SelectRepository("Docworks");
+            addProject.EnterPublishedPath("Publishing path to create project");
+            addProject.EnterDescription("This is to create Project");
+            addProject.ClickCreateProject();
+            addProject.ClickNotifications();
+            String status = GetNotificationStatus(driver);
+            addProject.SuccessScreenshot("Project Created Title");
+            VerifyText(test, "creating a project " + projectName + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
+            addProject.ClickDashboard();
+            addProject.SearchForProject(projectName);
+            String actual = addProject.GetProjectTitle();
+            addProject.SuccessScreenshot("ProjectTitle");
+            VerifyEquals(test, projectName, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
+            var map = new Dictionary<string, string>();
+            map.Add("projectName", projectName);
+            map.Add("projectStatus", "Success");
+            CreateFile(GetCurrentProjectPath() + "//bin/gitHubProject.properties", map);
+            return projectName;
+
         }
 
 

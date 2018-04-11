@@ -23,15 +23,14 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
         [Test, Description("Verify User is able to edit the existing draft content in Left side GDOC")]
-        public void TC_01_ValidateScreenEnhancementsWhenUserEditsExistingContentInLeftGdoc()
+        public void TC14A_ValidateScreenEnhancementsWhenUserEditsExistingContentInLeftGdoc()
         {
             try
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-               test= StartTest(TestName, description);
-                System.Threading.Thread.Sleep(5000);
-                String projectName = CreateGitLabProject(test, driver);
+                test = StartTest(TestName, description);
+                String projectName = CreateDistribution("GitLab", test, driver);
                 AddProjectPage project = new AddProjectPage(test, driver);
                 project.SearchForProject(projectName);
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
@@ -67,7 +66,7 @@ namespace DocWorksQA.Tests
             }
         }
         [Test, Description("Verify User is Able to view changes made of Existing Draft in Left GDOC are reflected in Right Side Tabs")]
-        public void TC_02_ValidationWhenEditedExistingDraftInLeftGDocGetsReflectedInRightSideTabs()
+        public void TC14B_ValidationWhenEditedExistingDraftInLeftGDocGetsReflectedInRightSideTabs()
         {
             try
             {
@@ -94,7 +93,7 @@ namespace DocWorksQA.Tests
             }
         }
         [Test, Description("Verify User is able to edit the existing draft content in Right side GDOC")]
-        public void TC_03_ValidationOfScreenEnhancementsUserEditsExistingContentInRightGdoc()
+        public void TC14C_ValidationOfScreenEnhancementsUserEditsExistingContentInRightGdoc()
         {
             try
             {
@@ -134,7 +133,7 @@ namespace DocWorksQA.Tests
             }
         }
        [Test, Description("Verify User is Able to view changes made of Existing Draft in Right GDOC are reflected in Left Side Tabs")]
-        public void TC_04_ValidationWhenUserEditedRightGDocGetsReflectedInLeftSideTabs()
+        public void TC14D_ValidationWhenUserEditedRightGDocGetsReflectedInLeftSideTabs()
         {
             try
             {

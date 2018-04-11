@@ -35,7 +35,6 @@ namespace DocWorksQA.Tests
 
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 Console.WriteLine("Starting Test Case : " + TestName);
-
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
@@ -47,16 +46,11 @@ namespace DocWorksQA.Tests
                 addProject.EnterPublishedPath("Publishing path to create project");
                 addProject.EnterDescription("This is to create Project");
                 addProject.ClickCreateProject();
-
                 addProject.ClickNotifications();
-
                 String status = addProject.GetNotificationStatus();
                 addProject.SuccessScreenshot("Project Created Title");
-
                 VerifyText(test, "creating a project " + projectName + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
-
                 addProject.ClickDashboard();
-
                 addProject.SearchForProject(projectName);
                 String actual = addProject.GetProjectTitle();
                 addProject.SuccessScreenshot("ProjectTitle");

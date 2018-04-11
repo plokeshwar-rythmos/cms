@@ -14,7 +14,6 @@ namespace DocWorksQA.Tests
         private static IWebDriver driver;
         private ExtentTest test;
 
-
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
@@ -33,11 +32,8 @@ namespace DocWorksQA.Tests
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
-
                 String projectName = CreateDistribution("GitLab", test, driver);
-
                 AddProjectPage addProject = new AddProjectPage(test, driver);
-                
                 addProject.SearchForProject(projectName);
                 CreateDraftPage createDraft = new CreateDraftPage(test,driver);
                 createDraft.ClickOpenProject();
@@ -65,7 +61,6 @@ namespace DocWorksQA.Tests
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
-
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
                 createDraft.ClickNewDraft();
                 String expected2 = "Please enter at least 5 characters.";

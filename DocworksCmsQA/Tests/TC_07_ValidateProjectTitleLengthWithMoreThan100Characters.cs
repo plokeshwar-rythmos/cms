@@ -33,16 +33,13 @@ namespace DocWorksQA.Tests
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 Console.WriteLine("Starting Test Case : " + TestName);
-
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.ClickAddProject();
                 addProject.ProjectLengthMoreThan100();
                 addProject.SelectContentType("Manual");
- 
                 addProject.SuccessScreenshot("Length of the Title exceeded its limit");
-
                 String str = addProject.GetTitleLength();
                 VerifyEquals(test, "100/100", str, "Length Of Project Title got exceeded to its limit as " + str + "", "Length Of Project Title Not got exceeded to its limit as " + str + "");
 

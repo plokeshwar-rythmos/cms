@@ -26,7 +26,7 @@ namespace DocWorksQA.Tests
         }
 
         [Test, Description("Verify User is able to add Distribution for the GitLab Project with TOC")]
-        public void TC08_ValidateCreateDistributionForGitLabProjectWithTOC()
+        public void TC08A_ValidateCreateDistributionForGitLabProjectWithTOC()
         {
             try
             {
@@ -34,10 +34,8 @@ namespace DocWorksQA.Tests
                 Console.WriteLine("Starting Test Case : " + TestName);
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
-
                 String projectName = CreateGitLabProject(test, driver);
                 AddProjectPage project = new AddProjectPage(test, driver);
-
                 project.SearchForProject(projectName);
                 CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
                 distmodule.ClickDistribution();
@@ -51,7 +49,6 @@ namespace DocWorksQA.Tests
                 String status1 = project.GetNotificationStatus();
                 SuccessScreenshot(driver, "Distribution got Created successfully With TOC Path", test);
                 VerifyText(test, "creating distribution " + distributionName + " in " + projectName + " is successful", status1, "Distribution is Created For GitLab TOC with status:" + status1 + "", "Distribution is not created For GitLab TOC with status: " + status1 + "");
-
                 project.ClickDashboard();
                 project.SearchForProject(projectName);
                 distmodule.ClickDistribution();
@@ -71,7 +68,7 @@ namespace DocWorksQA.Tests
         }
 
         [Test, Description("Verify User is able to add Distribution for the GitLab Project without TOC")]
-        public void TC09_ValidateCreateDistributionForGitLabProjectWithOutTOC()
+        public void TC08B_ValidateCreateDistributionForGitLabProjectWithOutTOC()
         {
             try
             {
@@ -79,14 +76,11 @@ namespace DocWorksQA.Tests
                 Console.WriteLine("Starting Test Case : " + TestName);
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
-
                 String projectName = CreateGitLabProject(test, driver);
                 AddProjectPage project = new AddProjectPage(test, driver);
-
                 project.SearchForProject(projectName);
                 CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
                 distmodule.ClickDistribution();
-                
                 String expected2 = distmodule.EnterDistirbutionName();
                 System.Threading.Thread.Sleep(75000);
                 distmodule.SelectBranch("DocworksManual2");
@@ -96,12 +90,13 @@ namespace DocWorksQA.Tests
                 String status2 = project.GetNotificationStatus();
                 SuccessScreenshot(driver, "Distribution: " + expected2 + " got Created successfully Without TOC Path", test);
                 VerifyText(test, "creating distribution " + expected2 + " in " + projectName + " is successful", status2, "Distribution is Created For GitLab Without TOC with status:" + status2 + "", "Distribution is not created For GitLab without TOC with status: " + status2 + "");
-
+                UpdateGitLabProjectProperties("Success");
             }
             catch (Exception ex)
             {
                 ReportExceptionScreenshot(test, driver, ex);
                 Fail(test, ex);
+                UpdateGitLabProjectProperties("Failure");
                 throw;
             }
 

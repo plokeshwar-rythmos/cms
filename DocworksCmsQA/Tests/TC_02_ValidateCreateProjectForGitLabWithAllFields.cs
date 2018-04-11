@@ -44,27 +44,19 @@ namespace DocWorksQA.Tests
                 addProject.EnterDescription("This is to create Project");
                 addProject.ClickCreateProject();
                 addProject.ClickNotifications();
-
                 String status = addProject.GetNotificationStatus();
                 addProject.SuccessScreenshot("Project Created Title");
-
                 VerifyText(test, "creating a project "+projectName+ " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
-
                 addProject.ClickDashboard();
-
                 addProject.SearchForProject(projectName);
                 String actual = addProject.GetProjectTitle();
                 addProject.SuccessScreenshot("ProjectTitle");
                 VerifyEquals(test, projectName, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
-
                 var map = new Dictionary<string, string>();
-
                 map.Add("projectName", projectName);
                 map.Add("projectStatus", "Success");
                 map.Add("distributionStatus", "");
                 CreateFile(GetCurrentProjectPath() + "//bin/gitLabProject.properties", map);
-
-
             }
             catch (Exception e)
             {
