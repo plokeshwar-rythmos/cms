@@ -34,6 +34,7 @@ namespace DocWorksQA.Tests
                 test = StartTest(TestName, description);
                 String projectName = CreateMercurialProject(test, driver);
                 AddProjectPage project = new AddProjectPage(test, driver);
+                project.SearchForProject(projectName);
                 CreateDistributionPage distribution = new CreateDistributionPage(test, driver);
                 distribution.ClickDistribution();
                 String expected1 = distribution.EnterDistirbutionName();

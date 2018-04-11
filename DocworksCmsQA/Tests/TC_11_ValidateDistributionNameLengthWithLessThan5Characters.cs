@@ -32,6 +32,7 @@ namespace DocWorksQA.Tests
                 test = StartTest(TestName, description);
                 String projectName = CreateMercurialProject(test, driver);
                 AddProjectPage project = new AddProjectPage(test, driver);
+                project.SearchForProject(projectName);
                 CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
                 distmodule.ClickDistribution();
                 String expected1 = "Please enter at least 5 characters.";
