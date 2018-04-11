@@ -64,7 +64,7 @@ namespace DocWorksQA.Tests
                 //addProject.ClickDashboard();
                 addProject.SearchForProject("SELENIUM_B7");
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
-                createDraft.CLICKOPENPROJECT();
+                createDraft.ClickOpenProject();
                 createDraft.ClickOnUnityManualNode();
                 createDraft.ClickNewDraft();
                 String draftName = createDraft.EnterValidDraftName();

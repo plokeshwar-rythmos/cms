@@ -182,7 +182,7 @@ namespace DocWorksQA.Pages
         * MethodName: CLOSEDRAFT()
         * Description: This method is used to close draft
         */
-        public void CLOSEDRAFT()
+        public void CloseDraft()
         {
             Click(CLOSEDRAFT_BUTTON);
             Info(test,"Clicked on Close Draft Button.");
@@ -192,7 +192,7 @@ namespace DocWorksQA.Pages
         * MethodName: CLICKOPENPROJECT()
         * Description: This method is used to open the project
         */
-        public void CLICKOPENPROJECT()
+        public void ClickOpenProject()
         {
             Click(OPENPROJECT);
             System.Threading.Thread.Sleep(25000);

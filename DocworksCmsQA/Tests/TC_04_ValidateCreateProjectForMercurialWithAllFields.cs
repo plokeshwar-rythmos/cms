@@ -39,7 +39,7 @@ namespace DocWorksQA.Tests
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.ClickAddProject();
-                String expected = addProject.EnterProjectTitle();
+                String projectName = addProject.EnterProjectTitle();
 
                 addProject.SelectContentType("Manual");
                 addProject.SelectSourceControlProviderType("Ono");
@@ -54,19 +54,19 @@ namespace DocWorksQA.Tests
                 String status = addProject.GetNotificationStatus();
                 addProject.SuccessScreenshot("Project Created Title");
 
-                VerifyText(test, "creating a project " + expected + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
+                VerifyText(test, "creating a project " + projectName + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
 
                 addProject.ClickDashboard();
 
-                addProject.SearchForProject(expected);
+                addProject.SearchForProject(projectName);
                 String actual = addProject.GetProjectTitle();
                 addProject.SuccessScreenshot("ProjectTitle");
-                VerifyEquals(test, expected, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
+                VerifyEquals(test, projectName, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
 
                 var map = new Dictionary<string, string>();
-
-                map.Add("projectName", expected);
+                map.Add("projectName", projectName);
                 map.Add("projectStatus", "Success");
+                map.Add("distributionStatus", "");
                 CreateFile(GetCurrentProjectPath() + "//bin/onoProject.properties", map);
 
             }

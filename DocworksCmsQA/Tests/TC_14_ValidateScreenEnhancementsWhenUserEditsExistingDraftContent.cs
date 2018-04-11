@@ -35,7 +35,7 @@ namespace DocWorksQA.Tests
                 AddProjectPage project = new AddProjectPage(test, driver);
                 project.SearchForProject(projectName);
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
-                createDraft.CLICKOPENPROJECT();
+                createDraft.ClickOpenProject();
                 createDraft.ClickOnUnityManualNode();
                 createDraft.ClickNewDraft();
                 String draftName = createDraft.EnterValidDraftName();

@@ -40,13 +40,13 @@ namespace DocWorksQA.Tests
                 
                 addProject.SearchForProject(projectName);
                 CreateDraftPage createDraft = new CreateDraftPage(test,driver);
-                createDraft.CLICKOPENPROJECT();
+                createDraft.ClickOpenProject();
                 createDraft.ClickOnUnityManualNode();
                 createDraft.ClickNewDraft();
                 Boolean flag = createDraft.IsDraftPopUpEnabled();
                 addProject.SuccessScreenshot("Draft Dialog Box Is appeared on screen");
                 VerifyBoolean(test,true, flag, "Draft Dialog Box got Opened Successfully", "Draft Dialog Box is not Opened Successfully");
-                createDraft.CLOSEDRAFT();
+                createDraft.CloseDraft();
             }
             catch (Exception ex)
             {
@@ -65,6 +65,7 @@ namespace DocWorksQA.Tests
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
+
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
                 createDraft.ClickNewDraft();
                 String expected2 = "Please enter at least 5 characters.";
@@ -72,7 +73,7 @@ namespace DocWorksQA.Tests
                 String actual2 = createDraft.GetErrorText(createDraft.DRAFTNAMEERROR);
                 addProject.SuccessScreenshot("Validating Draft Name Length");
                 VerifyEquals(test,expected2, actual2, "Validation Of Length Constraints for Draft Name Field is successful", "Validation of Length Constraints for Draft Name Field is not successful");
-                createDraft.CLOSEDRAFT();
+                createDraft.CloseDraft();
             }
             catch (Exception ex)
             {

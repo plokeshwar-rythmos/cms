@@ -63,11 +63,13 @@ namespace DocWorksQA.Tests
                 String status2 = project.GetNotificationStatus();
                 project.SuccessScreenshot("Distribution: " + expected2 + " got Created successfully Without TOC Path");
                 VerifyText(test, "creating distribution " + expected2 + " in " + projectName + " is successful", status2, "Distribution is Created For Mercurial Without TOC with status:" + status2 + "", "Distribution is not created For Mercurial without TOC with status: " + status2 + "");
+                UpdateMercurialProjectProperties("Success");
             }
             catch (Exception ex)
             {
                 ReportExceptionScreenshot(test, driver, ex);
                 Fail(test, ex);
+                UpdateMercurialProjectProperties("Failure");
                 throw;
             }
 

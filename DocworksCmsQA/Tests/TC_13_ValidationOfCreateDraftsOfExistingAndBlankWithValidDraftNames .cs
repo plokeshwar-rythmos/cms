@@ -50,7 +50,7 @@ namespace DocWorksQA.Tests
                 addProject.ClickDashboard();
                 addProject.SearchForProject(projectName);
                 CreateDraftPage createDraft = new CreateDraftPage(test,driver);
-                createDraft.CLICKOPENPROJECT();
+                createDraft.ClickOpenProject();
                 createDraft.ClickOnUnityManualNode();
                 createDraft.ClickNewDraft();
                 String draftName = createDraft.EnterValidDraftName();
@@ -68,7 +68,7 @@ namespace DocWorksQA.Tests
                 addProject.SuccessScreenshot("Error Message While Creating Duplicate Draft");
                 String actual2 = addProject.GetText(addProject.INVALID_TITLE_LENGTH);
                 VerifyEquals(test,str, actual2, "Duplicate Draft: " + draftName + " is Unable to Create", "Duplicate Draft " + draftName + " is created");
-                createDraft.CLOSEDRAFT();
+                createDraft.CloseDraft();
 
             }
             catch (Exception ex)
@@ -105,7 +105,7 @@ namespace DocWorksQA.Tests
                 addProject.SuccessScreenshot("Error Message While Creating Duplicate Draft");
                 String actual2 = addProject.GetText(addProject.INVALID_TITLE_LENGTH);
                VerifyEquals(test,str, actual2, "Duplicate Draft: " + draftName + " is Unable to Create", "Duplicate Draft " + draftName + " is created");
-                createDraft.CLOSEDRAFT();
+                createDraft.CloseDraft();
             }
             catch (Exception ex)
             {

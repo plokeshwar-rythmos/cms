@@ -238,7 +238,6 @@ namespace DocWorksQA.Utilities
                 string key = pair.Key;
                 string value = pair.Value;
                 w.WriteLine(key + "=" + value);
-                w.Write(w.NewLine);
             }
 
             w.Close();
@@ -507,7 +506,7 @@ namespace DocWorksQA.Utilities
 
         public String CreateMercurialProject(ExtentTest test, IWebDriver driver) {
 
-            if (System.IO.File.Exists(GetCurrentProjectPath() + "//bin/onoProject.properties"))
+            if (FileExists(GetCurrentProjectPath() + "//bin/onoProject.properties"))
             {
                 Properties prop = new Properties(GetCurrentProjectPath() + "//bin/onoProject");
                 if (prop.get("projectStatus").ToLower().Equals("success"))
