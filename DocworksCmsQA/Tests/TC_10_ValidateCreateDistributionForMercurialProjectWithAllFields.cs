@@ -34,6 +34,7 @@ namespace DocWorksQA.Tests
                 test = StartTest(TestName, description);
                 String projectName = CreateMercurialProject(test, driver);
                 AddProjectPage project = new AddProjectPage(test, driver);
+                project.ClickDashboard();
                 project.SearchForProject(projectName);
                 CreateDistributionPage distribution = new CreateDistributionPage(test, driver);
                 distribution.ClickDistribution();
@@ -74,7 +75,7 @@ namespace DocWorksQA.Tests
                 Console.WriteLine("Starting Test Case : " + TestName);
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
-                String projectName = CreateGitLabProject(test, driver);
+                String projectName = CreateMercurialProject(test, driver);
                 AddProjectPage project = new AddProjectPage(test, driver);
                 project.SearchForProject(projectName);
                 CreateDistributionPage distribution = new CreateDistributionPage(test, driver);

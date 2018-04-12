@@ -30,7 +30,7 @@ namespace DocWorksQA.Tests
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
-                String projectName = CreateDistribution("GitLab", test, driver);
+                String projectName = CreateDistribution("Mercurial", test, driver);
                 AddProjectPage project = new AddProjectPage(test, driver);
                 project.SearchForProject(projectName);
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);

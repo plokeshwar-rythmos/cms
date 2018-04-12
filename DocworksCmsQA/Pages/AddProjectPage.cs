@@ -63,6 +63,7 @@ namespace DocWorksQA.Pages
         public void SearchForProject(String projectName)
         {
             Clear(ENTER_SEARCH);
+            System.Threading.Thread.Sleep(15000);
             EnterValue(ENTER_SEARCH, projectName);
             Info(test, "Entered the Project Name in search bar");
             
@@ -229,7 +230,7 @@ namespace DocWorksQA.Pages
         }
 
         public void WaitForProcessCompletion() {
-            for(int i = 0; i < 300; i++)
+            for(int i = 0; i < 500; i++)
             {
                 
                 String tmp = driver.FindElement(NOTIFICATION_MESSAGE).Text; //WaitForElement(NOTIFICATION_MESSAGE).Text;
@@ -243,7 +244,7 @@ namespace DocWorksQA.Pages
                 {
                     Console.WriteLine(tmp);
                     //Console.WriteLine("Notification is still in progress.");
-                    System.Threading.Thread.Sleep(1000);
+                    System.Threading.Thread.Sleep(2000);
                 }
 
             }

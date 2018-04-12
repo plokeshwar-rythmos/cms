@@ -24,7 +24,7 @@ namespace DocWorksQA.Tests
 
         [Test, Description("Verify New Draft Button is enabled or not")]
 
-        public void TC_12A_ValidateNewDraftDialogBoxIsAppearedOrNot()
+        public void TC12A_ValidateNewDraftDialogBoxIsAppearedOrNot()
         {
 
             try
@@ -32,7 +32,7 @@ namespace DocWorksQA.Tests
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
-                String projectName = CreateDistribution("GitLab", test, driver);
+                String projectName = CreateDistribution("Mercurial", test, driver);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.SearchForProject(projectName);
                 CreateDraftPage createDraft = new CreateDraftPage(test,driver);
@@ -53,7 +53,7 @@ namespace DocWorksQA.Tests
         }
 
         [Test, Description("Verify When User Enters Invalid Draft Name Then an error message is apeared")]
-        public void TC_12B_ValidateErrorMesgForInvalidDraftName()
+        public void TC12B_ValidateErrorMesgForInvalidDraftName()
         {
             try
             {
