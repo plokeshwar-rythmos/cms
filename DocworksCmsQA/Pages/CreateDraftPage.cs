@@ -96,7 +96,7 @@ namespace DocWorksQA.Pages
         public void ClickOnUnityManualNode()
         {
             Click(UNITYMANUAL_CLICK);
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(15000);
             Info(test,"Clicked on Unity Manual Node");
 
         }

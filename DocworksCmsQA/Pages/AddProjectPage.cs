@@ -306,6 +306,7 @@ namespace DocWorksQA.Pages
                 this.Click(SOURCE_CONTROL_PROVIDER_DROPDOWN);
                 By OPTION = By.XPath("//mat-option//span[contains(@class,'mat-option-text')][contains(text(),'" + value + "')]");
                 this.Click(OPTION);
+                System.Threading.Thread.Sleep(15000);
                 Info(test, "Selected Source Control Provider Type as " + value);
             }
             else

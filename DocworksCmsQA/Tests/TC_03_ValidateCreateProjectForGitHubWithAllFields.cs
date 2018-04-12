@@ -27,7 +27,7 @@ namespace DocWorksQA.Tests
 
 
 
-       // [Test, Description("Verifying User is able to Add Project For GitHub  with all Fields")]
+        [Test, Description("Verifying User is able to Add Project For GitHub  with all Fields")]
         public void TC03_ValidateCreateProjectForGitHubWithAllFields()
         {
             try
