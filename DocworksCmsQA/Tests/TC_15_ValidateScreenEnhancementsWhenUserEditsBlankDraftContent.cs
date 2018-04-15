@@ -32,6 +32,7 @@ namespace DocWorksQA.Tests
                 test = StartTest(TestName, description);
                 String projectName = CreateDistribution("Mercurial", test, driver);
                 AddProjectPage project = new AddProjectPage(test, driver);
+                project.ClickDashboard();
                 project.SearchForProject(projectName);
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
                 createDraft.ClickOpenProject();
@@ -72,7 +73,7 @@ namespace DocWorksQA.Tests
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-                CreateTest(TestName, description);
+                test = StartTest(TestName, description);
                 String expected = "SELENIUM_TEST_123";
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test, driver);
@@ -99,7 +100,7 @@ namespace DocWorksQA.Tests
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-                CreateTest(TestName, description);
+                test=StartTest(TestName, description);
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
                 createDraft.ClickNewDraft();
                 String draftName = createDraft.EnterValidDraftName();
@@ -139,7 +140,7 @@ namespace DocWorksQA.Tests
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-                CreateTest(TestName, description);
+                test=StartTest(TestName, description);
                 String expected = "SELENIUM_TEST_123";
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test, driver);

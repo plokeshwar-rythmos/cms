@@ -65,7 +65,7 @@ namespace DocWorksQA.Pages
             Clear(ENTER_SEARCH);
             System.Threading.Thread.Sleep(15000);
             EnterValue(ENTER_SEARCH, projectName);
-            Info(test, "Entered the Project Name in search bar");
+            Info(test, "Entered the Project Name: "+ projectName + " in search bar");
             
         }
 
@@ -306,13 +306,14 @@ namespace DocWorksQA.Pages
                 this.Click(SOURCE_CONTROL_PROVIDER_DROPDOWN);
                 By OPTION = By.XPath("//mat-option//span[contains(@class,'mat-option-text')][contains(text(),'" + value + "')]");
                 this.Click(OPTION);
-                System.Threading.Thread.Sleep(15000);
+                
                 Info(test, "Selected Source Control Provider Type as " + value);
             }
             else
             {
                 Info(test, value + " Source Control Provider Type already Selected.");
             }
+            System.Threading.Thread.Sleep(15000);
         }
 
         public void SelectRepository(String value)

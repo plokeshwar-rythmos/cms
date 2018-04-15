@@ -217,7 +217,7 @@ namespace DocWorksQA.Pages
         public void ClickCloseButton()
         {
             Click(CLOSE_BUTTON);
-            Info(test, "Click Close Button");
+            Info(test, "Clicked Close Button");
             
 
         }

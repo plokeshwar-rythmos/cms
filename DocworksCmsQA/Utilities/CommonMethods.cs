@@ -418,6 +418,30 @@ namespace DocWorksQA.Utilities
                 }
 
             }
+            else if (projectType.Equals("GitHub"))
+            {
+                if (FileExists(GetCurrentProjectPath() + "//bin/GitHubProject.properties"))
+                {
+                    Properties prop = new Properties(GetCurrentProjectPath() + "//bin/GitHubProject");
+                    if (prop.get("distributionStatus").ToLower().Equals("success"))
+                    {
+                        Console.WriteLine("Using existing GitHub project.");
+                        projectName = prop.get("projectName");
+                    }
+                    else if (prop.get("projectStatus").ToLower().Equals("success"))
+                    {
+                        CreateDistribution(test, driver, prop.get("projectName"));
+                        UpdateGitHubProjectProperties("Success");
+                    }
+                    else
+                    {
+                        projectName = CreateGitHubProject(test, driver);
+                        CreateDistribution(test, driver, projectName);
+                        UpdateGitHubProjectProperties("Success");
+                    }
+                }
+
+            }
 
             return projectName;
 
@@ -432,7 +456,6 @@ namespace DocWorksQA.Utilities
             project.SearchForProject(projectName);
             CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
             distmodule.ClickDistribution();
-
             String expected2 = distmodule.EnterDistirbutionName();
             System.Threading.Thread.Sleep(75000);
             distmodule.SelectBranch("DocworksManual2");
@@ -442,12 +465,12 @@ namespace DocWorksQA.Utilities
             String status2 = project.GetNotificationStatus();
             SuccessScreenshot(driver, "Distribution: " + expected2 + " got Created successfully Without TOC Path", test);
             VerifyText(test, "creating distribution " + expected2 + " in " + projectName + " is successful", status2, "Distribution is Created For GitLab Without TOC with status:" + status2 + "", "Distribution is not created For GitLab without TOC with status: " + status2 + "");
-
+            project.ClickDashboard();
             return projectName;
 
         }
 
-        public void CreateMercurialDistribution(ExtentTest test, IWebDriver driver, String projectName)
+        public String CreateMercurialDistribution(ExtentTest test, IWebDriver driver, String projectName)
         {
             AddProjectPage project = new AddProjectPage(test, driver);
 
@@ -464,6 +487,8 @@ namespace DocWorksQA.Utilities
             String status1 = project.GetNotificationStatus();
             project.SuccessScreenshot("Distribution got Created successfully With TOC Path");
             VerifyText(test, "creating distribution " + expected1 + " in " + projectName + " is successful", status1, "Distribution is Created For Mercurial TOC with status:" + status1 + "", "Distribution is not created For Mercurial TOC with status: " + status1 + "");
+            project.ClickDashboard();
+            return projectName;
         }
 
         public String CreateGitLabProject(ExtentTest test, IWebDriver driver)

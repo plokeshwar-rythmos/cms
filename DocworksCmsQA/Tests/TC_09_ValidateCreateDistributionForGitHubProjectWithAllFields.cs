@@ -34,6 +34,7 @@ namespace DocWorksQA.Tests
                 test = StartTest(TestName, description);
                 String projectName = CreateGitHubProject(test, driver);
                 AddProjectPage project = new AddProjectPage(test, driver);
+                project.ClickDashboard();
                 project.SearchForProject(projectName);
                 CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
                 distmodule.ClickDistribution();
@@ -54,6 +55,7 @@ namespace DocWorksQA.Tests
                 SuccessScreenshot(driver, "Created Distribution:  " + distributionName + "", test);
                 VerifyEquals(test, distributionName, actual1, "Create Distribution for GitLab Project With TOC is successful", "Create Distribution for GitLab Project With TOC is not successful");
                 UpdateGitHubProjectProperties("Success");
+                distmodule.ClickCloseButton();
             }
             catch (Exception ex)
             {
@@ -66,7 +68,7 @@ namespace DocWorksQA.Tests
         }
 
 
-        [Test, Description("Verify User is able to add Distribution for the GitHub Project without TOC")]
+       // [Test, Description("Verify User is able to add Distribution for the GitHub Project without TOC")]
         public void TC09B_ValidateCreateDistributionForGitHubProjectWithOutTOC()
         {
             try
@@ -77,6 +79,7 @@ namespace DocWorksQA.Tests
                 test = StartTest(TestName, description);
                 String projectName = CreateGitHubProject(test, driver);
                 AddProjectPage project = new AddProjectPage(test, driver);
+                project.ClickDashboard();
                 project.SearchForProject(projectName);
                 CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
                 distmodule.ClickDistribution();
@@ -89,7 +92,7 @@ namespace DocWorksQA.Tests
                 String status2 = project.GetNotificationStatus();
                 SuccessScreenshot(driver, "Distribution: " + expected2 + " got Created successfully Without TOC Path", test);
                 VerifyText(test, "creating distribution " + expected2 + " in " + projectName + " is successful", status2, "Distribution is Created For GitLab Without TOC with status:" + status2 + "", "Distribution is not created For GitLab without TOC with status: " + status2 + "");
-                UpdateGitLabProjectProperties("Success");
+                UpdateGitHubProjectProperties("Success");
             }
             catch (Exception ex)
             {

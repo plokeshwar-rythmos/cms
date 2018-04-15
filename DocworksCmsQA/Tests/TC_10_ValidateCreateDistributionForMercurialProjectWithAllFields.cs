@@ -23,8 +23,8 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
 
-        [Test, Description("Verify User is able to add Distribution for the GitHub Project with out TOC")]
-        public void TC10A_ValidateCreateDistributionForMercurialProjectWithoutTOC()
+        [Test, Description("Verify User is able to add Distribution for the Mercurial Project with TOC")]
+        public void TC10A_ValidateCreateDistributionForMercurialProjectWithTOC()
         {
             try
             {
@@ -55,6 +55,7 @@ namespace DocWorksQA.Tests
                 project.SuccessScreenshot("Created Distribution:  " + expected1 + "");
                 VerifyEquals(test, expected1, actual1, "Create Distribution for Mercurial Project With TOC is successful", "Create Distribution for Mercurial Project With TOC is not successful");
                 UpdateMercurialProjectProperties("Success");
+                distribution.ClickCloseButton();
             }
             catch (Exception ex)
             {
@@ -66,7 +67,7 @@ namespace DocWorksQA.Tests
 
         }
 
-        [Test, Description("Verify User is able to add Distribution for the Mercurial Project without TOC")]
+       // [Test, Description("Verify User is able to add Distribution for the Mercurial Project without TOC")]
         public void TC10B_ValidateCreateDistributionForMercurialProjectWithOutTOC()
         {
             try
@@ -77,6 +78,7 @@ namespace DocWorksQA.Tests
                 test = StartTest(TestName, description);
                 String projectName = CreateMercurialProject(test, driver);
                 AddProjectPage project = new AddProjectPage(test, driver);
+                project.ClickDashboard();
                 project.SearchForProject(projectName);
                 CreateDistributionPage distribution = new CreateDistributionPage(test, driver);
                 distribution.ClickDistribution();
