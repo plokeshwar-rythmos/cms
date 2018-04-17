@@ -39,7 +39,7 @@ namespace DocWorksQA.Tests
                 String projectName = addProject.EnterProjectTitle();
                 addProject.SelectContentType("Manual");
                 addProject.SelectSourceControlProviderType("GitLab");
-                addProject.SelectRepository("Docworks");
+                addProject.SelectRepository("DocworksQA");
                 addProject.EnterPublishedPath("Publishing path to create project");
                 addProject.EnterDescription("This is to create Project");
                 addProject.ClickCreateProject();

@@ -67,7 +67,7 @@ namespace DocWorksQA.Tests
 
         }
 
-       // [Test, Description("Verify User is able to add Distribution for the Mercurial Project without TOC")]
+        [Test, Description("Verify User is able to add Distribution for the Mercurial Project without TOC")]
         public void TC10B_ValidateCreateDistributionForMercurialProjectWithOutTOC()
         {
             try

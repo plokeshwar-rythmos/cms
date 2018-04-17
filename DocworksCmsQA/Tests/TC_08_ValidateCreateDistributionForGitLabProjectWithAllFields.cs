@@ -69,7 +69,7 @@ namespace DocWorksQA.Tests
 
         }
 
-       // [Test, Description("Verify User is able to add Distribution for the GitLab Project without TOC")]
+        [Test, Description("Verify User is able to add Distribution for the GitLab Project without TOC")]
         public void TC08B_ValidateCreateDistributionForGitLabProjectWithOutTOC()
         {
             try

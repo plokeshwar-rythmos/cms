@@ -23,7 +23,7 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
 
-        [Test, Description("Verify User is able to add Distribution for the GitHub Project with TOC")]
+       [Test, Description("Verify User is able to add Distribution for the GitHub Project with TOC")]
         public void TC09A_ValidateCreateDistributionForGitHubProjectWithTOC()
         {
             try
@@ -68,7 +68,7 @@ namespace DocWorksQA.Tests
         }
 
 
-       // [Test, Description("Verify User is able to add Distribution for the GitHub Project without TOC")]
+        [Test, Description("Verify User is able to add Distribution for the GitHub Project without TOC")]
         public void TC09B_ValidateCreateDistributionForGitHubProjectWithOutTOC()
         {
             try
