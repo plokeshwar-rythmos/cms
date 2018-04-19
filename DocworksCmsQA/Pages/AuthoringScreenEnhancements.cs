@@ -55,7 +55,7 @@ namespace DocWorksQA.Pages
         public By UPLOAD_BUTTON = By.XPath("(//input[@type='file'])[1]");
         public By REPLACE_BUTTON = By.XPath("(//input[@type='file'])[2]");
         public By ACCEPTDRAFTTOLIVE_DROPDOWN = By.XPath("//div[@class='mat-menu-content ng-trigger ng-trigger-fadeInItems']");
-        public By SEARCH_ASSETID = By.XPath("//input[@type='Search']");
+        public By SEARCH_ASSETTEXT = By.XPath("//input[@type='Search']");
         public By SEARCH_ASSET_BAR = By.XPath("//button//span/i[@class='mdi mdi-magnify mdi-24px']");
         public By HISTORY_VALID_DRAFT1 = By.XPath("(//mat-list[@class='mat-list valid-draft ng-star-inserted']//div[@class='mat-list-item-content'])[last()]");
         public By HISTORT_VALID_DRAFT2 = By.XPath("(//mat-list[@class='mat-list valid-draft ng-star-inserted']//div[@class='mat-list-item-content'])[1]");
@@ -90,8 +90,8 @@ namespace DocWorksQA.Pages
         {
             System.Threading.Thread.Sleep(7000);
             Click(LEFT_DRAFTDROPDOWN);
-            String s = "(//mat-option/span)" + "[text()='" + str + "']";
-            Click(By.XPath(s));
+            String s = "(//mat-option//mat-list-item//div/span)[text()='"+ str +"']";
+            ClickByJavaScriptExecutor(By.XPath(s));
             Info(test,"selected Draft:  "+str+"  in left Drop Down");
         }
 
@@ -99,7 +99,7 @@ namespace DocWorksQA.Pages
         {
             System.Threading.Thread.Sleep(7000);
             Click(LEFT_DRAFTDROPDOWN);
-            Click(By.XPath("(//mat-option/span)[text()='Live Draft']"));
+            Click(By.XPath("(//mat-option//mat-list-item//div/span)[text()='Live Draft']"));
             Info(test,"selected a Live draft in Left Drop Down");
 
         }
@@ -108,7 +108,7 @@ namespace DocWorksQA.Pages
         public void LeftCoderDraft()
         {
             Click(LEFT_DRAFTDROPDOWN);
-            Click(By.XPath("(//mat-option/span)[text()='Coder Draft']"));
+            Click(By.XPath("(//mat-option//mat-list-item//div/span)[text()='Coder Draft']"));
             Info(test,"selected a Coder draft in Left Drop Down");
         }
         public IWebElement EnterIntoLeftFrame()
@@ -131,15 +131,15 @@ namespace DocWorksQA.Pages
         {
             System.Threading.Thread.Sleep(7000);
             Click(RIGHT_DRAFTDROPDOWN);
-            String s = "(//mat-option/span)" + "[text()='" + str + "']";
-            Click(By.XPath(s));
+            String s = "(//mat-option//mat-list-item//div/span)" + "[text()='" + str + "']";
+            ClickByJavaScriptExecutor(By.XPath(s));
             Info(test,"selected Draft:  " + str + "  in Right Drop Down");
         }
 
         public void RightLiveDraft()
         {
             Click(RIGHT_DRAFTDROPDOWN);
-            Click(By.XPath("(//mat-option/span)[text()='Live Draft']"));
+            Click(By.XPath("(//mat-option//mat-list-item//div/span)[text()='Live Draft']"));
             Info(test,"selected a Live draft in Right Drop Down");
 
         }
@@ -155,7 +155,7 @@ namespace DocWorksQA.Pages
         public void RightCoderDraft()
         {
             Click(RIGHT_DRAFTDROPDOWN);
-            Click(By.XPath("(//mat-option/span)[text()='Coder Draft']"));
+            Click(By.XPath("(//mat-option//mat-list-item//div/span)[text()='Coder Draft']"));
             Info(test,"selected a Coder draft in Right Drop Down");
 
         }
@@ -275,16 +275,16 @@ namespace DocWorksQA.Pages
             Info(test,"Clicked on Uploaded By Me Tab");
         }
 
-        public void SearchAssetID()
+        public void SearchAssetName()
         {
             System.Threading.Thread.Sleep(7000);
-            EnterValue(SEARCH_ASSETID, Keys.Control + "v");
+            EnterValue(SEARCH_ASSETTEXT, Keys.Control + "v");
             System.Threading.Thread.Sleep(7000);
             Click(By.XPath("//button/span/i[@class='mdi mdi-magnify mdi-24px']"));
            Info(test,"Clicked the search button");
         }
 
-        public void ReplaceTheImage(String Name)
+        public void ReplaceTheImage()
         {
 
             
@@ -314,7 +314,7 @@ namespace DocWorksQA.Pages
         }
         public void SelectImageFromUpload(String Name)
         {
-            Info("Selecting image: "+Name+" from the Upload");
+            Info(test,"Selecting image: "+Name+" from the Upload");
             System.Threading.Thread.Sleep(7000);
             Click(By.XPath("//button/span/i[@class='mdi mdi-content-copy']"));
             Info(test,"copying the clipboard content of Image");
@@ -345,12 +345,12 @@ namespace DocWorksQA.Pages
 
         public void EnterAssetID()
         {
-            EnterValue(SEARCH_ASSETID, Keys.Control + "V");
+            EnterValue(SEARCH_ASSETTEXT, Keys.Control + "V");
             Info(test,"ENtered the Asset ID in Search Bar");
         }
         public void EnterAssetName(String Name)
         {
-            EnterValue(SEARCH_ASSETID, Name);
+            EnterValue(SEARCH_ASSETTEXT, Name);
             Info(test,"ENtered Asset Name: " + Name);
             Click(SEARCH_ASSET_BAR);
             Info(test,"Clicked On Search Bar");
@@ -359,9 +359,8 @@ namespace DocWorksQA.Pages
         public void ClickMedia()
         {
             Click(By.XPath("//a[@href='/media']"));
-            System.Threading.Thread.Sleep(7000);
-            Info(test,"Clicked on Media Tab");
-
+            System.Threading.Thread.Sleep(17000);
+            Info(test, "Clicked on Media");
         }
         public void ClickCodeBlocksTab()
         {
@@ -370,24 +369,18 @@ namespace DocWorksQA.Pages
             Info(test,"Clicked on CodeBlock Tab");
         }
 
-        public void UploadCodeBlock()
+        public String UploadCodeBlock()
         {
             Click(By.XPath("//div[@class='mat-tab-label mat-ripple ng-star-inserted'][text()='Uploaded By Me']"));
-            try
-            {
-                String CodeBlock_Path = GetCodeBlockPath();
+              String CodeBlock_Path = GetCodeBlockPath();
                 Console.WriteLine("********" + CodeBlock_Path);
                 EnterValue(UPLOAD_BUTTON, CodeBlock_Path);
-                System.Threading.Thread.Sleep(17000);
-                Info(test,"Uploaded CodeBlock");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            System.Threading.Thread.Sleep(7000);
-           // Click(By.XPath("//div[@class='mat-tab-label mat-ripple ng-star-inserted'][text()='Uploaded By Me']"));
-            System.Threading.Thread.Sleep(7000);
+                String result = CodeBlock_Path.Split(new[] { '\\' }).Skip(6).FirstOrDefault();
+                String res = result.Split(new[] { '.' }).First();
+                Console.WriteLine("&&&&&****%%%%" + res);
+                Info(test, "Uploaded CodeBlock: " + res + "");
+                return res;
+           
         }
         public void UploadInvalidCodeBlock()
         {
@@ -407,7 +400,7 @@ namespace DocWorksQA.Pages
                     System.Threading.Thread.Sleep(7000);
                     String str = GetText(By.XPath("//div/mat-error/span"));
 
-                    Assert.AreEqual("Only .txt/.cs format allowed.", str, "Validating error message for .docx and .xml codeblocks");
+                    VerifyText(test,"Only .txt/.cs format allowed.", str, "Validating error message for Invalid Type codeblocks is successful", "Validating error message for Invalid Type codeblocks is Not successful");
 
                 }
                 else
@@ -417,7 +410,7 @@ namespace DocWorksQA.Pages
                     System.Threading.Thread.Sleep(7000);
                     String str = GetText(By.XPath("//div/mat-error/span"));
 
-                    Assert.AreEqual("Max 100KB size allowed", str, "Validating error message for CodeBlocks size greater than 100KB");
+                    VerifyText(test,"Max 100KB size allowed", str, "Validating error message for CodeBlocks size greater than 100KB is successful", "Validating error message for CodeBlocks size greater than 100KB is not successful");
 
                 }
                 System.Threading.Thread.Sleep(17000);
@@ -429,26 +422,18 @@ namespace DocWorksQA.Pages
             }
 
         }
-        public void UploadImage()
+        public String UploadImage()
         {
             Click(By.XPath("//div[@class='mat-tab-label mat-ripple ng-star-inserted'][text()='Uploaded By Me']"));
-            try
-            {
                 String Image_Path = GetImagePath();
                 Console.WriteLine("********" + Image_Path);
                 EnterValue(UPLOAD_BUTTON, Image_Path);
                 System.Threading.Thread.Sleep(7000);
-                Info(test,"Uploaded Image");
-                
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            System.Threading.Thread.Sleep(5000);
-           // Click(By.XPath("//div[@class='mat-tab-label mat-ripple ng-star-inserted'][text()='Uploaded By Me']"));
-            System.Threading.Thread.Sleep(3000);
-            
+               String result = Image_Path.Split(new[] { '\\' }).Skip(6).FirstOrDefault();
+                String res = result.Split(new[] { '.' }).First();
+                Console.WriteLine("&&&&&****%%%%" + res);
+                Info(test,"Uploaded Image: "+ res + "");
+                return res;
         }
 
         public void ViewDraft()
@@ -513,8 +498,7 @@ namespace DocWorksQA.Pages
                     Click(By.XPath("//div[@aria-controls='mat-tab-content-1-1']"));
                     System.Threading.Thread.Sleep(7000);
                     String str = GetText(By.XPath("//div/mat-error/span"));
-                   
-                    Assert.AreEqual("Only .jpeg/.jpg/.png/.gif format allowed.", str, "Validating error message for tif image");
+                    VerifyText(test,"Only .jpeg/.jpg/.png/.gif format allowed.", str, "Validating error message for type of image is successful", "Validating error message for type of image is Unsuccessful");
                    
                 }
                 else
@@ -523,8 +507,7 @@ namespace DocWorksQA.Pages
                     Click(By.XPath("//div[@aria-controls='mat-tab-content-1-1']"));
                     System.Threading.Thread.Sleep(7000);
                     String str = GetText(By.XPath("//div/mat-error/span"));
-
-                    Assert.AreEqual("Max 100KB size allowed", str, "Validating error message image size greater than 100KB");
+                    VerifyText(test, "Max 100KB size allowed", str, "Validating error message image size greater than 100KB is successful", "Validating error message image size greater than 100KB is Unsuccessful");
 
                 }
                 System.Threading.Thread.Sleep(17000);
@@ -536,6 +519,8 @@ namespace DocWorksQA.Pages
             }
             
         }
+
+       
         public void ClickDashboard()
         {
             Click(By.XPath("//a[@href='/dashboard']"));

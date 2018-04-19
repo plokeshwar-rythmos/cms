@@ -91,7 +91,6 @@ namespace DocWorksQA.Tests
                 auth.MDLeftTab();
                 project.SuccessScreenshot("Content in Live Draft after Update");
                 auth.LeftCoderDraft();
-                auth.RightCoderDraft();
                 project.SuccessScreenshot("Content in Coder Draft after Update");
 
             }
