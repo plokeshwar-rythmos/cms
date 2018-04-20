@@ -108,9 +108,6 @@
     <Compile Include="Pages\CreateDraftPage.cs" />
     <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="Pages\NodesPage.cs" />
-    <Compile Include="Pages\TagManagementNodeLevelPage.cs" />
-    <Compile Include="Pages\TagManagementProjectLevelPage.cs" />
-    <Compile Include="Pages\TagManagementSystemLevelPage.cs" />
     <Compile Include="SeleniumHelpers\DriverFactory.cs" />
     <Compile Include="SeleniumHelpers\ExtendedRemoteWebDriver.cs" />
     <Compile Include="SeleniumHelpers\PageControl.cs" />
@@ -151,6 +148,11 @@
     <Compile Include="Tests\TC_28_ValidateWhenUserSearchesCodeBlockAssetIdInImages.cs" />
     <Compile Include="Tests\TC_29_ValidateUserIsAbleToReplaceCodeBlock.cs" />
     <Compile Include="Tests\TC_30_ValidateUploadOfInvalidCodeBlock.cs" />
+    <Compile Include="Tests\TC_31_ValidateHistoryTabAfterEditingGdoc.cs" />
+    <Compile Include="Tests\TC_32_ValidateCreateDraftSnapShot.cs" />
+    <Compile Include="Tests\TC_33_ValidateEditDraftSnapshot.cs" />
+    <Compile Include="Tests\TC_34_ValidateUserAbleToAddNodeUnderTree.cs" />
+    <Compile Include="Tests\TC_35_ValidateUserAbleToAddNodeWithNodeTypeAsNone.cs" />
     <Compile Include="Utilities\CommonMethods.cs" />
     <Compile Include="Utilities\ConfigurationHelper.cs" />
     <Compile Include="Utilities\ExtentReporter.cs" />

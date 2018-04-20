@@ -58,7 +58,7 @@ namespace DocWorksQA.Pages
         public By SEARCH_ASSETTEXT = By.XPath("//input[@type='Search']");
         public By SEARCH_ASSET_BAR = By.XPath("//button//span/i[@class='mdi mdi-magnify mdi-24px']");
         public By HISTORY_VALID_DRAFT1 = By.XPath("(//mat-list[@class='mat-list valid-draft ng-star-inserted']//div[@class='mat-list-item-content'])[last()]");
-        public By HISTORT_VALID_DRAFT2 = By.XPath("(//mat-list[@class='mat-list valid-draft ng-star-inserted']//div[@class='mat-list-item-content'])[1]");
+        public By HISTORT_VALID_DRAFT2 = By.XPath("(//mat-list[@class='mat-list valid-draft ng-star-inserted']//div[@class='mat-list-item-content'])[first()]");
         public By ViewDraft_DraftName = By.XPath("//input[@ng-reflect-placeholder='Draft Name']");
 
         private ExtentTest test;
@@ -207,8 +207,9 @@ namespace DocWorksQA.Pages
         }
         public void HistoryRightTab()
         {
+            System.Threading.Thread.Sleep(30000);
             Click(RIGHT_HISTORY_TAB);
-            System.Threading.Thread.Sleep(20000);
+            System.Threading.Thread.Sleep(30000);
             Info(test,"Clicked On Right History Tab");
         }
         public void GdocRightTab()
@@ -216,6 +217,7 @@ namespace DocWorksQA.Pages
             Click(RIGHT_GDOC_TAB);
             System.Threading.Thread.Sleep(20000);
             Info(test,"Clicked on Right GDOC Tab");
+            System.Threading.Thread.Sleep(5000);
         }
         public void MDRightTab()
         {
@@ -232,11 +234,13 @@ namespace DocWorksQA.Pages
         public void PreviewRightTab()
         {
             Click(RIGHT_PREVIEW_TAB);
+           
             System.Threading.Thread.Sleep(20000);
             Info(test,"Clicked On Right Preview Tab");
         }
         public void PreviewLeftTab()
         {
+            System.Threading.Thread.Sleep(20000);
             Click(LEFT_PREVIEW_TAB);
             System.Threading.Thread.Sleep(20000);
             Info(test,"Clicked on Left Preview Tab");
@@ -465,9 +469,9 @@ namespace DocWorksQA.Pages
             String str = "DraftSnapshot " + GenerateRandomNumbers(2);
             EnterValue(ViewDraft_DraftName, str);
             System.Threading.Thread.Sleep(7000);
-            Click(By.XPath("(//button[@class='mat-raised-button mat-primary']/span)[contains(text(),'Create Draft')]"));
+            Click(By.XPath("(//button[@class='mat-raised-button mat-primary ng-star-inserted']/span)[contains(text(),'Create Draft')]"));
             System.Threading.Thread.Sleep(7000);
-            Info(test,"Created Draft from SnapShot");
+            Info(test,"Created Draft from DraftSnapShot");
             return str;
         }
         public String GetViewDraft()
