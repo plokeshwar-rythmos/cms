@@ -58,7 +58,7 @@ namespace DocWorksQA.Pages
         public By SEARCH_ASSETTEXT = By.XPath("//input[@type='Search']");
         public By SEARCH_ASSET_BAR = By.XPath("//button//span/i[@class='mdi mdi-magnify mdi-24px']");
         public By HISTORY_VALID_DRAFT1 = By.XPath("(//mat-list[@class='mat-list valid-draft ng-star-inserted']//div[@class='mat-list-item-content'])[last()]");
-        public By HISTORT_VALID_DRAFT2 = By.XPath("(//mat-list[@class='mat-list valid-draft ng-star-inserted']//div[@class='mat-list-item-content'])[first()]");
+        public By HISTORT_VALID_DRAFT2 = By.XPath("(//mat-list[@class='mat-list valid-draft ng-star-inserted']//div[@class='mat-list-item-content'])[1]");
         public By ViewDraft_DraftName = By.XPath("//input[@ng-reflect-placeholder='Draft Name']");
 
         private ExtentTest test;
