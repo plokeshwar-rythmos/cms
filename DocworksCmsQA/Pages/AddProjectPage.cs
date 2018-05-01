@@ -287,7 +287,9 @@ namespace DocWorksQA.Pages
 
         public void BackToProject()
         {
-            this.Click(BACKDROP);
+            System.Threading.Thread.Sleep(15000);
+            WaitForElement(BACKDROP);
+           MoveToelementAndClick(BACKDROP);
             Info(test, "Clicked On BackDrop");
         }
 

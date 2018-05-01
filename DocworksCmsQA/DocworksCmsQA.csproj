@@ -106,8 +106,12 @@
     <Compile Include="Pages\AuthoringScreenEnhancements.cs" />
     <Compile Include="Pages\CreateDistributionPage.cs" />
     <Compile Include="Pages\CreateDraftPage.cs" />
+    <Compile Include="Pages\Doc_HistoryPage.cs" />
     <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="Pages\NodesPage.cs" />
+    <Compile Include="Pages\TagManagementNodeLevelPage.cs" />
+    <Compile Include="Pages\TagManagementSystemLevelPage.cs" />
+    <Compile Include="Pages\TagManagmentProjectLevelPage.cs" />
     <Compile Include="SeleniumHelpers\DriverFactory.cs" />
     <Compile Include="SeleniumHelpers\ExtendedRemoteWebDriver.cs" />
     <Compile Include="SeleniumHelpers\PageControl.cs" />
@@ -137,6 +141,7 @@
     <Compile Include="Tests\TC_16_ValidateUserAbleToSeeDropDownOnAccepttodraftliveButtonIfBothTheDraftsAreDifferent.cs" />
     <Compile Include="Tests\TC_18_ValidateUserAbleToCreateLiveDraftAndCanContinuouslyUpdateIt.cs" />
     <Compile Include="Tests\TC_19_ValidateContentInLiveDraftShouldgetUpdatedInCoderDraftAndViceVersa.cs" />
+    <Compile Include="Tests\TC_40_ValidateDocHistoryBySelectingDate.cs" />
     <Compile Include="Tests\TC_20_ValidateUserAbleToSelectaDraftFromDropdownWhenTwoDifferentDraftsAreSelected.cs" />
     <Compile Include="Tests\TC_21_ValidationOfUploadImage.cs" />
     <Compile Include="Tests\TC_22_ValidateGdocEnhancementsForUploadOfImage.cs" />
@@ -153,6 +158,13 @@
     <Compile Include="Tests\TC_33_ValidateEditDraftSnapshot.cs" />
     <Compile Include="Tests\TC_34_ValidateUserAbleToAddNodeUnderTree.cs" />
     <Compile Include="Tests\TC_35_ValidateUserAbleToAddNodeWithNodeTypeAsNone.cs" />
+    <Compile Include="Tests\TC_36_ValidateDocHistoryforCreateRenameDeleteDraft.cs" />
+    <Compile Include="Tests\TC_37_ValidateDocHistoryWithActionItems.cs" />
+    <Compile Include="Tests\TC_38_ValidateDocHistoryForAddTagsToNodeAndRemoveTagsFromNode.cs" />
+    <Compile Include="Tests\TC_39_ValidateDocHistoryForAcceptDraftToLive.cs" />
+    <Compile Include="Tests\TC_41_ValidateDocHistoryBySearchingThroughUsernameandDraftnmaeInSearchField.cs" />
+    <Compile Include="Tests\ValidateSystemLevel.cs" />
+    <Compile Include="Tests\ValidateTagManagementProjectLevel.cs" />
     <Compile Include="Utilities\CommonMethods.cs" />
     <Compile Include="Utilities\ConfigurationHelper.cs" />
     <Compile Include="Utilities\ExtentReporter.cs" />
