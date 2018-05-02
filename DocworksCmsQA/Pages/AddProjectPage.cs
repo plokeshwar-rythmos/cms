@@ -12,7 +12,7 @@ namespace DocWorksQA.Pages
         public By ADDPROJECT_BUTTON = By.XPath("(//button[@class='mat-raised-button mat-primary']/span)[1]");
         public  By PROJECT_TITLE_FIELD= By.XPath("//input[@ng-reflect-placeholder='Project Title']");
         public By BELL_NOTIFICATION = By.XPath("//mat-chip[@class='mat-chip notification cursor-pointer mat-warn mat-chip-selected ng-star-inserted']");
-        public By NOTIFICATION_MESSAGE = By.XPath("//div[@class='mat-line operation-status-wrapper']//small");
+        public By NOTIFICATION_MESSAGE = By.XPath("//div[@class='operation-status-wrapper custom-tooltip-parent']//small");
         public By NOTIFICATION_PROGRESS = By.XPath("//mat-progress-spinner[@class='mat-progress-spinner mat-primary mat-progress-spinner-indeterminate-animation']");
         public By NOTIFICATION_NAME = By.XPath("//div[@class='mat-list-text']/p[@class='mat-line mb-5']/span");
         public By NOTIFICATION_STATUS = By.XPath("//div[@class='mat-list-text']/p[@class='mat-line mb-5']/small[@class='bg_Success']");
@@ -39,6 +39,8 @@ namespace DocWorksQA.Pages
         public By GET_CREATEDPROJECT = By.XPath("//div/mat-list-item/div/div[2]");
         public By BACKDROP = By.XPath("//div[@class='mat-drawer-backdrop mat-drawer-shown']");
         public By DESCRIPTION_MAT_CARD = By.XPath("//mat-card-content/p");
+        public By FAVOURITE_ICON = By.XPath("(//i[@class='mdi-star-outline mdi mdi-24px'])[1]");
+        public By AUTHORING_BUTTON = By.XPath("(//a[@class='mat-tab-link ng-star-inserted'])[contains(text(),'Authoring')]");
         public object DriverWaitUtil { get; private set; }
 
         private ExtentTest test;
@@ -388,6 +390,20 @@ namespace DocWorksQA.Pages
             Info(test, "selected the Reppository_Value from drop down");
 
 
+        }
+
+        public void ClickFavouriteIcon()
+        {
+            System.Threading.Thread.Sleep(1000);
+            Click(FAVOURITE_ICON);
+            Info(test, "Clicked on Favourite icon");
+        }
+
+        public void ClickOnAuthoring()
+        {
+            System.Threading.Thread.Sleep(10000);
+            Click(AUTHORING_BUTTON);
+            Info(test, "Clicked on Authoring tab");
         }
           
     }

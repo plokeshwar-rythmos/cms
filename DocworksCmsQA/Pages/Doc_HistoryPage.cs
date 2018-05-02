@@ -22,7 +22,7 @@ namespace DocWorksQA.Pages
         public By UPDATETITLE_CHECKBUTTON = By.XPath("(//mat-pseudo-checkbox[contains(@class,'mat-option-pseudo-checkbox')])[9]");
         public By UPDATEFILENAME_CHECKBUTTON = By.XPath("(//mat-pseudo-checkbox[contains(@class,'mat-option-pseudo-checkbox')])[10]");
         public By EMPTYSPACEIN_NODEHISTORY = By.XPath("(//mat-list[@class='mat-list'])[2]");
-        public By ACTIVITY_BUTTON = By.XPath("//div[@id='mat-tab-label-5-0']");
+        public By ACTIVITY_BUTTON = By.XPath("(//div[@class='mat-tab-label mat-ripple mat-tab-label-active ng-star-inserted'])[text()='Activity']");
         public By CHOOSE_DATE = By.XPath("//input[@class='mat-input-element mat-form-field-autofill-control ng-untouched ng-pristine ng-valid']");
         //public By CHOOSE_DATE_CALENDER = By.XPath("//button[@aria-label='Open calendar']");
         //public By CHOOSING_DATE_FROM_CALENDER = By.XPath("//*[@id='mat - datepicker - 0']/div[2]/mat-month-view/table/tbody/tr/td/div[contains(text(),'18')]");
