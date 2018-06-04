@@ -16,9 +16,9 @@ namespace DocWorksQA.Pages
         public By SETTINGS = By.XPath("//mat-card/mat-card-title/div[2]//i[1]");
         public By DISTRIBUTIONS = By.XPath("(//button[@class='mat-menu-item ng-star-inserted'])[contains(text(),'Distributions')]");
             //By.XPath("(//button[@class='mat-menu-item'])[2]");
-        public By DISTRIBUTION_NAME = By.XPath("//input[@ng-reflect-placeholder='Distribution Name']");
-        public By DESCRIPTION = By.XPath("//input[@ng-reflect-placeholder='Description']");
-        public By SELECT_BRANCH = By.XPath("//mat-select[@ng-reflect-placeholder='Select Branch']");
+        public By DISTRIBUTION_NAME = By.XPath("//input[@placeholder='Distribution Name']");
+        public By DESCRIPTION = By.XPath("//input[@placeholder='Description']");
+        public By SELECT_BRANCH = By.XPath("//mat-select[@placeholder='Select Branch']");
         public By BRANCH = By.XPath("//input[@placeholder='Branch']");
         public By BRANCH_OPTIONS_WITHTOC = By.XPath("(//mat-option//span[contains(@class,'mat-option-text')])[text()='DocworksManual3']");
         public By BRANCH_OPTIONS_WITHOUT_TOC = By.XPath("(//mat-option//span[contains(@class,'mat-option-text')])[text()='DocworksManual2']");

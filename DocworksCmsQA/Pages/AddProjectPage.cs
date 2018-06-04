@@ -10,7 +10,7 @@ namespace DocWorksQA.Pages
     {
         public By GET_TITLE = By.XPath("//mat-card/mat-card-title/div");
         public By ADDPROJECT_BUTTON = By.XPath("(//button[@class='mat-raised-button mat-primary']/span)[1]");
-        public  By PROJECT_TITLE_FIELD= By.XPath("//input[@ng-reflect-placeholder='Project Title']");
+        public  By PROJECT_TITLE_FIELD= By.XPath("//input[@placeholder='Project Title']");
         public By BELL_NOTIFICATION = By.XPath("//mat-chip[@class='mat-chip notification cursor-pointer mat-warn mat-chip-selected ng-star-inserted']");
         public By NOTIFICATION_MESSAGE = By.XPath("//div[@class='operation-status-wrapper custom-tooltip-parent']//small");
         public By NOTIFICATION_PROGRESS = By.XPath("//mat-progress-spinner[@class='mat-progress-spinner mat-primary mat-progress-spinner-indeterminate-animation']");
@@ -28,7 +28,7 @@ namespace DocWorksQA.Pages
         public By MERCURIAL_REPO_PATH = By.XPath("//input[@placeholder='Mercurial Repo Path']");
         public By SIZE_EXCEED_100 = By.XPath("(//mat-dialog-content//div/small)[1]");
         public By SIZE_EXCEED_1000 = By.XPath("(//mat-dialog-content//div/small)[4]");
-        public By DESCRIPTION_FIELD = By.XPath("//textarea[@ng-reflect-placeholder='Description']");
+        public By DESCRIPTION_FIELD = By.XPath("//textarea[@placeholder='Description']");
         public By PUBLISHED_PATH = By.XPath("//input[@placeholder='Published Path']");
         public By BACK_BUTTON = By.XPath("//button[@class='mat-raised-button']/span");
         public By CLEAR_BUTTON = By.XPath("//button[@class='mat-raised-button mat-warn']/span");

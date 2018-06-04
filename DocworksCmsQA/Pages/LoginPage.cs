@@ -8,8 +8,8 @@ namespace DocWorksQA.Pages
     public class LoginPage : PageControl
     {
 
-        By USERNAME_FIELD = By.XPath("//input[@ng-reflect-placeholder='User Name']");
-        By PASSWORD_FIELD = By.XPath("//input[@ng-reflect-placeholder='Password']");
+        By USERNAME_FIELD = By.XPath("//input[@placeholder='User Name']");
+        By PASSWORD_FIELD = By.XPath("//input[@placeholder='Password']");
         By LOGIN_BUTTON = By.XPath("//app-login//button");
         By USERNAME_ERROR = By.XPath("//input[@id='userName']/following-sibling::div//small");
         By PASSWORD_ERROR = By.XPath("//input[@id='passWord']/following-sibling::div//small");

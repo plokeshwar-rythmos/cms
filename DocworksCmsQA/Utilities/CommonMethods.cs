@@ -81,7 +81,7 @@ namespace DocWorksQA.Utilities
 
         public void ExceptionScreenshot(ExtentTest test, String path, String message)
         {
-            Info(test, "<a style=\"font - size: 20px; color: red;\" href=\"" + path + "\">Exception Occurred : " + message + "<br></a>");
+            Info(test, "<a style=\"font - size: 20px; color: red;\" href=\"" + path + "\">Screenshot : Exception Occurred - " + message + "<br></a>");
         }
 
         public string GetImagePath()
