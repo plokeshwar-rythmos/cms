@@ -21,7 +21,6 @@ namespace DocWorksQA.Tests
         public void AddPProjectModule() {
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
-            System.Threading.Thread.Sleep(5000);
         }
 
        
@@ -36,7 +35,8 @@ namespace DocWorksQA.Tests
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.ClickAddProject();
-                String projectName = addProject.EnterProjectTitle();
+                String projectName = "SELENIUM-GitLab" + "_" + GenerateRandomNumbers(5) + System.DateTime.Now.TimeOfDay;
+                addProject.EnterProjectTitle(projectName);
                 addProject.SelectContentType("Manual");
                 addProject.SelectSourceControlProviderType("GitLab");
                 addProject.SelectRepository("DocworksQA");
@@ -52,12 +52,13 @@ namespace DocWorksQA.Tests
                 String actual = addProject.GetProjectTitle();
                 addProject.SuccessScreenshot("ProjectTitle");
                 VerifyEquals(test, projectName, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
-                var map = new Dictionary<string, string>();
+              /*  var map = new Dictionary<string, string>();
                 map.Add("projectName", projectName);
                 map.Add("projectStatus", "Success");
                 map.Add("distributionStatus", "");
                 CreateFile(GetCurrentProjectPath() + "//bin/gitLabProject.properties", map);
-            }
+            */       
+    }
             catch (Exception e)
             {
                 ReportExceptionScreenshot(test, driver, e);

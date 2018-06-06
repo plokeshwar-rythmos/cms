@@ -1,12 +1,9 @@
 ﻿using OpenQA.Selenium;
-using DocWorksQA.TestRailApis;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
 using AventStack.ExtentReports;
 using DocWorksQA.Pages;
 using DocworksCmsQA.Utilities;
@@ -243,15 +240,7 @@ namespace DocWorksQA.Utilities
             w.Close();
         }
 
-        public void ReadFile(String fileName) {
-
-            IDictionary<string, string> properties;
-
-            using (TextReader reader = new StreamReader(fileName))
-            {
-                // properties = PropertiesLoader.Load(reader);
-            }
-        }
+      
 
 
 
@@ -290,7 +279,7 @@ namespace DocWorksQA.Utilities
 
         public String GenerateRandomNumbers(int length)
         {
-            String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-";
             Random rng = new Random();
             char[] text = new char[length];
             for (int i = 0; i < length; i++)
@@ -302,40 +291,7 @@ namespace DocWorksQA.Utilities
         }
 
 
-        public void KillProcess()
-        {
-            String processName = "";
-
-            String driverToUse = ConfigurationHelper.Get<String>("DriverToUse");
-            if (driverToUse.ToLower().Equals("chrome"))
-            {
-                processName = "chromedriver";
-            } else if (driverToUse.ToLower().Equals("firefox"))
-            {
-                processName = "firefox";
-            }
-            else
-            {
-                processName = "InternetExplorerDriver";
-            }
-
-
-            try
-            {
-                foreach (Process process in Process.GetProcessesByName(processName))
-                {
-                    //kill the process 
-                    Console.WriteLine("Killing process " + process);
-                    process.Kill();
-                }
-            }
-            catch (Exception ex)
-            {
-                //show the exceptions if any here
-                Console.WriteLine(ex.ToString());
-            };
-
-        }
+       
 
         public void UpdateGitLabProjectProperties(String distributionStatus) {
 
@@ -496,12 +452,19 @@ namespace DocWorksQA.Utilities
             if (FileExists(GetCurrentProjectPath() + "//bin/gitLabProject.properties"))
             {
                 Properties prop = new Properties(GetCurrentProjectPath() + "//bin/gitLabProject");
+                try { 
                 if (prop.get("projectStatus").ToLower().Equals("success"))
                 {
                     Console.WriteLine("Using existing GitLab project.");
                     return prop.get("projectName");
                 }
- 
+                }catch(Exception e)
+                {
+                    Console.WriteLine(e);
+                    
+                }
+
+
             }
 
             AddProjectPage addProject = new AddProjectPage(test, driver);
@@ -575,10 +538,15 @@ namespace DocWorksQA.Utilities
             if (FileExists(GetCurrentProjectPath() + "//bin/onoProject.properties"))
             {
                 Properties prop = new Properties(GetCurrentProjectPath() + "//bin/onoProject");
+                try { 
                 if (prop.get("projectStatus").ToLower().Equals("success"))
                 {
                     Console.WriteLine("Using existing Mercurial project.");
                     return prop.get("projectName");
+                }
+                }catch(Exception e)
+                {
+                    Console.WriteLine(e);
                 }
 
             }

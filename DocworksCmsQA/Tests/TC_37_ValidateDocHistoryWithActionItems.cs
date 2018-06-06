@@ -14,7 +14,6 @@ namespace DocWorksQA.Tests
     {
         private static IWebDriver driver;
         private ExtentTest test;
-        private bool projectStatus;
 
         [OneTimeSetUp]
         public void AddPProjectModule()

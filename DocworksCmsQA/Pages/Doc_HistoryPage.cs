@@ -70,7 +70,7 @@ namespace DocWorksQA.Pages
 
         public void SuccessScreenshot(String message)
         {
-            String path = TakeScreenshot(driver);
+            String path = TakeScreenshot();
             SuccessScreenshot(path, message);
         }
 

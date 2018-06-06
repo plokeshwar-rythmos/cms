@@ -78,7 +78,7 @@ namespace DocWorksQA.Pages
 
         public void SuccessScreenshot(String message)
         {
-            String path = TakeScreenshot(driver);
+            String path = TakeScreenshot();
             SuccessScreenshot(path, message);
         }
 
@@ -115,27 +115,33 @@ namespace DocWorksQA.Pages
 
         public void ClickDashboard()
         {
-            String url = driver.Url;
+            String url = GetDriver().Url;
             url = url.Substring(0, url.LastIndexOf("/"));
-            driver.Navigate().GoToUrl(url + "/dashboard");
+            GetDriver().Navigate().GoToUrl(url + "/dashboard");
             //Click(By.XPath("//a[@href='/dashboard']"));
             System.Threading.Thread.Sleep(7000);
             //Info(test, "Clicked On DashBoard");
         }
 
         public void ClickAddProject() {
-            ClickDashboard();
+            //ClickDashboard();
             Click(ADDPROJECT_BUTTON);
             WaitForElement(CREATE_PROJECT_BUTTON);
             Info(test, "Clicked on AddProject Button.");
         }
 
         public String EnterProjectTitle() {
-           String ProjectTitle = "SELENIUM" + "_" + GenerateRandomNumbers(2);
+            String ProjectTitle = "SELENIUM" + "_" + GenerateRandomNumbers(15);
             EnterValue(PROJECT_TITLE_FIELD, ProjectTitle);
             Info(test, "Entered Project Title : " + ProjectTitle);
             return ProjectTitle;
         }
+
+        public void EnterProjectTitle(String name)
+        {
+            EnterValue(PROJECT_TITLE_FIELD, name);
+            Info(test, "Entered Project Title : " + name);
+         }
 
         public String ProjectTitleInvalidLength()
         {
@@ -235,7 +241,7 @@ namespace DocWorksQA.Pages
             for(int i = 0; i < 500; i++)
             {
                 
-                String tmp = driver.FindElement(NOTIFICATION_MESSAGE).Text; //WaitForElement(NOTIFICATION_MESSAGE).Text;
+                String tmp = GetDriver().FindElement(NOTIFICATION_MESSAGE).Text; //WaitForElement(NOTIFICATION_MESSAGE).Text;
 
                 if (tmp.Contains("successful"))
                 {

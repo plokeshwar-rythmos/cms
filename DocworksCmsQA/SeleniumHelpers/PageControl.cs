@@ -3,12 +3,13 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Diagnostics;
+using System.Text;
 
 namespace DocWorksQA.SeleniumHelpers
 {
     public class PageControl : Utilities.CommonMethods
     {
-        protected IWebDriver driver;
+       IWebDriver driver;
 
         public PageControl(IWebDriver driver)
         {
@@ -16,7 +17,10 @@ namespace DocWorksQA.SeleniumHelpers
 
         }
 
-
+        public IWebDriver GetDriver()
+        {
+            return driver;
+        }
 
         public void Click(By by)
         {
@@ -357,6 +361,23 @@ namespace DocWorksQA.SeleniumHelpers
             js.ExecuteScript("arguments[0].setAttribute('style', arguments[1]);",
                     element, "color: red; border: 5px solid red;");
 
+
+        }
+
+        public String TakeScreenshot()
+        {
+
+            String path = GetCurrentProjectPath() + "/bin/Release/Reports/Screenshot";
+
+            CreateDirectory(path);
+
+            StringBuilder TimeAndDate = new StringBuilder(DateTime.Now.ToString());
+            TimeAndDate.Replace("/", "_");
+            TimeAndDate.Replace(":", "_");
+            ITakesScreenshot ssdriver = driver as ITakesScreenshot;
+            Screenshot screenshot = ssdriver.GetScreenshot();
+            screenshot.SaveAsFile(path + "/screenshot-" + TimeAndDate + ".jpeg", ScreenshotImageFormat.Jpeg);
+            return "./Screenshot/screenshot-" + TimeAndDate + ".jpeg";
 
         }
 

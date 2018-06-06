@@ -22,7 +22,6 @@ namespace DocWorksQA.Tests
         {
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
-            System.Threading.Thread.Sleep(5000);
         }
 
 
@@ -38,7 +37,8 @@ namespace DocWorksQA.Tests
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.ClickAddProject();
-                String projectName = addProject.EnterProjectTitle();
+                String projectName = "SELENIUM-Ono" + "_" + GenerateRandomNumbers(5) + System.DateTime.Now.TimeOfDay;
+                addProject.EnterProjectTitle(projectName);
                 addProject.SelectContentType("Manual");
                 addProject.SelectSourceControlProviderType("Ono");
                 addProject.EnterMercurialRepoPath();

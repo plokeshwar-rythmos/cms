@@ -164,7 +164,6 @@
     <Compile Include="Tests\TC_39_ValidateDocHistoryForAcceptDraftToLive.cs" />
     <Compile Include="Tests\TC_41_ValidateDocHistoryBySearchingThroughUsernameandDraftnmaeInSearchField.cs" />
     <Compile Include="Tests\ValidateSystemLevel.cs" />
-    <Compile Include="Tests\ValidateTagManagementProjectLevel.cs" />
     <Compile Include="Tests\TC_42_ValidateUserAbleToViewTheProjectInFavouriteSectionAfterClickingOnFavouriteIconInProjectListScreen.cs" />
     <Compile Include="Tests\TC_43_ValidateUserAbleToViewTheProjectInRecentProjectSectionAfterOpensAnyProjectOrGoesToAuthoringViewScreen.cs" />
     <Compile Include="Utilities\CommonMethods.cs" />

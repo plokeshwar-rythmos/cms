@@ -42,5 +42,7 @@ namespace DocWorksQA.SeleniumHelpers
                 (selector.StartsWith(ret, StringComparison.InvariantCultureIgnoreCase) ? string.Empty : ret) + selector);
             return result as IEnumerable<object>;
         }
+
+        
     }
 }
