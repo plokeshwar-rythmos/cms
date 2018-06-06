@@ -54,12 +54,7 @@ namespace DocWorksQA.Tests
                 String actual = addProject.GetProjectTitle();
                 addProject.SuccessScreenshot("ProjectTitle");
                 VerifyEquals(test, projectName, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
-                var map = new Dictionary<string, string>();
-                map.Add("projectName", projectName);
-                map.Add("projectStatus", "Success");
-                map.Add("distributionStatus", "");
-                CreateFile(GetCurrentProjectPath() + "//bin/onoProject.properties", map);
-
+              
             }
             catch (Exception e)
             {
