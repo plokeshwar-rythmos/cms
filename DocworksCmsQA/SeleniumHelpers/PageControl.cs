@@ -27,7 +27,10 @@ namespace DocWorksQA.SeleniumHelpers
             Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "Clicking on " + by.ToString());
             try
             {
-                WaitForElement(by).Click();
+                IJavaScriptExecutor executor = (IJavaScriptExecutor)driver;
+                executor.ExecuteScript("arguments[0].click();", WaitForElement(by));
+                
+
                 System.Threading.Thread.Sleep(5000);
             }
             catch (StaleElementReferenceException se)
