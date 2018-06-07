@@ -309,8 +309,13 @@ namespace DocWorksQA.SeleniumHelpers
             }
         }
 
+      
+
         public IWebElement WaitForElement(By by)
         {
+
+            
+
             IWebElement el = null;
             for (int i = 0; i <= 30; i++)
             {
@@ -322,7 +327,7 @@ namespace DocWorksQA.SeleniumHelpers
                         return driver.FindElement(by);
                     }
                 }
-                catch (NoSuchElementException e)
+                catch (Exception e)
                 {
                     if (i == 30)
                     {
@@ -336,17 +341,7 @@ namespace DocWorksQA.SeleniumHelpers
                     }
 
                 }
-                catch (StaleElementReferenceException se)
-                {
-                    Console.WriteLine("DRIVER ID : " + driver + ", " + se.Message + " Retrying after 1 second.");
-                    System.Threading.Thread.Sleep(2000);
-
-                }
-                catch (Exception ex)
-                {
-
-                    throw ex;
-                }
+               
 
 
             }

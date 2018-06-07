@@ -241,7 +241,7 @@ namespace DocWorksQA.Pages
             for(int i = 0; i < 500; i++)
             {
                 
-                String tmp = GetDriver().FindElement(NOTIFICATION_MESSAGE).Text; //WaitForElement(NOTIFICATION_MESSAGE).Text;
+                String tmp = GetText(NOTIFICATION_MESSAGE); //WaitForElement(NOTIFICATION_MESSAGE).Text;
 
                 if (tmp.Contains("successful"))
                 {

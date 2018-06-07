@@ -113,11 +113,8 @@
     <Compile Include="Pages\TagManagementSystemLevelPage.cs" />
     <Compile Include="Pages\TagManagmentProjectLevelPage.cs" />
     <Compile Include="SeleniumHelpers\DriverFactory.cs" />
-    <Compile Include="SeleniumHelpers\ExtendedRemoteWebDriver.cs" />
     <Compile Include="SeleniumHelpers\PageControl.cs" />
     <Compile Include="SeleniumHelpers\SeleniumHelper.cs" />
-    <Compile Include="SeleniumHelpers\SeleniumUtils.cs" />
-    <Compile Include="SeleniumHelpers\WebDriverExtensions.cs" />
     <Compile Include="TestRailApis\APIClient.cs" />
     <Compile Include="TestRailApis\APIException.cs" />
     <Compile Include="TestRailApis\TestRailMethods.cs" />
