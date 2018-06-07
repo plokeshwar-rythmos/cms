@@ -314,38 +314,42 @@ namespace DocWorksQA.SeleniumHelpers
         public IWebElement WaitForElement(By by)
         {
 
-            
-
-            IWebElement el = null;
-            for (int i = 0; i <= 30; i++)
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+            IWebElement element = wait.Until<IWebElement>((d) =>
             {
-                try
-                {
-                    if (driver.FindElement(by).Displayed || driver.FindElement(by).Enabled)
-                    {
-                        Console.WriteLine("DRIVER ID : "+driver.GetHashCode()+", IDENTIFIED: " + by.ToString());
-                        return driver.FindElement(by);
-                    }
-                }
-                catch (Exception e)
-                {
-                    if (i == 30)
-                    {
-                        throw e;
-                    }
-                    else
-                    {
+                return d.FindElement(by);
+            });
 
-                        Console.WriteLine("DRIVER ID : " + driver +", "+ e.Message + " Retrying after 1 second.");
-                        System.Threading.Thread.Sleep(2000);
-                    }
+            /*  IWebElement el = null;
+              for (int i = 0; i <= 30; i++)
+              {
+                  try
+                  {
+                      if (driver.FindElement(by).Displayed || driver.FindElement(by).Enabled)
+                      {
+                          Console.WriteLine("DRIVER ID : "+driver.GetHashCode()+", IDENTIFIED: " + by.ToString());
+                          return driver.FindElement(by);
+                      }
+                  }
+                  catch (Exception e)
+                  {
+                      if (i == 30)
+                      {
+                          throw e;
+                      }
+                      else
+                      {
 
-                }
-               
+                          Console.WriteLine("DRIVER ID : " + driver +", "+ e.Message + " Retrying after 1 second.");
+                          System.Threading.Thread.Sleep(2000);
+                      }
+
+                  }
 
 
-            }
-            return el;
+
+              }*/
+            return element;
         }
 
 
