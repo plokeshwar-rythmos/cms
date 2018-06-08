@@ -453,11 +453,11 @@ namespace DocWorksQA.Utilities
             {
                 Properties prop = new Properties(GetCurrentProjectPath() + "//bin/gitLabProject");
                 try { 
-                if (prop.get("projectStatus").ToLower().Equals("success"))
-                {
-                    Console.WriteLine("Using existing GitLab project.");
-                    return prop.get("projectName");
-                }
+                    if (prop.get("projectStatus").ToLower().Equals("success"))
+                    {
+                        Console.WriteLine("Using existing GitLab project.");
+                        return prop.get("projectName");
+                    }
                 }catch(Exception e)
                 {
                     Console.WriteLine(e);

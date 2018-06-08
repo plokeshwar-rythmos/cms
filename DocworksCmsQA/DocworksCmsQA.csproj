@@ -126,6 +126,7 @@
     <Compile Include="Tests\TC_06_ValidateProjectTitleLengthWithLessThan5Characters.cs" />
     <Compile Include="Tests\TC_07_ValidateProjectTitleLengthWithMoreThan100Characters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\TC_08_ValidateCreateDistributionForGitLabProjectWithAllFields.cs" />
     <Compile Include="Utilities\CommonMethods.cs" />
     <Compile Include="Utilities\ConfigurationHelper.cs" />
     <Compile Include="Utilities\ExtentReporter.cs" />

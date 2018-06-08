@@ -14,7 +14,7 @@ namespace DocWorksQA.Pages
         public By ENTER_SEARCH = By.XPath("//input[@type='Search']");
         public By GET_TITLE = By.XPath("//mat-card/mat-card-title/div");
         public By SETTINGS = By.XPath("//mat-card/mat-card-title/div[2]//i[1]");
-        public By DISTRIBUTIONS = By.XPath("(//button[@class='mat-menu-item ng-star-inserted'])[contains(text(),'Distributions')]");
+        public By DISTRIBUTIONS = By.XPath("//button[contains(text(),'Distributions')]");
             //By.XPath("(//button[@class='mat-menu-item'])[2]");
         public By DISTRIBUTION_NAME = By.XPath("//input[@placeholder='Distribution Name']");
         public By DESCRIPTION = By.XPath("//input[@placeholder='Description']");
@@ -25,7 +25,7 @@ namespace DocWorksQA.Pages
         public By BRANCH_OPTIONS_GITHUB = By.XPath("(//mat-option//span[contains(@class,'mat-option-text')])[text()='DocWorksManual3']");
         public By CLEAR_BUTTON = By.XPath("(//button[@class='mat-raised-button']/span)[1]");
         public By CLOSE_BUTTON = By.XPath("//button/span/i[@class='mdi mdi-close mdi-24px']");
-        public By CREATE_DISTRIBUTION = By.XPath("(//button[@class='mat-raised-button mat-primary']/span)[3]");
+        public By CREATE_DISTRIBUTION = By.XPath("//button//span[contains(text(),'Create Distribution')]");
         public By AVAIL_DISTRIBUTION_NAME = By.XPath("(//mat-chip/div/strong)");
         public By AVAIL_DISTRIBUTION_EDIT = By.XPath("//mat-chip/div/mat-icon/i");
         //public By AVAIL_DISTRIBUTION_CREATED_DT = By.XPath("//mat-chip/small/strong");
@@ -143,7 +143,7 @@ namespace DocWorksQA.Pages
         {
             if (!GetText(SELECT_BRANCH).Equals(value))
             {
-                this.Click(SELECT_BRANCH);
+                Click(By.XPath("//mat-select//div[@class='mat-select-arrow']"));
                 By OPTION = By.XPath("(//mat-option//span[contains(@class,'mat-option-text')])[text()='" + value + "']");
                 this.Click(OPTION);
                 Info(test, "Selected Branch as " + value);
