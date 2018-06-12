@@ -320,38 +320,11 @@ namespace DocWorksQA.SeleniumHelpers
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
             IWebElement element = wait.Until<IWebElement>((d) =>
             {
+                Highlight(d.FindElement(by));
                 return d.FindElement(by);
             });
 
-            /*  IWebElement el = null;
-              for (int i = 0; i <= 30; i++)
-              {
-                  try
-                  {
-                      if (driver.FindElement(by).Displayed || driver.FindElement(by).Enabled)
-                      {
-                          Console.WriteLine("DRIVER ID : "+driver.GetHashCode()+", IDENTIFIED: " + by.ToString());
-                          return driver.FindElement(by);
-                      }
-                  }
-                  catch (Exception e)
-                  {
-                      if (i == 30)
-                      {
-                          throw e;
-                      }
-                      else
-                      {
-
-                          Console.WriteLine("DRIVER ID : " + driver +", "+ e.Message + " Retrying after 1 second.");
-                          System.Threading.Thread.Sleep(2000);
-                      }
-
-                  }
-
-
-
-              }*/
+            RemoveHighlight(element);
             return element;
         }
 
@@ -380,6 +353,39 @@ namespace DocWorksQA.SeleniumHelpers
             Screenshot screenshot = ssdriver.GetScreenshot();
             screenshot.SaveAsFile(path + "/screenshot-" + TimeAndDate + ".jpeg", ScreenshotImageFormat.Jpeg);
             return "./Screenshot/screenshot-" + TimeAndDate + ".jpeg";
+
+        }
+
+        public String TakeElementScreenshot(By by)
+        {
+            IWebElement element = WaitForElement(by);
+            Highlight( element);
+            String path = GetCurrentProjectPath() + "/bin/Release/Reports/Screenshot";
+
+            CreateDirectory(path);
+
+            StringBuilder TimeAndDate = new StringBuilder(DateTime.Now.ToString());
+            TimeAndDate.Replace("/", "_");
+            TimeAndDate.Replace(":", "_");
+            ITakesScreenshot ssdriver = driver as ITakesScreenshot;
+            Screenshot screenshot = ssdriver.GetScreenshot();
+            screenshot.SaveAsFile(path + "/screenshot-" + TimeAndDate + ".jpeg", ScreenshotImageFormat.Jpeg);
+            RemoveHighlight(element);
+            return "./Screenshot/screenshot-" + TimeAndDate + ".jpeg";
+
+        }
+
+        public void Highlight(IWebElement element)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("arguments[0].setAttribute('style', arguments[1]);", element, " border: 3px solid red;");
+        }
+
+
+        public void RemoveHighlight(IWebElement element)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("arguments[0].setAttribute('style', arguments[1]);", element, "");
 
         }
 

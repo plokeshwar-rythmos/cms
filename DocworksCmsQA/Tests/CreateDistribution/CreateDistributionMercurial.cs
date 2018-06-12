@@ -49,15 +49,9 @@ namespace DocWorksQA.Tests
                 distribution.ClickCreateDistribution();
                 project.ClickNotifications();
                 String status1 = project.GetNotificationStatus();
-                project.SuccessScreenshot("Distribution got Created successfully With TOC Path");
+                project.SuccessScreenshot(project.NOTIFICATION_MESSAGE, "Distribution got Created successfully With TOC Path");
                 VerifyText(test, "creating distribution " + expected1 + " in " + projectName + " is successful", status1, "Distribution is Created For Mercurial TOC with status:" + status1 + "", "Distribution is not created For Mercurial TOC with status: " + status1 + "");
-                project.ClickDashboard();
-                project.SearchForProject(projectName);
-                distribution.ClickDistribution();
-                String actual1 = distribution.GetDistributionName();
-                project.SuccessScreenshot("Created Distribution:  " + expected1 + "");
-                VerifyEquals(test, expected1, actual1, "Create Distribution for Mercurial Project With TOC is successful", "Create Distribution for Mercurial Project With TOC is not successful");
-                distribution.ClickCloseButton();
+               
             }
             catch (Exception ex)
             {
@@ -90,7 +84,7 @@ namespace DocWorksQA.Tests
                 distribution.ClickCreateDistribution();
                 project.ClickNotifications();
                 String status2 = project.GetNotificationStatus();
-                project.SuccessScreenshot("Distribution: " + expected2 + " got Created successfully Without TOC Path");
+                project.SuccessScreenshot(project.NOTIFICATION_MESSAGE, "Distribution: " + expected2 + " got Created successfully Without TOC Path");
                 VerifyText(test, "creating distribution " + expected2 + " in " + projectName + " is successful", status2, "Distribution is Created For Mercurial Without TOC with status:" + status2 + "", "Distribution is not created For Mercurial without TOC with status: " + status2 + "");
             }
             catch (Exception ex)

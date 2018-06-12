@@ -50,7 +50,7 @@ namespace DocWorksQA.Tests
                 distmodule.ClickCreateDistribution();
                 project.ClickNotifications();
                 String status1 = project.GetNotificationStatus();
-                SuccessScreenshot(driver, "Distribution got Created successfully With TOC Path", test);
+                project.SuccessScreenshot(project.NOTIFICATION_MESSAGE, "Distribution got Created successfully With TOC Path");
                 VerifyText(test, "creating distribution " + distributionName + " in " + projectName + " is successful", status1, "Distribution is Created For GitLab TOC with status:" + status1 + "", "Distribution is not created For GitLab TOC with status: " + status1 + "");
                
             }
@@ -78,15 +78,15 @@ namespace DocWorksQA.Tests
                 project.SearchForProject(projectName);
                 CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
                 distmodule.ClickDistribution();
-                String expected2 = distmodule.EnterDistirbutionName();
+                String expected = distmodule.EnterDistirbutionName();
                 System.Threading.Thread.Sleep(5000);
                 distmodule.SelectBranch("DocworksManual3");
                 distmodule.EnterDescription("This is to create a distribution Without TOC Path");
                 distmodule.ClickCreateDistribution();
                 project.ClickNotifications();
-                String status2 = project.GetNotificationStatus();
-                SuccessScreenshot(driver, "Distribution: " + expected2 + " got Created successfully Without TOC Path", test);
-                VerifyText(test, "creating distribution " + expected2 + " in " + projectName + " is successful", status2, "Distribution is Created For GitLab Without TOC with status:" + status2 + "", "Distribution is not created For GitLab without TOC with status: " + status2 + "");
+                String status = project.GetNotificationStatus();
+                project.SuccessScreenshot(project.NOTIFICATION_MESSAGE, "Distribution: " + expected + " got Created successfully Without TOC Path");
+                VerifyText(test, "creating distribution " + expected + " in " + projectName + " is successful", status, "Distribution is Created For GitLab Without TOC with status:" + status + "", "Distribution is not created For GitLab without TOC with status: " + status + "");
             }
             catch (Exception ex)
             {

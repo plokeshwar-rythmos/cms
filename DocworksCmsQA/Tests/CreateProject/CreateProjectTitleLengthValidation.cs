@@ -43,7 +43,7 @@ namespace DocWorksQA.Tests
                 String expected = "Please enter at least 5 characters";
                 addProject.SelectContentType("Manual");
                 String actual = addProject.GetText(addProject.INVALID_TITLE_LENGTH);
-                addProject.SuccessScreenshot("Validating Length of the Title");
+                addProject.SuccessScreenshot(addProject.INVALID_TITLE_LENGTH, "Validating Length of the Title");
                 VerifyEquals(test, expected, actual, "Validation Got Successful", "Validation Got Failed");
             }
             catch (Exception e)
@@ -69,7 +69,7 @@ namespace DocWorksQA.Tests
                 addProject.ClickAddProject();
                 addProject.ProjectLengthMoreThan100();
                 addProject.SelectContentType("Manual");
-                addProject.SuccessScreenshot("Length of the Title exceeded its limit");
+                addProject.SuccessScreenshot(addProject.SIZE_EXCEED_100, "Length of the Title exceeded its limit");
                 String str = addProject.GetTitleLength();
                 VerifyEquals(test, "100/100", str, "Length Of Project Title got exceeded to its limit as " + str + "", "Length Of Project Title Not got exceeded to its limit as " + str + "");
 

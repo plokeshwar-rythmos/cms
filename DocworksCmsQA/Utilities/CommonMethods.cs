@@ -78,7 +78,9 @@ namespace DocWorksQA.Utilities
 
         public void ExceptionScreenshot(ExtentTest test, String path, String message)
         {
-            Info(test, "<a style=\"font - size: 20px; color: red;\" href=\"" + path + "\">Screenshot : Exception Occurred - " + message + "<br></a>");
+            //test.AddScreenCaptureFromPath(path, message);
+            test.Fail("FAILURE : " +message, MediaEntityBuilder.CreateScreenCaptureFromPath(path).Build());
+    //        Info(test, "<a style=\"font - size: 20px; color: red;\" href=\"" + path + "\">Screenshot : Exception Occurred - " + message + "<br></a>");
         }
 
         public string GetImagePath()
@@ -643,5 +645,7 @@ namespace DocWorksQA.Utilities
         {
             Info(test, "<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
         }
+
+        
     }
 }

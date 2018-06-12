@@ -179,12 +179,21 @@ namespace DocWorksQA.Utilities
             ReportFlusher();
         }
 
+        public void PassScreenshot(ExtentTest test, String path, String description)
+        {
+            Console.WriteLine(RemoveTags(description));
+            test.Pass(description, MediaEntityBuilder.CreateScreenCaptureFromPath(path).Build());
+            ReportFlusher();
+        }
+
         public void Pass(ExtentTest test, String description)
         {
             Console.WriteLine(RemoveTags(description));
             test.Pass(description);
             ReportFlusher();
         }
+
+     
 
         /**
          * This method adds a fail statement to the current test instance.
@@ -239,6 +248,7 @@ namespace DocWorksQA.Utilities
 
         public void Info(ExtentTest test, String description)
         {
+
             Console.WriteLine(RemoveTags(description));
             test.Info(description);
             ReportFlusher();

@@ -74,18 +74,29 @@ namespace DocWorksQA.Pages
 
         public void SuccessScreenshot(String path,String message)
         {
-            Info(test, "<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
+
+            test.Pass("SUCCESS : " + message, MediaEntityBuilder.CreateScreenCaptureFromPath(path).Build());
+            // test.AddScreenCaptureFromPath(path, message);
+//            PassScreenshot(test, path, message);
+            //Info(test, "<a href=\"" + path + "\">ScreenShot : " + message + "<br></a>");
         }
 
         public void SuccessScreenshot(String message)
         {
+            
             String path = TakeScreenshot();
             SuccessScreenshot(path, message);
         }
 
 
+        public void SuccessScreenshot(By by, String message)
+        {
+            String path = TakeElementScreenshot(by);
+            //String path = TakeScreenshot();
+            SuccessScreenshot(path, message);
+        }
 
-        
+
 
 
         public String GetDescriptionSize()

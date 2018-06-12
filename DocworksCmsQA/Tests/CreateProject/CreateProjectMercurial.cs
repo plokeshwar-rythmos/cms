@@ -47,12 +47,12 @@ namespace DocWorksQA.Tests
                 addProject.ClickCreateProject();
                 addProject.ClickNotifications();
                 String status = addProject.GetNotificationStatus();
-                addProject.SuccessScreenshot("Project Created Title");
+                addProject.SuccessScreenshot(addProject.NOTIFICATION_MESSAGE, "Project Created Successfully");
                 VerifyText(test, "creating a project " + projectName + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
                 addProject.ClickDashboard();
                 addProject.SearchForProject(projectName);
                 String actual = addProject.GetProjectTitle();
-                addProject.SuccessScreenshot("ProjectTitle");
+                addProject.SuccessScreenshot(addProject.GET_TITLE, "Project Available on Search");
                 VerifyEquals(test, projectName, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
               
             }
