@@ -104,6 +104,7 @@
     <Compile Include="CustomException\ExtentTestExtension.cs" />
     <Compile Include="DockworksApi\CmsCommonMethods.cs" />
     <Compile Include="DockworksApi\CreateProject .cs" />
+    <Compile Include="DockworksApi\CreateProjects.cs" />
     <Compile Include="DockworksApi\WSAPIClient.cs" />
     <Compile Include="DockworksApi\WSAPIException.cs" />
     <Compile Include="Pages\AddProjectPage.cs" />

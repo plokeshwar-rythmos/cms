@@ -48,7 +48,7 @@ namespace DocWorksQA.CmsApiMethods
                 status = r.GetValue("status").ToString();
 
                 Console.WriteLine("Current Status of Response ID (" + responseID + ") : " + status);
-                if (status.Equals("1"))
+                if (!status.Equals("1"))
                 {
                     Console.WriteLine("Current Status of Response ID (" + responseID + ") : " + status);
                     System.Threading.Thread.Sleep(4000);

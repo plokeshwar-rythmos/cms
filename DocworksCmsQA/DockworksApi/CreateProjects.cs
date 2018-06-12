@@ -1,0 +1,54 @@
+﻿using DocWorksQA.DockworksApi;
+using System;
+using DocWorksQA.Utilities;
+using System.Collections.Generic;
+using DocWorksQA.CmsApiMethods;
+using Newtonsoft.Json.Linq;
+
+namespace DocworksCmsQA.DockworksApi
+{
+   public class CreateProjects
+    {
+        WSAPIClient client;
+        
+
+        public String CreateGitLabProject()
+        {
+            client = new WSAPIClient(ConfigurationHelper.Get<String>("endpoint"));
+            String token = client.Login();
+
+            String projectName = "API_GitLab_"+new CommonMethods().GenerateRandomString(5);
+
+            var data = new Dictionary<string, object>
+            {
+                {"projectName", projectName },
+                {"RepositoryId", "6090611"},
+                {"RepositoryName", "Docworks"},
+                {"typeOfContent", 3},
+                {"Description", "Project Description"},
+                {"PublishedPath", "This is awesome"},
+                {"SourceControlProviderType", "1"}
+            };
+
+
+            JObject c = CmsCommonMethods.createProject(client, data, token);
+
+            var responseID = c.GetValue("responseId").ToString();
+            Console.WriteLine("Response ID " + responseID);
+
+            try
+            {
+                String responseStatus = CmsCommonMethods.getResponseCompleteExecution(client, responseID, token);
+                Console.WriteLine(responseStatus);
+             
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return projectName;
+        }
+
+    }
+}

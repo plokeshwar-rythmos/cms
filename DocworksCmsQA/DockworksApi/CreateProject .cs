@@ -1,31 +1,28 @@
-﻿using AventStack.ExtentReports;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using DocWorksQA.Tests;
 using Newtonsoft.Json.Linq;
 using DocWorksQA.CmsApiMethods;
 
 namespace DocWorksQA.DockworksApi
 {
     [TestFixture]
-    class TC_06_CreateProject : BeforeTestAfterTest
+    class TC_06_CreateProject
     {
-        private static ExtentTest test;
-
+      
         WSAPIClient client;
 
         String token;
 
 
-        [SetUp]
+       // [SetUp]
         public void Setup()
         {
             client = new WSAPIClient(Utilities.ConfigurationHelper.Get<String>("endpoint"));
             token = client.Login();
         }
 
-        [Test]
+      //  [Test]
         public void ValidateCreateProjectApiWithValidData()
         {
        
@@ -73,7 +70,7 @@ namespace DocWorksQA.DockworksApi
             }
         }
 
-        [TearDown]
+       // [TearDown]
         public void TearDown()
         {
         }

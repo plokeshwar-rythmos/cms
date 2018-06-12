@@ -4,6 +4,7 @@ using DocWorksQA.Pages;
 using DocWorksQA.SeleniumHelpers;
 using System;
 using AventStack.ExtentReports;
+using DocworksCmsQA.DockworksApi;
 
 namespace DocWorksQA.Tests
 {
@@ -22,6 +23,7 @@ namespace DocWorksQA.Tests
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
 
+            projectName = new CreateProjects().CreateGitLabProject();
 
         }
 
@@ -36,7 +38,7 @@ namespace DocWorksQA.Tests
                 Console.WriteLine("Starting Test Case : " + TestName);
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
-                projectName = CreateGitLabProject(test, driver);
+                //projectName = CreateGitLabProject(test, driver);
                 AddProjectPage project = new AddProjectPage(test, driver);
                 project.ClickDashboard();
                 project.SearchForProject(projectName);
@@ -79,12 +81,12 @@ namespace DocWorksQA.Tests
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
 
-                if (projectName == null || projectName == "")
-                {
-                    projectName = CreateGitLabProject(test, driver);
-                }
-                //String projectName = CreateGitLabProject(test, driver);
-
+                /*  if (projectName == null || projectName == "")
+                  {
+                      projectName = CreateGitLabProject(test, driver);
+                  }
+                  //String projectName = CreateGitLabProject(test, driver);
+              */
                 AddProjectPage project = new AddProjectPage(test, driver);
                 project.ClickDashboard();
                 project.SearchForProject(projectName);

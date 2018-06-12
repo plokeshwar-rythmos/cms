@@ -290,8 +290,20 @@ namespace DocWorksQA.Utilities
             return new String(text);
         }
 
+        public String GenerateRandomString(int length)
+        {
+            String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            Random rng = new Random();
+            char[] text = new char[length];
+            for (int i = 0; i < length; i++)
+            {
+                text[i] = characters.ElementAt(rng.Next(characters.Length));
 
-       
+            }
+            return new String(text);
+        }
+
+
 
         public void UpdateGitLabProjectProperties(String distributionStatus) {
 
