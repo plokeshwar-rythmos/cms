@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using System.Diagnostics;
 using AventStack.ExtentReports;
 using DocWorksQA.Utilities;
+using System.Collections.ObjectModel;
 
 namespace DocWorksQA.Pages
 {
@@ -243,7 +244,7 @@ namespace DocWorksQA.Pages
                 
                 String tmp = GetText(NOTIFICATION_MESSAGE); //WaitForElement(NOTIFICATION_MESSAGE).Text;
 
-                if (tmp.Contains("successful"))
+                if (tmp.Contains("successful") || tmp.Contains("failed"))
                 {
                    Console.WriteLine(i+" : "+tmp);
                    break;
@@ -323,7 +324,7 @@ namespace DocWorksQA.Pages
             {
                 Info(test, value + " Source Control Provider Type already Selected.");
             }
-            System.Threading.Thread.Sleep(15000);
+         //   System.Threading.Thread.Sleep(15000);
         }
 
         public void SelectRepository(String value)
@@ -331,8 +332,20 @@ namespace DocWorksQA.Pages
             if (!GetText(REPOSITORY_DROPDOWN).Equals(value))
             {
                 this.Click(REPOSITORY_DROPDOWN);
-                By OPTION = By.XPath("//mat-option//span[contains(@class,'mat-option-text')][contains(text(),'" + value + "')]");
-                this.Click(OPTION);
+                ReadOnlyCollection<IWebElement> options = GetDriver().FindElements(By.XPath("//span[@class='mat-option-text']"));
+                foreach (IWebElement e in options)
+                {
+                    if (e.Text.Equals("unitydemo2/" + value))
+                    {
+                        Console.WriteLine(e.Text);
+                        e.Click();
+                        System.Threading.Thread.Sleep(3000);
+                        break;
+                    }
+                }
+
+                //By OPTION = By.XPath("//mat-option//span[contains(@class,'mat-option-text')][contains(text(),'" + value + "')]");
+                //this.Click(OPTION);
                 Info(test, "Selected Repository as " + value);
             }
             else

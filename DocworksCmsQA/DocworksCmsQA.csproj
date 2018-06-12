@@ -102,6 +102,10 @@
     <Compile Include="CustomException\AssertException.cs" />
     <Compile Include="CustomException\ExceptionHandler.cs" />
     <Compile Include="CustomException\ExtentTestExtension.cs" />
+    <Compile Include="DockworksApi\CmsCommonMethods.cs" />
+    <Compile Include="DockworksApi\CreateProject .cs" />
+    <Compile Include="DockworksApi\WSAPIClient.cs" />
+    <Compile Include="DockworksApi\WSAPIException.cs" />
     <Compile Include="Pages\AddProjectPage.cs" />
     <Compile Include="Pages\AuthoringScreenEnhancements.cs" />
     <Compile Include="Pages\CreateDistributionPage.cs" />

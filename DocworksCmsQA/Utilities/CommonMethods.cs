@@ -586,7 +586,7 @@ namespace DocWorksQA.Utilities
 
         public void WaitForProcessCompletion(IWebDriver driver)
         {
-            By NOTIFICATION_MESSAGE = By.XPath("//div[@class='mat-line operation-status-wrapper']//small");
+            By NOTIFICATION_MESSAGE = By.XPath("//div[@ngclass='operation-status-wrapper']//small");
             for (int i = 0; i < 300; i++)
             {
 
@@ -609,7 +609,7 @@ namespace DocWorksQA.Utilities
 
         public String GetNotificationStatus(IWebDriver driver)
         {
-            By NOTIFICATION_MESSAGE = By.XPath("//div[@class='mat-line operation-status-wrapper']//small");
+            By NOTIFICATION_MESSAGE = By.XPath("//div[@ngclass='operation-status-wrapper']//small");
             WaitForProcessCompletion(driver);
             return driver.FindElement(NOTIFICATION_MESSAGE).Text;
 
