@@ -10,7 +10,7 @@ namespace DocWorksQA.Tests
 {
     [TestFixture, Category("Create Project")]
     [Parallelizable]
-    class TC_06_ValidateProjectTitleLengthWithLessThan5Characters : BeforeTestAfterTest
+    class CreateGitLabProjectWithMandatoryFields : BeforeTestAfterTest
     {
         private IWebDriver driver;
         private ExtentTest test;
@@ -26,25 +26,32 @@ namespace DocWorksQA.Tests
 
 
 
-
-        [Test, Description("Verify Project Title throws an error message When User gives Invalid Length")]
-        public void TC06_ValidateProjectTitleLengthWithLessThan5Characters()
+        [Test, Description("Verifying User is able to Add Project For GitLab with Mandatory Fields")]
+        public void TC05_ValidateAddingProjectForGitLabWithMandatoryFields()
         {
             try
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 Console.WriteLine("Starting Test Case : " + TestName);
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-                Trace.TraceInformation("");
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.ClickAddProject();
-                addProject.ProjectTitleInvalidLength();
-                String expected = "Please enter at least 5 characters";
+                String expected = addProject.EnterProjectTitle();
                 addProject.SelectContentType("Manual");
-                String actual = addProject.GetText(addProject.INVALID_TITLE_LENGTH);
-                addProject.SuccessScreenshot("Validating Length of the Title");
-                VerifyEquals(test, expected, actual, "Validation Got Successful", "Validation Got Failed");
+                addProject.SelectSourceControlProviderType("GitLab");
+                addProject.SelectRepository("Docworks");
+                addProject.EnterPublishedPath("Publishing path to create project");
+                addProject.ClickCreateProject();
+                addProject.ClickNotifications();
+                String status = addProject.GetNotificationStatus();
+                addProject.SuccessScreenshot("Project Created Title");
+                VerifyText(test, "creating a project " + expected + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
+                addProject.ClickDashboard();
+                addProject.SearchForProject(expected);
+                String actual = addProject.GetProjectTitle();
+                addProject.SuccessScreenshot("ProjectTitle");
+                VerifyEquals(test, expected, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
             }
             catch (Exception e)
             {
@@ -54,6 +61,7 @@ namespace DocWorksQA.Tests
             }
 
         }
+
 
 
 

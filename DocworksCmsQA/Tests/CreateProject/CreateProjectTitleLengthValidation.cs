@@ -10,7 +10,7 @@ namespace DocWorksQA.Tests
 {
     [TestFixture, Category("Create Project")]
     [Parallelizable]
-    class TC_07_ValidateProjectTitleLengthWithMoreThan100Characters : BeforeTestAfterTest
+    class CreateProjectTitleLengthValidation : BeforeTestAfterTest
     {
         private IWebDriver driver;
         private ExtentTest test;
@@ -26,6 +26,35 @@ namespace DocWorksQA.Tests
 
 
 
+
+        [Test, Description("Verify Project Title throws an error message When User gives Invalid Length")]
+        public void TC06_ValidateProjectTitleLengthWithLessThan5Characters()
+        {
+            try
+            {
+                String TestName = (TestContext.CurrentContext.Test.Name.ToString());
+                Console.WriteLine("Starting Test Case : " + TestName);
+                String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
+                Trace.TraceInformation("");
+                test = StartTest(TestName, description);
+                AddProjectPage addProject = new AddProjectPage(test, driver);
+                addProject.ClickAddProject();
+                addProject.ProjectTitleInvalidLength();
+                String expected = "Please enter at least 5 characters";
+                addProject.SelectContentType("Manual");
+                String actual = addProject.GetText(addProject.INVALID_TITLE_LENGTH);
+                addProject.SuccessScreenshot("Validating Length of the Title");
+                VerifyEquals(test, expected, actual, "Validation Got Successful", "Validation Got Failed");
+            }
+            catch (Exception e)
+            {
+                ReportExceptionScreenshot(test, driver, e);
+                Fail(test, e);
+                throw;
+            }
+
+        }
+
         [Test, Description("Verifying Whether User is able to send More Than 100 characters to the Project Title")]
         public void TC07_ValidateProjectTitleLengthWithMoreThan100Characters()
         {
@@ -36,6 +65,7 @@ namespace DocWorksQA.Tests
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
+                addProject.ClickDashboard();
                 addProject.ClickAddProject();
                 addProject.ProjectLengthMoreThan100();
                 addProject.SelectContentType("Manual");
@@ -51,6 +81,8 @@ namespace DocWorksQA.Tests
                 throw;
             }
         }
+
+
 
         [OneTimeTearDown]
         public void CloseBrowser()

@@ -5,12 +5,13 @@ using System;
 using DocWorksQA.Pages;
 using System.Diagnostics;
 using AventStack.ExtentReports;
+using System.Collections.Generic;
 
 namespace DocWorksQA.Tests
 {
     [TestFixture, Category("Create Project")]
     [Parallelizable]
-    class TC_05_ValidateAddingProjectForGitLabWithMandatoryFields : BeforeTestAfterTest
+    class CreateProjectMercurial : BeforeTestAfterTest
     {
         private IWebDriver driver;
         private ExtentTest test;
@@ -21,13 +22,12 @@ namespace DocWorksQA.Tests
         {
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
-            System.Threading.Thread.Sleep(5000);
         }
 
 
 
-        [Test, Description("Verifying User is able to Add Project For GitLab with Mandatory Fields")]
-        public void TC05_ValidateAddingProjectForGitLabWithMandatoryFields()
+        [Test, Description("Verifying User is able to Add Project For Mercurial with all Fields")]
+        public void TC04_ValidateCreateProjectForMercurialWithAllFields()
         {
             try
             {
@@ -37,21 +37,24 @@ namespace DocWorksQA.Tests
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.ClickAddProject();
-                String expected = addProject.EnterProjectTitle();
+                String projectName = "SELENIUM-Ono" + "_" + GenerateRandomNumbers(5) + System.DateTime.Now.TimeOfDay;
+                addProject.EnterProjectTitle(projectName);
                 addProject.SelectContentType("Manual");
-                addProject.SelectSourceControlProviderType("GitLab");
-                addProject.SelectRepository("Docworks");
+                addProject.SelectSourceControlProviderType("Ono");
+                addProject.EnterMercurialRepoPath();
                 addProject.EnterPublishedPath("Publishing path to create project");
+                addProject.EnterDescription("This is to create Project");
                 addProject.ClickCreateProject();
                 addProject.ClickNotifications();
                 String status = addProject.GetNotificationStatus();
                 addProject.SuccessScreenshot("Project Created Title");
-                VerifyText(test, "creating a project " + expected + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
+                VerifyText(test, "creating a project " + projectName + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
                 addProject.ClickDashboard();
-                addProject.SearchForProject(expected);
+                addProject.SearchForProject(projectName);
                 String actual = addProject.GetProjectTitle();
                 addProject.SuccessScreenshot("ProjectTitle");
-                VerifyEquals(test, expected, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
+                VerifyEquals(test, projectName, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
+              
             }
             catch (Exception e)
             {
@@ -61,7 +64,6 @@ namespace DocWorksQA.Tests
             }
 
         }
-
 
 
 

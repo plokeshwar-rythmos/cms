@@ -10,7 +10,7 @@ namespace DocWorksQA.Tests
 {
     [TestFixture, Category("Create Distribution")]
     [Parallelizable]
-    class TC_08_ValidateCreateDistributionForGitLabProjectWithAllFields : BeforeTestAfterTest
+    class CreateDistributionGitLab : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
@@ -22,7 +22,6 @@ namespace DocWorksQA.Tests
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
-
             projectName = new CreateProjects().CreateGitLabProject();
 
         }
@@ -38,14 +37,13 @@ namespace DocWorksQA.Tests
                 Console.WriteLine("Starting Test Case : " + TestName);
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
-                //projectName = CreateGitLabProject(test, driver);
                 AddProjectPage project = new AddProjectPage(test, driver);
                 project.ClickDashboard();
                 project.SearchForProject(projectName);
                 CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
                 distmodule.ClickDistribution();
                 String distributionName = distmodule.EnterDistirbutionName();
-               System.Threading.Thread.Sleep(10000);
+                System.Threading.Thread.Sleep(5000);
                 distmodule.SelectBranch("DocworksManual3");
                 distmodule.EnterTocPath();
                 distmodule.EnterDescription("This is to create a distribution With TOC Path");
@@ -54,13 +52,7 @@ namespace DocWorksQA.Tests
                 String status1 = project.GetNotificationStatus();
                 SuccessScreenshot(driver, "Distribution got Created successfully With TOC Path", test);
                 VerifyText(test, "creating distribution " + distributionName + " in " + projectName + " is successful", status1, "Distribution is Created For GitLab TOC with status:" + status1 + "", "Distribution is not created For GitLab TOC with status: " + status1 + "");
-               /* project.ClickDashboard();
-                project.SearchForProject(projectName);
-                distmodule.ClickDistribution();
-                String actual1 = distmodule.GetDistributionName();
-                SuccessScreenshot(driver, "Created Distribution:  " + distributionName + "", test);
-                VerifyEquals(test, distributionName, actual1, "Create Distribution for GitLab Project With TOC is successful", "Create Distribution for GitLab Project With TOC is not successful");
-                distmodule.ClickCloseButton();*/
+               
             }
             catch (Exception ex)
             {
@@ -81,19 +73,13 @@ namespace DocWorksQA.Tests
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
 
-                /*  if (projectName == null || projectName == "")
-                  {
-                      projectName = CreateGitLabProject(test, driver);
-                  }
-                  //String projectName = CreateGitLabProject(test, driver);
-              */
                 AddProjectPage project = new AddProjectPage(test, driver);
                 project.ClickDashboard();
                 project.SearchForProject(projectName);
                 CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
                 distmodule.ClickDistribution();
                 String expected2 = distmodule.EnterDistirbutionName();
-                System.Threading.Thread.Sleep(75000);
+                System.Threading.Thread.Sleep(5000);
                 distmodule.SelectBranch("DocworksManual3");
                 distmodule.EnterDescription("This is to create a distribution Without TOC Path");
                 distmodule.ClickCreateDistribution();
@@ -106,7 +92,6 @@ namespace DocWorksQA.Tests
             {
                 ReportExceptionScreenshot(test, driver, ex);
                 Fail(test, ex);
-            //    UpdateGitLabProjectProperties("Failure");
                 throw;
             }
 
