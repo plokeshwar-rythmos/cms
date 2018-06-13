@@ -31,14 +31,14 @@ namespace DocworksCmsQA.DockworksApi
             };
 
 
-            JObject c = CmsCommonMethods.createProject(client, data, token);
+            JObject c = CmsCommonMethods.CreateProject(client, data, token);
 
             var responseID = c.GetValue("responseId").ToString();
             Console.WriteLine("Response ID " + responseID);
 
             try
             {
-                String responseStatus = CmsCommonMethods.getResponseCompleteExecution(client, responseID, token);
+                String responseStatus = CmsCommonMethods.GetResponseCompleteExecution(client, responseID, token);
                 Console.WriteLine(responseStatus);
              
 
@@ -70,14 +70,14 @@ namespace DocworksCmsQA.DockworksApi
             };
 
 
-            JObject c = CmsCommonMethods.createProject(client, data, token);
+            JObject c = CmsCommonMethods.CreateProject(client, data, token);
 
             var responseID = c.GetValue("responseId").ToString();
             Console.WriteLine("Response ID " + responseID);
 
             try
             {
-                String responseStatus = CmsCommonMethods.getResponseCompleteExecution(client, responseID, token);
+                String responseStatus = CmsCommonMethods.GetResponseCompleteExecution(client, responseID, token);
                 Console.WriteLine(responseStatus);
 
 
@@ -109,14 +109,14 @@ namespace DocworksCmsQA.DockworksApi
             };
 
 
-            JObject c = CmsCommonMethods.createProject(client, data, token);
+            JObject c = CmsCommonMethods.CreateProject(client, data, token);
 
             var responseID = c.GetValue("responseId").ToString();
             Console.WriteLine("Response ID " + responseID);
 
             try
             {
-                String responseStatus = CmsCommonMethods.getResponseCompleteExecution(client, responseID, token);
+                String responseStatus = CmsCommonMethods.GetResponseCompleteExecution(client, responseID, token);
                 Console.WriteLine(responseStatus);
 
 

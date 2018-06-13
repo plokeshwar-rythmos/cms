@@ -38,14 +38,14 @@ namespace DocWorksQA.DockworksApi
             };
 
 
-            JObject c = CmsCommonMethods.createProject(client, data, token);
+            JObject c = CmsCommonMethods.CreateProject(client, data, token);
             Assert.NotNull(c);
             var responseID = c.GetValue("responseId").ToString();
             Console.WriteLine("Response ID " +responseID);
          
             try
             {
-                String responseStatus = CmsCommonMethods.getResponseCompleteExecution(client, responseID, token);
+                String responseStatus = CmsCommonMethods.GetResponseCompleteExecution(client, responseID, token);
                 Console.WriteLine(responseStatus);
          /*       if (responseStatus.Equals("1"))
                 {

@@ -11,7 +11,7 @@ namespace DocWorksQA.CmsApiMethods
 {
     public class CmsCommonMethods
     {
-        public static JObject createProject(WSAPIClient client, Dictionary<string, object> data, string token)
+        public static JObject CreateProject(WSAPIClient client, Dictionary<string, object> data, string token)
         {
             JObject c = (JObject)client.SendPost("api/Projects", data, token);
             Assert.NotNull(c);
@@ -19,7 +19,7 @@ namespace DocWorksQA.CmsApiMethods
         }
 
 
-        public JObject getProjects(WSAPIClient client, string token)
+        public JObject GetProjects(WSAPIClient client, string token)
 
         {
             JObject c = (JObject)client.SendGet("api/Projects", token);
@@ -27,7 +27,7 @@ namespace DocWorksQA.CmsApiMethods
             return c;
         }
 
-        public static JObject getResponse(WSAPIClient client, String responseID, string token)
+        public static JObject GetResponse(WSAPIClient client, String responseID, string token)
         {
             JObject c = (JObject)client.SendGet("api/Responses/" + responseID, token);
             Assert.NotNull(c);
@@ -35,13 +35,13 @@ namespace DocWorksQA.CmsApiMethods
         }
 
 
-        public static string getResponseCompleteExecution(WSAPIClient client, String responseID, string token)
+        public static string GetResponseCompleteExecution(WSAPIClient client, String responseID, string token)
         {
 
             string status = "";
             for (int i = 0; i < 50; i++)
             {
-                JObject r = CmsCommonMethods.getResponse(client, responseID, token);
+                JObject r = CmsCommonMethods.GetResponse(client, responseID, token);
                 Console.WriteLine(r);
 
 

@@ -13,7 +13,6 @@ namespace DocWorksQA.Utilities
 {
     public class ExtentReporter
     {
-        ExtentHtmlReporter htmlReporter;
         static ExtentReports reporter;
         ExtentTest parent;
        ExtentTest test;
@@ -43,9 +42,12 @@ namespace DocWorksQA.Utilities
 
 
 
-        public static ExtentXReporter GetXReporter() {
-            
-            ExtentXReporter xReporter = new ExtentXReporter(ConfigurationHelper.Get<String>("mongoDbUrl"));
+        public static KlovReporter GetXReporter() {
+
+            KlovReporter xReporter = new KlovReporter();
+
+
+            //ExtentXReporter xReporter = new ExtentXReporter(ConfigurationHelper.Get<String>("mongoDbUrl"));
             xReporter.Configuration().ServerURL = (ConfigurationHelper.Get<String>("serverUrl"));
             xReporter.Configuration().ProjectName = ("CMS");
             xReporter.Configuration().ReportName = ("DocWorks-CMS");
@@ -95,7 +97,7 @@ namespace DocWorksQA.Utilities
         public void InitReports(String folderPath, String reportName, String mongoDBUrl, String serverUrl,
                 String projectName)
         {
-            ExtentXReporter xReporter = new ExtentXReporter(mongoDBUrl);
+           /* ExtentXReporter xReporter = new ExtentXReporter(mongoDBUrl);
             xReporter.Configuration().ServerURL = serverUrl;
             xReporter.Configuration().ReportName = reportName;
             xReporter.Configuration().ProjectName = projectName;
@@ -105,6 +107,7 @@ namespace DocWorksQA.Utilities
             htmlReporter.Configuration().DocumentTitle = reportName;
             reporter = new ExtentReports();
             reporter.AttachReporter(htmlReporter, xReporter);
+            */
         }
 
         /**
