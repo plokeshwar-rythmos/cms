@@ -42,6 +42,7 @@ namespace DocWorksQA.Pages
         public By DESCRIPTION_MAT_CARD = By.XPath("//mat-card-content/p");
         public By FAVOURITE_ICON = By.XPath("(//i[@class='mdi-star-outline mdi mdi-24px'])[1]");
         public By AUTHORING_BUTTON = By.XPath("(//a[@class='mat-tab-link ng-star-inserted'])[contains(text(),'Authoring')]");
+        public By ERROR = By.XPath("//mat-error");
         public object DriverWaitUtil { get; private set; }
 
         private ExtentTest test;
@@ -236,6 +237,8 @@ namespace DocWorksQA.Pages
         }
         public void ClickCreateProject()
         {
+
+            
             Click(CREATE_PROJECT_BUTTON);
             Info(test, "Clicked on Create project Button.");
             WaitForElement(BELL_NOTIFICATION);
@@ -250,7 +253,7 @@ namespace DocWorksQA.Pages
         }
 
         public void WaitForProcessCompletion() {
-            for(int i = 0; i < 500; i++)
+            for(int i = 0; i < 1000; i++)
             {
                 
                 String tmp = GetText(NOTIFICATION_MESSAGE); //WaitForElement(NOTIFICATION_MESSAGE).Text;
@@ -355,8 +358,17 @@ namespace DocWorksQA.Pages
                     }
                 }
 
-                //By OPTION = By.XPath("//mat-option//span[contains(@class,'mat-option-text')][contains(text(),'" + value + "')]");
-                //this.Click(OPTION);
+                GetDriver().FindElement(PUBLISHED_PATH).SendKeys(Keys.Tab);
+                if (CheckForError(ERROR, "Repository is required"))
+                {
+                    Console.WriteLine("Errors While Selecting Repository.");
+                    SelectRepository(value);
+                }
+                else
+                {
+                    Console.WriteLine("No Errors While Selecting Repository.");
+                }
+
                 Info(test, "Selected Repository as " + value);
             }
             else

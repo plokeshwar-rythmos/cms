@@ -42,6 +42,7 @@ namespace DocWorksQA.Tests
                 addProject.SelectRepository("DocworksQA");
                 addProject.EnterPublishedPath("Publishing path to create project");
                 addProject.EnterDescription("This is to create Project");
+
                 addProject.ClickCreateProject();
                 addProject.ClickNotifications();
                 String status = addProject.GetNotificationStatus();

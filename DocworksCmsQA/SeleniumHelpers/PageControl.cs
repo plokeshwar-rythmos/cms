@@ -53,6 +53,21 @@ namespace DocWorksQA.SeleniumHelpers
         }
 
 
+        public bool CheckForError(By by, String errorString) {
+
+            try
+            {
+                if (driver.FindElement(by).Displayed && driver.FindElement(by).Text.Contains(errorString))
+                    return true;
+
+            }catch(Exception e)
+            {
+                return false;
+            }
+
+            return false;
+        }
+
         public void EnterValue(By by, string value)
         {
             Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "Entering value into " + by.ToString());

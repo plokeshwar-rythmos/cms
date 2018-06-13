@@ -31,6 +31,7 @@ namespace DocWorksQA.Pages
         //public By AVAIL_DISTRIBUTION_CREATED_DT = By.XPath("//mat-chip/small/strong");
         public By INVALID_TITLE_LENGTH = By.XPath("//mat-error[@class='mat-error ng-star-inserted']");
         public By TOC_PATH = By.XPath("//input[@placeholder='TOC Path']");
+        public By ERROR = By.XPath("//mat-error");
 
         private ExtentTest test;
         /**
@@ -146,6 +147,18 @@ namespace DocWorksQA.Pages
                 Click(By.XPath("//mat-select//div[@class='mat-select-arrow']"));
                 By OPTION = By.XPath("(//mat-option//span[contains(@class,'mat-option-text')])[text()='" + value + "']");
                 this.Click(OPTION);
+
+                GetDriver().FindElement(TOC_PATH).SendKeys(Keys.Tab);
+                if (CheckForError(ERROR, "Repository is required"))
+                {
+                    Console.WriteLine("Errors While Selecting Repository.");
+                    SelectBranch(value);
+                }
+                else
+                {
+                    Console.WriteLine("No Errors While Selecting Repository.");
+                }
+
                 Info(test, "Selected Branch as " + value);
             }
             else
