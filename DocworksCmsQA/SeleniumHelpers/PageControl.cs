@@ -384,7 +384,7 @@ namespace DocWorksQA.SeleniumHelpers
             TimeAndDate.Replace(":", "_");
             ITakesScreenshot ssdriver = driver as ITakesScreenshot;
             Screenshot screenshot = ssdriver.GetScreenshot();
-            screenshot.SaveAsFile(path + "/screenshot-" + TimeAndDate + ".jpeg", ScreenshotImageFormat.Jpeg);
+            screenshot.SaveAsFile(path + "/screenshot-" + TimeAndDate + ".png", ScreenshotImageFormat.Png);
             RemoveHighlight(element);
             return "./Screenshot/screenshot-" + TimeAndDate + ".jpeg";
 

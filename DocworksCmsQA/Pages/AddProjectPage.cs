@@ -247,27 +247,27 @@ namespace DocWorksQA.Pages
 
         public void ClickNotifications()
         {
-            System.Threading.Thread.Sleep(7000);
+            System.Threading.Thread.Sleep(1000);
             Click(NOTIFICATION_BELL);
-           Info(test, "Clicked on Notification Bell.");
+            Info(test, "Clicked on Notification Bell.");
         }
 
         public void WaitForProcessCompletion() {
             for(int i = 0; i < 1000; i++)
             {
                 
-                String tmp = GetText(NOTIFICATION_MESSAGE); //WaitForElement(NOTIFICATION_MESSAGE).Text;
+                String tmp = GetText(NOTIFICATION_MESSAGE);
 
                 if (tmp.Contains("successful") || tmp.Contains("failed"))
                 {
                    Console.WriteLine(i+" : "+tmp);
+                    Info(test, "Total time taken for completion : "+(3000*1000)+" ms");
                    break;
                 }
                 else
                 {
                     Console.WriteLine(tmp);
-                    //Console.WriteLine("Notification is still in progress.");
-                    System.Threading.Thread.Sleep(2000);
+                    System.Threading.Thread.Sleep(3000);
                 }
 
             }
@@ -284,10 +284,9 @@ namespace DocWorksQA.Pages
         public String GetNotificationName()
         {
             String text = GetText(NOTIFICATION_NAME);
-            System.Threading.Thread.Sleep(7000);
-            //Console.WriteLine("%%%%%" + text);
             return text;
         }
+
         public String GetCreatedProject()
         {
             for (int i=1;i<=5;i++)
@@ -310,7 +309,7 @@ namespace DocWorksQA.Pages
 
         public void BackToProject()
         {
-            System.Threading.Thread.Sleep(15000);
+            System.Threading.Thread.Sleep(5000);
             WaitForElement(BACKDROP);
            MoveToelementAndClick(BACKDROP);
             Info(test, "Clicked On BackDrop");
@@ -338,7 +337,6 @@ namespace DocWorksQA.Pages
             {
                 Info(test, value + " Source Control Provider Type already Selected.");
             }
-         //   System.Threading.Thread.Sleep(15000);
         }
 
         int counter = 1;
