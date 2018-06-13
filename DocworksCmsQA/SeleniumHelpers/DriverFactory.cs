@@ -6,8 +6,6 @@ using OpenQA.Selenium.IE;
 using DocWorksQA.Utilities;
 using OpenQA.Selenium.Safari;
 using OpenQA.Selenium.PhantomJS;
-using System.Diagnostics;
-using NLog;
 
 namespace DocWorksQA.SeleniumHelpers
 {
@@ -22,7 +20,6 @@ namespace DocWorksQA.SeleniumHelpers
 
     public class DriverFactory
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 
 

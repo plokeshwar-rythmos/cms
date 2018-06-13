@@ -4,7 +4,6 @@ using AventStack.ExtentReports.Reporter.Configuration;
 using DocworksCmsQA.CustomException;
 using MongoDB.Driver;
 using Newtonsoft.Json;
-using NLog;
 using System;
 using System.Diagnostics;
 using System.Text;
