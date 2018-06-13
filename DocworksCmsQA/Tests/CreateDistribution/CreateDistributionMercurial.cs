@@ -20,10 +20,10 @@ namespace DocWorksQA.Tests
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
+            projectName = new CreateProjects().CreateMercurialProject();
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
-            projectName = new CreateProjects().CreateMercurialProject();
 
         }
 
@@ -45,7 +45,7 @@ namespace DocWorksQA.Tests
                 System.Threading.Thread.Sleep(5000);
                 distribution.EnterBranchForMercurial("DocworksManual3");
                 distribution.EnterTocPath();
-                distribution.EnterDescription("This is to create a distribution With TOC");
+//                distribution.EnterDescription("This is to create a distribution With TOC");
                 distribution.ClickCreateDistribution();
                 project.ClickNotifications();
                 String status1 = project.GetNotificationStatus();
@@ -80,7 +80,7 @@ namespace DocWorksQA.Tests
                 String expected2 = distribution.EnterDistirbutionName();
                 System.Threading.Thread.Sleep(5000);
                 distribution.EnterBranchWithoutTOCForMercurial("DocworkManual2");
-                distribution.EnterDescription("This is to create a distribution Without TOC");
+//                distribution.EnterDescription("This is to create a distribution Without TOC");
                 distribution.ClickCreateDistribution();
                 project.ClickNotifications();
                 String status2 = project.GetNotificationStatus();

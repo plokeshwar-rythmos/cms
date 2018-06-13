@@ -19,10 +19,10 @@ namespace DocWorksQA.Tests
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
+            projectName = new CreateProjects().CreateGitLabProject();
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
-            projectName = new CreateProjects().CreateGitLabProject();
 
         }
 
@@ -38,7 +38,7 @@ namespace DocWorksQA.Tests
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
                 AddProjectPage project = new AddProjectPage(test, driver);
-                project.ClickDashboard();
+//                project.ClickDashboard();
                 project.SearchForProject(projectName);
                 CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
                 distmodule.ClickDistribution();
@@ -46,7 +46,7 @@ namespace DocWorksQA.Tests
                 System.Threading.Thread.Sleep(5000);
                 distmodule.SelectBranch("DocworksManual3");
                 distmodule.EnterTocPath();
-                distmodule.EnterDescription("This is to create a distribution With TOC Path");
+  //              distmodule.EnterDescription("This is to create a distribution With TOC Path");
                 distmodule.ClickCreateDistribution();
                 project.ClickNotifications();
                 String status1 = project.GetNotificationStatus();
@@ -81,7 +81,7 @@ namespace DocWorksQA.Tests
                 String expected = distmodule.EnterDistirbutionName();
                 System.Threading.Thread.Sleep(5000);
                 distmodule.SelectBranch("DocworksManual3");
-                distmodule.EnterDescription("This is to create a distribution Without TOC Path");
+    //            distmodule.EnterDescription("This is to create a distribution Without TOC Path");
                 distmodule.ClickCreateDistribution();
                 project.ClickNotifications();
                 String status = project.GetNotificationStatus();

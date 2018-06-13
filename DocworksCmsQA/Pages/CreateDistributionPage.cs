@@ -140,6 +140,7 @@ namespace DocWorksQA.Pages
             Info(test, "Selected the branch");
         }
 
+        int counter = 1;
         public void SelectBranch(String value)
         {
             if (!GetText(SELECT_BRANCH).Equals(value))
@@ -149,14 +150,18 @@ namespace DocWorksQA.Pages
                 this.Click(OPTION);
 
                 GetDriver().FindElement(TOC_PATH).SendKeys(Keys.Tab);
-                if (CheckForError(ERROR, "Repository is required"))
+                if (CheckForError(ERROR, "Branch is required"))
                 {
-                    Console.WriteLine("Errors While Selecting Repository.");
-                    SelectBranch(value);
+                    Console.WriteLine("Errors While Selecting Branch.");
+                    if (counter < 2) {
+                        SelectBranch(value);
+                        counter++;
+                    }
+                    
                 }
                 else
                 {
-                    Console.WriteLine("No Errors While Selecting Repository.");
+                    Console.WriteLine("No Errors While Selecting Branch.");
                 }
 
                 Info(test, "Selected Branch as " + value);

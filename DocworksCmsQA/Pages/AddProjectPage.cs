@@ -341,6 +341,7 @@ namespace DocWorksQA.Pages
          //   System.Threading.Thread.Sleep(15000);
         }
 
+        int counter = 1;
         public void SelectRepository(String value)
         {
             if (!GetText(REPOSITORY_DROPDOWN).Equals(value))
@@ -362,7 +363,11 @@ namespace DocWorksQA.Pages
                 if (CheckForError(ERROR, "Repository is required"))
                 {
                     Console.WriteLine("Errors While Selecting Repository.");
-                    SelectRepository(value);
+                    if (counter < 2)
+                    {
+                        SelectRepository(value);
+                        counter++;
+                    }
                 }
                 else
                 {
