@@ -13,7 +13,7 @@ namespace DocWorksQA.Pages
         
         public By ENTER_SEARCH = By.XPath("//input[@type='Search']");
         public By GET_TITLE = By.XPath("//mat-card/mat-card-title/div");
-        public By SETTINGS = By.XPath("//mat-card/mat-card-title/div[2]//i[1]");
+        public By SETTINGS = By.XPath("//mat-card/mat-card-title/div//a");
         public By DISTRIBUTIONS = By.XPath("//button[contains(text(),'Distributions')]");
             //By.XPath("(//button[@class='mat-menu-item'])[2]");
         public By DISTRIBUTION_NAME = By.XPath("//input[@placeholder='Distribution Name']");
@@ -142,18 +142,23 @@ namespace DocWorksQA.Pages
 
         public void SelectBranch(String value)
         {
+            System.Threading.Thread.Sleep(30000);
+
             if (!GetText(SELECT_BRANCH).Equals(value))
             {
                 Click(By.XPath("//mat-select//div[@class='mat-select-arrow']"));
                 By OPTION = By.XPath("(//mat-option//span[contains(@class,'mat-option-text')])[text()='" + value + "']");
-                this.Click(OPTION);
-
-                if (!GetText(SELECT_BRANCH).Equals(value))
+                try
                 {
-                    Console.WriteLine("Retrying Branch Selection.");
-                    Click(SELECT_BRANCH);
-                }
+                    this.Click(OPTION);
+                }catch(WebDriverTimeoutException e)
+                {
+                    Console.WriteLine(e.InnerException.Message);
+                    Console.WriteLine("Retrying Select Branch ");
+                    Click(By.XPath("//mat-select//div[@class='mat-select-arrow']"));
+                    this.Click(OPTION);
 
+                }
                 Info(test, "Selected Branch as " + value);
             }
             else
@@ -162,7 +167,16 @@ namespace DocWorksQA.Pages
             }
         }
 
-
+        public void RetryBranchSelection(String value)
+        {
+            if (!GetText(SELECT_BRANCH).Equals(value))
+            {
+                Click(By.XPath("//mat-select//div[@class='mat-select-arrow']"));
+                By OPTION = By.XPath("(//mat-option//span[contains(@class,'mat-option-text')])[text()='" + value + "']");
+                this.Click(OPTION);
+                Info(test, "Retry Branch Selection for Branch " + value);
+            }
+        }
 
         public void ClickBranchWithOutTOC()
         {

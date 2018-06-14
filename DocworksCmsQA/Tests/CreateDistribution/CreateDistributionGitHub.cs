@@ -10,7 +10,7 @@ namespace DocWorksQA.Tests
 {
     [TestFixture, Category("Create Distribution")]
     [Parallelizable]
-    class TC_09_ValidateCreateDistributionForGitHubProjectWithAllFields : BeforeTestAfterTest
+    class CreateDistributionGitHub : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
@@ -41,10 +41,10 @@ namespace DocWorksQA.Tests
                 CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
                 distmodule.ClickDistribution();
                 String distributionName = distmodule.EnterDistirbutionName();
-                System.Threading.Thread.Sleep(10000);
                 distmodule.SelectBranch("DocWorksManual3");
                 distmodule.EnterTocPath();
                 //distmodule.EnterDescription("This is to create a distribution With TOC Path");
+                distmodule.RetryBranchSelection("DocWorksManual3");
                 distmodule.ClickCreateDistribution();
                 project.ClickNotifications();
                 String status1 = project.GetNotificationStatus();
@@ -76,9 +76,9 @@ namespace DocWorksQA.Tests
                 CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
                 distmodule.ClickDistribution();
                 String expected2 = distmodule.EnterDistirbutionName();
-                System.Threading.Thread.Sleep(75000);
+                //distmodule.EnterDescription("This is to create a distribution Without TOC Path");
                 distmodule.SelectBranch("DocworksManual2");
-                distmodule.EnterDescription("This is to create a distribution Without TOC Path");
+                distmodule.RetryBranchSelection("DocWorksManual2");
                 distmodule.ClickCreateDistribution();
                 project.ClickNotifications();
                 String status2 = project.GetNotificationStatus();

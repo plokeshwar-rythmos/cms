@@ -46,7 +46,9 @@ namespace DocWorksQA.Tests
                 System.Threading.Thread.Sleep(5000);
                 distmodule.SelectBranch("DocworksManual3");
                 distmodule.EnterTocPath();
-  //              distmodule.EnterDescription("This is to create a distribution With TOC Path");
+                //              distmodule.EnterDescription("This is to create a distribution With TOC Path");
+                distmodule.RetryBranchSelection("DocWorksManual3");
+
                 distmodule.ClickCreateDistribution();
                 project.ClickNotifications();
                 String status1 = project.GetNotificationStatus();
@@ -81,7 +83,8 @@ namespace DocWorksQA.Tests
                 String expected = distmodule.EnterDistirbutionName();
                 System.Threading.Thread.Sleep(5000);
                 distmodule.SelectBranch("DocworksManual3");
-    //            distmodule.EnterDescription("This is to create a distribution Without TOC Path");
+                //            distmodule.EnterDescription("This is to create a distribution Without TOC Path");
+                distmodule.RetryBranchSelection("DocWorksManual3");
                 distmodule.ClickCreateDistribution();
                 project.ClickNotifications();
                 String status = project.GetNotificationStatus();

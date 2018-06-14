@@ -37,7 +37,7 @@ namespace DocWorksQA.Tests
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
                 AddProjectPage project = new AddProjectPage(test, driver);
-                project.ClickDashboard();
+           //     project.ClickDashboard();
                 project.SearchForProject(projectName);
                 CreateDistributionPage distribution = new CreateDistributionPage(test, driver);
                 distribution.ClickDistribution();
@@ -57,7 +57,6 @@ namespace DocWorksQA.Tests
             {
                 ReportExceptionScreenshot(test, driver, ex);
                 Fail(test, ex);
-                UpdateMercurialProjectProperties("Failure");
                 throw;
             }
 

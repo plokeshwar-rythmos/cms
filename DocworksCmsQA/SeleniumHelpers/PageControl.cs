@@ -331,13 +331,19 @@ namespace DocWorksQA.SeleniumHelpers
 
         public IWebElement WaitForElement(By by)
         {
-
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
-            IWebElement element = wait.Until<IWebElement>((d) =>
+            IWebElement element = null;
+            try
             {
-                Highlight(d.FindElement(by));
-                return d.FindElement(by);
-            });
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+                element = wait.Until<IWebElement>((d) =>
+                {
+                    Highlight(d.FindElement(by));
+                    return d.FindElement(by);
+                });
+            }
+            catch (Exception e) {
+                throw e;
+            }
 
             RemoveHighlight(element);
             return element;

@@ -61,7 +61,7 @@ namespace DocworksCmsQA.DockworksApi
             var data = new Dictionary<string, object>
             {
                 {"projectName", projectName },
-                {"RepositoryId", "6090611"},
+                {"RepositoryId", "118083636"},
                 {"RepositoryName", "Docworks"},
                 {"typeOfContent", 3},
                 {"Description", "Project Description"},
