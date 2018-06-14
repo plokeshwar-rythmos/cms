@@ -124,6 +124,7 @@
     <Compile Include="TestRailApis\APIException.cs" />
     <Compile Include="TestRailApis\TestRailMethods.cs" />
     <Compile Include="Tests\BeforeTestAfterTest.cs" />
+    <Compile Include="Tests\CreateDistribution\CreateDistributionGitHub.cs" />
     <Compile Include="Tests\CreateProject\CreateProjectGitLab.cs" />
     <Compile Include="Tests\CreateProject\CreateProjectGitHub.cs" />
     <Compile Include="Tests\CreateProject\CreateProjectMercurial.cs" />

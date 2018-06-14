@@ -140,7 +140,6 @@ namespace DocWorksQA.Pages
             Info(test, "Selected the branch");
         }
 
-        int counter = 1;
         public void SelectBranch(String value)
         {
             if (!GetText(SELECT_BRANCH).Equals(value))
@@ -149,19 +148,10 @@ namespace DocWorksQA.Pages
                 By OPTION = By.XPath("(//mat-option//span[contains(@class,'mat-option-text')])[text()='" + value + "']");
                 this.Click(OPTION);
 
-                GetDriver().FindElement(TOC_PATH).SendKeys(Keys.Tab);
-                if (CheckForError(ERROR, "Branch is required"))
+                if (!GetText(SELECT_BRANCH).Equals(value))
                 {
-                    Console.WriteLine("Errors While Selecting Branch.");
-                    if (counter < 2) {
-                        SelectBranch(value);
-                        counter++;
-                    }
-                    
-                }
-                else
-                {
-                    Console.WriteLine("No Errors While Selecting Branch.");
+                    Console.WriteLine("Retrying Branch Selection.");
+                    Click(SELECT_BRANCH);
                 }
 
                 Info(test, "Selected Branch as " + value);
