@@ -142,7 +142,7 @@ namespace DocWorksQA.Pages
 
         public void SelectBranch(String value)
         {
-            System.Threading.Thread.Sleep(30000);
+            System.Threading.Thread.Sleep(75000);
 
             if (!GetText(SELECT_BRANCH).Equals(value))
             {
@@ -151,7 +151,7 @@ namespace DocWorksQA.Pages
                 try
                 {
                     this.Click(OPTION);
-                }catch(WebDriverTimeoutException e)
+                }catch(Exception e)
                 {
                     Console.WriteLine(e.InnerException.Message);
                     Console.WriteLine("Retrying Select Branch ");
