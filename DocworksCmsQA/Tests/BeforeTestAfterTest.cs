@@ -1,12 +1,15 @@
 ﻿using NUnit.Framework;
 using DocWorksQA.Utilities;
 using System;
+using DocworksCmsQA.DatabaseScripts;
 
 namespace DocWorksQA.Tests
 {
     public class BeforeTestAfterTest : CommonMethods
     {
-        
+
+        public DatabaseScripts db;
+
         [OneTimeSetUp]
         public void SetupReporting()
         {
@@ -14,6 +17,7 @@ namespace DocWorksQA.Tests
 
             if (GetReporter()) { 
                 InitReports(path, "CMS-Selenium");
+                db = new DatabaseScripts();
             }
 
             

@@ -6,6 +6,7 @@ using DocWorksQA.Pages;
 using System.Diagnostics;
 using AventStack.ExtentReports;
 using System.Collections.Generic;
+using DocworksCmsQA.DatabaseScripts;
 
 namespace DocWorksQA.Tests
 {
@@ -15,6 +16,7 @@ namespace DocWorksQA.Tests
     {
         private IWebDriver driver;
         private ExtentTest test;
+        String projectName;
 
 
         [OneTimeSetUp]
@@ -39,7 +41,7 @@ namespace DocWorksQA.Tests
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.ClickAddProject();
 
-                String projectName = "SELENIUM-GitHub" + "_" + GenerateRandomNumbers(5) + System.DateTime.Now.TimeOfDay;
+                projectName = "SELENIUM-GitHub" + "_" + GenerateRandomNumbers(5) + System.DateTime.Now.TimeOfDay;
                 addProject.EnterProjectTitle(projectName);
                 addProject.SelectContentType("Manual");
                 addProject.SelectSourceControlProviderType("GitHub");
@@ -73,8 +75,8 @@ namespace DocWorksQA.Tests
         public void CloseBrowser()
         {
             Console.WriteLine("Quiting Browser");
-
             CloseDriver(driver);
+            db.FindProjectAndDelete(projectName);
         }
 
 

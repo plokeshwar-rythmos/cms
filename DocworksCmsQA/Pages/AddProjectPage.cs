@@ -339,9 +339,9 @@ namespace DocWorksQA.Pages
             }
         }
 
-        int counter = 1;
         public void SelectRepository(String value)
         {
+            System.Threading.Thread.Sleep(50000);
             if (!GetText(REPOSITORY_DROPDOWN).Equals(value))
             {
                 this.Click(REPOSITORY_DROPDOWN);
@@ -357,20 +357,7 @@ namespace DocWorksQA.Pages
                     }
                 }
 
-                GetDriver().FindElement(PUBLISHED_PATH).SendKeys(Keys.Tab);
-                if (CheckForError(ERROR, "Repository is required"))
-                {
-                    Console.WriteLine("Errors While Selecting Repository.");
-                    if (counter < 2)
-                    {
-                        SelectRepository(value);
-                        counter++;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("No Errors While Selecting Repository.");
-                }
+              
 
                 Info(test, "Selected Repository as " + value);
             }

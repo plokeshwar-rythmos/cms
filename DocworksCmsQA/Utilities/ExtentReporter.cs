@@ -2,10 +2,7 @@
 using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports.Reporter.Configuration;
 using DocworksCmsQA.CustomException;
-using MongoDB.Driver;
-using Newtonsoft.Json;
 using System;
-using System.Diagnostics;
 using System.Text;
 
 namespace DocWorksQA.Utilities
@@ -78,9 +75,11 @@ namespace DocWorksQA.Utilities
 
             //Console.WriteLine("Initializing Extent Reporting");
             ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(file);
+            
             htmlReporter.Configuration().ReportName = reportName;
             htmlReporter.Configuration().DocumentTitle = reportName;
             reporter = new ExtentReports();
+
             reporter.AttachReporter(htmlReporter);
             //Console.WriteLine("Creating Reporting file " + file);
         }

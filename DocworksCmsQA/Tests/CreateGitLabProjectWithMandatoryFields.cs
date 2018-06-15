@@ -14,6 +14,7 @@ namespace DocWorksQA.Tests
     {
         private IWebDriver driver;
         private ExtentTest test;
+        String projectName;
 
 
         [OneTimeSetUp]
@@ -37,7 +38,7 @@ namespace DocWorksQA.Tests
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.ClickAddProject();
-                String expected = addProject.EnterProjectTitle();
+                projectName = addProject.EnterProjectTitle();
                 addProject.SelectContentType("Manual");
                 addProject.SelectSourceControlProviderType("GitLab");
                 addProject.SelectRepository("Docworks");
@@ -46,12 +47,12 @@ namespace DocWorksQA.Tests
                 addProject.ClickNotifications();
                 String status = addProject.GetNotificationStatus();
                 addProject.SuccessScreenshot(addProject.NOTIFICATION_MESSAGE, "Project Created Title");
-                VerifyText(test, "creating a project " + expected + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
+                VerifyText(test, "creating a project " + projectName + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
                 addProject.ClickDashboard();
-                addProject.SearchForProject(expected);
+                addProject.SearchForProject(projectName);
                 String actual = addProject.GetProjectTitle();
                 addProject.SuccessScreenshot(addProject.GET_TITLE, "ProjectTitle");
-                VerifyEquals(test, expected, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
+                VerifyEquals(test, projectName, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
             }
             catch (Exception e)
             {
@@ -71,6 +72,7 @@ namespace DocWorksQA.Tests
             Console.WriteLine("Quiting Browser");
 
             CloseDriver(driver);
+            db.FindProjectAndDelete(projectName);
         }
 
 

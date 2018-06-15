@@ -41,7 +41,7 @@ namespace DocWorksQA.Tests
                 project.SearchForProject(projectName);
                 CreateDistributionPage distribution = new CreateDistributionPage(test, driver);
                 distribution.ClickDistribution();
-                String expected1 = distribution.EnterDistirbutionName();
+                String distributionName = distribution.EnterDistirbutionName();
                 System.Threading.Thread.Sleep(5000);
                 distribution.EnterBranchForMercurial("DocworksManual3");
                 distribution.EnterTocPath();
@@ -50,8 +50,8 @@ namespace DocWorksQA.Tests
                 project.ClickNotifications();
                 String status1 = project.GetNotificationStatus();
                 project.SuccessScreenshot(project.NOTIFICATION_MESSAGE, "Distribution got Created successfully With TOC Path");
-                VerifyText(test, "creating distribution " + expected1 + " in " + projectName + " is successful", status1, "Distribution is Created For Mercurial TOC with status:" + status1 + "", "Distribution is not created For Mercurial TOC with status: " + status1 + "");
-               
+                VerifyText(test, "creating distribution " + distributionName + " in " + projectName + " is successful", status1, "Distribution is Created For Mercurial TOC with status:" + status1 + "", "Distribution is not created For Mercurial TOC with status: " + status1 + "");
+                db.FindDistributionAndDelete(distributionName);
             }
             catch (Exception ex)
             {
@@ -76,15 +76,16 @@ namespace DocWorksQA.Tests
                 project.SearchForProject(projectName);
                 CreateDistributionPage distribution = new CreateDistributionPage(test, driver);
                 distribution.ClickDistribution();
-                String expected2 = distribution.EnterDistirbutionName();
+                String distributionName = distribution.EnterDistirbutionName();
                 System.Threading.Thread.Sleep(5000);
                 distribution.EnterBranchWithoutTOCForMercurial("DocworkManual2");
 //                distribution.EnterDescription("This is to create a distribution Without TOC");
                 distribution.ClickCreateDistribution();
                 project.ClickNotifications();
                 String status2 = project.GetNotificationStatus();
-                project.SuccessScreenshot(project.NOTIFICATION_MESSAGE, "Distribution: " + expected2 + " got Created successfully Without TOC Path");
-                VerifyText(test, "creating distribution " + expected2 + " in " + projectName + " is successful", status2, "Distribution is Created For Mercurial Without TOC with status:" + status2 + "", "Distribution is not created For Mercurial without TOC with status: " + status2 + "");
+                project.SuccessScreenshot(project.NOTIFICATION_MESSAGE, "Distribution: " + distributionName + " got Created successfully Without TOC Path");
+                VerifyText(test, "creating distribution " + distributionName + " in " + projectName + " is successful", status2, "Distribution is Created For Mercurial Without TOC with status:" + status2 + "", "Distribution is not created For Mercurial without TOC with status: " + status2 + "");
+                db.FindDistributionAndDelete(distributionName);
             }
             catch (Exception ex)
             {
@@ -101,6 +102,7 @@ namespace DocWorksQA.Tests
             Console.WriteLine("Quiting Browser");
 
             CloseDriver(driver);
+            db.FindProjectAndDelete(projectName);
         }
 
     }

@@ -15,6 +15,7 @@ namespace DocWorksQA.Tests
     {
         private IWebDriver driver;
         private ExtentTest test;
+        String projectName;
 
 
         [OneTimeSetUp]
@@ -37,7 +38,7 @@ namespace DocWorksQA.Tests
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.ClickAddProject();
-                String projectName = "SELENIUM-Ono" + "_" + GenerateRandomNumbers(5) + System.DateTime.Now.TimeOfDay;
+                projectName = "SELENIUM-Ono" + "_" + GenerateRandomNumbers(5) + System.DateTime.Now.TimeOfDay;
                 addProject.EnterProjectTitle(projectName);
                 addProject.SelectContentType("Manual");
                 addProject.SelectSourceControlProviderType("Ono");
@@ -73,6 +74,7 @@ namespace DocWorksQA.Tests
             Console.WriteLine("Quiting Browser");
 
             CloseDriver(driver);
+            db.FindProjectAndDelete(projectName);
         }
 
 

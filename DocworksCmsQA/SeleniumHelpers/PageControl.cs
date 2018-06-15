@@ -53,20 +53,7 @@ namespace DocWorksQA.SeleniumHelpers
         }
 
 
-        public bool CheckForError(By by, String errorString) {
-
-            try
-            {
-                if (driver.FindElement(by).Displayed && driver.FindElement(by).Text.Contains(errorString))
-                    return true;
-
-            }catch(Exception e)
-            {
-                return false;
-            }
-
-            return false;
-        }
+        
 
         public void EnterValue(By by, string value)
         {
@@ -370,6 +357,7 @@ namespace DocWorksQA.SeleniumHelpers
             StringBuilder TimeAndDate = new StringBuilder(DateTime.Now.ToString());
             TimeAndDate.Replace("/", "_");
             TimeAndDate.Replace(":", "_");
+            TimeAndDate.Replace(" ", "_");
             ITakesScreenshot ssdriver = driver as ITakesScreenshot;
             Screenshot screenshot = ssdriver.GetScreenshot();
             screenshot.SaveAsFile(path + "/screenshot-" + TimeAndDate + ".jpeg", ScreenshotImageFormat.Jpeg);
@@ -388,9 +376,11 @@ namespace DocWorksQA.SeleniumHelpers
             StringBuilder TimeAndDate = new StringBuilder(DateTime.Now.ToString());
             TimeAndDate.Replace("/", "_");
             TimeAndDate.Replace(":", "_");
+            TimeAndDate.Replace(" ", "_");
+
             ITakesScreenshot ssdriver = driver as ITakesScreenshot;
             Screenshot screenshot = ssdriver.GetScreenshot();
-            screenshot.SaveAsFile(path + "/screenshot-" + TimeAndDate + ".png", ScreenshotImageFormat.Png);
+            screenshot.SaveAsFile(path + "/screenshot-" + TimeAndDate + ".jpg", ScreenshotImageFormat.Jpeg);
             RemoveHighlight(element);
             return "./Screenshot/screenshot-" + TimeAndDate + ".jpeg";
 

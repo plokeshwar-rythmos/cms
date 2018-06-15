@@ -49,7 +49,8 @@ namespace DocWorksQA.Tests
                 String status1 = project.GetNotificationStatus();
                 project.SuccessScreenshot(project.NOTIFICATION_MESSAGE, "Distribution got Created successfully With TOC Path");
                 VerifyText(test, "creating distribution " + distributionName + " in " + projectName + " is successful", status1, "Distribution is Created For GitLab TOC with status:" + status1 + "", "Distribution is not created For GitLab TOC with status: " + status1 + "");
-             }
+                db.FindDistributionAndDelete(distributionName);
+            }
             catch (Exception ex)
             {
                 ReportExceptionScreenshot(test, driver, ex);
@@ -74,14 +75,15 @@ namespace DocWorksQA.Tests
                 project.SearchForProject(projectName);
                 CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
                 distmodule.ClickDistribution();
-                String expected2 = distmodule.EnterDistirbutionName();
+                String distributionName = distmodule.EnterDistirbutionName();
                 //distmodule.EnterDescription("This is to create a distribution Without TOC Path");
                 distmodule.SelectBranch("DocworksManual2");
                 distmodule.ClickCreateDistribution();
                 project.ClickNotifications();
                 String status2 = project.GetNotificationStatus();
-                project.SuccessScreenshot(project.NOTIFICATION_MESSAGE, "Distribution: " + expected2 + " got Created successfully Without TOC Path");
-                VerifyText(test, "creating distribution " + expected2 + " in " + projectName + " is successful", status2, "Distribution is Created For GitLab Without TOC with status:" + status2 + "", "Distribution is not created For GitLab without TOC with status: " + status2 + "");
+                project.SuccessScreenshot(project.NOTIFICATION_MESSAGE, "Distribution: " + distributionName + " got Created successfully Without TOC Path");
+                VerifyText(test, "creating distribution " + distributionName + " in " + projectName + " is successful", status2, "Distribution is Created For GitLab Without TOC with status:" + status2 + "", "Distribution is not created For GitLab without TOC with status: " + status2 + "");
+                db.FindDistributionAndDelete(distributionName);
             }
             catch (Exception ex)
             {
@@ -96,6 +98,7 @@ namespace DocWorksQA.Tests
         {
             Console.WriteLine("Quiting Browser");
             CloseDriver(driver);
+            db.FindProjectAndDelete(projectName);
         }
 
     }

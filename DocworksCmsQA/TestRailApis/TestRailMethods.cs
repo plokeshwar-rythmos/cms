@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DocWorksQA.TestRailApis
 {
-    public class TestRailMethods: Verify
+    public class TestRailMethods
     {
         private static string uid = ConfigurationHelper.Get<String>("TestRailUsername");
         private static string pwd = ConfigurationHelper.Get<String>("TestRailPassword");
@@ -20,16 +20,18 @@ namespace DocWorksQA.TestRailApis
 
         private static string runID;
 
-        private static APIClient getApiClient()
+        private static APIClient GetApiClient()
         {
 
-            APIClient client = new APIClient(url);
-            client.User = uid;
-            client.Password = pwd;
+            APIClient client = new APIClient(url)
+            {
+                User = uid,
+                Password = pwd
+            };
             return client;
         }
 
-        public string createTestRun(String projectID)
+        public string CreateTestRun(String projectID)
         {
 
             if (!testRailIndicator)
@@ -58,19 +60,19 @@ namespace DocWorksQA.TestRailApis
                   { "include_all", false }
             };
 
-            APIClient client = getApiClient();
+            APIClient client = GetApiClient();
             JObject c = (JObject)client.SendPost("add_run/" + projectID, data);
             Console.WriteLine("Test Run Created Successfully : " + c.GetValue("id").ToString());
             runID = c.GetValue("id").ToString();
             return runID;
         }
 
-        public void updateTestRun(String caseID)
+        public void UpdateTestRun(String caseID)
         {
             if (testRailIndicator)
             {
 
-                JArray array = getTestCasesInRun(runID);
+                JArray array = GetTestCasesInRun(runID);
                 array.Add(caseID);
 
 
@@ -80,14 +82,14 @@ namespace DocWorksQA.TestRailApis
                 { "case_ids", array }
             };
 
-                APIClient client = getApiClient();
+                APIClient client = GetApiClient();
                 JObject c = (JObject)client.SendPost("update_run/" + runID, data);
                 Console.WriteLine("Test Run Updated successfully.");
                 Console.WriteLine(c.ToString());
             }
         }
 
-        public void addTestCaseStatus(String status, String caseID, String message)
+        public void AddTestCaseStatus(String status, String caseID, String message)
         {
 
             if (testRailIndicator)
@@ -96,18 +98,18 @@ namespace DocWorksQA.TestRailApis
 
                 var data = new Dictionary<string, object>
             {
-                { "status_id", getStatusID(status)},
+                { "status_id", GetStatusID(status)},
                 { "comment", message },
                 { "defects", "" }
             };
 
-                APIClient client = getApiClient();
+                APIClient client = GetApiClient();
                 JObject c = (JObject)client.SendPost("add_result_for_case/" + runID + "/" + caseID, data);
                 Console.WriteLine(c.ToString());
             }
         }
 
-        private static int getStatusID(String status)
+        private static int GetStatusID(String status)
         {
             if (status.ToLower() == "pass" || status.ToLower() == "passed")
             {
@@ -124,7 +126,7 @@ namespace DocWorksQA.TestRailApis
 
         }
 
-       private static JArray getTestCasesInRun(String runID)
+       private static JArray GetTestCasesInRun(String runID)
         {
             if (!testRailIndicator)
             {
@@ -132,7 +134,7 @@ namespace DocWorksQA.TestRailApis
             }
             JArray array = new JArray();
 
-            APIClient client = getApiClient();
+            APIClient client = GetApiClient();
             JArray c = (JArray)client.SendGet("get_tests/" + runID);
             foreach (JObject item in c)
             {
