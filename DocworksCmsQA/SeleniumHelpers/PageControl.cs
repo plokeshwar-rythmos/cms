@@ -360,8 +360,8 @@ namespace DocWorksQA.SeleniumHelpers
             TimeAndDate.Replace(" ", "_");
             ITakesScreenshot ssdriver = driver as ITakesScreenshot;
             Screenshot screenshot = ssdriver.GetScreenshot();
-            screenshot.SaveAsFile(path + "/screenshot-" + TimeAndDate + ".jpeg", ScreenshotImageFormat.Jpeg);
-            return "./Screenshot/screenshot-" + TimeAndDate + ".jpeg";
+            screenshot.SaveAsFile(path + "/screenshot-" + TimeAndDate + ".jpg", ScreenshotImageFormat.Jpeg);
+            return "./Screenshot/screenshot-" + TimeAndDate + ".jpg";
 
         }
 
@@ -382,7 +382,7 @@ namespace DocWorksQA.SeleniumHelpers
             Screenshot screenshot = ssdriver.GetScreenshot();
             screenshot.SaveAsFile(path + "/screenshot-" + TimeAndDate + ".jpg", ScreenshotImageFormat.Jpeg);
             RemoveHighlight(element);
-            return "./Screenshot/screenshot-" + TimeAndDate + ".jpeg";
+            return "./Screenshot/screenshot-" + TimeAndDate + ".jpg";
 
         }
 

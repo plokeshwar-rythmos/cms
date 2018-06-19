@@ -50,6 +50,8 @@ namespace DocWorksQA.Utilities
             StringBuilder TimeAndDate = new StringBuilder(DateTime.Now.ToString());
             TimeAndDate.Replace("/", "_");
             TimeAndDate.Replace(":", "_");
+            TimeAndDate.Replace(" ", "_");
+
             ITakesScreenshot ssdriver = driver as ITakesScreenshot;
             Screenshot screenshot = ssdriver.GetScreenshot();
             screenshot.SaveAsFile(path + "/screenshot-" + TimeAndDate + ".jpeg", ScreenshotImageFormat.Jpeg);
