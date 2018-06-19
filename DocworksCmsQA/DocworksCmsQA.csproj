@@ -130,6 +130,7 @@
     <Compile Include="TestRailApis\APIClient.cs" />
     <Compile Include="TestRailApis\APIException.cs" />
     <Compile Include="TestRailApis\TestRailMethods.cs" />
+    <Compile Include="Tests\Assets\TC_21_ValidationOfUploadImage.cs" />
     <Compile Include="Tests\BeforeTestAfterTest.cs" />
     <Compile Include="Tests\CreateDistribution\CreateDistributionGitHub.cs" />
     <Compile Include="Tests\CreateDistribution\DistributionNameLengthValidation.cs" />
