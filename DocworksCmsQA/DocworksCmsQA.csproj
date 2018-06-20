@@ -132,8 +132,6 @@
     <Compile Include="TestRailApis\TestRailMethods.cs" />
     <Compile Include="Tests\Assets\TC_21_ValidationOfUploadImage.cs" />
     <Compile Include="Tests\GitLab\AddNode.cs" />
-    <Compile Include="Tests\Mercurial\TC_34_ValidateUserAbleToAddNodeUnderTree.cs" />
-    <Compile Include="Tests\Mercurial\TC_35_ValidateUserAbleToAddNodeWithNodeTypeAsNone.cs" />
     <Compile Include="Tests\BeforeTestAfterTest.cs" />
     <Compile Include="Tests\GitHub\CreateDistributionGitHub.cs" />
     <Compile Include="Tests\OtherValidations\DistributionNameLengthValidation.cs" />
