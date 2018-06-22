@@ -11,7 +11,7 @@ namespace DocWorksQA.Pages
     {
         public By SYSTEM_LEVEL = By.XPath("//a[@href='/system']");
         public By CREATE_TAGGROUP_BUTTON = By.XPath("//button/span[contains(text(),'CREATE TAG GROUP')]");
-        public By TAG_GROUP_NAME = By.XPath("//input[@ng-reflect-placeholder='Tag Group Name']");
+        public By TAG_GROUP_NAME = By.XPath("//input[@placeholder='Tag Group Name']");
         public By LIMITTOONE_CHECKBOX = By.XPath("(//div[@class='mat-checkbox-inner-container'])[1]");
         public By CHILDNODESINHERITS_CHECKBOX = By.XPath("(//div[@class='mat-checkbox-inner-container'])[2]");
         public By DISPLAYGROUPNAME_CHECHBOX = By.XPath("(//div[@class='mat-checkbox-inner-container'])[3]");
@@ -27,7 +27,7 @@ namespace DocWorksQA.Pages
         public By EDIT_TAG_GROUP = By.XPath("//button[@class='mat-menu-item'][contains(text(),'Edit Tag Group')]");
         public By MANAGE_TAG_GROUP = By.XPath("//button[@class='mat-menu-item'][contains(text(),'Manage Tags')]");
         public By ADD_TAG = By.XPath("//button[@class='mat-raised-button secondary-btn']/span");
-        public By ENTER_TAG_NAME = By.XPath("//input[@ng-reflect-placeholder='Tag Name']");
+        public By ENTER_TAG_NAME = By.XPath("//input[@placeholder='Tag Name']");
         public By CHECK_THE_TAGNAME = By.XPath("//i[@class='mdi mdi-check mdi-24px']");
         public By CROSS_TAG_NAME = By.XPath("//button[@class='mat-menu-item']//i[@class='mdi mdi-close mdi-24px']");
         public By CLOSE_MANAGE_TAGS = By.XPath("//button[@class='mat-button']//i[@class='mdi mdi-close mdi-24px']");

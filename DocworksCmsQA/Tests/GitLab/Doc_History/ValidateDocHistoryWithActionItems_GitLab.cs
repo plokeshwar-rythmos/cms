@@ -10,7 +10,7 @@ namespace DocWorksQA.Tests
 {
     [TestFixture, Category("DocHistory")]
     [Parallelizable]
-    class TC_37_ValidateDocHistoryWithActionItems : BeforeTestAfterTest
+    class ValidateDocHistoryWithActionItems_GitLab : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
@@ -22,11 +22,10 @@ namespace DocWorksQA.Tests
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
 
-
         }
 
         [Test, Description("Verify User is able to view history details in DocHistory module for Action items")]
-        public void TC37_ValidateDocHistoryWithActionItems()
+        public void ValidateDocHistoryWithActionItems()
         {
             try
             {
@@ -34,7 +33,7 @@ namespace DocWorksQA.Tests
                 Console.WriteLine("Starting Test Case : " + TestName);
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
-                String projectName = CreateDistribution("Mercurial", test, driver);
+                String projectName = CreateDistribution("GitLab", test, driver);
                 AddProjectPage project = new AddProjectPage(test, driver);
                 project.ClickDashboard();
                 project.SearchForProject(projectName);
@@ -49,8 +48,8 @@ namespace DocWorksQA.Tests
                 DocHistory.ClickCheckBoxAcceptDraftToLive();
                 // DocHistory.ClickEmptySpaceInNodeHistory();
                 //DocHistory.ClickActivityTab();
-                project.BackToProject();
-               // DocHistory.ClickOnNodeHistoryCloseButton();
+                //project.BackToProject();
+                DocHistory.ClickOnNodeHistoryCloseButton();
                 DocHistory.ClickSearchButton();
                 System.Threading.Thread.Sleep(10000);
                 project.SuccessScreenshot("Action details loaded Successfully");

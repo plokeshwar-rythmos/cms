@@ -10,7 +10,7 @@ namespace DocWorksQA.Tests
 {
     [TestFixture, Category("DocHistory")]
     [Parallelizable]
-    class TC_38_ValidateDocHistoryForAddTagsToNodeAndRemoveTagsFromNode : BeforeTestAfterTest
+    class ValidateDocHistoryForAddTagsToNodeAndRemoveTagsFromNode_Mercurial : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
@@ -25,8 +25,8 @@ namespace DocWorksQA.Tests
 
         }
 
-        [Test, Description("Verify User is able to view history details in DocHistory module for AddingTagsToNode and RemoveTagsFromNode")]
-        public void TC38_ValidateDocHistoryForAddTagsToNodeAndRemoveTagsFromNode()
+        //[Test, Description("Verify User is able to view history details in DocHistory module for AddingTagsToNode and RemoveTagsFromNode")]
+        public void ValidateDocHistoryForAddTagsToNodeAndRemoveTagsFromNode()
         {
             try
             {
@@ -67,10 +67,22 @@ namespace DocWorksQA.Tests
                 ProjectLevel.ClickSettings();
                 ProjectLevel.ClickOnManageTagGroups();
                 ProjectLevel.SearchTagsAtProjectLevel(TagName);
+                ProjectLevel.ClickPlusCircle();
+                project.BackToProject();
+                project.SearchForProject(projectName);
+                CreateDraftPage createDraft = new CreateDraftPage(test, driver);
+                createDraft.ClickOpenProject();
+                createDraft.ClickOnUnityManualNode();
+                Doc_HistoryPage DocHistory = new Doc_HistoryPage(test, driver);
+                DocHistory.ClickLeftCursor();
+                TagManagmentNodeLevelPage NodeLevel = new TagManagmentNodeLevelPage(test, driver);
+                NodeLevel.ClickEditTags();
+                NodeLevel.SearchTagGroupAtNodeLevel();
+
 
                 /*Doc_HistoryPage DocHistory = new Doc_HistoryPage(test, driver);
                 DocHistory.ClickDoc_History();*/
-                
+
 
             }
             catch (Exception ex)

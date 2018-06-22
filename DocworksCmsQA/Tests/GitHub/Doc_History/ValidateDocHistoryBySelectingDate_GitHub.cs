@@ -10,11 +10,12 @@ namespace DocWorksQA.Tests
 {
     [TestFixture, Category("DocHistory")]
     [Parallelizable]
-    class TC_41_ValidateDocHistoryBySearchingThroughUsernameandDraftnmaeInSearchField : BeforeTestAfterTest
+    class ValidateDocHistoryBySelectingDate_GitHub : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
         
+
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
@@ -25,8 +26,8 @@ namespace DocWorksQA.Tests
 
         }
 
-        [Test, Description("Verify User is able to view history details in DocHistory module for Action items")]
-        public void TC41_ValidateDocHistoryBySearchingThroughUsernameandDraftnmaeInSearchField()
+        [Test, Description("Verify User is able to view history details in DocHistory module")]
+        public void ValidateDocHistoryBySelectingDate()
         {
             try
             {
@@ -43,14 +44,12 @@ namespace DocWorksQA.Tests
                 createDraft.ClickOnUnityManualNode();
                 Doc_HistoryPage DocHistory = new Doc_HistoryPage(test, driver);
                 DocHistory.ClickDoc_History();
-                DocHistory.ClickSearchField("service");
+                System.Threading.Thread.Sleep(6000);
+                DocHistory.ChooseDate();
                 DocHistory.ClickSearchButton();
-                System.Threading.Thread.Sleep(15000);
-                project.SuccessScreenshot("Action details loaded Successfully by username");
-                DocHistory.ClickSearchField("draft");
-                DocHistory.ClickSearchButton();
-                System.Threading.Thread.Sleep(15000);
-                project.SuccessScreenshot("Action details loaded Successfully by draft name");
+                System.Threading.Thread.Sleep(20000);
+                project.SuccessScreenshot("Action details loaded Successfully for selected date");
+                project.BackToProject();
 
             }
             catch (Exception ex)
@@ -72,3 +71,4 @@ namespace DocWorksQA.Tests
 
     }
 }
+

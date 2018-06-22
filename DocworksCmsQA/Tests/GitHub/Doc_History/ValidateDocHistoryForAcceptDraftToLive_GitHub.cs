@@ -10,12 +10,11 @@ namespace DocWorksQA.Tests
 {
     [TestFixture, Category("DocHistory")]
     [Parallelizable]
-    class TC_40_ValidateDocHistoryBySelectingDate : BeforeTestAfterTest
+    class ValidateDocHistoryForAcceptDraftToLive_GitHub : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
         
-
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
@@ -26,13 +25,12 @@ namespace DocWorksQA.Tests
 
         }
 
-        [Test, Description("Verify User is able to view history details in DocHistory module")]
-        public void TC40_ValidateDocHistoryBySelectingDate()
+        [Test, Description("Verify User is able to view history details in DocHistory module for Create,rename,delete draft")]
+        public void ValidateDocHistoryForAcceptDraftToLive()
         {
             try
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
-                Console.WriteLine("Starting Test Case : " + TestName);
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
                 String projectName = CreateDistribution("Mercurial", test, driver);
@@ -42,14 +40,28 @@ namespace DocWorksQA.Tests
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
                 createDraft.ClickOpenProject();
                 createDraft.ClickOnUnityManualNode();
+                /*createDraft.ClickNewDraft();
+                String draftName = createDraft.EnterValidDraftName();
+                createDraft.ClickOnBlankDraft();
+                createDraft.CreateDraft();
+                project.ClickNotifications();
+                String status2 = project.GetNotificationStatus();
+                project.SuccessScreenshot("Blank Draft got Created Successfully");
+                VerifyText(test, "creating a draft " + draftName + " in UnityManual is successful", status2, "Draft: " + draftName + " is Created with status:" + status2 + "", "Draft is not created with status: " + status2 + "");
+                project.BackToProject();*/
+                AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test, driver);
+                auth.LeftDraftDropDown("draft123");
+                auth.RightDraftDropDown("draft123");
+                auth.ClickAcceptDraftToLive();
+                project.ClickNotifications();
+                String status = project.GetNotificationStatus();
+                project.SuccessScreenshot("Accept Draft To live of Draft got Created Successfully");
+                project.BackToProject();
                 Doc_HistoryPage DocHistory = new Doc_HistoryPage(test, driver);
                 DocHistory.ClickDoc_History();
-                System.Threading.Thread.Sleep(6000);
-                DocHistory.ChooseDate();
-                DocHistory.ClickSearchButton();
-                System.Threading.Thread.Sleep(20000);
-                project.SuccessScreenshot("Action details loaded Successfully for selected date");
-                project.BackToProject();
+                System.Threading.Thread.Sleep(10000);
+                project.SuccessScreenshot("Accept Draft To Live history details loaded Successfully");
+                DocHistory.ClickOnNodeHistoryCloseButton();
 
             }
             catch (Exception ex)
@@ -71,4 +83,3 @@ namespace DocWorksQA.Tests
 
     }
 }
-

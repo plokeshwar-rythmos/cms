@@ -10,7 +10,7 @@ namespace DocWorksQA.Tests
 {
     [TestFixture, Category("DocHistory")]
     [Parallelizable]
-    class TC_36_ValidateDocHistoryforCreateRenameDeleteDraft : BeforeTestAfterTest
+    class ValidateDocHistoryforCreateRenameDeleteDraft_GitLab : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
@@ -25,7 +25,7 @@ namespace DocWorksQA.Tests
         }
 
         [Test, Description("Verify User is able to view history details in DocHistory module for Create draft")]
-        public void TC36A_ValidateDocHistoryforCreateDraft()
+        public void ValidateDocHistoryforCreateRenameDeleteDraft()
         {
             try
             {
