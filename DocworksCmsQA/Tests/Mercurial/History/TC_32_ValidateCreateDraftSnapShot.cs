@@ -59,8 +59,9 @@ namespace DocWorksQA.Tests
                 addProject.ClickNotifications();
                 String status3 = addProject.GetNotificationStatus();
                 addProject.SuccessScreenshot("Blank Draft got Created Successfully");
-                //VerifyText(test, "creating a draft " + DraftSnapshot + " with snapshot is successful", status2, "DraftSnapshot: " + DraftSnapshot + " is Created with status:" + status2 + "", "DraftSnapshot is not created with status: " + status2 + "");
+                VerifyText(test, "creating a draft " + DraftSnapshot + " with snapshot is successful", status2, "DraftSnapshot: " + DraftSnapshot + " is Created with status:" + status2 + "", "DraftSnapshot is not created with status: " + status2 + "");
                 addProject.BackToProject();
+                //AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test, driver);
                 auth.LeftDraftDropDown(DraftSnapshot);
                 auth.RightDraftDropDown(DraftSnapshot);
                 auth.HistoryRightTab();
@@ -73,7 +74,7 @@ namespace DocWorksQA.Tests
                 System.Threading.Thread.Sleep(5000);
                 driver.SwitchTo().ActiveElement();
                 auth.ClickGdocLeft();
-                driver.SwitchTo().ActiveElement().Click();
+                //driver.SwitchTo().ActiveElement().Click();
                 driver.SwitchTo().DefaultContent();
                 auth.RightDraftDropDown(DraftSnapshot);
                 auth.PreviewRightTab();

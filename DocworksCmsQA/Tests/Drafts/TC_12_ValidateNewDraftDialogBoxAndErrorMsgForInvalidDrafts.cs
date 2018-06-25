@@ -22,7 +22,7 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
 
-        //[Test, Description("Verify New Draft Button is enabled or not")]
+        [Test, Description("Verify New Draft Button is enabled or not")]
         public void TC12A_ValidateNewDraftDialogBoxIsAppearedOrNot()
         {
 

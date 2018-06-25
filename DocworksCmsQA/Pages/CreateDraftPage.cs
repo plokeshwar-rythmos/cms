@@ -14,11 +14,11 @@ namespace DocWorksQA.Pages
         public By BACKDROP_CLICK = By.XPath("//div[@class='mat-drawer-backdrop mat-drawer-shown']");
         public By NEWDRAFT_BUTTON = By.XPath("//button/span/i[@class='mdi mdi-plus mdi-18px']");
         public By CLOSEDRAFT_BUTTON = By.XPath("//button[@aria-label='Close dialog']");
-        public By DRAFTNAME_EDT = By.XPath("//input[@ng-reflect-placeholder='Draft Name']");
+        public By DRAFTNAME_EDT = By.XPath("//input[@placeholder='Draft Name']");
         public By EXISTINGDRAFT_CLICK = By.XPath("(//div[@class='mat-radio-outer-circle'])[1]");
         public By BLANKDRAFT_CLICK = By.XPath("(//div[@class='mat-radio-outer-circle'])[2]");
         public By EXISTINGDRAFTDROPDOWN = By.XPath("//mat-select[@aria-label='Existing Drafts']");
-        public By CODERDRAFT_CLICK = By.XPath("(//mat-option[@class='mat-option ng-star-inserted mat-selected mat-active']//span)[contains(text(),'Coder Draft')]");
+        public By CODERDRAFT_CLICK = By.XPath("(//mat-option[@class='mat-option ng-star-inserted mat-selected mat-active']//span)[contains(text(),' Source Control Draft ')]");
         public By CREATEDRAFT_BUTTON = By.XPath("(//button[@class='mat-raised-button mat-primary']/span)[contains(text(),'Create Draft')]");
         public By DRAFTNAMEERROR = By.XPath("//mat-error[text()='Please enter at least 5 characters.']");
         public By OPENPROJECT = By.XPath("(//button[@class='mat-raised-button mat-primary']/span)[contains(text(),'Open')]");
@@ -143,6 +143,7 @@ namespace DocWorksQA.Pages
         public String EnterValidDraftName()
         {
             String DraftName = "Draft" + "_" + GenerateRandomNumbers(2);
+            Click(DRAFTNAME_EDT);
             EnterValue(DRAFTNAME_EDT, DraftName);
             Info(test,"Draft Name is" + DraftName + " ");
             return DraftName;
@@ -166,7 +167,7 @@ namespace DocWorksQA.Pages
         {
             Click(BLANKDRAFT_CLICK);
             Info(test,"Selected Blank Draft.");
-        }
+        } 
 
         /**
         * MethodName: ClickOnExistingDraft()

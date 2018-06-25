@@ -12,7 +12,7 @@ namespace DocWorksQA.Tests
 
     [TestFixture, Category("ViewCoderWIPAndFinalDraftHistory")]
     [Parallelizable]
-    class TC_31_ValidateHistoryTabAfterEditingGdoc : BeforeTestAfterTest
+    class TC_33_ValidateEditDraftSnapshot : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
@@ -26,8 +26,8 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
 
-        [Test, Description("Verify User is able to View History Tab After Editing GDOC")]
-        public void TC31_VerifyHistoryTabAfterEditingGdoc()
+        [Test, Description("Verify User is able to edit the Draft Snapshot")]
+        public void TC33_VerifyEditDraftSnapshot()
         {
             try
             {
@@ -51,30 +51,54 @@ namespace DocWorksQA.Tests
                 addProject.SuccessScreenshot("Blank Draft got Created Successfully");
                 VerifyText(test, "creating a draft " + draftName + " in UnityManual is successful", status2, "Draft: " + draftName + " is Created with status:" + status2 + "", "Draft is not created with status: " + status2 + "");
                 addProject.BackToProject();
-                AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test,driver);
+                AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test, driver);
                 auth.LeftDraftDropDown(draftName);
                 auth.RightDraftDropDown(draftName);
                 auth.HistoryRightTab();
-                auth.ViewDraft();
-                addProject.SuccessScreenshot("History of View Draft Before Editing the Blank Draft in Gdoc");
+                String DraftSnapshot = auth.CreateDraftFromSnapshot();
+                addProject.ClickNotifications();
+                String status3 = addProject.GetNotificationStatus();
+                addProject.SuccessScreenshot("Blank Draft got Created Successfully");
+                VerifyText(test, "creating a draft " + DraftSnapshot + " with snapshot is successful", status2, "DraftSnapshot: " + DraftSnapshot + " is Created with status:" + status2 + "", "DraftSnapshot is not created with status: " + status2 + "");
+                addProject.BackToProject();
+                auth.LeftDraftDropDown(DraftSnapshot);
+                auth.RightDraftDropDown(DraftSnapshot);
+                auth.HistoryRightTab();
+                auth.ViewDraft1();
+                addProject.SuccessScreenshot("History of created Draft SnapShot with content same as the Draft");
                 auth.CloseViewDraft();
                 auth.GdocLeftTab();
                 IWebElement framel = auth.EnterIntoLeftFrame();
                 driver.SwitchTo().Frame(framel);
+                System.Threading.Thread.Sleep(5000);
                 driver.SwitchTo().ActiveElement();
                 auth.ClickGdocLeft();
-                driver.SwitchTo().ActiveElement().SendKeys("SELENIUM_AUTOMATION");
-                addProject.SuccessScreenshot("Editing Blank Draft in GDOC Left");
+                //driver.SwitchTo().ActiveElement().Click();
                 driver.SwitchTo().DefaultContent();
-                auth.RightDraftDropDown(draftName);
+                auth.RightDraftDropDown(DraftSnapshot);
                 auth.PreviewRightTab();
                 auth.HistoryRightTab();
+                addProject.SuccessScreenshot("Number of Instances after Clicked on Gdoc for long time");
+                auth.LeftDraftDropDown(DraftSnapshot);
+                auth.GdocLeftTab(); 
+                IWebElement frame2 = auth.EnterIntoLeftFrame();
+                driver.SwitchTo().Frame(frame2);
+                System.Threading.Thread.Sleep(5000);
+                driver.SwitchTo().ActiveElement();
+                auth.ClickGdocLeft();
+                driver.SwitchTo().ActiveElement().SendKeys("Hi Hello!!!!");
+                addProject.SuccessScreenshot("Editing Draft Snapshot in GDOC Left");
+                driver.SwitchTo().DefaultContent();
+                auth.PreviewRightTab();
+                auth.HistoryRightTab();
+                addProject.SuccessScreenshot("Two or more instances are created with edited content");
                 auth.ViewDraft1();
-                addProject.SuccessScreenshot("History of View Draft After Editing the Blank draft in GDoc");
+                addProject.SuccessScreenshot("History of created Draft SnapShot with content");
                 String Actual = auth.GetViewDraft();
                 Console.WriteLine("The text is ****" + Actual);
                 auth.CloseViewDraft();
-              VerifyText(test,"SELENIUM_AUTOMATION", Actual, "Validating the changes in ViewDraft is successful", "Validating the changes in ViewDraft is not successful");
+                Assert.AreEqual("Hi Hello!!!!", Actual, "Validating the changes in ViewDraft");
+                auth.CloseViewDraft();
             }
             catch (Exception e)
             {

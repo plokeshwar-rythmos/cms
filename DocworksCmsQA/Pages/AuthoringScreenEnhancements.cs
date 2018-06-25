@@ -27,7 +27,7 @@ namespace DocWorksQA.Pages
         public By OPENPROJECT = By.XPath("//button[@class='mat-raised-button mat-primary']/span[text()='Open']");
         public By LEFT_DRAFTDROPDOWN = By.XPath("//div[@class='authoring-tabview left-window']//mat-select");
         public By RIGHT_DRAFTDROPDOWN = By.XPath("//div[@class='authoring-tabview right-window']//mat-select");
-        public By LEFT_GDOC_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@ng-reflect-message='GDoc']");
+        public By LEFT_GDOC_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div//div//div/div/div/i[@class='tab-title-icon mdi mdi-24px mdi-file-document']");
         public By LEFT_HTML_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@ng-reflect-message='HTML']");
         public By LEFT_MD_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@ng-reflect-message='.md']");
         public By LEFT_PREVIEW_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@ng-reflect-message='preview']");
@@ -36,8 +36,8 @@ namespace DocWorksQA.Pages
         public By RIGHT_HTML_TAB = By.XPath("//div[@class='authoring-tabview right-window']//div/i[@ng-reflect-message='HTML']");
         public By Right_HTML_EDT = By.XPath("//app-authoring-tabbed-view[@ng-reflect-align='right']//div[@ng-reflect-ng-class='authoring-tabview-body']/div");
         public By RIGHT_MD_TAB = By.XPath("//div[@class='authoring-tabview right-window']//div/i[@ng-reflect-message='.md']");
-        public By RIGHT_PREVIEW_TAB = By.XPath("//div[@class='authoring-tabview right-window']//div/i[@ng-reflect-message='preview']");
-        public By RIGHT_HISTORY_TAB = By.XPath("//div[@class='authoring-tabview right-window']//div/i[@ng-reflect-message='history']");
+        public By RIGHT_PREVIEW_TAB = By.XPath("(//div/i[@class='tab-title-icon mdi mdi-24px mdi-eye'])[2]");
+        public By RIGHT_HISTORY_TAB = By.XPath("//div[@id='mat-tab-label-2-4']/div/i[@class='tab-title-icon mdi mdi-24px mdi-history']");
         public By EDT_LEFT_TAB = By.XPath("//div[@class='authoring-tabview left-window']/div[2]/div");
         public By EDT_RIGHT_TAB = By.XPath("//div[@class='authoring-tabview right-window']/div[2]/div");
         public By EDT_GDOC = By.XPath("(//div[@class='kix-appview-editor']//span[@class='goog-inline-block kix-lineview-text-block']/span)[1]");
@@ -59,7 +59,7 @@ namespace DocWorksQA.Pages
         public By SEARCH_ASSET_BAR = By.XPath("//button//span/i[@class='mdi mdi-magnify mdi-24px']");
         public By HISTORY_VALID_DRAFT1 = By.XPath("(//mat-list[@class='mat-list valid-draft ng-star-inserted']//div[@class='mat-list-item-content'])[last()]");
         public By HISTORT_VALID_DRAFT2 = By.XPath("(//mat-list[@class='mat-list valid-draft ng-star-inserted']//div[@class='mat-list-item-content'])[1]");
-        public By ViewDraft_DraftName = By.XPath("//input[@ng-reflect-placeholder='Draft Name']");
+        public By ViewDraft_DraftName = By.XPath("//input[@placeholder='Draft Name']");
 
         private ExtentTest test;
 
@@ -113,14 +113,16 @@ namespace DocWorksQA.Pages
         }
         public IWebElement EnterIntoLeftFrame()
         {
-            IWebElement framel = WaitForElement(By.XPath("//app-authoring-tabbed-view[@ng-reflect-align='left']//div//iframe"));
-
+            //IWebElement framel = WaitForElement(By.XPath("//app-authoring-tabbed-view[@ng-reflect-align='left']//div//iframe"));
+            IWebElement framel = WaitForElement(By.XPath("//app-authoring-tabbed-view//div[@class='ng-star-inserted']/iframe"));
             return framel;
         }
 
         public void ClickGdocLeft( )
         {
-            Click(EDT_GDOC_HDR);
+            WaitForElement(EDT_GDOC_HDR);
+            MoveToelementAndClick(EDT_GDOC_HDR);
+            //Click(EDT_GDOC_HDR);
             System.Threading.Thread.Sleep(7000);
             Info(test,"Click on left Gdoc");
             
@@ -186,7 +188,9 @@ namespace DocWorksQA.Pages
         }
         public void GdocLeftTab()
         {
-            Click(LEFT_GDOC_TAB);
+            WaitForElement(LEFT_GDOC_TAB);
+            MoveToelementAndClick(LEFT_GDOC_TAB);
+            //Click(LEFT_GDOC_TAB);
             Info(test,"Clicked On Left GDOC Tab");
         }
 
@@ -207,9 +211,9 @@ namespace DocWorksQA.Pages
         }
         public void HistoryRightTab()
         {
-            System.Threading.Thread.Sleep(30000);
-            Click(RIGHT_HISTORY_TAB);
-            System.Threading.Thread.Sleep(30000);
+            WaitForElement(RIGHT_HISTORY_TAB);
+            MoveToelementAndClick(RIGHT_HISTORY_TAB);
+            System.Threading.Thread.Sleep(50000);
             Info(test,"Clicked On Right History Tab");
         }
         public void GdocRightTab()
@@ -455,7 +459,7 @@ namespace DocWorksQA.Pages
             MoveToElement(HISTORT_VALID_DRAFT2);
             System.Threading.Thread.Sleep(7000);
             MoveToelementAndClick(By.XPath("(//div[@class='draft-extend-icons']/i[@title='View Draft'])"));
-            System.Threading.Thread.Sleep(7000);
+            System.Threading.Thread.Sleep(30000);
             Info(test,"Clicked on Uppdated View Draft");
         }
 
@@ -464,7 +468,7 @@ namespace DocWorksQA.Pages
             System.Threading.Thread.Sleep(7000);
             MoveToElement(HISTORT_VALID_DRAFT2);
             System.Threading.Thread.Sleep(7000);
-            MoveToelementAndClick(By.XPath("(//div[@class='draft-extend-icons']/i[@title='Create Draft'])"));
+            MoveToelementAndClick(By.XPath("(//div[@class='draft-extend-icons']/i[@title='Create Draft'])[1]"));
             System.Threading.Thread.Sleep(7000);
             String str = "DraftSnapshot " + GenerateRandomNumbers(2);
             EnterValue(ViewDraft_DraftName, str);
