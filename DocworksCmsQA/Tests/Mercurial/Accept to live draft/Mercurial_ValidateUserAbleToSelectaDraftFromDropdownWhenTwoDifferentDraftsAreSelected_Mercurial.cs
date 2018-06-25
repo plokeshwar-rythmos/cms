@@ -10,7 +10,7 @@ namespace DocWorksQA.Tests
 
     [TestFixture, Category("Accept Draft To Live in Authoring screen")]
     [Parallelizable]
-    class TC_20_ValidateUserAbleToSelectaDraftFromDropdownWhenTwoDifferentDraftsAreSelected : BeforeTestAfterTest
+    class Mercurial_ValidateUserAbleToSelectaDraftFromDropdownWhenTwoDifferentDraftsAreSelected_Mercurial : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
@@ -25,14 +25,14 @@ namespace DocWorksQA.Tests
         }
 
         [Test, Description("Verify User is able to select a Draft from Dropdown when two different Drafts are selected for AcceptDraftToLive")]
-        public void TC20A_ValidateUserAbleToSelectaDraftFromDropdownWhenClickedAcceptDraftToLiveButton()
+        public void ValidateUserAbleToSelectaDraftFromDropdownWhenClickedAcceptDraftToLiveButton()
         {
-            try
-            {
-                String TestName = (TestContext.CurrentContext.Test.Name.ToString());
+           try
+          {
+               String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-                test = StartTest(TestName, description);
-                String projectName = CreateDistribution("Mercurial", test, driver);
+               test = StartTest(TestName, description);
+               String projectName = CreateDistribution("Mercurial", test, driver);
                 AddProjectPage project = new AddProjectPage(test, driver);
                 project.ClickDashboard();
                 project.SearchForProject(projectName);
@@ -61,7 +61,9 @@ namespace DocWorksQA.Tests
                 project.BackToProject();
                 auth.LeftLiveDraft();
                 auth.MDLeftTab();
+            
                 project.SuccessScreenshot("Content In the Live Draft");
+               // project.BackToProject();
 
             }
             catch (Exception ex)
@@ -74,13 +76,14 @@ namespace DocWorksQA.Tests
         }
 
        [Test, Description("Verify User is Unable to create a Draft with Same Name of Existing Draft")]
-        public void TC20B_ValidateUserIsUnableToCreateDuplicateDrafts()
+        public void ValidateUserIsUnableToCreateDuplicateDrafts()
         {
             try
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
+                
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
                 AddProjectPage project = new AddProjectPage(test, driver);
                 createDraft.ClickNewDraft();
@@ -99,6 +102,7 @@ namespace DocWorksQA.Tests
                 project.SuccessScreenshot("Unable To Create a Draft Named " + draftName + " with Blank Message");
 
             }
+
             catch (Exception ex)
             {
                 ReportExceptionScreenshot(test, driver, ex);

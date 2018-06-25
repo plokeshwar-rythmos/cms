@@ -9,9 +9,9 @@ using System.Collections.Generic;
 
 namespace DocWorksQA.Tests
 {
-    [TestFixture, Category("Favourite Section")]
+    [TestFixture, Category("Recent Projects Section")]
     [Parallelizable]
-    class TC_42_ValidateUserAbleToViewTheProjectInFavouriteSectionAfterClickingOnFavouriteIconInProjectListScreen : BeforeTestAfterTest
+    class Mercurial_ValidateUserAbleToViewTheProjectInRecentProjectSectionAfterOpensAnyProjectOrGoesToAuthoringViewScreen_Mercurial : BeforeTestAfterTest
     {
         private IWebDriver driver;
         private ExtentTest test;
@@ -25,8 +25,8 @@ namespace DocWorksQA.Tests
         }
 
 
-        [Test, Description("Validate user able to view the project in favourite section after clicking on favourite icon in Project List Screen")]
-        public void TC42_ValidateUserAbleToViewTheProjectInFavouriteSectionAfterClickingOnFavouriteIconInProjectListScreen()
+        [Test, Description("Validate user able to view the project in recent project section after opens any project or goes to authoring view screen")]
+        public void TC43_ValidateUserAbleToViewTheProjectInRecentProjectSectionAfterOpensAnyProjectOrGoesToAuthoringViewScreen()
         {
             try
             {
@@ -50,10 +50,26 @@ namespace DocWorksQA.Tests
                 addProject.BackToProject();
                 addProject.ClickDashboard();
                 addProject.SearchForProject(projectName);
-                addProject.ClickFavouriteIcon();
-                System.Threading.Thread.Sleep(6000);
-                addProject.SuccessScreenshot("Project moved to favourite section");
-
+                CreateDistributionPage distribution = new CreateDistributionPage(test, driver);
+                distribution.ClickDistribution();
+                String expected1 = distribution.EnterDistirbutionName();
+                System.Threading.Thread.Sleep(5000);
+                distribution.EnterBranchForMercurial("DocworksManual3");
+                distribution.EnterTocPath();
+                distribution.EnterDescription("This is to create a distribution With TOC");
+                distribution.ClickCreateDistribution();
+                addProject.ClickNotifications();
+                String status1 = addProject.GetNotificationStatus();
+                addProject.SuccessScreenshot("Distribution got Created successfully With TOC Path");
+                VerifyText(test, "creating distribution " + expected1 + " in " + projectName + " is successful", status1, "Distribution is Created For Mercurial TOC with status:" + status1 + "", "Distribution is not created For Mercurial TOC with status: " + status1 + "");
+                addProject.ClickDashboard();
+                addProject.SearchForProject(projectName);
+                CreateDraftPage createDraft = new CreateDraftPage(test, driver);
+                createDraft.ClickOpenProject();
+                createDraft.ClickOnUnityManualNode();
+                addProject.ClickOnAuthoring();
+                System.Threading.Thread.Sleep(25000);
+                addProject.SuccessScreenshot("Project moved to Recent Projects Section");
 
             }
             catch (Exception e)

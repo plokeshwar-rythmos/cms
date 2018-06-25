@@ -25,17 +25,21 @@ namespace DocWorksQA.Pages
         public By CREATEDRAFT_BUTTON = By.XPath("//button[@class='mat-raised-button mat-primary']");
         public By DRAFTNAMEERROR = By.XPath("//mat-error[text()='Please enter at least 5 characters.']");
         public By OPENPROJECT = By.XPath("//button[@class='mat-raised-button mat-primary']/span[text()='Open']");
-        public By LEFT_DRAFTDROPDOWN = By.XPath("//div[@class='authoring-tabview left-window']//mat-select");
-        public By RIGHT_DRAFTDROPDOWN = By.XPath("//div[@class='authoring-tabview right-window']//mat-select");
-        public By LEFT_GDOC_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@ng-reflect-message='GDoc']");
+          public By LEFT_DRAFTDROPDOWN = By.XPath("//div[@class='authoring-tabview left-window']//mat-select" + "");
+         public By RIGHT_DRAFTDROPDOWN = By.XPath("//div[@class='authoring-tabview right-window']//mat-select");
+       // public By LEFT_GDOC_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@ng-reflect-message='GDoc']");
+        public By LEFT_GDOC_TAB = By.XPath("(//div[@class='tab-title ng-star-inserted'])[1]");
         public By LEFT_HTML_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@ng-reflect-message='HTML']");
-        public By LEFT_MD_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@ng-reflect-message='.md']");
+        // public By LEFT_MD_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@ng-reflect-message='.md']");
+        public By LEFT_MD_TAB = By.XPath("(//div//i[@class='tab-title-icon mdi mdi-24px mdi-markdown'])[1]");
         public By LEFT_PREVIEW_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@ng-reflect-message='preview']");
         public By LEFT_HISTORY_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@ng-reflect-message='history']");
-        public By RIGHT_GDOC_TAB = By.XPath("//div[@class='authoring-tabview right-window']//div/i[@ng-reflect-message='GDoc']");
+        //  public By RIGHT_GDOC_TAB = By.XPath("//div[@class='authoring-tabview right-window']//div/i[@ng-reflect-message='GDoc']");
+        public By RIGHT_GDOC_TAB = By.XPath("(//div[@class='tab-title ng-star-inserted'])[6]");
         public By RIGHT_HTML_TAB = By.XPath("//div[@class='authoring-tabview right-window']//div/i[@ng-reflect-message='HTML']");
         public By Right_HTML_EDT = By.XPath("//app-authoring-tabbed-view[@ng-reflect-align='right']//div[@ng-reflect-ng-class='authoring-tabview-body']/div");
-        public By RIGHT_MD_TAB = By.XPath("//div[@class='authoring-tabview right-window']//div/i[@ng-reflect-message='.md']");
+        // public By RIGHT_MD_TAB = By.XPath("//div[@class='authoring-tabview right-window']//div/i[@ng-reflect-message='.md']");
+        public By RIGHT_MD_TAB = By.XPath("(//div//i[@class='tab-title-icon mdi mdi-24px mdi-markdown'])[2]");
         public By RIGHT_PREVIEW_TAB = By.XPath("//div[@class='authoring-tabview right-window']//div/i[@ng-reflect-message='preview']");
         public By RIGHT_HISTORY_TAB = By.XPath("//div[@class='authoring-tabview right-window']//div/i[@ng-reflect-message='history']");
         public By EDT_LEFT_TAB = By.XPath("//div[@class='authoring-tabview left-window']/div[2]/div");
@@ -99,7 +103,8 @@ namespace DocWorksQA.Pages
         {
             System.Threading.Thread.Sleep(7000);
             Click(LEFT_DRAFTDROPDOWN);
-            Click(By.XPath("(//mat-option//mat-list-item//div/span)[text()='Live Draft']"));
+           
+            Click(By.XPath("(//mat-option//mat-list-item//div/span)[text()='Approved Edition']"));
             Info(test,"selected a Live draft in Left Drop Down");
 
         }
@@ -108,13 +113,14 @@ namespace DocWorksQA.Pages
         public void LeftCoderDraft()
         {
             Click(LEFT_DRAFTDROPDOWN);
-            Click(By.XPath("(//mat-option//mat-list-item//div/span)[text()='Coder Draft']"));
+          //  Click(By.XPath("(//mat-option//mat-list-item//div/span)[text()='Coder Draft']"));
+            Click(By.XPath("(//mat-option//mat-list-item//div/span)[text()='Source Control Draft']"));
             Info(test,"selected a Coder draft in Left Drop Down");
         }
         public IWebElement EnterIntoLeftFrame()
         {
-            IWebElement framel = WaitForElement(By.XPath("//app-authoring-tabbed-view[@ng-reflect-align='left']//div//iframe"));
-
+          // IWebElement framel = WaitForElement(By.XPath("//app-authoring-tabbed-view[@ng-reflect-align='left']//div//iframe"));
+           IWebElement framel = WaitForElement(By.XPath("(//app-authoring-tabbed-view/div[@class='authoring-tabview left-window']//div/iframe)[1]"));
             return framel;
         }
 
@@ -138,24 +144,36 @@ namespace DocWorksQA.Pages
 
         public void RightLiveDraft()
         {
-            Click(RIGHT_DRAFTDROPDOWN);
-            Click(By.XPath("(//mat-option//mat-list-item//div/span)[text()='Live Draft']"));
+            Click(RIGHT_DRAFTDROPDOWN);            
+            Click(By.XPath("(//mat-option//mat-list-item//div/span)[text()='Approved Edition']"));
             Info(test,"selected a Live draft in Right Drop Down");
 
         }
         public Boolean IsAcceptDraftToLiveButtonEnabled()
         {
-            Boolean Flag = this.IsEnabled(By.XPath("//button[@ng-reflect-disabled='true'] /span/i[@class='mdi mdi-checkbox-marked-circle-outline mdi-18px']"));
+            // Boolean Flag = this.IsEnabled(By.XPath("//button[@ng-reflect-disabled='true'] /span/i[@class='mdi mdi-checkbox-marked-circle-outline mdi-18px']"));
+            String display = WaitForElement(By.XPath("//button[@class='mat-raised-button mat-accent ng-star-inserted']//div[@class='mat-button-ripple mat-ripple']")).GetAttribute("display");
+            Boolean Flag = true;
+            if (display.Equals("block")) Flag = false;
+            //Boolean Flag = this.IsEnabled(By.XPath("//button[@class='mat-raised-button mat-accent ng-star-inserted']//div[@class='mat-button-ripple mat-ripple']"));
+            if (Flag == true)
+            {
+                Info(test, "Approve Draft Button id Enabled");
+               
+            }
+            else
+            {
+                Info(test, "Approve Draft Button id disabled");
 
-           Info(test,"AddProject Button id Enabled");
-
-
+            }
             return Flag;
+
+
         }
         public void RightCoderDraft()
         {
             Click(RIGHT_DRAFTDROPDOWN);
-            Click(By.XPath("(//mat-option//mat-list-item//div/span)[text()='Coder Draft']"));
+            Click(By.XPath("(//mat-option//mat-list-item//div/span)[text()='Source Control Draft']"));
             Info(test,"selected a Coder draft in Right Drop Down");
 
         }

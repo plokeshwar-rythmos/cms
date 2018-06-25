@@ -9,7 +9,7 @@ namespace DocWorksQA.Tests
 {
     [TestFixture, Category("Accept Draft To Live in Authoring screen")]
     [Parallelizable]
-    class TC_16_ValidateUserAbleToSeeDropDownOnAccepttodraftliveButtonIfBothTheDraftsAreDifferent : BeforeTestAfterTest
+    class Mercurial_ValidateUserAbleToSeeDropDownOnAccepttodraftliveButtonIfBothTheDraftsAreDifferent_Mercurial : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
@@ -24,7 +24,7 @@ namespace DocWorksQA.Tests
         }
 
         [Test, Description("Verify User Is able to View a DropDown on Clicking of AcceptDraftToLive Button When both drafts are different")]
-        public void TC16_ValidateUserAbleToSeeDropDownOnAccepttodraftliveButtonIfBothTheDraftsAreDifferent()
+        public void ValidateUserAbleToSeeDropDownOnAccepttodraftliveButtonIfBothTheDraftsAreDifferent()
         {
             try
             {

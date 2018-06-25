@@ -14,16 +14,19 @@ namespace DocWorksQA.Pages
         public By BACKDROP_CLICK = By.XPath("//div[@class='mat-drawer-backdrop mat-drawer-shown']");
         public By NEWDRAFT_BUTTON = By.XPath("//button/span/i[@class='mdi mdi-plus mdi-18px']");
         public By CLOSEDRAFT_BUTTON = By.XPath("//button[@aria-label='Close dialog']");
-        public By DRAFTNAME_EDT = By.XPath("//input[@ng-reflect-placeholder='Draft Name']");
+        public By DRAFTNAME_EDT = By.XPath("//*[@placeholder='Draft Name']");
+        
         public By EXISTINGDRAFT_CLICK = By.XPath("(//div[@class='mat-radio-outer-circle'])[1]");
-        public By BLANKDRAFT_CLICK = By.XPath("(//div[@class='mat-radio-outer-circle'])[2]");
+      public By BLANKDRAFT_CLICK = By.XPath("(//div[@class='mat-radio-outer-circle'])[2]");
         public By EXISTINGDRAFTDROPDOWN = By.XPath("//mat-select[@aria-label='Existing Drafts']");
-        public By CODERDRAFT_CLICK = By.XPath("(//mat-option[@class='mat-option ng-star-inserted mat-selected mat-active']//span)[contains(text(),'Coder Draft')]");
+         public By CODERDRAFT_CLICK = By.XPath("(//mat-option[@class='mat-option ng-star-inserted mat-selected mat-active']//span)[contains(text(),'Source Control Draft')]");
+  
+
         public By CREATEDRAFT_BUTTON = By.XPath("(//button[@class='mat-raised-button mat-primary']/span)[contains(text(),'Create Draft')]");
         public By DRAFTNAMEERROR = By.XPath("//mat-error[text()='Please enter at least 5 characters.']");
         public By OPENPROJECT = By.XPath("(//button[@class='mat-raised-button mat-primary']/span)[contains(text(),'Open')]");
         public By LATEST_DRAFT_IN_DROPDOWN = By.XPath("(//mat-option[@class='mat-option ng-star-inserted']//span)[last()]");
-
+        
         private ExtentTest test;
         /**
         * Constructor: CreateDraftPage()
@@ -43,7 +46,8 @@ namespace DocWorksQA.Pages
         public void ClickNewDraft()
         {
             Click(NEWDRAFT_BUTTON);
-            Info(test,"Clicked on New Draft Button.");
+            Info
+                (test,"Clicked on New Draft Button.");
         }
 
         /**
@@ -143,6 +147,7 @@ namespace DocWorksQA.Pages
         public String EnterValidDraftName()
         {
             String DraftName = "Draft" + "_" + GenerateRandomNumbers(2);
+            Click(DRAFTNAME_EDT);
             EnterValue(DRAFTNAME_EDT, DraftName);
             Info(test,"Draft Name is" + DraftName + " ");
             return DraftName;
@@ -164,8 +169,8 @@ namespace DocWorksQA.Pages
         */
         public void ClickOnBlankDraft()
         {
-            Click(BLANKDRAFT_CLICK);
-            Info(test,"Selected Blank Draft.");
+         Click(BLANKDRAFT_CLICK);
+           Info(test,"Selected Blank Draft.");
         }
 
         /**
@@ -195,6 +200,7 @@ namespace DocWorksQA.Pages
         public void ClickOpenProject()
         {
             Click(OPENPROJECT);
+            
             System.Threading.Thread.Sleep(25000);
             Info(test,"Clicked on Open Project Button");
         }

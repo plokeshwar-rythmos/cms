@@ -9,7 +9,7 @@ namespace DocWorksQA.Tests
 {
     [TestFixture, Category("Accept Draft To Live in Authoring screen")]
     [Parallelizable]
-    class TC_18_ValidateUserAbleToCreateLiveDraftAndCanContinuouslyUpdateIt : BeforeTestAfterTest
+    class Mercurial_ValidateUserAbleToCreateLiveDraftAndCanContinuouslyUpdateIt_Mercurial : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
@@ -23,7 +23,7 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
 
-        [Test, Description("Verify User Able to Validate Live Draft and Continuous Update Of Live Draft")]
+      [Test, Description("Verify User Able to Validate Live Draft and Continuous Update Of Live Draft")]
         public void TC18A_ValidateUserAbleToCreateLiveDraftAndCanContinuouslyUpdateIt()
         {
             try
@@ -64,7 +64,7 @@ namespace DocWorksQA.Tests
                 project.SuccessScreenshot("Validating a Live Draft in both Editor Panes with some content");
                 createDraft.ClickNewDraft();
                 String draftName1 = createDraft.EnterValidDraftName();
-                createDraft.ClickOnBlankDraft();
+               // createDraft.ClickOnBlankDraft();
                 createDraft.CreateDraft();
                 project.ClickNotifications();
                 String status3 = project.GetNotificationStatus();
@@ -77,7 +77,7 @@ namespace DocWorksQA.Tests
                 project.ClickNotifications();
                 String status1 = project.GetNotificationStatus();
                 project.SuccessScreenshot("Accept Draft To live of Draft: " + draftName + " got Created Successfully");
-                VerifyText(test, "accept draft " + draftName + " to live is successful", status1, "Draft: " + draftName + " is Accepted to Live with status:" + status1 + "", "Draft is not Accepted to Live with status: " + status1 + "");
+                VerifyText(test, "accept draft " + draftName1 + " to live is successful", status1, "Draft: " + draftName1 + " is Accepted to Live with status:" + status1 + "", "Draft is not Accepted to Live with status: " + status1 + "");
                 project.BackToProject();
                 auth.LeftLiveDraft();
                 auth.MDLeftTab();
@@ -93,8 +93,8 @@ namespace DocWorksQA.Tests
             }
         }
 
-        [Test, Description("Verify User Able To View Gdoc Content When selected Live or Coder Draft ")]
-        public void TC18B_ValidateUserAbleToSeeGdocTabWithaMessageWhenSelectedLiveOrCoderDrafts()
+      [Test, Description("Verify User Able To View Gdoc Content When selected Live or Coder Draft ")]
+        public void ValidateUserAbleToSeeGdocTabWithaMessageWhenSelectedLiveOrCoderDrafts()
         {
             try
             {
@@ -121,8 +121,8 @@ namespace DocWorksQA.Tests
 
         }
 
-        [Test, Description("Verify When User selects Existing Live Drafts to Live the AcceptDraftToLive Button is disabled")]
-        public void TC18C_ValidateAcceptDraftToLiveButtonIsDisabledWhenUserSelectsExistingLiveDraftsToLive()
+       [Test, Description("Verify When User selects Existing Live Drafts to Live the AcceptDraftToLive Button is disabled")]
+        public void ValidateAcceptDraftToLiveButtonIsDisabledWhenUserSelectsExistingLiveDraftsToLive()
         {
             try
             {
@@ -134,9 +134,9 @@ namespace DocWorksQA.Tests
                 auth.RightLiveDraft();
                 Boolean flag = auth.IsAcceptDraftToLiveButtonEnabled();
                 Console.WriteLine("Flag is " + flag);
-                AddProjectPage project = new AddProjectPage(test, driver);
-                project.SuccessScreenshot("Verifying Accept Draft To Live Button Is Enabled or Disabled ");
-                VerifyBoolean(test, false, flag, "Accept Draft to Live buttom is disabled", "Accept Draft to Live Button is enabled");
+                AddProjectPage project1 = new AddProjectPage(test, driver);
+                project1.SuccessScreenshot("Verifying Accept Draft To Live Button Is Enabled or Disabled ");
+                VerifyBoolean(test, false, flag, "Accept Draft to Live button is disabled", "Accept Draft to Live Button is enabled");
             }
             catch (Exception ex)
             {
