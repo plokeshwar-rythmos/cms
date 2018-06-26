@@ -14,7 +14,7 @@ namespace DocWorksQA.Pages
         public By BACKDROP_CLICK = By.XPath("//div[@class='mat-drawer-backdrop mat-drawer-shown']");
         public By NEWDRAFT_BUTTON = By.XPath("//button/span/i[@class='mdi mdi-plus mdi-18px']");
         public By CLOSEDRAFT_BUTTON = By.XPath("//button[@aria-label='Close dialog']");
-        public By DRAFTNAME_EDT = By.XPath("//input[@ng-reflect-placeholder='Draft Name']");
+        public By DRAFTNAME_EDT = By.XPath("//input[@placeholder='Draft Name']");
         public By EXISTINGDRAFT_CLICK = By.XPath("(//div[@class='mat-radio-outer-circle'])[1]");
         public By BLANKDRAFT_CLICK = By.XPath("(//div[@class='mat-radio-outer-circle'])[2]");
         public By EXISTINGDRAFTDROPDOWN = By.XPath("//mat-select[@aria-label='Existing Drafts']");

@@ -28,8 +28,8 @@ namespace DocWorksQA.Pages
         //public By CHOOSING_DATE_FROM_CALENDER = By.XPath("//*[@id='mat - datepicker - 0']/div[2]/mat-month-view/table/tbody/tr/td/div[contains(text(),'18')]");
         //public By CHOOSE_MONTH = By.XPath("//button[@aria-label='Choose month and year']");
         //public By NEXT_MONTH_BUTTON = By.XPath("//button[@class='mat-calendar-next-button mat-icon-button']");
-        public By SEARCH_FIELD = By.XPath("(//input[@ng-reflect-ng-class='form-control'])[1]");
-        public By SEARCH_BUTTON = By.XPath("(//div[@class='custom-mat-input-wrapper']/i)[1]");
+        public By SEARCH_FIELD = By.XPath("//input[@placeholder='Search']");
+        public By SEARCH_BUTTON = By.XPath("//app-document-activity//i[@class='mat-suffix mdi mdi-magnify mdi-24px']");
         //public By NEWDRAFT_BUTTON = By.XPath("(//button[@class='mat-raised-button mat-primary'])[1]");
         //public By DRAFT_NAME = By.XPath("//input[contains(@class,'ng-pristine ng-invalid ng-touched')]");
         //public By BLANKDRAFT_CLICK = By.XPath("(//div[@class='mat-radio-outer-circle'])[2]");
@@ -37,10 +37,11 @@ namespace DocWorksQA.Pages
         //public By CODERDRAFT_CLICK = By.XPath("(//mat-option[@class='mat-option ng-star-inserted mat-selected mat-active']//span)[contains(text(),'Coder Draft')]");
         //public By CREATEDRAFT_BUTTON = By.XPath("(//button[@class='mat-raised-button mat-primary']/span)[contains(text(),'Create Draft')]");
         public By ACCEPTDRAFTTOLIVE = By.XPath("//button[@ng-reflect-message='Accept to live overwrites live']");
-        public By LEFT_CURSOR = By.XPath("//div[@class='cursor-pointer']/i");
+        public By LEFT_CURSOR = By.XPath("//i[@class='mdi mdi-arrow-left mdi-24px']");
         public By ALLDRAFT = By.XPath("(//mat-panel-title[@class='mat-expansion-panel-header-title'])[1]");
         public By RENAMEDRAFT = By.XPath("(//div[@fxlayoutalign='space-between center']/span)[text()=@draftName]");
-        public By DELETEDRAFT_BUTTON = By.XPath("(//mat-icon/i[@class='mdi mdi-delete mdi-24px cursor-pointer'])[last()]");
+        public By DELETEDRAFT_ICON = By.XPath("(//mat-icon/i[@class='mdi mdi-delete mdi-24px cursor-pointer'])[last()]");
+        public By DELETEDRAFT_BUTTON = By.XPath("//button[@class='mat-raised-button mat-primary']/span[text()='Delete']");
         public By RENAME_RIGHT_MARK = By.XPath("(//button[@class='mat-menu-item']/i)[1]");
 
         private ExtentTest test;
@@ -156,7 +157,7 @@ namespace DocWorksQA.Pages
             WaitForElement(CHOOSE_DATE);
             Click(CHOOSE_DATE);
             Info(test,"Clicked on ChooseDate");
-            EnterValue(CHOOSE_DATE, "04/18/2018");
+            EnterValue(CHOOSE_DATE, "06/20/2018");
         }
 
         public void ClickChooseDateCalender()
@@ -214,9 +215,10 @@ namespace DocWorksQA.Pages
         public void RenameDraft(String draftName, String newDraftName)
         {
 
-            By RENAMEDRAFT = By.XPath("(//div[@fxlayoutalign='space-between center']/span[text()='" + draftName + "']");
+            By RENAMEDRAFT = By.XPath("(//div[@fxlayoutalign='space-between center'])/span[text()='" + draftName + "']");
             By DRAFT_NAME = By.XPath("//input[@name='draftName']");
             Click(RENAMEDRAFT);
+            Clear(DRAFT_NAME);
             Type(DRAFT_NAME, newDraftName);
 
 
@@ -228,10 +230,16 @@ namespace DocWorksQA.Pages
             Info(test,"Clicked on draft to rename");
         }
 
+        public void ClickDeleteDraftIcon()
+        {
+            Click(DELETEDRAFT_ICON);
+            Info(test,"Clicked on Delete draft Icon");
+        }
+
         public void ClickDeleteDraftButton()
         {
             Click(DELETEDRAFT_BUTTON);
-            Info(test,"Clicked on Delete draft Button");
+            Info(test, "Clicked on Delete draft Button");
         }
 
         public void ClickOnRightMarkToRename()
@@ -242,8 +250,11 @@ namespace DocWorksQA.Pages
 
         public void ClickOnNodeHistoryCloseButton()
         {
-            Click(NODEHISTORY_CLOSEBUTTON);
-            Info(test,"Clicked on NodeHistoryCloseButton");
+            System.Threading.Thread.Sleep(5000);
+            WaitForElement(NODEHISTORY_CLOSEBUTTON);
+            MoveToelementAndClick(NODEHISTORY_CLOSEBUTTON);
+            Info(test, "Clicked on NodeHistoryCloseButton");
+            
         }
 
     }

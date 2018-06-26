@@ -15,7 +15,7 @@ namespace DocWorksQA.Pages
         public By SETTINGS = By.XPath("//mat-card/mat-card-title/div[2]//i[1]");
         public By CLICK_MANAGE_TAG_GROUPS = By.XPath("//button[@class='mat-menu-item'][contains(text(),'Manage Tag Groups')]");
         public By SEARCH_TAGS_AT_PROJECTLEVEL = By.XPath("//input[@placeholder='Search Tag Groups']");
-        public By AVAILABLE_TAG_PLUS_CIRCLE = By.XPath("//mat-expansion-panel//i[@class='mdi mdi-plus-circle mdi-18px']");
+        public By AVAILABLE_TAG_PLUS_CIRCLE = By.XPath("(//mat-expansion-panel//i[@class='mdi mdi-plus-circle mdi-18px'])[position()=1]");
         public By ASSIGNED_TAG_CLOSE_CIRCLE = By.XPath("//mat-expansion-panel//i[@class='mdi mdi-close-circle mdi-18px']");
         public By GET_TAG_NAME_AT_PROJECTLEVEL = By.XPath("//mat-chip/span");
         public By CLOSE_MANAGE_TAG_GROUPS = By.XPath("//button/span/i[@class='mdi mdi-close mdi-24px']");
