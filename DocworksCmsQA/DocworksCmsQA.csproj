@@ -170,10 +170,10 @@
     <Compile Include="Tests\Drafts\TC_15_ValidateScreenEnhancementsWhenUserEditsBlankDraftContent.cs" />
     <Compile Include="Tests\GitHub\CreateProjectGitHub.cs" />
     <Compile Include="Tests\GitLab\CreateProjectGitLab.cs" />
-    <Compile Include="Tests\History\TC_31_ValidateHistoryTabAfterEditingGdoc.cs" />
-    <Compile Include="Tests\History\TC_32_ValidateCreateDraftSnapShot.cs" />
-    <Compile Include="Tests\History\TC_33_ValidateEditDraftSnapshot.cs" />
     <Compile Include="Tests\Mercurial\CreateProjectMercurial.cs" />
+    <Compile Include="Tests\Mercurial\History\TC_31_ValidateHistoryTabAfterEditingGdoc.cs" />
+    <Compile Include="Tests\Mercurial\History\TC_32_ValidateCreateDraftSnapShot.cs" />
+    <Compile Include="Tests\Mercurial\History\TC_33_ValidateEditDraftSnapshot.cs" />
     <Compile Include="Tests\Validation\CreateProjectTitleLengthValidation.cs" />
     <Compile Include="Utilities\CommonMethods.cs" />
     <Compile Include="Utilities\ConfigurationHelper.cs" />

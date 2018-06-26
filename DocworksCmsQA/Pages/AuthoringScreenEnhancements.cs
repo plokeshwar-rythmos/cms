@@ -28,14 +28,14 @@ namespace DocWorksQA.Pages
         public By LEFT_DRAFTDROPDOWN = By.XPath("//div[@class='authoring-tabview left-window']//mat-select");
         public By RIGHT_DRAFTDROPDOWN = By.XPath("//div[@class='authoring-tabview right-window']//mat-select");
         public By LEFT_GDOC_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div//div//div/div/div/i[@class='tab-title-icon mdi mdi-24px mdi-file-document']");
-        public By LEFT_HTML_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@ng-reflect-message='HTML']");
-        public By LEFT_MD_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@ng-reflect-message='.md']");
-        public By LEFT_PREVIEW_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@ng-reflect-message='preview']");
+        public By LEFT_HTML_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/div/i[@class='tab-title-icon mdi mdi-24px mdi-code-not-equal-variant']");
+        public By LEFT_MD_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@class='tab-title-icon mdi mdi-24px mdi-markdown']");
+        public By LEFT_PREVIEW_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@class='tab-title-icon mdi mdi-24px mdi-eye']");
         public By LEFT_HISTORY_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@ng-reflect-message='history']");
-        public By RIGHT_GDOC_TAB = By.XPath("//div[@class='authoring-tabview right-window']//div/i[@ng-reflect-message='GDoc']");
-        public By RIGHT_HTML_TAB = By.XPath("//div[@class='authoring-tabview right-window']//div/i[@ng-reflect-message='HTML']");
+        public By RIGHT_GDOC_TAB = By.XPath("//div[@class='authoring-tabview right-window']//div/i[@class='tab-title-icon mdi mdi-24px mdi-file-document']");
+        public By RIGHT_HTML_TAB = By.XPath("(//div[@class='authoring-tabview right-window']//div[@class='mat-tab-label mat-ripple ng-star-inserted'])[1]");
         public By Right_HTML_EDT = By.XPath("//app-authoring-tabbed-view[@ng-reflect-align='right']//div[@ng-reflect-ng-class='authoring-tabview-body']/div");
-        public By RIGHT_MD_TAB = By.XPath("//div[@class='authoring-tabview right-window']//div/i[@ng-reflect-message='.md']");
+        public By RIGHT_MD_TAB = By.XPath("//div[@class='authoring-tabview right-window']//div/i[@class='tab-title-icon mdi mdi-24px mdi-markdown']");
         public By RIGHT_PREVIEW_TAB = By.XPath("(//div/i[@class='tab-title-icon mdi mdi-24px mdi-eye'])[2]");
         public By RIGHT_HISTORY_TAB = By.XPath("//div[@id='mat-tab-label-2-4']/div/i[@class='tab-title-icon mdi mdi-24px mdi-history']");
         public By EDT_LEFT_TAB = By.XPath("//div[@class='authoring-tabview left-window']/div[2]/div");
@@ -88,7 +88,8 @@ namespace DocWorksQA.Pages
 
         public void LeftDraftDropDown(String str)
         {
-            System.Threading.Thread.Sleep(7000);
+            //System.Threading.Thread.Sleep(7000);
+            System.Threading.Thread.Sleep(20000);
             Click(LEFT_DRAFTDROPDOWN);
             String s = "(//mat-option//mat-list-item//div/span)[text()='"+ str +"']";
             ClickByJavaScriptExecutor(By.XPath(s));
@@ -169,7 +170,8 @@ namespace DocWorksQA.Pages
         }
         public IWebElement EnterIntoRightFrame()
         {
-            IWebElement framel = WaitForElement(By.XPath("//app-authoring-tabbed-view[@ng-reflect-align='right']//div//iframe"));
+            //IWebElement framel = WaitForElement(By.XPath("//app-authoring-tabbed-view[@ng-reflect-align='right']//div//iframe"));
+            IWebElement framel = WaitForElement(By.XPath("//app-authoring-tabbed-view//div[@class='authoring-tabview right-window']//div[@class='ng-star-inserted']/iframe"));
 
             return framel;
         }
@@ -197,7 +199,7 @@ namespace DocWorksQA.Pages
         public void HtmlLeftTab()
         {
             Click(LEFT_HTML_TAB);
-            System.Threading.Thread.Sleep(20000);
+            System.Threading.Thread.Sleep(70000);
             Info(test,"Clicked On Left HTML Tab");
 
         }
@@ -232,7 +234,7 @@ namespace DocWorksQA.Pages
         public void MDLeftTab()
         {
             Click(LEFT_MD_TAB);
-            System.Threading.Thread.Sleep(20000);
+            System.Threading.Thread.Sleep(40000);
             Info(test,"Clicked On Left MD Tab");
         }
         public void PreviewRightTab()
@@ -244,9 +246,9 @@ namespace DocWorksQA.Pages
         }
         public void PreviewLeftTab()
         {
-            System.Threading.Thread.Sleep(20000);
+            System.Threading.Thread.Sleep(40000);
             Click(LEFT_PREVIEW_TAB);
-            System.Threading.Thread.Sleep(20000);
+            System.Threading.Thread.Sleep(40000);
             Info(test,"Clicked on Left Preview Tab");
         }
 
