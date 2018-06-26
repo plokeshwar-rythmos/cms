@@ -19,6 +19,13 @@ namespace DocWorksQA.CmsApiMethods
         }
 
 
+        public static JObject CreateDistributions(WSAPIClient client, Dictionary<string, object> data, string token)
+        {
+            JObject c = (JObject)client.SendPost("api/Distributions", data, token);
+            Assert.NotNull(c);
+            return c;
+        }
+
         public JObject GetProjects(WSAPIClient client, string token)
 
         {
@@ -35,31 +42,37 @@ namespace DocWorksQA.CmsApiMethods
         }
 
 
-        public static string GetResponseCompleteExecution(WSAPIClient client, String responseID, string token)
+        public static Dictionary<string, string> GetResponseCompleteExecution(WSAPIClient client, String responseID, string token)
         {
+            Dictionary<string, string> map = new Dictionary<string, string>();
 
-            string status = "";
-            for (int i = 0; i < 50; i++)
+            String status = "";
+            for (int i = 0; i < 200; i++)
             {
                 JObject r = CmsCommonMethods.GetResponse(client, responseID, token);
-                Console.WriteLine(r);
+                //Console.WriteLine(r);
 
 
-                status = r.GetValue("status").ToString();
+                 status = r.GetValue("status").ToString();
 
                 Console.WriteLine("Current Status of Response ID (" + responseID + ") : " + status);
-                if (!status.Equals("1"))
+                if (status.Equals("1"))
                 {
                     Console.WriteLine("Current Status of Response ID (" + responseID + ") : " + status);
                     System.Threading.Thread.Sleep(4000);
                 }
                 else
                 {
+                    map.Add("status", status);
+                    map.Add("id", r.GetValue("_id").ToString());
+
+                    Console.WriteLine("Distribution ID "+r.GetValue("_id"));
+                    Console.WriteLine("Total Time Taken "+(i*4000)+" ms.");
                     break;
                 }
 
             }
-            return status;
+            return map;
         }
 
 

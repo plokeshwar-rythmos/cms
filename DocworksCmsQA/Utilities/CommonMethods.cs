@@ -54,8 +54,8 @@ namespace DocWorksQA.Utilities
 
             ITakesScreenshot ssdriver = driver as ITakesScreenshot;
             Screenshot screenshot = ssdriver.GetScreenshot();
-            screenshot.SaveAsFile(path + "/screenshot-" + TimeAndDate + ".jpeg", ScreenshotImageFormat.Jpeg);
-            return "./Screenshot/screenshot-" + TimeAndDate + ".jpeg";
+            screenshot.SaveAsFile(path + "/screenshot-" + TimeAndDate + ".jpg", ScreenshotImageFormat.Jpeg);
+            return "./Screenshot/screenshot-" + TimeAndDate + ".jpg";
 
         }
 

@@ -20,7 +20,7 @@ namespace DocWorksQA.Tests
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
-            projectName = new CreateProjects().CreateGitHubProject();
+            projectName = new CreateProjectsApi().CreateGitHubProject();
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);

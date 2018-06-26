@@ -5,39 +5,44 @@ using DocWorksQA.SeleniumHelpers;
 using System;
 using System.Text;
 using AventStack.ExtentReports;
-
+using DocworksCmsQA.DockworksApi;
+using System.Collections.Generic;
 
 namespace DocWorksQA.Tests
 {
 
     [TestFixture, Category("AddNodeModule")]
     [Parallelizable]
-    class TC_35_ValidateUserAbleToAddNodeWithNodeTypeAsNone : BeforeTestAfterTest
+    class AddNode : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
+        String projectName;
+        Dictionary<string, string> distribution;
 
-
-        [OneTimeSetUp]
+       [OneTimeSetUp]
         public void AddPProjectModule()
         {
+            
+            projectName = new CreateProjectsApi().CreateGitLabProject();
+            distribution = new CreateDistributionsApi().CreateGitLabDistribution(projectName);
+
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
         }
 
-
-        [Test, Description("Verify User is able to add a Node with Node Type as None")]
-        public void TC35_VerifyUserAbleToAddNodeWithNodeTypeAsNone()
+        [Test, Description("Verify User is able to Add Node Under Tree")]
+        public void TC34_VerifyUserAbleToAddNodeGitLab()
         {
             try
             {
-                String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
+
+
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
+                String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
-                String projectName = CreateDistribution("Mercurial", test, driver);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
-                addProject.ClickDashboard();
                 addProject.SearchForProject(projectName);
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
                 createDraft.ClickOpenProject();
@@ -46,17 +51,17 @@ namespace DocWorksQA.Tests
                 node.ClickOnNewNode();
                 String NodeTitle = node.EnterNodeTitle();
                 String NodeSubTitle = node.EnterNodeSubTitle();
-                node.ClickNoneRadioButton();
+                String DraftName = node.EnterDraftName();
                 node.ClickCreateNode();
                 addProject.ClickNotifications();
                 String status2 = addProject.GetNotificationStatus();
-                addProject.SuccessScreenshot("Node: " + NodeTitle + " Created Successfully");
                 VerifyText(test, "adding a node " + NodeTitle + " is successful", status2, "Node: " + NodeTitle + " is Created with status:" + status2 + "", "Node is not created with status: " + status2 + "");
+                addProject.SuccessScreenshot(addProject.NOTIFICATION_MESSAGE, "Node: " + NodeTitle + " Created Successfully");
                 addProject.BackToProject();
                 node.ClickUnityManualTree();
-                addProject.SuccessScreenshot("Created NodeSubTitle:  " + NodeSubTitle + "");
                 String Actual = node.GetTextOfNode(NodeSubTitle);
-                VerifyEquals(test, NodeSubTitle, Actual, "Validation of the Node Created Under Tree is successful", "Validation of Node creation is unsuccessful");
+                addProject.SuccessScreenshot("Created NodeSubTitle:  " + NodeSubTitle + "");
+                VerifyEquals(test,NodeSubTitle, Actual, "Validation of the Node Created Under Tree is successful","Validation of Node creation is unsuccessful");
                 node.ClickDashboard();
             }
             catch (Exception e)
@@ -70,8 +75,9 @@ namespace DocWorksQA.Tests
         public void CloseBrowser()
         {
             Console.WriteLine("Quiting Browser");
-
             CloseDriver(driver);
+            db.FindDistributionAndDelete(distribution["distributionName"]);
+            db.FindProjectAndDelete(projectName);
         }
     }
 }

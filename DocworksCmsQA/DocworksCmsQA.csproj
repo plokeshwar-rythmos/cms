@@ -110,7 +110,7 @@
     <Compile Include="CustomException\ExtentTestExtension.cs" />
     <Compile Include="DatabaseScripts\DatabaseScripts.cs" />
     <Compile Include="DockworksApi\CmsCommonMethods.cs" />
-    <Compile Include="DockworksApi\CreateProject .cs" />
+    <Compile Include="DockworksApi\CreateDistributions.cs" />
     <Compile Include="DockworksApi\CreateProjects.cs" />
     <Compile Include="DockworksApi\WSAPIClient.cs" />
     <Compile Include="DockworksApi\WSAPIException.cs" />

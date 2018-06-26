@@ -57,6 +57,18 @@ namespace DocworksCmsQA.DatabaseScripts
 
         }
 
+        public String GetProjectId(String projectName)
+        {
+            Console.WriteLine("Finding the project. " + projectName);
+
+            var DB = Client.GetDatabase(dbName);
+            var collection = DB.GetCollection<BsonDocument>("Project");
+            var Filter = new BsonDocument("ProjectName", projectName);
+            var list = collection.Find(Filter).ToListAsync().Result.FirstOrDefault();
+            return list.GetValue("_id").ToString();
+
+        }
+
 
     }
 }
