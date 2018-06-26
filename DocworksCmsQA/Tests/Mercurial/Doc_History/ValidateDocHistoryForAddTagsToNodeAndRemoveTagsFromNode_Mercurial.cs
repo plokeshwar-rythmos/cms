@@ -75,9 +75,9 @@ namespace DocWorksQA.Tests
                 createDraft.ClickOnUnityManualNode();
                 Doc_HistoryPage DocHistory = new Doc_HistoryPage(test, driver);
                 DocHistory.ClickLeftCursor();
-                TagManagmentNodeLevelPage NodeLevel = new TagManagmentNodeLevelPage(test, driver);
-                NodeLevel.ClickEditTags();
-                NodeLevel.SearchTagGroupAtNodeLevel();
+               // TagManagmentNodeLevelPage NodeLevel = new TagManagmentNodeLevelPage(test, driver);
+                //NodeLevel.ClickEditTags();
+                //NodeLevel.SearchTagGroupAtNodeLevel();
 
 
                 /*Doc_HistoryPage DocHistory = new Doc_HistoryPage(test, driver);

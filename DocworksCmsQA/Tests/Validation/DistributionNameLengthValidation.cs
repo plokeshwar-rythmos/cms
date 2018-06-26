@@ -20,7 +20,7 @@ namespace DocWorksQA.Tests
         public void AddPProjectModule()
         {
 
-            projectName = new CreateProjects().CreateMercurialProject();
+            projectName = new CreateProjectsApi().CreateMercurialProject();
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);

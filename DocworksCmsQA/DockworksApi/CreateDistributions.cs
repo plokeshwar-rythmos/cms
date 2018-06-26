@@ -12,7 +12,7 @@ namespace DocworksCmsQA.DockworksApi
     {
         WSAPIClient client;
         
-        [Test]
+       // [Test]
         public void Testing() {
             CreateProjectsApi cp = new CreateProjectsApi();
             String projectName = cp.CreateGitLabProject();

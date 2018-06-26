@@ -25,7 +25,7 @@ namespace DocWorksQA.Tests
 
         }
 
-        [Test, Description("Verify User is able to view history details in DocHistory module for AddingTagsToNode and RemoveTagsFromNode")]
+       // [Test, Description("Verify User is able to view history details in DocHistory module for AddingTagsToNode and RemoveTagsFromNode")]
         public void ValidateDocHistoryForAddTagsToNodeAndRemoveTagsFromNode()
         {
             try
