@@ -164,13 +164,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\CreateDistribution\CreateDistributionGitLab.cs" />
     <Compile Include="Tests\CreateDistribution\CreateDistributionMercurial.cs" />
-    <Compile Include="Tests\Drafts\TC_12_ValidateNewDraftDialogBoxAndErrorMsgForInvalidDrafts.cs" />
-    <Compile Include="Tests\Drafts\TC_13_ValidationOfCreateDraftsOfExistingAndBlankWithValidDraftNames .cs" />
-    <Compile Include="Tests\Drafts\TC_14_ValidateScreenEnhancementsWhenUserEditsExistingDraftContent.cs" />
-    <Compile Include="Tests\Drafts\TC_15_ValidateScreenEnhancementsWhenUserEditsBlankDraftContent.cs" />
     <Compile Include="Tests\GitHub\CreateProjectGitHub.cs" />
     <Compile Include="Tests\GitLab\CreateProjectGitLab.cs" />
     <Compile Include="Tests\Mercurial\CreateProjectMercurial.cs" />
+    <Compile Include="Tests\Mercurial\Drafts\TC_12_ValidateNewDraftDialogBoxAndErrorMsgForInvalidDrafts.cs" />
+    <Compile Include="Tests\Mercurial\Drafts\TC_13_ValidationOfCreateDraftsOfExistingAndBlankWithValidDraftNames .cs" />
+    <Compile Include="Tests\Mercurial\Drafts\TC_14_ValidateScreenEnhancementsWhenUserEditsExistingDraftContent.cs" />
+    <Compile Include="Tests\Mercurial\Drafts\TC_15_ValidateScreenEnhancementsWhenUserEditsBlankDraftContent.cs" />
     <Compile Include="Tests\Mercurial\History\TC_31_ValidateHistoryTabAfterEditingGdoc.cs" />
     <Compile Include="Tests\Mercurial\History\TC_32_ValidateCreateDraftSnapShot.cs" />
     <Compile Include="Tests\Mercurial\History\TC_33_ValidateEditDraftSnapshot.cs" />
