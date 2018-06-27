@@ -4,51 +4,63 @@ using DocWorksQA.Utilities;
 using System.Collections.Generic;
 using DocWorksQA.CmsApiMethods;
 using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 
 namespace DocworksCmsQA.DockworksApi
 {
-   public class CreateProjectsApi
+   public class CreateDistributionsApi
     {
         WSAPIClient client;
         
+       // [Test]
+        public void Testing() {
+            CreateProjectsApi cp = new CreateProjectsApi();
+            String projectName = cp.CreateGitLabProject();
+            String projectId = new DatabaseScripts.DatabaseScripts().GetProjectId(projectName);
+            Console.WriteLine(projectId);
+            Console.WriteLine(CreateGitLabDistribution(projectName));
 
-        public String CreateGitLabProject()
+        }
+
+
+        public Dictionary<string, string> CreateGitLabDistribution(String projectName)
         {
+            String projectId = new DatabaseScripts.DatabaseScripts().GetProjectId(projectName);
+
             client = new WSAPIClient(ConfigurationHelper.Get<String>("endpoint"));
             String token = client.Login();
 
-            String projectName = "API_GitLab_"+new CommonMethods().GenerateRandomString(5);
+            String distributionName = "API_GitLab_Distribution_"+new CommonMethods().GenerateRandomString(5);
 
             var data = new Dictionary<string, object>
             {
-                {"projectName", projectName },
-                {"RepositoryId", "6090611"},
-                {"RepositoryName", "Docworks"},
-                {"typeOfContent", 3},
-                {"Description", "Project Description"},
-                {"PublishedPath", "This is awesome"},
-                {"SourceControlProviderType", "1"}
+                {"ProjectId", projectId },
+                {"BranchName", "DocworksManual3"},
+                {"DistributionName", distributionName},
+                {"Description", "API Creation"},
+                {"TocPath", "Tocfolder"}
             };
 
 
-            JObject c = CmsCommonMethods.CreateProject(client, data, token);
+            JObject c = CmsCommonMethods.CreateDistributions(client, data, token);
 
             var responseID = c.GetValue("responseId").ToString();
             Console.WriteLine("Response ID " + responseID);
 
             try
             {
-                String responseStatus = CmsCommonMethods.GetResponseCompleteExecution(client, responseID, token)["status"];
+                Dictionary<string, string> response = CmsCommonMethods.GetResponseCompleteExecution(client, responseID, token);
+                Console.WriteLine(response["status"]);
+                response.Add("projectID", projectId);
+                response.Add("distributionName", distributionName);
 
-                Console.WriteLine(responseStatus);
-             
+                return response;
 
             }
             catch (Exception)
             {
                 throw;
             }
-            return projectName;
         }
 
 
@@ -78,8 +90,10 @@ namespace DocworksCmsQA.DockworksApi
 
             try
             {
-                String responseStatus = CmsCommonMethods.GetResponseCompleteExecution(client, responseID, token)["status"];
-                Console.WriteLine(responseStatus);
+
+                Dictionary<string, string> response = CmsCommonMethods.GetResponseCompleteExecution(client, responseID, token);
+
+                Console.WriteLine(response["status"]);
 
 
             }
@@ -119,7 +133,6 @@ namespace DocworksCmsQA.DockworksApi
             {
                 Dictionary<string, string> response = CmsCommonMethods.GetResponseCompleteExecution(client, responseID, token);
                 Console.WriteLine(response["status"]);
-
 
             }
             catch (Exception)

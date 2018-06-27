@@ -4,6 +4,7 @@ using System.Diagnostics;
 using AventStack.ExtentReports;
 using DocWorksQA.Utilities;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace DocWorksQA.Pages
 {
@@ -131,6 +132,16 @@ namespace DocWorksQA.Pages
             String url = GetDriver().Url;
             url = url.Substring(0, url.LastIndexOf("/"));
             GetDriver().Navigate().GoToUrl(url + "/dashboard");
+            //Click(By.XPath("//a[@href='/dashboard']"));
+            System.Threading.Thread.Sleep(7000);
+            //Info(test, "Clicked On DashBoard");
+        }
+
+        public void NavigateDistributionUsingUrl(Dictionary<string, string> map)
+        {
+            String url = GetDriver().Url;
+            url = url.Substring(0, url.LastIndexOf("/"));
+            GetDriver().Navigate().GoToUrl(url + "/project/"+map["projectID"] + "/distribution/"+map["id"]);
             //Click(By.XPath("//a[@href='/dashboard']"));
             System.Threading.Thread.Sleep(7000);
             //Info(test, "Clicked On DashBoard");

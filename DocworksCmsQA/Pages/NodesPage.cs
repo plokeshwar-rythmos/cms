@@ -18,9 +18,9 @@ namespace DocWorksQA.Pages
         public By UNITYMANUAL_TREE = By.XPath("//span[@class='ui-treenode-label ui-corner-all']");
         public By UNITYMANUAL_SIDEBAR = By.XPath("//span[@class='ui-tree-toggler fa fa-fw fa-caret-right']");
         public By NEW_NODE_CLICK = By.XPath("(//a[@class='ui-menuitem-link ui-corner-all ng-star-inserted'])[1]");
-        public By NODE_Title = By.XPath("//input[@ng-reflect-placeholder='Title']");
-        public By Node_SubTitle = By.XPath("//input[@ng-reflect-placeholder='Short Title']");
-        public By DRAFT_NAME = By.XPath("//input[@ng-reflect-placeholder='Draft Name']");
+        public By NODE_Title = By.XPath("//input[@placeholder='Title']");
+        public By Node_SubTitle = By.XPath("//input[@placeholder='Short Title']");
+        public By DRAFT_NAME = By.XPath("//input[@placeholder='Draft Name']");
         public By CREATE_NODE = By.XPath("(//button/span)[contains(text(),'Create Node')]");
         public By NONE_RADIO_BUTTON = By.XPath("(//mat-radio-button//div[@class='mat-radio-outer-circle'])[2]");
         public By LAST_CREATED_NODE = By.XPath("(//li/div[@class='ui-treenode-content ui-treenode-selectable'])[last()]");
@@ -133,7 +133,9 @@ namespace DocWorksQA.Pages
         public String GetTextOfNode(String NodeName)
         {
             System.Threading.Thread.Sleep(7000);
-           String str = GetText(By.XPath("(//li/div[@class='ui-treenode-content ui-treenode-selectable'])[text()='" + NodeName + "']"));
+            By xpath = By.XPath("//p-treenode//div//span[text()='" + NodeName + "']");
+            String str = GetText(xpath);
+            ElementHighlight(WaitForElement(xpath));
             Info(test,"The Text of Node Created is" + str);
             return str;
         }
