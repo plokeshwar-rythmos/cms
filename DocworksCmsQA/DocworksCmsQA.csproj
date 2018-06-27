@@ -131,6 +131,7 @@
     <Compile Include="TestRailApis\APIException.cs" />
     <Compile Include="TestRailApis\TestRailMethods.cs" />
     <Compile Include="Tests\Assets\TC_21_ValidationOfUploadImage.cs" />
+
     <Compile Include="Tests\BeforeTestAfterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\GitHub\CreateDistributionGitHub.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Tests\Mercurial\Doc_History\ValidateDocHistoryWithActionItems_Mercurial.cs" />
     <Compile Include="Tests\Validation\CreateProjectTitleLengthValidation.cs" />
     <Compile Include="Tests\Validation\DistributionNameLengthValidation.cs" />
+
     <Compile Include="Utilities\CommonMethods.cs" />
     <Compile Include="Utilities\ConfigurationHelper.cs" />
     <Compile Include="Utilities\ExtentReporter.cs" />
@@ -189,7 +191,9 @@
     <Content Include="MediaFiles\Images\Rose.tif" />
     <Content Include="MediaFiles\Images\Rythmos.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Tests\CreateProject\" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
