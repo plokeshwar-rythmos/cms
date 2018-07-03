@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
@@ -167,6 +168,11 @@ namespace DocWorksQA.SeleniumHelpers
         {
             String str = driver.FindElements(by).Count.ToString();
             return str;
+        }
+
+        public IList<IWebElement> GetElementList(By by)
+        {
+            return driver.FindElements(by);
         }
 
         public Boolean IsEnabled(By by)
