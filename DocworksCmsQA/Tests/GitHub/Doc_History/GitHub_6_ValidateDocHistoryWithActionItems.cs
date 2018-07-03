@@ -4,50 +4,52 @@ using DocWorksQA.Pages;
 using DocWorksQA.SeleniumHelpers;
 using System;
 using AventStack.ExtentReports;
-
+using DocworksCmsQA.DockworksApi;
 
 namespace DocWorksQA.Tests
 {
     [TestFixture, Category("DocHistory")]
     [Parallelizable]
-    class ValidateDocHistoryforCreateRenameDeleteDraft_GitHub : BeforeTestAfterTest
+    class GitHub_6_ValidateDocHistoryWithActionItems : BeforeTestAfterTest
     {
+
         private static IWebDriver driver;
         private ExtentTest test;
-      
+        String projectName;
+        String distributionName;
+
+
         [OneTimeSetUp]
         public void AddPProjectModule()
+
         {
+            projectName = new CreateProjectsApi().CreateGitHubProject();
+            distributionName = new CreateDistributionsApi().CreateGitHubDistribution(projectName)["distributionName"];
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
 
         }
 
-        [Test, Description("Verify User is able to view history details in DocHistory module for Create draft")]
-        public void ValidateDocHistoryforCreateRenameDeleteDraft()
+        [Test, Description("Verify User is able to view history details in DocHistory module for Action items")]
+        public void ValidateDocHistoryWithActionItems()
         {
             try
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 Console.WriteLine("Starting Test Case : " + TestName);
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-                test = StartTest(TestName, description);
-                String projectName = CreateDistribution("Mercurial", test, driver);
+                test = StartTest(TestName, description);               
                 AddProjectPage project = new AddProjectPage(test, driver);
-                project.ClickDashboard();
+                //project.ClickDashboard();
                 project.SearchForProject(projectName);
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
                 createDraft.ClickOpenProject();
                 createDraft.ClickOnUnityManualNode();
-                CreateDraftPage CreateDraft = new CreateDraftPage(test, driver);
-
-                //Creating draft
-
-                CreateDraft.ClickNewDraft();
+                createDraft.ClickNewDraft();
                 String draftName = createDraft.EnterValidDraftName();
-                CreateDraft.ClickOnBlankDraft();
-                CreateDraft.CreateDraft();
+                //CreateDraft.ClickOnBlankDraft();
+                createDraft.CreateDraft();
                 project.ClickNotifications();
                 String status2 = project.GetNotificationStatus();
                 project.SuccessScreenshot("Blank Draft got Created Successfully");
@@ -55,38 +57,25 @@ namespace DocWorksQA.Tests
                 project.BackToProject();
                 Doc_HistoryPage DocHistory = new Doc_HistoryPage(test, driver);
                 DocHistory.ClickDoc_History();
-                driver.Navigate().Refresh();
-                DocHistory.ClickDoc_History();
-                project.SuccessScreenshot("Created draft history details loaded Successfully");
-                project.BackToProject();
-
-                //Renaming Draft
-                DocHistory.ClickLeftCursor();
-                DocHistory.ClickAllDrafts();
-                DocHistory.RenameDraft(draftName, "draft123");
-                DocHistory.ClickOnRightMarkToRename();
-                project.ClickNotifications();
-                String status3 = project.GetNotificationStatus();
-                project.SuccessScreenshot("Draft Renamed Successfully");
-                project.BackToProject();
-                DocHistory.ClickDoc_History();
+                DocHistory.ClickActions();
+                DocHistory.ClickCheckBoxCreateDraft();
+                //DocHistory.ClickCheckBoxRenameDraft();
+                //DocHistory.ClickCheckBoxAcceptDraftToLive();
+                // DocHistory.ClickEmptySpaceInNodeHistory();
+                //DocHistory.ClickActivityTab();
+                //project.BackToProject();
+                DocHistory.ClickOnNodeHistoryCloseButton();
+                DocHistory.ClickSearchButton();
                 System.Threading.Thread.Sleep(10000);
-                project.SuccessScreenshot("Rename draft history details loaded Successfully");
-                DocHistory.ClickOnNodeHistoryCloseButton();
-
-                //Deleting Draft
-
-                DocHistory.ClickLeftCursor();
-                DocHistory.ClickAllDrafts();
-                DocHistory.ClickOnNodeHistoryCloseButton();
-
+                String str = DocHistory.GetHistoryMessage();
+                project.SuccessScreenshot("Action details loaded Successfully");
+                VerifyContainsText(test, draftName, str, "Action details loaded Successfully for create draft", "Action details are not loaded Successfully for create draft");
 
             }
             catch (Exception ex)
             {
                 ReportExceptionScreenshot(test, driver, ex);
                 Fail(test, ex);
-                UpdateGitLabProjectProperties("Failure");
                 throw;
             }
 
@@ -97,6 +86,9 @@ namespace DocWorksQA.Tests
         {
             Console.WriteLine("Quiting Browser");
             CloseDriver(driver);
+            db.FindDistributionAndDelete(distributionName);
+            db.FindProjectAndDelete(projectName);
+
         }
 
     }

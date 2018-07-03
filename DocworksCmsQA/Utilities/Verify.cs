@@ -417,12 +417,12 @@ namespace DocWorksQA.Utilities
          
          */
 
-        public void VerifyContainsText(String expected, String actual, String successMessage, String errorMessage)
+        public void VerifyContainsText(ExtentTest test, String expected, String actual, String successMessage, String errorMessage)
         {
 
             if (actual.Contains(expected))
             {
-                Pass("<b>Expected</b> : [" + expected + "] is available in <b>Actual</b> : [" + actual + "]<br> SUCCESS : "
+                Pass(test, "<b>Expected</b> : [" + expected + "] is available in <b>Actual</b> : [" + actual + "]<br> SUCCESS : "
                         + successMessage);
                 
             }
