@@ -17,6 +17,8 @@ namespace DocWorksQA.Pages
         public By DISTRIBUTIONS = By.XPath("//button[contains(text(),'Distributions')]");
             //By.XPath("(//button[@class='mat-menu-item'])[2]");
         public By DISTRIBUTION_NAME = By.XPath("//input[@placeholder='Distribution Name']");
+        public By DISTRIBUTION_NAME_STAR = By.XPath("//label[contains(@class,'mat-form-field-label mat-input-placeholder')][text()='Distribution Name']/span");
+        public By SELECT_BRANCH_STAR = By.XPath("//label[contains(@class,'mat-form-field-label mat-input-placeholder')][text()='Select Branch']/span");
         public By DESCRIPTION = By.XPath("//input[@placeholder='Description']");
         public By SELECT_BRANCH = By.XPath("//mat-select[@placeholder='Select Branch']");
         public By BRANCH = By.XPath("//input[@placeholder='Branch']");
@@ -25,13 +27,16 @@ namespace DocWorksQA.Pages
         public By BRANCH_OPTIONS_GITHUB = By.XPath("(//mat-option//span[contains(@class,'mat-option-text')])[text()='DocWorksManual3']");
         public By CLEAR_BUTTON = By.XPath("(//button[@class='mat-raised-button']/span)[1]");
         public By CLOSE_BUTTON = By.XPath("//button/span/i[@class='mdi mdi-close mdi-24px']");
-        public By CREATE_DISTRIBUTION = By.XPath("//button//span[contains(text(),'Create Distribution')]");
+        //public By CREATE_DISTRIBUTION = By.XPath("//button//span[contains(text(),'Create Distribution')]");
+        public By CREATE_DISTRIBUTION = By.XPath("//button[@class='mat-raised-button mat-primary ng-star-inserted']");
         public By AVAIL_DISTRIBUTION_NAME = By.XPath("(//mat-chip/div/strong)");
         public By AVAIL_DISTRIBUTION_EDIT = By.XPath("//mat-chip/div/mat-icon/i");
         //public By AVAIL_DISTRIBUTION_CREATED_DT = By.XPath("//mat-chip/small/strong");
         public By INVALID_TITLE_LENGTH = By.XPath("//mat-error[@class='mat-error ng-star-inserted']");
+                                                   //mat-error[@class="mat-error ng-star-inserted"]
         public By TOC_PATH = By.XPath("//input[@placeholder='TOC Path']");
-        public By ERROR = By.XPath("//mat-error");
+        public By ERROR = By.XPath("//mat-error[@role='alert']");
+
 
         private ExtentTest test;
         /**
@@ -99,12 +104,48 @@ namespace DocWorksQA.Pages
         }
 
         /**
+       * MethodName: EnterDuplicateDistirbutionName()
+       * Description: This method is used to enter the duplicate distribution name
+       */
+        public String EnterDuplicateDistirbutionName(String distNameduplicate)
+        {            
+            EnterValue(DISTRIBUTION_NAME, distNameduplicate);
+            Info(test, "Distribution Name is" + distNameduplicate);
+            return distNameduplicate;
+        }
+        /**
        * MethodName: EnterInvalidnNameLength()
        * Description: This method is used to enter the invalid name length
        */
         public String EnterInvalidnNameLength()
         {
             String DistributionTitle = "QA";
+            EnterValue(DISTRIBUTION_NAME, DistributionTitle);
+            Info(test, "Entered Distribution Title : " + DistributionTitle);
+            return DistributionTitle;
+
+        }
+
+        /**
+       * MethodName: EnterEmptyDistributionName()
+       * Description: This method is used to enter the Empty Distribution Name
+       */
+        public String EnterEmptyDistributionName()
+        {
+            String DistributionTitle = "";
+            EnterValue(DISTRIBUTION_NAME, DistributionTitle);
+            Info(test, "Entered Distribution Title : " + DistributionTitle);
+            return DistributionTitle;
+
+        }
+
+        /**
+      * MethodName: EnterLeadingTrailingSpaceDistName()
+      * Description: This method is used to enter the Empty Distribution Name
+      */
+        public String EnterLeadingTrailingSpaceDistName()
+        {
+            String DistributionTitle = " QA TEST ";
             EnterValue(DISTRIBUTION_NAME, DistributionTitle);
             Info(test, "Entered Distribution Title : " + DistributionTitle);
             return DistributionTitle;
@@ -221,6 +262,23 @@ namespace DocWorksQA.Pages
             Info(test, "Clicked on Create distribution");
         }
 
+        public Boolean CreateDistributionButtonDisabled()
+        {
+            Boolean actual = IsEnabled(CREATE_DISTRIBUTION);
+            if (actual == false)
+            {
+                Info(test, "Create Distribution button is disabled");
+            }
+            if (actual == true)
+            {
+                Info(test, "Create Distribution button is enabled");
+            }
+           
+            return actual;
+        }
+
+        
+
         /**
            * MethodName: ClickClearButton()
            * Description: This method is used to click the Clear Button
@@ -231,6 +289,8 @@ namespace DocWorksQA.Pages
             Info(test, "Click Clear Button");
 
         }
+
+
 
         /**
            * MethodName: ClickCloseButton()
@@ -254,10 +314,14 @@ namespace DocWorksQA.Pages
             return this.GetText(AVAIL_DISTRIBUTION_NAME);
         }
 
-        /**
-         * MethodName: ClickAvailDistributionDeletd()
-         * Description: This method is used to click on the available distribution
-        */
+        public String GetTextOfErrorMsg()
+        {
+            String str = this.GetText(ERROR).ToString();
+            Info("Error message is" +str);
+            return str;
+        }
+
+        
        
     }
 }
