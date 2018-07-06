@@ -34,7 +34,8 @@ namespace DocWorksQA.Pages
         public By PUBLISHED_PATH = By.XPath("//input[@placeholder='Published Path']");
         public By BACK_BUTTON = By.XPath("//button[@class='mat-raised-button']/span");
         public By CLEAR_BUTTON = By.XPath("//button[@class='mat-raised-button mat-warn']/span");
-        public By CREATE_PROJECT_BUTTON = By.XPath("(//button/span[contains(@class,'mat-button-wrapper')][contains(text(),'Create Project')])[2]");
+        //public By CREATE_PROJECT_BUTTON = By.XPath("(//button/span[contains(@class,'mat-button-wrapper')][contains(text(),'Create Project')])[2]");
+        public By CREATE_PROJECT_BUTTON = By.XPath("//mat-dialog-content[@class='mat-dialog-content']/form/div/button[@class='mat-raised-button mat-primary']");
         public By INVALID_TITLE_LENGTH = By.XPath("//mat-error[@class='mat-error ng-star-inserted']");
         public By FOOTER_TEXT = By.XPath("//*/snack-bar-container/app-custom-snack-bar-component");
         public By NOTIFICATION_BELL = By.XPath("//i[@class='mdi mdi-bell mdi-24px']");
@@ -174,6 +175,12 @@ namespace DocWorksQA.Pages
             Info(test, "Entered Project Title : " + name);
          }
 
+        public void NoProjectTitle()
+        {
+            Click(PROJECT_TITLE_FIELD);
+            Info(test, "Did not enter the project title");
+        }
+
         public String ProjectTitleInvalidLength()
         {
             String ProjectTitle = "QA";
@@ -185,6 +192,14 @@ namespace DocWorksQA.Pages
         public String ProjectLengthMoreThan100()
         {
             String ProjectTitle = "SELENIUM" + RandomValueOfLengthMorethan100();
+            EnterValue(PROJECT_TITLE_FIELD, ProjectTitle);
+            Info(test, "Entered Project Title : " + ProjectTitle);
+            return ProjectTitle;
+        }
+
+        public String ProjectNameAsSapce()
+        {
+            String ProjectTitle = "  QA   ";
             EnterValue(PROJECT_TITLE_FIELD, ProjectTitle);
             Info(test, "Entered Project Title : " + ProjectTitle);
             return ProjectTitle;
@@ -455,6 +470,15 @@ namespace DocWorksQA.Pages
             Click(AUTHORING_BUTTON);
             Info(test, "Clicked on Authoring tab");
         }
-          
+
+        public Boolean CreateProjectButtonDisabled()
+        {
+            Boolean actual = IsEnabled(CREATE_PROJECT_BUTTON);
+            //Assert.AreEqual(false, IsEnabled(CREATE_PROJECT_BUTTON));
+            Info(test, "The create project button is Disabled");
+            return actual;
+
+        }
+
     }
 }

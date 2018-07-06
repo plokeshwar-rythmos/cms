@@ -244,7 +244,7 @@ namespace DocWorksQA.Pages
         public void HtmlLeftTab()
         {
             Click(LEFT_HTML_TAB);
-            System.Threading.Thread.Sleep(70000);
+            System.Threading.Thread.Sleep(80000);
             Info(test,"Clicked On Left HTML Tab");
 
         }
@@ -279,7 +279,7 @@ namespace DocWorksQA.Pages
         public void MDLeftTab()
         {
             Click(LEFT_MD_TAB);
-            System.Threading.Thread.Sleep(40000);
+            System.Threading.Thread.Sleep(50000);
             Info(test,"Clicked On Left MD Tab");
         }
         public void PreviewRightTab()

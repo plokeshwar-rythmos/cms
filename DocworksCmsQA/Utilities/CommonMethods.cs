@@ -294,6 +294,33 @@ namespace DocWorksQA.Utilities
             return new String(text);
         }
 
+        public String GenerateNumbers(int length)
+        {
+            String characters = "0123456789";
+            Random rng = new Random();
+            char[] text = new char[length];
+            for (int i = 0; i < length; i++)
+            {
+                text[i] = characters.ElementAt(rng.Next(characters.Length));
+
+            }
+            return new String(text);
+        }
+
+        public String GenerateRandomSpecialCharacters(int length)
+        {
+            String characters = "!@#$%^&~*()|{}`?";
+            Random rng = new Random();
+            char[] text = new char[length];
+            for (int i = 0; i < length; i++)
+            {
+                text[i] = characters.ElementAt(rng.Next(characters.Length));
+
+            }
+            return new String(text);
+        }
+
+
         public String GenerateRandomString(int length)
         {
             String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
