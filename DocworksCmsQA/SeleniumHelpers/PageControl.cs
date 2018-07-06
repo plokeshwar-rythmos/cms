@@ -202,6 +202,16 @@ namespace DocWorksQA.SeleniumHelpers
             return tmp;
         }
 
+        public string GetCurrentUrl()
+        {
+            System.Threading.Thread.Sleep(4000);
+            String tmp1 = driver.Url;
+            Console.WriteLine("The current url is " + tmp1);
+            return tmp1;
+
+        }
+
+
         public void Type(By by, String Value)
         {
             try
