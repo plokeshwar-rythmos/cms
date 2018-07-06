@@ -63,6 +63,86 @@ namespace DocworksCmsQA.DockworksApi
             }
         }
 
+        public Dictionary<string, string> CreateGitHubDistribution(String projectName)
+        {
+            String projectId = new DatabaseScripts.DatabaseScripts().GetProjectId(projectName);
+
+            client = new WSAPIClient(ConfigurationHelper.Get<String>("endpoint"));
+            String token = client.Login();
+
+            String distributionName = "API_GitHub_Distribution_" + new CommonMethods().GenerateRandomString(5);
+
+            var data = new Dictionary<string, object>
+            {
+                {"ProjectId", projectId },
+                {"BranchName", "DocWorksManual3"},
+                {"DistributionName", distributionName},
+                {"Description", "API Creation"},
+                {"TocPath", "Tocfolder"}
+            };
+
+
+            JObject c = CmsCommonMethods.CreateDistributions(client, data, token);
+
+            var responseID = c.GetValue("responseId").ToString();
+            Console.WriteLine("Response ID " + responseID);
+
+            try
+            {
+                Dictionary<string, string> response = CmsCommonMethods.GetResponseCompleteExecution(client, responseID, token);
+                Console.WriteLine(response["status"]);
+                response.Add("projectID", projectId);
+                response.Add("distributionName", distributionName);
+
+                return response;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Dictionary<string, string> CreateOnoDistribution(String projectName)
+        {
+            String projectId = new DatabaseScripts.DatabaseScripts().GetProjectId(projectName);
+
+            client = new WSAPIClient(ConfigurationHelper.Get<String>("endpoint"));
+            String token = client.Login();
+
+            String distributionName = "API_Ono_Distribution_" + new CommonMethods().GenerateRandomString(5);
+
+            var data = new Dictionary<string, object>
+            {
+                {"ProjectId", projectId },
+                {"BranchName", "DocworksManual3"},
+                {"DistributionName", distributionName},
+                {"Description", "API Creation"},
+                {"TocPath", "Tocfolder"}
+            };
+
+
+            JObject c = CmsCommonMethods.CreateDistributions(client, data, token);
+
+            var responseID = c.GetValue("responseId").ToString();
+            Console.WriteLine("Response ID " + responseID);
+
+            try
+            {
+                Dictionary<string, string> response = CmsCommonMethods.GetResponseCompleteExecution(client, responseID, token);
+                Console.WriteLine(response["status"]);
+                response.Add("projectID", projectId);
+                response.Add("distributionName", distributionName);
+
+                return response;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         public String CreateGitHubProject()
         {

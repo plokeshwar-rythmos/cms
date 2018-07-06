@@ -4,20 +4,26 @@ using DocWorksQA.Pages;
 using DocWorksQA.SeleniumHelpers;
 using System;
 using AventStack.ExtentReports;
+using DocworksCmsQA.DockworksApi;
+
 
 
 namespace DocWorksQA.Tests
 {
     [TestFixture, Category("DocHistory")]
     [Parallelizable]
-    class ValidateDocHistoryForAddTagsToNodeAndRemoveTagsFromNode_GitLab : BeforeTestAfterTest
+    class GItLab_4_ValidateDocHistoryForAddTagsToNodeAndRemoveTagsFromNode : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
-        
+        String projectName;
+        String distributionName;
+
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
+            projectName = new CreateProjectsApi().CreateGitLabProject();
+            distributionName = new CreateDistributionsApi().CreateGitLabDistribution(projectName)["distributionName"];
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
@@ -25,7 +31,7 @@ namespace DocWorksQA.Tests
 
         }
 
-       // [Test, Description("Verify User is able to view history details in DocHistory module for AddingTagsToNode and RemoveTagsFromNode")]
+        //[Test, Description("Verify User is able to view history details in DocHistory module for AddingTagsToNode and RemoveTagsFromNode")]
         public void ValidateDocHistoryForAddTagsToNodeAndRemoveTagsFromNode()
         {
             try
@@ -33,8 +39,7 @@ namespace DocWorksQA.Tests
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 Console.WriteLine("Starting Test Case : " + TestName);
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-                test = StartTest(TestName, description);
-                String projectName = CreateDistribution("Mercurial", test, driver);
+                test = StartTest(TestName, description);                
                 AddProjectPage project = new AddProjectPage(test, driver);
                 project.ClickDashboard();
                 TagManagementSystemLevelPage SystemLevel = new TagManagementSystemLevelPage(test, driver);
@@ -67,10 +72,22 @@ namespace DocWorksQA.Tests
                 ProjectLevel.ClickSettings();
                 ProjectLevel.ClickOnManageTagGroups();
                 ProjectLevel.SearchTagsAtProjectLevel(TagName);
+                ProjectLevel.ClickPlusCircle();
+                project.BackToProject();
+                project.SearchForProject(projectName);
+                CreateDraftPage createDraft = new CreateDraftPage(test, driver);
+                createDraft.ClickOpenProject();
+                createDraft.ClickOnUnityManualNode();
+                Doc_HistoryPage DocHistory = new Doc_HistoryPage(test, driver);
+                DocHistory.ClickLeftCursor();
+               // TagManagmentNodeLevelPage NodeLevel = new TagManagmentNodeLevelPage(test, driver);
+                //NodeLevel.ClickEditTags();
+                //NodeLevel.SearchTagGroupAtNodeLevel();
+
 
                 /*Doc_HistoryPage DocHistory = new Doc_HistoryPage(test, driver);
                 DocHistory.ClickDoc_History();*/
-                
+
 
             }
             catch (Exception ex)
@@ -88,6 +105,8 @@ namespace DocWorksQA.Tests
         {
             Console.WriteLine("Quiting Browser");
             CloseDriver(driver);
+            db.FindProjectAndDelete(projectName);
+            db.FindDistributionAndDelete(distributionName);
         }
 
     }

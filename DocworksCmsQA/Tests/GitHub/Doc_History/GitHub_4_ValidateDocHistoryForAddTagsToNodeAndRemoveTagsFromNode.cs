@@ -4,20 +4,25 @@ using DocWorksQA.Pages;
 using DocWorksQA.SeleniumHelpers;
 using System;
 using AventStack.ExtentReports;
-
+using DocworksCmsQA.DockworksApi;
 
 namespace DocWorksQA.Tests
 {
     [TestFixture, Category("DocHistory")]
     [Parallelizable]
-    class ValidateDocHistoryForAddTagsToNodeAndRemoveTagsFromNode_Mercurial : BeforeTestAfterTest
+
+    class GitHub_4_ValidateDocHistoryForAddTagsToNodeAndRemoveTagsFromNode : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
-        
+        String projectName;
+        String distributionName;
+
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
+            projectName = new CreateProjectsApi().CreateGitHubProject();
+            distributionName = new CreateDistributionsApi().CreateGitHubDistribution(projectName)["distributionName"];
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
@@ -34,9 +39,9 @@ namespace DocWorksQA.Tests
                 Console.WriteLine("Starting Test Case : " + TestName);
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
-                String projectName = CreateDistribution("Mercurial", test, driver);
+                
                 AddProjectPage project = new AddProjectPage(test, driver);
-                project.ClickDashboard();
+                //project.ClickDashboard();
                 TagManagementSystemLevelPage SystemLevel = new TagManagementSystemLevelPage(test, driver);
                 SystemLevel.ClickSystemTab();
                 SystemLevel.ClickCreateTagGroup();
@@ -89,7 +94,6 @@ namespace DocWorksQA.Tests
             {
                 ReportExceptionScreenshot(test, driver, ex);
                 Fail(test, ex);
-                UpdateGitLabProjectProperties("Failure");
                 throw;
             }
 
@@ -100,6 +104,8 @@ namespace DocWorksQA.Tests
         {
             Console.WriteLine("Quiting Browser");
             CloseDriver(driver);
+            db.FindDistributionAndDelete(distributionName);
+            db.FindProjectAndDelete(projectName);
         }
 
     }

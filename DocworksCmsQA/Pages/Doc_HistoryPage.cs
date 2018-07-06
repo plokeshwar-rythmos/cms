@@ -3,12 +3,14 @@ using OpenQA.Selenium;
 using System.Diagnostics;
 using AventStack.ExtentReports;
 using DocWorksQA.Utilities;
+using System.Collections.Generic;
 
 namespace DocWorksQA.Pages
 {
     class Doc_HistoryPage : SeleniumHelpers.PageControl
     {
         public By DOC_HISTORY_BUTTON = By.XPath("(//button[@class='mat-raised-button'])[3]/span");
+        public By HISTORY_TEXT = By.XPath("(//div[@ngclass='node-history-details']//div[@class='mat-line'])[position()=1]");
         public By NODEHISTORY_CLOSEBUTTON = By.XPath("//span[@class='cursor-pointer']//i[@class='mdi mdi-close mdi-24px']");
         public By ACTIONS_BUTTON = By.XPath("//div[@class='mat-select-value']/span[contains(text(),'Actions')]");
         public By ACCEPTDRAFTTOLIVE_CHECKBUTTON = By.XPath("(//mat-pseudo-checkbox[contains(@class,'mat-option-pseudo-checkbox')])[1]");
@@ -40,10 +42,10 @@ namespace DocWorksQA.Pages
         public By LEFT_CURSOR = By.XPath("//i[@class='mdi mdi-arrow-left mdi-24px']");
         public By ALLDRAFT = By.XPath("(//mat-panel-title[@class='mat-expansion-panel-header-title'])[1]");
         public By RENAMEDRAFT = By.XPath("(//div[@fxlayoutalign='space-between center']/span)[text()=@draftName]");
-        public By DELETEDRAFT_ICON = By.XPath("(//mat-icon/i[@class='mdi mdi-delete mdi-24px cursor-pointer'])[last()]");
+        public By DELETEDRAFT_ICON = By.XPath("(//mat-icon/i[@class='mdi mdi-delete mdi-24px cursor-pointer'])[last()]");    
         public By DELETEDRAFT_BUTTON = By.XPath("//button[@class='mat-raised-button mat-primary']/span[text()='Delete']");
         public By RENAME_RIGHT_MARK = By.XPath("(//button[@class='mat-menu-item']/i)[1]");
-
+        public By LIST_OF_DRAFTS = By.XPath("//div[@class='tag-editing']/div/span");
         private ExtentTest test;
         public Doc_HistoryPage(ExtentTest test, IWebDriver driver) : base(driver)
         {
@@ -56,6 +58,14 @@ namespace DocWorksQA.Pages
             Click(DOC_HISTORY_BUTTON);
             Info(test, "Clicked on DocHistory Button.");
         }
+
+        public String GetHistoryMessage()
+        {
+            Info(test, GetText(HISTORY_TEXT));
+            return GetText(HISTORY_TEXT);
+
+        }
+
 
         public void ClickActions()
         {
@@ -157,7 +167,7 @@ namespace DocWorksQA.Pages
             WaitForElement(CHOOSE_DATE);
             Click(CHOOSE_DATE);
             Info(test,"Clicked on ChooseDate");
-            EnterValue(CHOOSE_DATE, "06/20/2018");
+            EnterValue(CHOOSE_DATE, "06/28/2018");
         }
 
         public void ClickChooseDateCalender()
@@ -217,7 +227,8 @@ namespace DocWorksQA.Pages
 
             By RENAMEDRAFT = By.XPath("(//div[@fxlayoutalign='space-between center'])/span[text()='" + draftName + "']");
             By DRAFT_NAME = By.XPath("//input[@name='draftName']");
-            Click(RENAMEDRAFT);
+            WaitForElement(RENAMEDRAFT);
+            MoveToelementAndClick(RENAMEDRAFT);
             Clear(DRAFT_NAME);
             Type(DRAFT_NAME, newDraftName);
 
@@ -230,9 +241,11 @@ namespace DocWorksQA.Pages
             Info(test,"Clicked on draft to rename");
         }
 
-        public void ClickDeleteDraftIcon()
+        public void ClickDeleteDraftIcon(String RenameDraft)
         {
-            Click(DELETEDRAFT_ICON);
+            //Click(DELETEDRAFT_ICON);
+            MoveToelementAndClick(By.XPath("(//div[@class='tag-editing']//div/span[text()='" + RenameDraft + "\'])//following::mat-icon[1]"));
+
             Info(test,"Clicked on Delete draft Icon");
         }
 
@@ -254,6 +267,24 @@ namespace DocWorksQA.Pages
             WaitForElement(NODEHISTORY_CLOSEBUTTON);
             MoveToelementAndClick(NODEHISTORY_CLOSEBUTTON);
             Info(test, "Clicked on NodeHistoryCloseButton");
+            
+        }
+
+        public void ClickDeleteIcon(string RenameDraft)
+        {
+            IList<IWebElement> draftList = GetElementList(LIST_OF_DRAFTS);
+
+            foreach(IWebElement e in draftList)
+            {
+                if (e.Text == RenameDraft)
+                {
+                    Click(By.XPath("(//div[@class='tag-editing']//div/span[text()='"+RenameDraft+"\'])//following::mat-icon[1]"));
+                    Info(test, "Clicked on delete draft icon");
+                    break;
+
+                }
+            }
+
             
         }
 

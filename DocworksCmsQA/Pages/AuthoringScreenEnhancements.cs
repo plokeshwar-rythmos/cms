@@ -15,6 +15,12 @@ namespace DocWorksQA.Pages
     class AuthoringScreenEnhancements : SeleniumHelpers.PageControl
     {
         public By UNITYMANUAL_CLICK = By.XPath("//span[@class='ui-treenode-label ui-corner-all']");
+        public By DISTRIBUTION_DROPDOWN = By.XPath("//div[@class='mat-select-trigger']");
+        //public By DISTRIBUTION_TEXT = By.XPath("//span[@class='ng-tns-c18-245 ng-star-inserted'][text()='" +distributionName+ "']");
+        public By AVAILABLE_DISTRIBUTION = By.XPath("//mat-chip[@class='mat-chip mat-primary ng-star-inserted']/div/strong");
+        public By AVAILABLE_DISTRIBUTION_1 = By.XPath("(//div[@class='mat-select-content ng-trigger ng-trigger-fadeInContent']/mat-option/span)[1]");
+        public By AVAILABLE_DISTRIBUTION_2 = By.XPath("(//div[@class='mat-select-content ng-trigger ng-trigger-fadeInContent']/mat-option/span)[2]");
+        public By OPENED_DISTRIBUTION = By.XPath("//div[@class='mat-select-value']");
         public By BACKDROP_CLICK = By.XPath("//div[@class='mat-drawer-backdrop mat-drawer-shown']");
         public By NEWDRAFT_BUTTON = By.XPath("//button/span/i[@class='mdi mdi-plus mdi-18px']");
         public By CLOSEDRAFT_BUTTON = By.XPath("//button[@aria-label='Close dialog']");
@@ -72,6 +78,45 @@ namespace DocWorksQA.Pages
         {
             Click(OPENPROJECT);
             Info(test,"Clicked on open Project");
+        }
+
+        public void ClickOnDistributionDropdown()
+        {
+            Click(DISTRIBUTION_DROPDOWN);
+            Info(test,"Clicked on distribution dropdown");
+        }
+
+        public String GetTestofDistributions()
+        {
+            //String str = GetText(By.XPath("//span[@class='ng-tns-c18-245 ng-star-inserted'][text()='" + distributionName + "']"));
+            String str = GetText(By.XPath("//span[@class='mat-option-text']")).ToString();
+            return str;
+        }
+        public void ClickOnAvailableDistribution2()
+        {
+            Click(AVAILABLE_DISTRIBUTION_2);
+        }
+
+        public String GetTextOfAvailableDistribution2()
+        {
+
+            String str = GetText(AVAILABLE_DISTRIBUTION_2).ToString();
+            return str;
+        }
+
+        public String GetTextOfOpenedDistribution()
+
+        {
+            String str = GetText(OPENED_DISTRIBUTION).ToString();
+            Info(test, str);
+            return str;
+        }
+
+        public string GetTextOfAvailableDistribution()
+        {
+            WaitForElement(AVAILABLE_DISTRIBUTION);
+            String str = GetText(AVAILABLE_DISTRIBUTION);
+            return str;
         }
 
         public void ClickNode()

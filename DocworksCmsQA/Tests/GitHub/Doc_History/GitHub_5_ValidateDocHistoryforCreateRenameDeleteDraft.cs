@@ -4,38 +4,46 @@ using DocWorksQA.Pages;
 using DocWorksQA.SeleniumHelpers;
 using System;
 using AventStack.ExtentReports;
-
+using DocworksCmsQA.DockworksApi;
 
 namespace DocWorksQA.Tests
 {
     [TestFixture, Category("DocHistory")]
     [Parallelizable]
-    class ValidateDocHistoryforCreateRenameDeleteDraft_Mercurial : BeforeTestAfterTest
+    class GitHub_5_ValidateDocHistoryforCreateRenameDeleteDraft : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
-      
+        String projectName;
+        String distributionName;
+        String draftName;
+        String renameDraft;
+
+
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
+
+            projectName = new CreateProjectsApi().CreateGitHubProject();
+            distributionName = new CreateDistributionsApi().CreateGitHubDistribution(projectName)["distributionName"];
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
 
         }
 
+
         [Test, Description("Verify User is able to view history details in DocHistory module for Create draft")]
-        public void ValidateDocHistoryforCreateRenameDeleteDraft()
+        public void TC1_ValidateDocHistoryforCreateDraft()
         {
             try
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 Console.WriteLine("Starting Test Case : " + TestName);
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-                test = StartTest(TestName, description);
-                String projectName = CreateDistribution("Mercurial", test, driver);
+                test = StartTest(TestName, description);              
                 AddProjectPage project = new AddProjectPage(test, driver);
-                project.ClickDashboard();
+                //project.ClickDashboard();
                 project.SearchForProject(projectName);
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
                 createDraft.ClickOpenProject();
@@ -45,7 +53,7 @@ namespace DocWorksQA.Tests
                 //Creating draft
 
                 CreateDraft.ClickNewDraft();
-                String draftName = createDraft.EnterValidDraftName();
+                draftName = createDraft.EnterValidDraftName();
                 //CreateDraft.ClickOnBlankDraft();
                 CreateDraft.CreateDraft();
                 project.ClickNotifications();
@@ -58,15 +66,41 @@ namespace DocWorksQA.Tests
                 driver.Navigate().Refresh();
                 DocHistory.ClickDoc_History();
                 System.Threading.Thread.Sleep(20000);
+                String str = DocHistory.GetHistoryMessage();
                 project.SuccessScreenshot("Created draft history details loaded Successfully");
+                VerifyContainsText(test,draftName,str, "Created draft history details loaded Successfully", "Created draft history details are not loaded Successfully");
                 project.BackToProject();
 
+                
+               
+            }
+            catch (Exception ex)
+            {
+                ReportExceptionScreenshot(test, driver, ex);
+                Fail(test, ex);             
+                throw;
+            }
+
+        }
+
+        [Test, Description("Verify User is able to view history details in DocHistory module for Rename draft")]
+        public void TC2_ValidateDocHistoryforRenameDraft()
+        {
+            try
+            {
+                
+
                 //Renaming Draft
+                renameDraft = "draft_kk";
+
+                Doc_HistoryPage DocHistory = new Doc_HistoryPage(test, driver);
 
                 DocHistory.ClickLeftCursor();
                 DocHistory.ClickAllDrafts();
-                DocHistory.RenameDraft(draftName, "draft123");
+                DocHistory.RenameDraft(draftName, renameDraft);
                 DocHistory.ClickOnRightMarkToRename();
+                AddProjectPage project = new AddProjectPage(test, driver);
+
                 project.ClickNotifications();
                 String status3 = project.GetNotificationStatus();
                 project.SuccessScreenshot("Draft Renamed Successfully");
@@ -75,15 +109,41 @@ namespace DocWorksQA.Tests
                 driver.Navigate().Refresh();
                 DocHistory.ClickDoc_History();
                 System.Threading.Thread.Sleep(20000);
+                String str1 = DocHistory.GetHistoryMessage();
                 project.SuccessScreenshot("Rename draft history details loaded Successfully");
+                VerifyContainsText(test, renameDraft, str1, "Rename draft history details loaded Successfully", "Rename draft history details are not loaded Successfully");
                 DocHistory.ClickOnNodeHistoryCloseButton();
+
+
+                
+
+            }
+            catch (Exception ex)
+            {
+                ReportExceptionScreenshot(test, driver, ex);
+                Fail(test, ex);
+                throw;
+            }
+
+        }
+
+        [Test, Description("Verify User is able to view history details in DocHistory module for delete draft")]
+        public void TC3_ValidateDocHistoryforDeleteDraft()
+        {
+            try
+            {
 
                 //Deleting Draft
 
+                Doc_HistoryPage DocHistory = new Doc_HistoryPage(test, driver);
+
                 DocHistory.ClickLeftCursor();
                 DocHistory.ClickAllDrafts();
-                DocHistory.ClickDeleteDraftIcon();
+                //DocHistory.ClickDeleteIcon(renameDraft);
+                DocHistory.ClickDeleteDraftIcon(renameDraft);
                 DocHistory.ClickDeleteDraftButton();
+                AddProjectPage project = new AddProjectPage(test, driver);
+
                 project.ClickNotifications();
                 String status4 = project.GetNotificationStatus();
                 project.SuccessScreenshot("Draft Deleted Successfully");
@@ -92,94 +152,31 @@ namespace DocWorksQA.Tests
                 driver.Navigate().Refresh();
                 DocHistory.ClickDoc_History();
                 System.Threading.Thread.Sleep(20000);
+                String str2 = DocHistory.GetHistoryMessage();
                 project.SuccessScreenshot("Deleted draft history details loaded Successfully");
+                VerifyContainsText(test, renameDraft, str2, "Deleted draft history details loaded Successfully", "Deleted draft history details are not loaded Successfully");
                 DocHistory.ClickOnNodeHistoryCloseButton();
-               
+
             }
             catch (Exception ex)
             {
                 ReportExceptionScreenshot(test, driver, ex);
                 Fail(test, ex);
-                UpdateGitLabProjectProperties("Failure");
                 throw;
             }
 
         }
 
-        /* [Test, Description("Verify User is able to view history details in DocHistory module for rename draft")]
-         public void TC36B_ValidateDocHistoryforRenameDraft()
-         {
-             try
-             {
-                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
-                 Console.WriteLine("Starting Test Case : " + TestName);
-                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-                 test = StartTest(TestName, description);
-                 String projectName = CreateDistribution("Mercurial", test, driver);
-                 AddProjectPage project = new AddProjectPage(test, driver);
-                 project.ClickDashboard();
-                 project.SearchForProject(projectName);
-                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
-                 createDraft.ClickOpenProject();
-                 createDraft.ClickOnUnityManualNode();
-                 CreateDraftPage CreateDraft = new CreateDraftPage(test, driver);
+       
 
 
-                 
-
-             }
-             catch (Exception ex)
-             {
-                 ReportExceptionScreenshot(test, driver, ex);
-                 Fail(test, ex);
-                 UpdateGitLabProjectProperties("Failure");
-                 throw;
-             }
-
-         }
-
-         [Test, Description("Verify User is able to view history details in DocHistory module for delete draft")]
-         public void TC36C_ValidateDocHistoryforCreateRenameDeleteDraft()
-         {
-             try
-             {
-                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
-                 Console.WriteLine("Starting Test Case : " + TestName);
-                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-                 test = StartTest(TestName, description);
-                 String projectName = CreateDistribution("Mercurial", test, driver);
-                 AddProjectPage project = new AddProjectPage(test, driver);
-                 project.ClickDashboard();
-                 project.SearchForProject(projectName);
-                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
-                 createDraft.ClickOpenProject();
-                 createDraft.ClickOnUnityManualNode();
-                 CreateDraftPage CreateDraft = new CreateDraftPage(test, driver);
-
-
-
-                 //Deleting Draft
-
-                 DocHistory.ClickLeftCursor();
-                 DocHistory.ClickAllDrafts();
-
-
-             }
-             catch (Exception ex)
-             {
-                 ReportExceptionScreenshot(test, driver, ex);
-                 Fail(test, ex);
-                 UpdateGitLabProjectProperties("Failure");
-                 throw;
-             }
-
-         }
-         */
         [OneTimeTearDown]
         public void CloseBrowser()
         {
             Console.WriteLine("Quiting Browser");
             CloseDriver(driver);
+            db.FindDistributionAndDelete(distributionName);
+            db.FindProjectAndDelete(projectName);
         }
 
     }
