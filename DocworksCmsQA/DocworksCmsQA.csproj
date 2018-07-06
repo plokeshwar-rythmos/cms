@@ -158,9 +158,16 @@
     <Compile Include="Tests\Mercurial\Doc_History\Mercurial_4_ValidateDocHistoryForAddTagsToNodeAndRemoveTagsFromNode.cs" />
     <Compile Include="Tests\Mercurial\Doc_History\Mercurial_5_ValidateDocHistoryforCreateRenameDeleteDraft.cs" />
     <Compile Include="Tests\Mercurial\Doc_History\Mercurial_6_ValidateDocHistoryWithActionItems.cs" />
+    <Compile Include="Tests\Validation\CreateDistribution\VerifySystemShouldThrowAnErrorWhileCreatingDistributionIfValuesAreNotEnteredInAnyOneMandatoryFields.cs" />
+    <Compile Include="Tests\Validation\CreateDistribution\VerifyUserAbleToSeeListOfNewlyCreatedOrexistingDistributionsInDistributionsDropdownList.cs" />
+    <Compile Include="Tests\Validation\CreateDistribution\VerifyUserAbleToSeeTheStarMarkAgainstTheFieldforAllTheMandatoryFields.cs" />
+    <Compile Include="Tests\Validation\CreateDistribution\VerifyUserAbleToSelectAnyOneDistributionInDistributionsDropdownList.cs" />
+    <Compile Include="Tests\Validation\CreateDistribution\VerifyUserAbleToViewTheListofAvailableDistributionsForParticularProjectinAvailableDistributionsField.cs" />
+    <Compile Include="Tests\Validation\CreateDistribution\VerifyUserAbleToCreateDistributionWithLeadingAndTrailingSpaceInDistributionNameTextbox.cs" />
+    <Compile Include="Tests\Validation\CreateDistribution\VerifyUserShouldNotAbleToCreateDistributionWithSameDistributionNameForSameBranch.cs" />
     <Compile Include="Tests\Validation\CreateProjectTitleLengthValidation.cs" />
-    <Compile Include="Tests\Validation\DistributionNameLengthValidation.cs" />
-
+    <Compile Include="Tests\Validation\CreateDistribution\DistributionNameLengthValidation.cs" />
+    <Compile Include="Tests\Validation\CreateDistribution\VerifyUserAbleToClickOnCloseButtonInCreateDistributionWindow.cs" />
     <Compile Include="Utilities\CommonMethods.cs" />
     <Compile Include="Utilities\ConfigurationHelper.cs" />
     <Compile Include="Utilities\ExtentReporter.cs" />

@@ -137,6 +137,13 @@ namespace DocWorksQA.Pages
             //Info(test, "Clicked On DashBoard");
         }
 
+        public String GetURl()
+        {
+            String url = GetDriver().Url;
+            Info(test,"Current URL is " +url);
+            return url;
+        }
+
         public void NavigateDistributionUsingUrl(Dictionary<string, string> map)
         {
             String url = GetDriver().Url;
