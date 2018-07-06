@@ -26,7 +26,7 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
 
-        [Test, Description("Verify user should not able to create distribution with same distribution name for same branch")]
+        //[Test, Description("Verify user should not able to create distribution with same distribution name for same branch")]
         public void TC_VerifyUserShouldNotAbleToCreateDistributionWithSameDistributionNameForSameBranch()
         {
             try

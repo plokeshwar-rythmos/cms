@@ -18,12 +18,12 @@ namespace DocworksCmsQA.Tests.OtherValidations.CreateProjectValidations
     {
         private IWebDriver driver;
         private ExtentTest test;
-        String projectName;
+        
 
 
         [OneTimeSetUp]
         public void AddPProjectModule()
-        {
+        { 
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
         }
@@ -73,7 +73,7 @@ namespace DocworksCmsQA.Tests.OtherValidations.CreateProjectValidations
             Console.WriteLine("Quiting Browser");
 
             CloseDriver(driver);
-            db.FindProjectAndDelete(projectName);
+         
         }
     }
 }

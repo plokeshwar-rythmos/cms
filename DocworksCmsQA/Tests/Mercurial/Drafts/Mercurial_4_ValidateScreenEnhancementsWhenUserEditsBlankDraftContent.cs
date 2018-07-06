@@ -4,27 +4,31 @@ using DocWorksQA.Pages;
 using DocWorksQA.SeleniumHelpers;
 using System;
 using AventStack.ExtentReports;
+using DocworksCmsQA.DockworksApi;
 
 namespace DocWorksQA.Tests
 {
     [TestFixture, Category("Authoring Screen Enhancements")]
     [Parallelizable]
-    class TC_15_ValidateScreenEnhancementsWhenUserEditsBlankDraftContent : BeforeTestAfterTest
+    class Mercurial_4_ValidateScreenEnhancementsWhenUserEditsBlankDraftContent : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
-
+        String projectName;
+        String distributionName;
 
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
+            projectName = new CreateProjectsApi().CreateMercurialProject();
+            distributionName = new CreateDistributionsApi().CreateOnoDistribution(projectName)["distributionName"];
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
         }
 
-        //[Test, Description("Verify User is able to edit the Blank draft content in Left side GDOC")]
-        public void TC15A_ValidateScreenEnhancementsWhenUserEditsBlankContentInLeftGdoc()
+        [Test, Description("Verify User is able to edit the Blank draft content in Left side GDOC")]
+        public void Mercurial_4A_ValidateScreenEnhancementsWhenUserEditsBlankContentInLeftGdoc()
         {
             try
             {
@@ -68,8 +72,8 @@ namespace DocWorksQA.Tests
             }
         }
 
-       // [Test, Description("Verify User is Able to view changes made of Blank Draft in Left GDOC are reflected in Right Side Tabs")]
-        public void TC15B_ValidationWhenEditedBlankDraftInLeftGDocGetsReflectedInRightSideTabs()
+        [Test, Description("Verify User is Able to view changes made of Blank Draft in Left GDOC are reflected in Right Side Tabs")]
+        public void Mercurial_4B_ValidationWhenEditedBlankDraftInLeftGDocGetsReflectedInRightSideTabs()
         {
             try
             {
@@ -96,8 +100,8 @@ namespace DocWorksQA.Tests
             }
         }
 
-        //[Test, Description("Verify User is able to edit the Blank draft content in Right side GDOC")]
-        public void TC15C_ValidationOfScreenEnhancementsUserEditsBlankContentInRightGdoc()
+        [Test, Description("Verify User is able to edit the Blank draft content in Right side GDOC")]
+        public void Mercurial_4C_ValidationOfScreenEnhancementsUserEditsBlankContentInRightGdoc()
         {
             try
             {
@@ -137,8 +141,8 @@ namespace DocWorksQA.Tests
             }
         }
 
-        // [Test, Description("Verify User is Able to view changes made of Blank Draft in Right GDOC are reflected in Left Side Tabs")]
-        public void TC15D_ValidationWhenUserEditedRightGDocGetsReflectedInLeftSideTabs()
+         [Test, Description("Verify User is Able to view changes made of Blank Draft in Right GDOC are reflected in Left Side Tabs")]
+        public void Mercurial_4D_ValidationWhenUserEditedRightGDocGetsReflectedInLeftSideTabs()
         {
             try
             {
@@ -170,6 +174,8 @@ namespace DocWorksQA.Tests
             Console.WriteLine("Quiting Browser");
 
             CloseDriver(driver);
+            db.FindDistributionAndDelete(distributionName);
+            db.FindProjectAndDelete(projectName);
         }
 
     }

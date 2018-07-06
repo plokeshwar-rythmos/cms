@@ -26,7 +26,7 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
 
-         [Test, Description("Verify User is able to Upload an Image in Media Screen")]
+         //[Test, Description("Verify User is able to Upload an Image in Media Screen")]
         public void TC21_ValidationOfUploadImage()
         {
             try
