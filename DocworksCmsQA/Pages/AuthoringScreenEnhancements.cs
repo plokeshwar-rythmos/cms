@@ -336,10 +336,11 @@ namespace DocWorksQA.Pages
             EnterValue(SEARCH_ASSETTEXT, Keys.Control + "v");
             System.Threading.Thread.Sleep(7000);
             Click(By.XPath("//button/span/i[@class='mdi mdi-magnify mdi-24px']"));
-           Info(test,"Clicked the search button");
+            Info(test,"Clicked the search button");
+            System.Threading.Thread.Sleep(10000);
         }
 
-        public void ReplaceTheImage()
+        public String ReplaceTheImage()
         {
 
             
@@ -349,9 +350,16 @@ namespace DocWorksQA.Pages
 
             EnterValue(REPLACE_BUTTON, Image_Path);
             System.Threading.Thread.Sleep(7000);
+            String result = Image_Path.Split(new[] { '\\' }).Skip(7).FirstOrDefault();
+            String res = result.Split(new[] { '.' }).First();
+            Console.WriteLine("&&&&&****%%%%" + res);
+            Info(test, "Replaced Image is: " + res + "");
             Click(By.XPath("//mat-dialog-actions/div/button/span[text()='REPLACE']"));
             System.Threading.Thread.Sleep(27000);
-            Info(test,"Replaced the Image");
+            Info(test, "Replaced the Image");
+            return res;
+           
+
         }
 
         public void ReplaceCodeBlocks()
@@ -395,7 +403,7 @@ namespace DocWorksQA.Pages
         {
             Click(By.XPath("//button/span/i[@class='mdi mdi-close mdi-24px']"));
             System.Threading.Thread.Sleep(7000);
-            Info(test,"Closed the Uppload Image Dialog box");
+            Info(test,"Closed the Upload Image Dialog box");
         }
 
         public void EnterAssetID()
@@ -409,7 +417,7 @@ namespace DocWorksQA.Pages
             Info(test,"ENtered Asset Name: " + Name);
             Click(SEARCH_ASSET_BAR);
             Info(test,"Clicked On Search Bar");
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(7000);
         }
         public void ClickMedia()
         {
@@ -430,7 +438,7 @@ namespace DocWorksQA.Pages
               String CodeBlock_Path = GetCodeBlockPath();
                 Console.WriteLine("********" + CodeBlock_Path);
                 EnterValue(UPLOAD_BUTTON, CodeBlock_Path);
-                String result = CodeBlock_Path.Split(new[] { '\\' }).Skip(6).FirstOrDefault();
+                String result = CodeBlock_Path.Split(new[] { '\\' }).Skip(7).FirstOrDefault();
                 String res = result.Split(new[] { '.' }).First();
                 Console.WriteLine("&&&&&****%%%%" + res);
                 Info(test, "Uploaded CodeBlock: " + res + "");
@@ -484,7 +492,7 @@ namespace DocWorksQA.Pages
                 Console.WriteLine("********" + Image_Path);
                 EnterValue(UPLOAD_BUTTON, Image_Path);
                 System.Threading.Thread.Sleep(7000);
-               String result = Image_Path.Split(new[] { '\\' }).Skip(6).FirstOrDefault();
+               String result = Image_Path.Split(new[] { '\\' }).Skip(7).FirstOrDefault();
                 String res = result.Split(new[] { '.' }).First();
                 Console.WriteLine("&&&&&****%%%%" + res);
                 Info(test,"Uploaded Image: "+ res + "");

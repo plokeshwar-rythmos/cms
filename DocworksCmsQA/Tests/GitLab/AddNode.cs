@@ -32,7 +32,7 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
 
-        [Test, Description("Verify User is able to Add Node Under Tree")]
+        //[Test, Description("Verify User is able to Add Node Under Tree")]
         public void TC34_VerifyUserAbleToAddNodeGitLab()
         {
             try

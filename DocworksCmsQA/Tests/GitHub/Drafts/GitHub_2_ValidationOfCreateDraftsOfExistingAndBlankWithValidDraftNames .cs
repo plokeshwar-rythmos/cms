@@ -33,8 +33,7 @@ namespace DocWorksQA.Tests
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-                test = StartTest(TestName, description);
-                String projectName = CreateDistribution("Mercurial", test, driver);
+                test = StartTest(TestName, description);                
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.ClickDashboard();
                 addProject.SearchForProject(projectName);
@@ -75,8 +74,7 @@ namespace DocWorksQA.Tests
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-                test = StartTest(TestName, description);
-                //String projectName = CreateDistribution("Mercurial", test, driver);
+                test = StartTest(TestName, description);                
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 //addProject.ClickDashboard();
                 addProject.SearchForProject(projectName);

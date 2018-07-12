@@ -156,7 +156,7 @@ namespace DocWorksQA.Pages
         public void CreateDraft()
         {
             Click(CREATEDRAFT_BUTTON);
-            Info(test,"Draft Created Successfully.");
+            Info(test,"Clicked on Create Draft button");
         }
 
         /**

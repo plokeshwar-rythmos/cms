@@ -5,6 +5,7 @@ using DocWorksQA.SeleniumHelpers;
 using System;
 using System.Text;
 using AventStack.ExtentReports;
+using DocworksCmsQA.DockworksApi;
 
 
 namespace DocWorksQA.Tests
@@ -16,11 +17,15 @@ namespace DocWorksQA.Tests
     {
         private static IWebDriver driver;
         private ExtentTest test;
+        String projectName;
+        String distributionName;
 
 
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
+            projectName = new CreateProjectsApi().CreateMercurialProject();
+            distributionName = new CreateDistributionsApi().CreateOnoDistribution(projectName)["distributionName"];
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
@@ -33,8 +38,7 @@ namespace DocWorksQA.Tests
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-                test = StartTest(TestName, description);
-                String projectName = CreateDistribution("Mercurial", test, driver);
+                test = StartTest(TestName, description);              
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.ClickDashboard();
                 addProject.SearchForProject(projectName);
@@ -90,6 +94,7 @@ namespace DocWorksQA.Tests
             Console.WriteLine("Quiting Browser");
 
             CloseDriver(driver);
-        }
+            db.FindDistributionAndDelete(distributionName);
+            db.FindDistributionAndDelete(projectName);        }
     }
 }

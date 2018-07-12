@@ -105,6 +105,7 @@ namespace DocWorksQA.Utilities
                 // throwable by the above methods.
                 catch { }
             }
+
             Console.WriteLine("The random image" + file);
             StringBuilder TimeAndDate = new StringBuilder(DateTime.Now.ToString());
             TimeAndDate.Replace("/", "_");
@@ -117,6 +118,7 @@ namespace DocWorksQA.Utilities
             finfo.CopyTo(Updatedpath);
             Console.WriteLine("Original Path" + Updatedpath);
             return Updatedpath;
+            
         }
 
         public string GetInvalidImagePath()
@@ -152,6 +154,7 @@ namespace DocWorksQA.Utilities
             finfo.CopyTo(Updatedpath);
             Console.WriteLine("Original Path" + Updatedpath);
             return Updatedpath;
+            
         }
 
 
@@ -188,6 +191,7 @@ namespace DocWorksQA.Utilities
             finfo.CopyTo(Updatedpath);
             Console.WriteLine("Original Path" + Updatedpath);
             return Updatedpath;
+            
         }
 
         public string GetInvalidCodeBlockPath()
@@ -222,6 +226,7 @@ namespace DocWorksQA.Utilities
             finfo.CopyTo(Updatedpath);
             Console.WriteLine("Original Path" + Updatedpath);
             return Updatedpath;
+       
         }
 
         public void CreateDirectory(String path)

@@ -38,7 +38,7 @@ namespace DocWorksQA.Tests
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
                 AddProjectPage project = new AddProjectPage(test, driver);
-//                project.ClickDashboard();
+//              project.ClickDashboard();
                 project.SearchForProject(projectName);
                 CreateDistributionPage distmodule = new CreateDistributionPage(test, driver);
                 distmodule.ClickDistribution();
