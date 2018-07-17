@@ -107,17 +107,18 @@ namespace DocWorksQA.Utilities
             }
 
             Console.WriteLine("The random image" + file);
-            StringBuilder TimeAndDate = new StringBuilder(DateTime.Now.ToString());
+            /*StringBuilder TimeAndDate = new StringBuilder(DateTime.Now.ToString());
             TimeAndDate.Replace("/", "_");
-            TimeAndDate.Replace(":", "_");
+            TimeAndDate.Replace(":", "_");*/
+            
             String savedpath1 = file;
             FileInfo finfo = new FileInfo(savedpath1);
             Console.WriteLine("saved Path" + savedpath1);
-            String Updatedpath = path + @"\MediaFiles\Images\" + TimeAndDate + ".jpg";
+            /*String Updatedpath = path + @"\MediaFiles\Images\" + TimeAndDate + ".jpg";
             Console.WriteLine("updated Path" + Updatedpath);
             finfo.CopyTo(Updatedpath);
-            Console.WriteLine("Original Path" + Updatedpath);
-            return Updatedpath;
+            Console.WriteLine("Original Path" + Updatedpath);*/
+            return savedpath1;
             
         }
 
@@ -180,17 +181,18 @@ namespace DocWorksQA.Utilities
                 catch { }
             }
             Console.WriteLine("The random image" + file);
-            StringBuilder TimeAndDate = new StringBuilder(DateTime.Now.ToString());
+            /*StringBuilder TimeAndDate = new StringBuilder(DateTime.Now.ToString());
             TimeAndDate.Replace("/", "_");
-            TimeAndDate.Replace(":", "_");
+            TimeAndDate.Replace(":", "_");*/
             String savedpath1 = file;
             FileInfo finfo = new FileInfo(savedpath1);
             Console.WriteLine("saved Path" + savedpath1);
-            String Updatedpath = path + @"\MediaFiles\CodeBlocks\" + TimeAndDate + ".txt";
-            Console.WriteLine("updated Path" + Updatedpath);
-            finfo.CopyTo(Updatedpath);
-            Console.WriteLine("Original Path" + Updatedpath);
-            return Updatedpath;
+            /* String Updatedpath = path + @"\MediaFiles\CodeBlocks\" + TimeAndDate + ".txt";
+             Console.WriteLine("updated Path" + Updatedpath);
+             finfo.CopyTo(Updatedpath);
+             Console.WriteLine("Original Path" + Updatedpath);
+             return Updatedpath;*/
+            return savedpath1;
             
         }
 

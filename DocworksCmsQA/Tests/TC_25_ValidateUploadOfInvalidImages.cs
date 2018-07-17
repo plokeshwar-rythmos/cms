@@ -38,6 +38,7 @@ namespace DocWorksQA.Tests
                 auth.ClickMedia();
                 auth.UploadInvalidImages();
                 project.SuccessScreenshot("Unable to Upload Image");
+
             }
             catch (Exception e)
             {

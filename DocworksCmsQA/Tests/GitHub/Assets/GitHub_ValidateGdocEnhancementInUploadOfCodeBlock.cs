@@ -10,7 +10,7 @@ using DocworksCmsQA.DockworksApi;
 namespace DocWorksQA.Tests
 {
 
-    [TestFixture, Category("Upload CodeBlocks")]
+    [TestFixture, Category("Upload Images")]
     [Parallelizable]
     class GitHub_ValidateGdocEnhancementInUploadOfCodeBlock : BeforeTestAfterTest
     {
@@ -24,19 +24,20 @@ namespace DocWorksQA.Tests
         public void AddPProjectModule()
         {
             projectName = new CreateProjectsApi().CreateGitHubProject();
-            distributionName = new CreateDistributionsApi().CreateGitHubDistribution(projectName)["distributionName"]; 
+            distributionName = new CreateDistributionsApi().CreateGitHubDistribution(projectName)["distributionName"];
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
         }
-   [Test, Description("Verify User is able to make Gdoc Enhancements for Upploaded CodeBlocks")]
+
+        [Test, Description("Verify User is able to make Gdoc Enhancements for Upploaded CodeBlocks")]
         public void ValidateGdocEnhancementInUploadOfCodeBlock()
         {
             try
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-                test = StartTest(TestName, description);               
+                test = StartTest(TestName, description);
                 AddProjectPage project = new AddProjectPage(test, driver);
                 AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test, driver);
                 auth.ClickMedia();
@@ -49,10 +50,9 @@ namespace DocWorksQA.Tests
                 project.BackToProject();
                 project.ClickDashboard();
                 project.SearchForProject(projectName);
-
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
                 createDraft.ClickOpenProject();
-                createDraft.ClickOnUnityManualNode(); 
+                createDraft.ClickOnUnityManualNode();
                 auth.ClickInsertCodeBlock();
                 auth.EnterAssetName(CodeBlockName);
                 project.SuccessScreenshot("Verifying Uploaded CodeBlocks in search Assets");
@@ -79,6 +79,9 @@ namespace DocWorksQA.Tests
                 auth.PreviewLeftTab();
                 project.SuccessScreenshot("Verifying the Code got reflected in Preview Left");
                 auth.GdocLeftTab();
+                db.FindAssetAndDelete(CodeBlockName);
+
+
             }
             catch (Exception e)
             {
@@ -98,4 +101,3 @@ namespace DocWorksQA.Tests
         }
     }
 }
-

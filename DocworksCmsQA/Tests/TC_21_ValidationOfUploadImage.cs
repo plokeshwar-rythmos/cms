@@ -41,10 +41,13 @@ namespace DocWorksQA.Tests
                 Console.WriteLine(ImageName);
                 AddProjectPage project = new AddProjectPage(test,driver);
                 project.ClickNotifications();
-                String status2 = project.GetNotificationStatus();
+                String status1 = project.GetNotificationStatus();
                 project.SuccessScreenshot("Image Got Uploaded Successfully");
-                VerifyText(test, "upsert asset " + ImageName + " is successful", status2, "Image: " + ImageName + " is Uploaded with status:" + status2 + "", "Image is not Uploaded with status: " + status2 + "");
+                VerifyText(test, "upsert asset " + ImageName + " is successful", status1, "Image: " + ImageName + " is Uploaded with status:" + status1 + "", "Image is not Uploaded with status: " + status1 + "");
                 project.BackToProject();
+                db.FindAssetAndDelete(ImageName);
+                
+
             }
             catch (Exception e)
             {

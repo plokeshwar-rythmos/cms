@@ -57,6 +57,21 @@ namespace DocworksCmsQA.DatabaseScripts
 
         }
 
+        public void FindAssetAndDelete(String assetName)
+        {
+            Console.WriteLine("Finding the Asset to Delete. " + assetName);
+
+            var DB = Client.GetDatabase(dbName);
+            var collection = DB.GetCollection<BsonDocument>("Asset");
+            var Filter = new BsonDocument("FileName", assetName);
+            var list = collection.Find(Filter).ToListAsync().Result.FirstOrDefault();
+            Console.WriteLine("Asset Found : " + list);
+            id = list.GetValue("_id").ToString();
+            collection.DeleteOne(Builders<BsonDocument>.Filter.Eq("_id", id));
+            System.Threading.Thread.Sleep(10000);
+
+        }
+
         public String GetProjectId(String projectName)
         {
             Console.WriteLine("Finding the project. " + projectName);

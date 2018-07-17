@@ -62,6 +62,7 @@ namespace DocWorksQA.Tests
                 auth.EnterAssetName(CodeBlockName);
                 project.SuccessScreenshot("Verifying the CodeBlock Name pasted in Images does not show any Uploads");
                 auth.CloseUploadPage();
+                db.FindAssetAndDelete(CodeBlockName);
             }
             catch (Exception e)
             {

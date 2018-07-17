@@ -79,6 +79,7 @@ namespace DocWorksQA.Tests
                 auth.PreviewLeftTab();
                 project.SuccessScreenshot("Verifying the Code got reflected in Preview Left");
                 auth.GdocLeftTab();
+                db.FindAssetAndDelete(CodeBlockName);
             }
             catch (Exception e)
             {
@@ -93,6 +94,7 @@ namespace DocWorksQA.Tests
             Console.WriteLine("Quiting Browser");
 
             CloseDriver(driver);
+           
             db.FindDistributionAndDelete(distributionName);
             db.FindProjectAndDelete(projectName);
         }

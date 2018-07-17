@@ -10,7 +10,7 @@ using DocworksCmsQA.DockworksApi;
 namespace DocWorksQA.Tests
 {
 
-    [TestFixture, Category("Upload CodeBlocks")]
+    [TestFixture, Category("Upload CodeBlock")]
     [Parallelizable]
     class GitHub_ValidateUserIsAbleToReplaceCodeBlock : BeforeTestAfterTest
     {
@@ -29,23 +29,25 @@ namespace DocWorksQA.Tests
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
         }
-       //[Test, Description("Verify User Is able to Replace the code blocks in media screen")]
+
+        [Test, Description("Verify User is able to replace an Codeblock")]
         public void ValidateUserIsAbleToReplaceCodeBlock()
         {
             try
             {
+
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
-                test = StartTest(TestName, description);              
+                test = StartTest(TestName, description);
                 AddProjectPage project = new AddProjectPage(test, driver);
                 AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test, driver);
                 auth.ClickMedia();
                 auth.ClickCodeBlocksTab();
                 String CodeBlockName = auth.UploadCodeBlock();
                 project.ClickNotifications();
-                String status2 = project.GetNotificationStatus();
+                String status1 = project.GetNotificationStatus();
                 project.SuccessScreenshot("CodeBlock Got Uploaded Successfully");
-                VerifyText(test, "upsert asset " + CodeBlockName + " is successful", status2, "CodeBlock: " + CodeBlockName + " is Uploaded with status:" + status2 + "", "CodeBlock is not Uploaded with status: " + status2 + "");
+                VerifyText(test, "upsert asset " + CodeBlockName + " is successful", status1, "CodeBlock: " + CodeBlockName + " is Uploaded with status:" + status1 + "", "CodeBlock is not Uploaded with status: " + status1 + "");
                 project.BackToProject();
                 project.ClickDashboard();
                 project.SearchForProject(projectName);
@@ -55,39 +57,17 @@ namespace DocWorksQA.Tests
                 auth.ClickInsertCodeBlock();
                 auth.EnterAssetName(CodeBlockName);
                 project.SuccessScreenshot("Verifying Uploaded CodeBlocks in search Assets");
-                auth.SelectCodeBlockFromUpload(CodeBlockName);
-                createDraft.ClickNewDraft();
-                String draftName = createDraft.EnterValidDraftName();
-                createDraft.ClickOnBlankDraft();
-                project.SuccessScreenshot("Creating Blank Draft: " + draftName + "");
-                createDraft.CreateDraft();
+                String ReplaceCodeBlock = auth.ReplaceTheCodeblockwithNewCodeblock(CodeBlockName);              
+                auth.CloseUploadPage();
                 project.ClickNotifications();
-                String status3 = project.GetNotificationStatus();
-                project.SuccessScreenshot("Blank Draft got Created Successfully");
-                VerifyText(test, "creating a draft " + draftName + " in UnityManual is successful", status3, "Draft: " + draftName + " is Created with status:" + status3 + "", "Draft is not created with status: " + status3 + "");
+                String status2 = project.GetNotificationStatus();
+                project.SuccessScreenshot("Replaced Codeblock Got uploaded Successfully");
+                VerifyText(test, "upsert asset " + ReplaceCodeBlock + " is successful", status2, "CodeBlock: " + ReplaceCodeBlock + " is Uploaded with status:" + status2 + "", "CodeBlock is not Uploaded with status: " + status2 + "");
                 project.BackToProject();
-                auth.LeftDraftDropDown(draftName);
-                IWebElement framel = auth.EnterIntoLeftFrame();
-                driver.SwitchTo().Frame(framel);
-                System.Threading.Thread.Sleep(5000);
-                driver.SwitchTo().ActiveElement();
-                auth.ClickGdocLeft();
-                driver.SwitchTo().ActiveElement().SendKeys(Keys.Control + "v");
-                project.SuccessScreenshot("pasting the CodeBlock Url in Gdoc");
-                driver.SwitchTo().DefaultContent();
-                auth.PreviewLeftTab();
-                project.SuccessScreenshot("Verifying the CodeBlock got reflected in Preview Left");
-                auth.GdocLeftTab();
                 auth.ClickInsertCodeBlock();
-                auth.EnterAssetName(CodeBlockName);
-                auth.ReplaceCodeBlocks();
-                project.SuccessScreenshot("Verifying the CodeBlock got replaced with new CodeBlock");
-                auth.SelectCodeBlockFromUpload(CodeBlockName);
-                auth.LeftDraftDropDown(draftName);
-                project.SuccessScreenshot("The same CodeBlock AssetId in Gdoc Which was added earlier");
-                driver.SwitchTo().DefaultContent();
-                auth.PreviewLeftTab();
-                project.SuccessScreenshot("Verifying the CodeBlock got replaced successfully in Preview Left");
+                auth.EnterAssetName(ReplaceCodeBlock);
+                project.SuccessScreenshot("Verifying the Codeblock got replaced Succesfully");
+                db.FindAssetAndDelete(ReplaceCodeBlock);
             }
             catch (Exception e)
             {

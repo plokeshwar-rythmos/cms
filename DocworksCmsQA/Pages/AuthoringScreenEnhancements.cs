@@ -362,7 +362,51 @@ namespace DocWorksQA.Pages
 
         }
 
-        public void ReplaceCodeBlocks()
+        public String ReplaceTheImagewithNewimage(String imageName)
+        {
+
+
+            String Image_Path = GetImagePath();
+            Console.WriteLine("********" + Image_Path);
+            String result1 = Image_Path.Split(new[] { '\\' }).Skip(7).FirstOrDefault();
+            String res = result1.Split(new[] { '.' }).First();
+            if (res != imageName)
+            {
+                EnterValue(REPLACE_BUTTON, Image_Path);
+                System.Threading.Thread.Sleep(7000);
+                Console.WriteLine("&&&&&****%%%%" + res);
+                Info(test, "Replaced Image is: " + res + "");
+                Click(By.XPath("//mat-dialog-actions/div/button/span[text()='REPLACE']"));
+                System.Threading.Thread.Sleep(27000);
+                Info(test, "Replaced the Image");
+                return res;
+
+            }
+           
+            else
+            {
+                String NewImage_Path = GetImagePath();
+                Console.WriteLine("********" + Image_Path);
+                System.Threading.Thread.Sleep(7000);
+                EnterValue(REPLACE_BUTTON, NewImage_Path);
+                System.Threading.Thread.Sleep(7000);
+                String result2 = NewImage_Path.Split(new[] { '\\' }).Skip(7).FirstOrDefault();
+                String res1 = result2.Split(new[] { '.' }).First();
+                Console.WriteLine("&&&&&****%%%%" + res);
+                Info(test, "Replaced Image is: " + res + "");
+                Click(By.XPath("//mat-dialog-actions/div/button/span[text()='REPLACE']"));
+                System.Threading.Thread.Sleep(27000);
+                Info(test, "Replaced the Image");
+                return res1;
+
+            }
+            
+            
+
+
+        }
+
+        public String ReplaceCodeBlocks()
         {
            
             String Image_Path = GetCodeBlockPath();
@@ -370,12 +414,59 @@ namespace DocWorksQA.Pages
             System.Threading.Thread.Sleep(7000);
             EnterValue(REPLACE_BUTTON, Image_Path);
             System.Threading.Thread.Sleep(7000);
+            String result = Image_Path.Split(new[] { '\\' }).Skip(7).FirstOrDefault();
+            String res = result.Split(new[] { '.' }).First();
+            Console.WriteLine("&&&&&****%%%%" + res);
+            Info(test, "Replaced Image is: " + res + "");
             Click(By.XPath("//mat-dialog-actions/div/button/span[text()='REPLACE']"));
             System.Threading.Thread.Sleep(27000);
             Info(test,"Replaced the codeBlocks");
+            return res;
 
         }
-        public void SelectImageFromUpload(String Name)
+
+        public String ReplaceTheCodeblockwithNewCodeblock(String CodeBlockName)
+        {
+
+
+            String Image_Path = GetCodeBlockPath();
+            Console.WriteLine("********" + Image_Path);
+            String result1 = Image_Path.Split(new[] { '\\' }).Skip(7).FirstOrDefault();
+            String res = result1.Split(new[] { '.' }).First();
+            if (res != CodeBlockName)
+            {
+                EnterValue(REPLACE_BUTTON, Image_Path);
+                System.Threading.Thread.Sleep(7000);
+                Console.WriteLine("&&&&&****%%%%" + res);
+                Info(test, "Replaced Codeblock is: " + res + "");
+                Click(By.XPath("//mat-dialog-actions/div/button/span[text()='REPLACE']"));
+                System.Threading.Thread.Sleep(27000);
+                Info(test, "Replaced the Codeblock");
+                return res;
+
+            }
+
+            else
+            {
+                String NewImage_Path = GetCodeBlockPath();
+                Console.WriteLine("********" + Image_Path);
+                System.Threading.Thread.Sleep(7000);
+                EnterValue(REPLACE_BUTTON, NewImage_Path);
+                System.Threading.Thread.Sleep(7000);
+                String result2 = NewImage_Path.Split(new[] { '\\' }).Skip(7).FirstOrDefault();
+                String res1 = result2.Split(new[] { '.' }).First();
+                Console.WriteLine("&&&&&****%%%%" + res);
+                Info(test, "Replaced Codeblock is: " + res + "");
+                Click(By.XPath("//mat-dialog-actions/div/button/span[text()='REPLACE']"));
+                System.Threading.Thread.Sleep(27000);
+                Info(test, "Replaced the Codeblock");
+                return res1;
+
+            }
+        }
+
+            public void SelectImageFromUpload(String Name)
+
         {
             Info(test,"Selecting image: "+Name+" from the Upload");
             System.Threading.Thread.Sleep(7000);
@@ -498,6 +589,7 @@ namespace DocWorksQA.Pages
                 Info(test,"Uploaded Image: "+ res + "");
                 return res;
         }
+       
 
         public void ViewDraft()
         {

@@ -30,7 +30,7 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
 
-       [Test, Description("Verify User is Unable to get the codeBlock when searched with the AssetId of CodeBlock in Images Tab")]
+       [Test, Description("Verify User is Unable to get the codeBlock when searched with the AssetName of CodeBlock in Images Tab")]
         public void ValidateWhenUserSearchesCodeBlockAssetNameInImages()
         {
             try
@@ -55,14 +55,17 @@ namespace DocWorksQA.Tests
                 createDraft.ClickOnUnityManualNode();
                 auth.ClickInsertCodeBlock();
                 auth.EnterAssetName(CodeBlockName);
+                
                 project.SuccessScreenshot("Verifying Uploaded CodeBlocks in search Assets");
-                //auth.SelectCodeBlockFromUpload(CodeBlockName); 
+                //auth.SelectCodeBlockFromUpload(CodeBlockName);
+                auth.CloseUploadPage();
                 auth.ClickInsertImage();
                 System.Threading.Thread.Sleep(5000);
                 //auth.SearchAssetName();
                 auth.EnterAssetName(CodeBlockName);
-                project.SuccessScreenshot("Verifying the CodeBlock  Url pasted in Images does not show any Uploads");
+                project.SuccessScreenshot("Verifying the CodeBlock name pasted in Images does not show any Uploads");
                 auth.CloseUploadPage();
+                db.FindAssetAndDelete(CodeBlockName);
             }
             catch (Exception e)
             {

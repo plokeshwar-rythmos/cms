@@ -44,6 +44,8 @@ namespace DocWorksQA.Tests
                 project.SuccessScreenshot("CodeBlock Got Uploaded Successfully");
                 VerifyText(test, "upsert asset " + CodeBlockName + " is successful", status2, "CodeBlock: " + CodeBlockName + " is Uploaded with status:" + status2 + "", "CodeBlock is not Uploaded with status: " + status2 + "");
                 project.BackToProject();
+                db.FindAssetAndDelete(CodeBlockName);
+
             }
             catch (Exception e)
             {

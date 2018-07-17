@@ -29,7 +29,8 @@ namespace DocWorksQA.Tests
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
         }
-   [Test, Description("Verify User is able to make Gdoc Enhancements for Upploaded CodeBlocks")]
+
+        [Test, Description("Verify User is able to make Gdoc Enhancements for Upploaded CodeBlocks")]
         public void ValidateGdocEnhancementInUploadOfCodeBlock()
         {
             try
@@ -79,6 +80,7 @@ namespace DocWorksQA.Tests
                 auth.PreviewLeftTab();
                 project.SuccessScreenshot("Verifying the Code got reflected in Preview Left");
                 auth.GdocLeftTab();
+                db.FindAssetAndDelete(CodeBlockName);
             }
             catch (Exception e)
             {

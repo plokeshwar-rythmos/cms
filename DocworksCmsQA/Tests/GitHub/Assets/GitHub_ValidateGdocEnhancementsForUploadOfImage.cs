@@ -79,6 +79,7 @@ namespace DocWorksQA.Tests
                 auth1.PreviewLeftTab();
                 project.SuccessScreenshot("Verifying the image got reflected in Preview Left");
                 auth.GdocLeftTab();
+                db.FindAssetAndDelete(ImageName);
             }
             catch (Exception e)
             {

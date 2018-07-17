@@ -44,7 +44,7 @@ namespace DocWorksQA.Tests
                 project.ClickNotifications();
                 String status2 = project.GetNotificationStatus();
                 project.SuccessScreenshot("Image Got Uploaded Successfully");
-                //VerifyText(test, "upsert asset " + ImageName + " is successful", status2, "Image: " + ImageName + " is Uploaded with status:" + status2 + "", "Image is not Uploaded with status: " + status2 + "");
+                VerifyText(test, "upsert asset " + ImageName + " is successful", status2, "Image: " + ImageName + " is Uploaded with status:" + status2 + "", "Image is not Uploaded with status: " + status2 + "");
                 project.BackToProject();
                 project.ClickDashboard();
                 project.SearchForProject(projectName);
@@ -79,6 +79,8 @@ namespace DocWorksQA.Tests
                 auth1.PreviewLeftTab();
                 project.SuccessScreenshot("Verifying the image got reflected in Preview Left");
                 auth.GdocLeftTab();
+                db.FindAssetAndDelete(ImageName);
+
             }
             catch (Exception e)
             {
